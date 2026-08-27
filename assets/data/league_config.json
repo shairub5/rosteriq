@@ -1,0 +1,15 @@
+{
+  "teamsCount": 12,
+  "myDraftSlot": 12,
+  "rosterSlots": [
+    { "type": "PG", "count": 1 },
+    { "type": "SG", "count": 1 },
+    { "type": "SF", "count": 1 },
+    { "type": "PF", "count": 1 },
+    { "type": "C", "count": 1 },
+    { "type": "G", "count": 1 },
+    { "type": "F", "count": 1 },
+    { "type": "UTIL", "count": 3 },
+    { "type": "BN", "count": 3 }
+  ]
+}
