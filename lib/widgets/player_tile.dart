@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../models/player.dart';
 import '../models/ranking_result.dart';
 import '../state/team_names_provider.dart';
+import 'player_avatar.dart';
 import 'player_stat_row.dart';
 
 class PlayerTile extends StatelessWidget {
@@ -45,7 +46,11 @@ class PlayerTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final displayZ = showPuntAdjusted ? ranking.puntAdjustedZ : ranking.totalZ;
     return ListTile(
-      leading: CircleAvatar(child: Text('${ranking.rank}')),
+      leading: PlayerAvatar(
+        nbaId: player.nbaId,
+        playerName: player.name,
+        radius: 22,
+      ),
       title: Row(
         children: [
           Expanded(

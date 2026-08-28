@@ -1,0 +1,8294 @@
+{
+  "generatedAt": "2026-08-28T00:00:00Z",
+  "headshotUrl": "https://cdn.nba.com/headshots/nba/latest/260x190/{nbaId}.png",
+  "players": [
+    {
+      "nbaId": 1630639,
+      "name": "A.J. Lawson",
+      "slug": "aj_lawson",
+      "team": "TOR",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1643407,
+      "name": "AJ Dybantsa",
+      "slug": "aj_dybantsa",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631260,
+      "name": "AJ Green",
+      "slug": "aj_green",
+      "team": "MIL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631100,
+      "name": "AJ Griffin",
+      "slug": "aj_griffin",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1642358,
+      "name": "AJ Johnson",
+      "slug": "aj_johnson",
+      "team": "WAS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1643758,
+      "name": "AK Okereke",
+      "slug": "ak_okereke",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203932,
+      "name": "Aaron Gordon",
+      "slug": "aaron_gordon",
+      "team": "DEN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630565,
+      "name": "Aaron Henry",
+      "slug": "aaron_henry",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1628988,
+      "name": "Aaron Holiday",
+      "slug": "aaron_holiday",
+      "team": "HOU",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630174,
+      "name": "Aaron Nesmith",
+      "slug": "aaron_nesmith",
+      "team": "IND",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630598,
+      "name": "Aaron Wiggins",
+      "slug": "aaron_wiggins",
+      "team": "OKC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1627846,
+      "name": "Abdel Nader",
+      "slug": "abdel_nader",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1642846,
+      "name": "Ace Bailey",
+      "slug": "ace_bailey",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641745,
+      "name": "Adam Flagler",
+      "slug": "adam_flagler",
+      "team": "OKC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629690,
+      "name": "Adam Mokoka",
+      "slug": "adam_mokoka",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1642380,
+      "name": "Adama Bal",
+      "slug": "adama_bal",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1641766,
+      "name": "Adama Sanogo",
+      "slug": "adama_sanogo",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1643530,
+      "name": "Aday Mara",
+      "slug": "aday_mara",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630278,
+      "name": "Ade Murkey",
+      "slug": "ade_murkey",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1641737,
+      "name": "Adem Bona",
+      "slug": "adem_bona",
+      "team": "PHI",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629678,
+      "name": "Admiral Schofield",
+      "slug": "admiral_schofield",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1642876,
+      "name": "Adou Thiero",
+      "slug": "adou_thiero",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629958,
+      "name": "Ahmad Caver",
+      "slug": "ahmad_caver",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1642349,
+      "name": "Ajay Mitchell",
+      "slug": "ajay_mitchell",
+      "team": "OKC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 201143,
+      "name": "Al Horford",
+      "slug": "al_horford",
+      "team": "BOS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 202329,
+      "name": "Al-Farouq Aminu",
+      "slug": "al-farouq_aminu",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 202692,
+      "name": "Alec Burks",
+      "slug": "alec_burks",
+      "team": "MIA",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1630758,
+      "name": "Aleem Ford",
+      "slug": "aleem_ford",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1630197,
+      "name": "Aleksej Pokusevski",
+      "slug": "aleksej_pokusevski",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1629346,
+      "name": "Alen Smailagic",
+      "slug": "alen_smailagic",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1630828,
+      "name": "Alex Antetokounmpo",
+      "slug": "alex_antetokounmpo",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1627936,
+      "name": "Alex Caruso",
+      "slug": "alex_caruso",
+      "team": "OKC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642505,
+      "name": "Alex Ducas",
+      "slug": "alex_ducas",
+      "team": "OKC",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1641788,
+      "name": "Alex Fudge",
+      "slug": "alex_fudge",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1642284,
+      "name": "Alex Karaban",
+      "slug": "alex_karaban",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203458,
+      "name": "Alex Len",
+      "slug": "alex_len",
+      "team": "LAL",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1631457,
+      "name": "Alex Morales",
+      "slug": "alex_morales",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642024,
+      "name": "Alex Reese",
+      "slug": "alex_reese",
+      "team": "PHI",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1642259,
+      "name": "Alex Sarr",
+      "slug": "alex_sarr",
+      "team": "WAS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628035,
+      "name": "Alfonzo McKinnie",
+      "slug": "alfonzo_mckinnie",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1642918,
+      "name": "Alijah Martin",
+      "slug": "alijah_martin",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628993,
+      "name": "Alize Johnson",
+      "slug": "alize_johnson",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1643512,
+      "name": "Allen Graves",
+      "slug": "allen_graves",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631214,
+      "name": "Alondes Williams",
+      "slug": "alondes_williams",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1630578,
+      "name": "Alperen Sengun",
+      "slug": "alperen_sengun",
+      "team": "HOU",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1643813,
+      "name": "Alpha Diallo",
+      "slug": "alpha_diallo",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641735,
+      "name": "Amari Bailey",
+      "slug": "amari_bailey",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1642873,
+      "name": "Amari Williams",
+      "slug": "amari_williams",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641708,
+      "name": "Amen Thompson",
+      "slug": "amen_thompson",
+      "team": "HOU",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628578,
+      "name": "Amida Brimah",
+      "slug": "amida_brimah",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1629599,
+      "name": "Amir Coffey",
+      "slug": "amir_coffey",
+      "team": "LAC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 2760,
+      "name": "Anderson Varejao",
+      "slug": "anderson_varejao",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1643158,
+      "name": "Andersson Garcia",
+      "slug": "andersson_garcia",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 203083,
+      "name": "Andre Drummond",
+      "slug": "andre_drummond",
+      "team": "PHI",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 2738,
+      "name": "Andre Iguodala",
+      "slug": "andre_iguodala",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1641748,
+      "name": "Andre Jackson Jr.",
+      "slug": "andre_jackson_jr",
+      "team": "MIL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203460,
+      "name": "Andre Roberson",
+      "slug": "andre_roberson",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1641847,
+      "name": "Andrew Funk",
+      "slug": "andrew_funk",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1629614,
+      "name": "Andrew Nembhard",
+      "slug": "andrew_nembhard",
+      "team": "IND",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203952,
+      "name": "Andrew Wiggins",
+      "slug": "andrew_wiggins",
+      "team": "MIA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629014,
+      "name": "Anfernee Simons",
+      "slug": "anfernee_simons",
+      "team": "POR",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641710,
+      "name": "Anthony Black",
+      "slug": "anthony_black",
+      "team": "ORL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203076,
+      "name": "Anthony Davis",
+      "slug": "anthony_davis",
+      "team": "DAL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630162,
+      "name": "Anthony Edwards",
+      "slug": "anthony_edwards",
+      "team": "MIN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630264,
+      "name": "Anthony Gill",
+      "slug": "anthony_gill",
+      "team": "WAS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630237,
+      "name": "Anthony Lamb",
+      "slug": "anthony_lamb",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 201229,
+      "name": "Anthony Tolliver",
+      "slug": "anthony_tolliver",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1641817,
+      "name": "Anton Watson",
+      "slug": "anton_watson",
+      "team": "NYK",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1641810,
+      "name": "Antonio Reeves",
+      "slug": "antonio_reeves",
+      "team": "NOP",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628394,
+      "name": "Anžejs Pasečņiks",
+      "slug": "anžejs_pasečņiks",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1630574,
+      "name": "Ariel Hukporti",
+      "slug": "ariel_hukporti",
+      "team": "NYK",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642422,
+      "name": "Armel Traore",
+      "slug": "armel_traore",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1629717,
+      "name": "Armoni Brooks",
+      "slug": "armoni_brooks",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1629083,
+      "name": "Arnoldas Kulboka",
+      "slug": "arnoldas_kulboka",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 203382,
+      "name": "Aron Baynes",
+      "slug": "aron_baynes",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1641751,
+      "name": "Arthur Kaluma",
+      "slug": "arthur_kaluma",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642854,
+      "name": "Asa Newell",
+      "slug": "asa_newell",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630204,
+      "name": "Ashton Hagans",
+      "slug": "ashton_hagans",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1641709,
+      "name": "Ausar Thompson",
+      "slug": "ausar_thompson",
+      "team": "DET",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630559,
+      "name": "Austin Reaves",
+      "slug": "austin_reaves",
+      "team": "LAL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203085,
+      "name": "Austin Rivers",
+      "slug": "austin_rivers",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 202340,
+      "name": "Avery Bradley",
+      "slug": "avery_bradley",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1626253,
+      "name": "Axel Toupane",
+      "slug": "axel_toupane",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1630245,
+      "name": "Ayo Dosunmu",
+      "slug": "ayo_dosunmu",
+      "team": "CHI",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629168,
+      "name": "BJ Johnson",
+      "slug": "bj_johnson",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1642394,
+      "name": "Baba Miller",
+      "slug": "baba_miller",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628389,
+      "name": "Bam Adebayo",
+      "slug": "bam_adebayo",
+      "team": "MIA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631248,
+      "name": "Baylor Scheierman",
+      "slug": "baylor_scheierman",
+      "team": "BOS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203463,
+      "name": "Ben McLemore",
+      "slug": "ben_mclemore",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1642879,
+      "name": "Ben Saraf",
+      "slug": "ben_saraf",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641767,
+      "name": "Ben Sheppard",
+      "slug": "ben_sheppard",
+      "team": "IND",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1627732,
+      "name": "Ben Simmons",
+      "slug": "ben_simmons",
+      "team": "LAC",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1631097,
+      "name": "Bennedict Mathurin",
+      "slug": "bennedict_mathurin",
+      "team": "IND",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642892,
+      "name": "Bennett Stirtz",
+      "slug": "bennett_stirtz",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1643016,
+      "name": "Bez Mbeng",
+      "slug": "bez_mbeng",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641731,
+      "name": "Bilal Coulibaly",
+      "slug": "bilal_coulibaly",
+      "team": "WAS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 202687,
+      "name": "Bismack Biyombo",
+      "slug": "bismack_biyombo",
+      "team": "SAS",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 201933,
+      "name": "Blake Griffin",
+      "slug": "blake_griffin",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1642396,
+      "name": "Blake Hinson",
+      "slug": "blake_hinson",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631104,
+      "name": "Blake Wesley",
+      "slug": "blake_wesley",
+      "team": "SAS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1626246,
+      "name": "Boban Marjanovic",
+      "slug": "boban_marjanovic",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1626171,
+      "name": "Bobby Portis Jr.",
+      "slug": "bobby_portis_jr",
+      "team": "MIL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641752,
+      "name": "Bobi Klintman",
+      "slug": "bobi_klintman",
+      "team": "DET",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 203992,
+      "name": "Bogdan Bogdanović",
+      "slug": "bogdan_bogdanović",
+      "team": "LAC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642881,
+      "name": "Bogoljub Marković",
+      "slug": "bogoljub_marković",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 202711,
+      "name": "Bojan Bogdanovic",
+      "slug": "bojan_bogdanovic",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1629626,
+      "name": "Bol Bol",
+      "slug": "bol_bol",
+      "team": "PHX",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1630538,
+      "name": "Bones Hyland",
+      "slug": "bones_hyland",
+      "team": "MIN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 202954,
+      "name": "Brad Wanamaker",
+      "slug": "brad_wanamaker",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1643552,
+      "name": "Braden Smith",
+      "slug": "braden_smith",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203078,
+      "name": "Bradley Beal",
+      "slug": "bradley_beal",
+      "team": "PHX",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642382,
+      "name": "Branden Carlson",
+      "slug": "branden_carlson",
+      "team": "OKC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641764,
+      "name": "Brandin Podziemski",
+      "slug": "brandin_podziemski",
+      "team": "GSW",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630527,
+      "name": "Brandon Boston Jr.",
+      "slug": "brandon_boston_jr",
+      "team": "NOP",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1629634,
+      "name": "Brandon Clarke",
+      "slug": "brandon_clarke",
+      "team": "MEM",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1629164,
+      "name": "Brandon Goodwin",
+      "slug": "brandon_goodwin",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1627742,
+      "name": "Brandon Ingram",
+      "slug": "brandon_ingram",
+      "team": "TOR",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 202688,
+      "name": "Brandon Knight",
+      "slug": "brandon_knight",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1641706,
+      "name": "Brandon Miller",
+      "slug": "brandon_miller",
+      "team": "CHA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630314,
+      "name": "Brandon Williams",
+      "slug": "brandon_williams",
+      "team": "DAL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630296,
+      "name": "Braxton Key",
+      "slug": "braxton_key",
+      "team": "GSW",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1643415,
+      "name": "Brayden Burries",
+      "slug": "brayden_burries",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628968,
+      "name": "Brian Bowen II",
+      "slug": "brian_bowen_ii",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1641729,
+      "name": "Brice Sensabaugh",
+      "slug": "brice_sensabaugh",
+      "team": "UTA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630271,
+      "name": "Brodric Thomas",
+      "slug": "brodric_thomas",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1642355,
+      "name": "Bronny James",
+      "slug": "bronny_james",
+      "team": "LAL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 201572,
+      "name": "Brook Lopez",
+      "slug": "brook_lopez",
+      "team": "MIL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642964,
+      "name": "Brooks Barnhizer",
+      "slug": "brooks_barnhizer",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628971,
+      "name": "Bruce Brown",
+      "slug": "bruce_brown",
+      "team": "NOP",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1643570,
+      "name": "Bruce Thornton",
+      "slug": "bruce_thornton",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203998,
+      "name": "Bruno Caboclo",
+      "slug": "bruno_caboclo",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1628981,
+      "name": "Bruno Fernando",
+      "slug": "bruno_fernando",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1643624,
+      "name": "Bryce Hopkins",
+      "slug": "bryce_hopkins",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631121,
+      "name": "Bryce McGowens",
+      "slug": "bryce_mcgowens",
+      "team": "POR",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1627854,
+      "name": "Bryn Forbes",
+      "slug": "bryn_forbes",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1642267,
+      "name": "Bub Carrington",
+      "slug": "bub_carrington",
+      "team": "WAS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631205,
+      "name": "Buddy Boeheim",
+      "slug": "buddy_boeheim",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1627741,
+      "name": "Buddy Hield",
+      "slug": "buddy_hield",
+      "team": "GSW",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629604,
+      "name": "CJ Elleby",
+      "slug": "cj_elleby",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1643047,
+      "name": "CJ Huntley",
+      "slug": "cj_huntley",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203468,
+      "name": "CJ McCollum",
+      "slug": "cj_mccollum",
+      "team": "NOP",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 101139,
+      "name": "CJ Miles",
+      "slug": "cj_miles",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1630595,
+      "name": "Cade Cunningham",
+      "slug": "cade_cunningham",
+      "team": "DET",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630258,
+      "name": "Caleb Homesley",
+      "slug": "caleb_homesley",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1631216,
+      "name": "Caleb Houstan",
+      "slug": "caleb_houstan",
+      "team": "ORL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631126,
+      "name": "Caleb Love",
+      "slug": "caleb_love",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628997,
+      "name": "Caleb Martin",
+      "slug": "caleb_martin",
+      "team": "DAL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1643410,
+      "name": "Caleb Wilson",
+      "slug": "caleb_wilson",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642353,
+      "name": "Cam Christie",
+      "slug": "cam_christie",
+      "team": "LAC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629629,
+      "name": "Cam Reddish",
+      "slug": "cam_reddish",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1629244,
+      "name": "Cam Reynolds",
+      "slug": "cam_reynolds",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1642285,
+      "name": "Cam Spencer",
+      "slug": "cam_spencer",
+      "team": "MEM",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630560,
+      "name": "Cam Thomas",
+      "slug": "cam_thomas",
+      "team": "BKN",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1641715,
+      "name": "Cam Whitmore",
+      "slug": "cam_whitmore",
+      "team": "HOU",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1643409,
+      "name": "Cameron Boozer",
+      "slug": "cameron_boozer",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1643418,
+      "name": "Cameron Carr",
+      "slug": "cameron_carr",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629661,
+      "name": "Cameron Johnson",
+      "slug": "cameron_johnson",
+      "team": "BKN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630787,
+      "name": "Cameron McGriff",
+      "slug": "cameron_mcgriff",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1628419,
+      "name": "Cameron Oliver",
+      "slug": "cameron_oliver",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1626166,
+      "name": "Cameron Payne",
+      "slug": "cameron_payne",
+      "team": "NYK",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1627747,
+      "name": "Caris LeVert",
+      "slug": "caris_levert",
+      "team": "ATL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630637,
+      "name": "Carlik Jones",
+      "slug": "carlik_jones",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 2546,
+      "name": "Carmelo Anthony",
+      "slug": "carmelo_anthony",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1629035,
+      "name": "Carsen Edwards",
+      "slug": "carsen_edwards",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1642868,
+      "name": "Carter Bryant",
+      "slug": "carter_bryant",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641717,
+      "name": "Cason Wallace",
+      "slug": "cason_wallace",
+      "team": "OKC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630199,
+      "name": "Cassius Stanley",
+      "slug": "cassius_stanley",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1630216,
+      "name": "Cassius Winston",
+      "slug": "cassius_winston",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1627760,
+      "name": "Cat Barber",
+      "slug": "cat_barber",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1626224,
+      "name": "Cedi Osman",
+      "slug": "cedi_osman",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1642907,
+      "name": "Cedric Coward",
+      "slug": "cedric_coward",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628435,
+      "name": "Chance Comanche",
+      "slug": "chance_comanche",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1628990,
+      "name": "Chandler Hutchison",
+      "slug": "chandler_hutchison",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1643052,
+      "name": "Chaney Johnson",
+      "slug": "chaney_johnson",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629646,
+      "name": "Charles Bassey",
+      "slug": "charles_bassey",
+      "team": "SAS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629718,
+      "name": "Charlie Brown Jr.",
+      "slug": "charlie_brown_jr",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1626184,
+      "name": "Chasson Randle",
+      "slug": "chasson_randle",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1630602,
+      "name": "Chaundee Brown Jr.",
+      "slug": "chaundee_brown_jr",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1642404,
+      "name": "Chaz Lanier",
+      "slug": "chaz_lanier",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1627767,
+      "name": "Cheick Diallo",
+      "slug": "cheick_diallo",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1631096,
+      "name": "Chet Holmgren",
+      "slug": "chet_holmgren",
+      "team": "OKC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631320,
+      "name": "Chima Moneke",
+      "slug": "chima_moneke",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1629002,
+      "name": "Chimezie Metu",
+      "slug": "chimezie_metu",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1628449,
+      "name": "Chris Boucher",
+      "slug": "chris_boucher",
+      "team": "TOR",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1643416,
+      "name": "Chris Cenac Jr.",
+      "slug": "chris_cenac_jr",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629185,
+      "name": "Chris Chiozza",
+      "slug": "chris_chiozza",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1630537,
+      "name": "Chris Duarte",
+      "slug": "chris_duarte",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1641753,
+      "name": "Chris Livingston",
+      "slug": "chris_livingston",
+      "team": "MIL",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1643024,
+      "name": "Chris Mañon",
+      "slug": "chris_mañon",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 101108,
+      "name": "Chris Paul",
+      "slug": "chris_paul",
+      "team": "SAS",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1629735,
+      "name": "Chris Silva",
+      "slug": "chris_silva",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1642959,
+      "name": "Chris Youngblood",
+      "slug": "chris_youngblood",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1643515,
+      "name": "Christian Anderson",
+      "slug": "christian_anderson",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631128,
+      "name": "Christian Braun",
+      "slug": "christian_braun",
+      "team": "DEN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631132,
+      "name": "Christian Koloko",
+      "slug": "christian_koloko",
+      "team": "LAL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1626174,
+      "name": "Christian Wood",
+      "slug": "christian_wood",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1642935,
+      "name": "Chucky Hepburn",
+      "slug": "chucky_hepburn",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629643,
+      "name": "Chuma Okeke",
+      "slug": "chuma_okeke",
+      "team": "CLE",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 203991,
+      "name": "Clint Capela",
+      "slug": "clint_capela",
+      "team": "ATL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629632,
+      "name": "Coby White",
+      "slug": "coby_white",
+      "team": "CHI",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628998,
+      "name": "Cody Martin",
+      "slug": "cody_martin",
+      "team": "PHX",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1642262,
+      "name": "Cody Williams",
+      "slug": "cody_williams",
+      "team": "UTA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203469,
+      "name": "Cody Zeller",
+      "slug": "cody_zeller",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1641732,
+      "name": "Colby Jones",
+      "slug": "colby_jones",
+      "team": "WAS",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1630175,
+      "name": "Cole Anthony",
+      "slug": "cole_anthony",
+      "team": "MEM",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1631306,
+      "name": "Cole Swider",
+      "slug": "cole_swider",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1630658,
+      "name": "Colin Castleton",
+      "slug": "colin_castleton",
+      "team": "TOR",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631221,
+      "name": "Collin Gillespie",
+      "slug": "collin_gillespie",
+      "team": "PHX",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642867,
+      "name": "Collin Murray-Boyles",
+      "slug": "collin_murray-boyles",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629012,
+      "name": "Collin Sexton",
+      "slug": "collin_sexton",
+      "team": "UTA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642843,
+      "name": "Cooper Flagg",
+      "slug": "cooper_flagg",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630557,
+      "name": "Corey Kispert",
+      "slug": "corey_kispert",
+      "team": "WAS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642504,
+      "name": "Cormac Ryan",
+      "slug": "cormac_ryan",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 202709,
+      "name": "Cory Joseph",
+      "slug": "cory_joseph",
+      "team": "ORL",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1641854,
+      "name": "Craig Porter Jr.",
+      "slug": "craig_porter_jr",
+      "team": "CLE",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628591,
+      "name": "Craig Sword",
+      "slug": "craig_sword",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1626245,
+      "name": "Cristiano Felicio",
+      "slug": "cristiano_felicio",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1642385,
+      "name": "Cui Cui",
+      "slug": "yongxi_cui",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1642938,
+      "name": "Curtis Jones",
+      "slug": "curtis_jones",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1626156,
+      "name": "D'Angelo Russell",
+      "slug": "dangelo_russell",
+      "team": "BKN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641793,
+      "name": "D'Moi Hodge",
+      "slug": "dmoi_hodge",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 201571,
+      "name": "D.J. Augustin",
+      "slug": "dj_augustin",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1630618,
+      "name": "D.J. Carton",
+      "slug": "dj_carton",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1628391,
+      "name": "D.J. Wilson",
+      "slug": "dj_wilson",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1630597,
+      "name": "DJ Stewart",
+      "slug": "dj_stewart",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1629610,
+      "name": "DaQuan Jeffries",
+      "slug": "daquan_jeffries",
+      "team": "CHA",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1641747,
+      "name": "DaRon Holmes II",
+      "slug": "daron_holmes_ii",
+      "team": "DEN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631342,
+      "name": "Daeqwon Plowden",
+      "slug": "daeqwon_plowden",
+      "team": "ATL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1643517,
+      "name": "Dailyn Swain",
+      "slug": "dailyn_swain",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630227,
+      "name": "Daishen Nix",
+      "slug": "daishen_nix",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1629751,
+      "name": "Dakota Mathias",
+      "slug": "dakota_mathias",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1630625,
+      "name": "Dalano Banton",
+      "slug": "dalano_banton",
+      "team": "POR",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1631207,
+      "name": "Dalen Terry",
+      "slug": "dalen_terry",
+      "team": "CHI",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642261,
+      "name": "Dalton Knecht",
+      "slug": "dalton_knecht",
+      "team": "LAL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1627745,
+      "name": "Damian Jones",
+      "slug": "damian_jones",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 203081,
+      "name": "Damian Lillard",
+      "slug": "damian_lillard",
+      "team": "MIL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641878,
+      "name": "Damion Baugh",
+      "slug": "damion_baugh",
+      "team": "CHA",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1627814,
+      "name": "Damion Lee",
+      "slug": "damion_lee",
+      "team": "PHX",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1628422,
+      "name": "Damyean Dotson",
+      "slug": "damyean_dotson",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1629655,
+      "name": "Daniel Gafford",
+      "slug": "daniel_gafford",
+      "team": "DAL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630187,
+      "name": "Daniel Oturu",
+      "slug": "daniel_oturu",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1628464,
+      "name": "Daniel Theis",
+      "slug": "daniel_theis",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 201568,
+      "name": "Danilo Gallinari",
+      "slug": "danilo_gallinari",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1642450,
+      "name": "Daniss Jenkins",
+      "slug": "daniss_jenkins",
+      "team": "DET",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 201980,
+      "name": "Danny Green",
+      "slug": "danny_green",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1642874,
+      "name": "Danny Wolf",
+      "slug": "danny_wolf",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203957,
+      "name": "Dante Exum",
+      "slug": "dante_exum",
+      "team": "DAL",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1627863,
+      "name": "Danuel House Jr.",
+      "slug": "danuel_house_jr",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 203967,
+      "name": "Dario Saric",
+      "slug": "dario_saric",
+      "team": "DEN",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1641727,
+      "name": "Dariq Whitehead",
+      "slug": "dariq_whitehead",
+      "team": "BKN",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1643411,
+      "name": "Darius Acuff Jr.",
+      "slug": "darius_acuff_jr",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629647,
+      "name": "Darius Bazley",
+      "slug": "darius_bazley",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1642468,
+      "name": "Darius Brown II",
+      "slug": "darius_brown_ii",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1630620,
+      "name": "Darius Days",
+      "slug": "darius_days",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1629636,
+      "name": "Darius Garland",
+      "slug": "darius_garland",
+      "team": "CLE",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203121,
+      "name": "Darius Miller",
+      "slug": "darius_miller",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 201954,
+      "name": "Darren Collison",
+      "slug": "darren_collison",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1643408,
+      "name": "Darryn Peterson",
+      "slug": "darryn_peterson",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630561,
+      "name": "David Duke Jr.",
+      "slug": "david_duke_jr",
+      "team": "SAS",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1630525,
+      "name": "David Johnson",
+      "slug": "david_johnson",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1642357,
+      "name": "David Jones Garcia",
+      "slug": "david_jones_garcia",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628021,
+      "name": "David Nwaba",
+      "slug": "david_nwaba",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1631223,
+      "name": "David Roddy",
+      "slug": "david_roddy",
+      "team": "HOU",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630558,
+      "name": "Davion Mitchell",
+      "slug": "davion_mitchell",
+      "team": "MIA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 202722,
+      "name": "Davis Bertans",
+      "slug": "davis_bertans",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1628432,
+      "name": "Davon Reed",
+      "slug": "davon_reed",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1630549,
+      "name": "Day'Ron Sharpe",
+      "slug": "dayron_sharpe",
+      "team": "BKN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628368,
+      "name": "De'Aaron Fox",
+      "slug": "deaaron_fox",
+      "team": "SAS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629631,
+      "name": "De'Andre Hunter",
+      "slug": "deandre_hunter",
+      "team": "CLE",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629001,
+      "name": "De'Anthony Melton",
+      "slug": "deanthony_melton",
+      "team": "BKN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 201599,
+      "name": "DeAndre Jordan",
+      "slug": "deandre_jordan",
+      "team": "DEN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1627761,
+      "name": "DeAndre' Bembry",
+      "slug": "deandre_bembry",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1630610,
+      "name": "DeJon Jarreau",
+      "slug": "dejon_jarreau",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 201942,
+      "name": "DeMar DeRozan",
+      "slug": "demar_derozan",
+      "team": "SAC",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 202326,
+      "name": "DeMarcus Cousins",
+      "slug": "demarcus_cousins",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1629731,
+      "name": "Dean Wade",
+      "slug": "dean_wade",
+      "team": "CLE",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629028,
+      "name": "Deandre Ayton",
+      "slug": "deandre_ayton",
+      "team": "POR",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629686,
+      "name": "Deividas Sirvydis",
+      "slug": "deividas_sirvydis",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1627749,
+      "name": "Dejounte Murray",
+      "slug": "dejounte_murray",
+      "team": "NOP",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1626153,
+      "name": "Delon Wright",
+      "slug": "delon_wright",
+      "team": "NYK",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1630166,
+      "name": "Deni Avdija",
+      "slug": "deni_avdija",
+      "team": "POR",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203471,
+      "name": "Dennis Schröder",
+      "slug": "dennis_schröder",
+      "team": "DET",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628372,
+      "name": "Dennis Smith Jr.",
+      "slug": "dennis_smith_jr",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1627756,
+      "name": "Denzel Valentine",
+      "slug": "denzel_valentine",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1629126,
+      "name": "Deonte Burton",
+      "slug": "deonte_burton",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1641726,
+      "name": "Dereck Lively II",
+      "slug": "dereck_lively_ii",
+      "team": "DAL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631220,
+      "name": "Dereon Seabron",
+      "slug": "dereon_seabron",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1642852,
+      "name": "Derik Queen",
+      "slug": "derik_queen",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 202324,
+      "name": "Derrick Favors",
+      "slug": "derrick_favors",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1627884,
+      "name": "Derrick Jones Jr.",
+      "slug": "derrick_jones_jr",
+      "team": "LAC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 201565,
+      "name": "Derrick Rose",
+      "slug": "derrick_rose",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1628476,
+      "name": "Derrick Walton Jr.",
+      "slug": "derrick_walton_jr",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1628401,
+      "name": "Derrick White",
+      "slug": "derrick_white",
+      "team": "BOS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630217,
+      "name": "Desmond Bane",
+      "slug": "desmond_bane",
+      "team": "ORL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1626164,
+      "name": "Devin Booker",
+      "slug": "devin_booker",
+      "team": "PHX",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629962,
+      "name": "Devin Cannady",
+      "slug": "devin_cannady",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1642269,
+      "name": "Devin Carter",
+      "slug": "devin_carter",
+      "team": "SAC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630170,
+      "name": "Devin Vassell",
+      "slug": "devin_vassell",
+      "team": "SAS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629653,
+      "name": "Devon Dotson",
+      "slug": "devon_dotson",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1629719,
+      "name": "Devontae Cacok",
+      "slug": "devontae_cacok",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1628984,
+      "name": "Devonte' Graham",
+      "slug": "devonte_graham",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 203473,
+      "name": "Dewayne Dedmon",
+      "slug": "dewayne_dedmon",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1641926,
+      "name": "Dexter Dennis",
+      "slug": "dexter_dennis",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1629712,
+      "name": "Didi Louzada",
+      "slug": "didi_louzada",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1628415,
+      "name": "Dillon Brooks",
+      "slug": "dillon_brooks",
+      "team": "HOU",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641794,
+      "name": "Dillon Jones",
+      "slug": "dillon_jones",
+      "team": "OKC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641759,
+      "name": "Dillon Mitchell",
+      "slug": "dillon_mitchell",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631376,
+      "name": "Dmytro Skapintsev",
+      "slug": "dmytro_skapintsev",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1627734,
+      "name": "Domantas Sabonis",
+      "slug": "domantas_sabonis",
+      "team": "SAC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631230,
+      "name": "Dominick Barlow",
+      "slug": "dominick_barlow",
+      "team": "ATL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642270,
+      "name": "Donovan Clingan",
+      "slug": "donovan_clingan",
+      "team": "POR",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628378,
+      "name": "Donovan Mitchell",
+      "slug": "donovan_mitchell",
+      "team": "CLE",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631495,
+      "name": "Donovan Williams",
+      "slug": "donovan_williams",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1629743,
+      "name": "Donta Hall",
+      "slug": "donta_hall",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1628978,
+      "name": "Donte DiVincenzo",
+      "slug": "donte_divincenzo",
+      "team": "MIN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1627827,
+      "name": "Dorian Finney-Smith",
+      "slug": "dorian_finney-smith",
+      "team": "LAL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203926,
+      "name": "Doug McDermott",
+      "slug": "doug_mcdermott",
+      "team": "SAC",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1642962,
+      "name": "Drake Powell",
+      "slug": "drake_powell",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203110,
+      "name": "Draymond Green",
+      "slug": "draymond_green",
+      "team": "GSW",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629234,
+      "name": "Drew Eubanks",
+      "slug": "drew_eubanks",
+      "team": "LAC",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1641809,
+      "name": "Drew Peterson",
+      "slug": "drew_peterson",
+      "team": "BOS",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1631166,
+      "name": "Drew Timme",
+      "slug": "drew_timme",
+      "team": "BKN",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1630696,
+      "name": "Dru Smith",
+      "slug": "dru_smith",
+      "team": "MIA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630613,
+      "name": "Duane Washington Jr.",
+      "slug": "duane_washington_jr",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1643575,
+      "name": "Duke Miles",
+      "slug": "duke_miles",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629130,
+      "name": "Duncan Robinson",
+      "slug": "duncan_robinson",
+      "team": "MIA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641871,
+      "name": "Duop Reath",
+      "slug": "duop_reath",
+      "team": "POR",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1628407,
+      "name": "Dwayne Bacon",
+      "slug": "dwayne_bacon",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 2730,
+      "name": "Dwight Howard",
+      "slug": "dwight_howard",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 203939,
+      "name": "Dwight Powell",
+      "slug": "dwight_powell",
+      "team": "DAL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642928,
+      "name": "Dylan Cardwell",
+      "slug": "dylan_cardwell",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642844,
+      "name": "Dylan Harper",
+      "slug": "dylan_harper",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629685,
+      "name": "Dylan Windler",
+      "slug": "dylan_windler",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1630700,
+      "name": "Dyson Daniels",
+      "slug": "dyson_daniels",
+      "team": "ATL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 202734,
+      "name": "E'Twaun Moore",
+      "slug": "etwaun_moore",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1630604,
+      "name": "E.J. Liddell",
+      "slug": "ej_liddell",
+      "team": "CHI",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1643536,
+      "name": "Ebuka Okorie",
+      "slug": "ebuka_okorie",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 202334,
+      "name": "Ed Davis",
+      "slug": "ed_davis",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1628410,
+      "name": "Edmond Sumner",
+      "slug": "edmond_sumner",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1642856,
+      "name": "Egor Dëmin",
+      "slug": "egor_dëmin",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203901,
+      "name": "Elfrid Payton",
+      "slug": "elfrid_payton",
+      "team": "NOP",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1629091,
+      "name": "Elijah Bryant",
+      "slug": "elijah_bryant",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1641989,
+      "name": "Elijah Harkless",
+      "slug": "elijah_harkless",
+      "team": "UTA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630190,
+      "name": "Elijah Hughes",
+      "slug": "elijah_hughes",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1641801,
+      "name": "Emanuel Miller",
+      "slug": "emanuel_miller",
+      "team": "CHI",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1643567,
+      "name": "Emanuel Sharp",
+      "slug": "emanuel_sharp",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629150,
+      "name": "Emanuel Terry",
+      "slug": "emanuel_terry",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1626144,
+      "name": "Emmanuel Mudiay",
+      "slug": "emmanuel_mudiay",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1641734,
+      "name": "Emoni Bates",
+      "slug": "emoni_bates",
+      "team": "CLE",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 202683,
+      "name": "Enes Freedom",
+      "slug": "enes_freedom",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1642402,
+      "name": "Enrique Freeman",
+      "slug": "enrique_freeman",
+      "team": "IND",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 202339,
+      "name": "Eric Bledsoe",
+      "slug": "eric_bledsoe",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 201569,
+      "name": "Eric Gordon",
+      "slug": "eric_gordon",
+      "team": "PHI",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1629672,
+      "name": "Eric Paschall",
+      "slug": "eric_paschall",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1643640,
+      "name": "Ernest Udeh, Jr.",
+      "slug": "ernest_udeh,_jr",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 101141,
+      "name": "Ersan Ilyasova",
+      "slug": "ersan_ilyasova",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1630679,
+      "name": "Ethan Thompson",
+      "slug": "ethan_thompson",
+      "team": "ORL",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1630647,
+      "name": "Eugene Omoruyi",
+      "slug": "eugene_omoruyi",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 203095,
+      "name": "Evan Fournier",
+      "slug": "evan_fournier",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1630596,
+      "name": "Evan Mobley",
+      "slug": "evan_mobley",
+      "team": "CLE",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630267,
+      "name": "Facundo Campazzo",
+      "slug": "facundo_campazzo",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1643590,
+      "name": "Felix Okpara",
+      "slug": "felix_okpara",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630624,
+      "name": "Feron Hunt",
+      "slug": "feron_hunt",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1630196,
+      "name": "Filip Petrusev",
+      "slug": "filip_petrusev",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1628402,
+      "name": "Frank Jackson",
+      "slug": "frank_jackson",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1626163,
+      "name": "Frank Kaminsky",
+      "slug": "frank_kaminsky",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1628412,
+      "name": "Frank Mason III",
+      "slug": "frank_mason_iii",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1628373,
+      "name": "Frank Ntilikina",
+      "slug": "frank_ntilikina",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1630532,
+      "name": "Franz Wagner",
+      "slug": "franz_wagner",
+      "team": "ORL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1627832,
+      "name": "Fred VanVleet",
+      "slug": "fred_vanvleet",
+      "team": "HOU",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630273,
+      "name": "Freddie Gillespie",
+      "slug": "freddie_gillespie",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1627788,
+      "name": "Furkan Korkmaz",
+      "slug": "furkan_korkmaz",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1641713,
+      "name": "GG Jackson",
+      "slug": "gg_jackson",
+      "team": "MEM",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629216,
+      "name": "Gabe Vincent",
+      "slug": "gabe_vincent",
+      "team": "LAL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628221,
+      "name": "Gabe York",
+      "slug": "gabe_york",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1630466,
+      "name": "Gabriel Deck",
+      "slug": "gabriel_deck",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1630994,
+      "name": "Gabriel Lundberg",
+      "slug": "gabriel_lundberg",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 202066,
+      "name": "Garrett Temple",
+      "slug": "garrett_temple",
+      "team": "TOR",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1629726,
+      "name": "Garrison Mathews",
+      "slug": "garrison_mathews",
+      "team": "ATL",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1629109,
+      "name": "Gary Clark",
+      "slug": "gary_clark",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 203914,
+      "name": "Gary Harris",
+      "slug": "gary_harris",
+      "team": "ORL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1627780,
+      "name": "Gary Payton II",
+      "slug": "gary_payton_ii",
+      "team": "GSW",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629018,
+      "name": "Gary Trent Jr.",
+      "slug": "gary_trent_jr",
+      "team": "MIL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 201588,
+      "name": "George Hill",
+      "slug": "george_hill",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1628994,
+      "name": "George King",
+      "slug": "george_king",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1627777,
+      "name": "Georges Niang",
+      "slug": "georges_niang",
+      "team": "ATL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630686,
+      "name": "Georgios Kalaitzakis",
+      "slug": "georgios_kalaitzakis",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 203507,
+      "name": "Giannis Antetokounmpo",
+      "slug": "giannis_antetokounmpo",
+      "team": "MIL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203922,
+      "name": "Glenn Robinson III",
+      "slug": "glenn_robinson_iii",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1629048,
+      "name": "Goga Bitadze",
+      "slug": "goga_bitadze",
+      "team": "ORL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 201609,
+      "name": "Goran Dragic",
+      "slug": "goran_dragic",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 202330,
+      "name": "Gordon Hayward",
+      "slug": "gordon_hayward",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 203476,
+      "name": "Gorgui Dieng",
+      "slug": "gorgui_dieng",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1641711,
+      "name": "Gradey Dick",
+      "slug": "gradey_dick",
+      "team": "TOR",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641761,
+      "name": "Grant Nelson",
+      "slug": "grant_nelson",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1630203,
+      "name": "Grant Riller",
+      "slug": "grant_riller",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1629684,
+      "name": "Grant Williams",
+      "slug": "grant_williams",
+      "team": "CHA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628960,
+      "name": "Grayson Allen",
+      "slug": "grayson_allen",
+      "team": "PHX",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630535,
+      "name": "Greg Brown III",
+      "slug": "greg_brown_iii",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 202328,
+      "name": "Greg Monroe",
+      "slug": "greg_monroe",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 204222,
+      "name": "Greg Whittington",
+      "slug": "greg_whittington",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1627824,
+      "name": "Guerschon Yabusele",
+      "slug": "guerschon_yabusele",
+      "team": "PHI",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1630611,
+      "name": "Gui Santos",
+      "slug": "gui_santos",
+      "team": "GSW",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628977,
+      "name": "Hamidou Diallo",
+      "slug": "hamidou_diallo",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1643419,
+      "name": "Hannes Steinbach",
+      "slug": "hannes_steinbach",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203084,
+      "name": "Harrison Barnes",
+      "slug": "harrison_barnes",
+      "team": "SAS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631127,
+      "name": "Harrison Ingram",
+      "slug": "harrison_ingram",
+      "team": "SAS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628385,
+      "name": "Harry Giles III",
+      "slug": "harry_giles_iii",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 202355,
+      "name": "Hassan Whiteside",
+      "slug": "hassan_whiteside",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1629755,
+      "name": "Hassani Gravett",
+      "slug": "hassani_gravett",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1643060,
+      "name": "Hayden Gray",
+      "slug": "hayden_gray",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629312,
+      "name": "Haywood Highsmith",
+      "slug": "haywood_highsmith",
+      "team": "MIA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630929,
+      "name": "Henri Drell",
+      "slug": "henri_drell",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1643539,
+      "name": "Henri Veesaar",
+      "slug": "henri_veesaar",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1627740,
+      "name": "Henry Ellenson",
+      "slug": "henry_ellenson",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1630529,
+      "name": "Herbert Jones",
+      "slug": "herbert_jones",
+      "team": "NOP",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642864,
+      "name": "Hugo González",
+      "slug": "hugo_gonzález",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630621,
+      "name": "Hunter Dickinson",
+      "slug": "hunter_dickinson",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1642282,
+      "name": "Hunter Sallis",
+      "slug": "hunter_sallis",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1641816,
+      "name": "Hunter Tyson",
+      "slug": "hunter_tyson",
+      "team": "DEN",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1630641,
+      "name": "Ibou Badji",
+      "slug": "ibou_badji",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1629649,
+      "name": "Ignas Brazdeikis",
+      "slug": "ignas_brazdeikis",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 202697,
+      "name": "Iman Shumpert",
+      "slug": "iman_shumpert",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1630193,
+      "name": "Immanuel Quickley",
+      "slug": "immanuel_quickley",
+      "team": "TOR",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629067,
+      "name": "Isaac Bonga",
+      "slug": "isaac_bonga",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1642403,
+      "name": "Isaac Jones",
+      "slug": "isaac_jones",
+      "team": "SAC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630171,
+      "name": "Isaac Okoro",
+      "slug": "isaac_okoro",
+      "team": "CLE",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642268,
+      "name": "Isaiah Collier",
+      "slug": "isaiah_collier",
+      "team": "UTA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642384,
+      "name": "Isaiah Crawford",
+      "slug": "isaiah_crawford",
+      "team": "SAC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642912,
+      "name": "Isaiah Evans",
+      "slug": "isaiah_evans",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628392,
+      "name": "Isaiah Hartenstein",
+      "slug": "isaiah_hartenstein",
+      "team": "OKC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630543,
+      "name": "Isaiah Jackson",
+      "slug": "isaiah_jackson",
+      "team": "IND",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630198,
+      "name": "Isaiah Joe",
+      "slug": "isaiah_joe",
+      "team": "OKC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630587,
+      "name": "Isaiah Livers",
+      "slug": "isaiah_livers",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630600,
+      "name": "Isaiah Mobley",
+      "slug": "isaiah_mobley",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1629676,
+      "name": "Isaiah Roby",
+      "slug": "isaiah_roby",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1641815,
+      "name": "Isaiah Stevens",
+      "slug": "isaiah_stevens",
+      "team": "MIA",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1630191,
+      "name": "Isaiah Stewart",
+      "slug": "isaiah_stewart",
+      "team": "DET",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 202738,
+      "name": "Isaiah Thomas",
+      "slug": "isaiah_thomas",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1630225,
+      "name": "Isaiah Todd",
+      "slug": "isaiah_todd",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1631209,
+      "name": "Isaiah Wong",
+      "slug": "isaiah_wong",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 202397,
+      "name": "Ish Smith",
+      "slug": "ish_smith",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1630688,
+      "name": "Ish Wainright",
+      "slug": "ish_wainright",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1627826,
+      "name": "Ivica Zubac",
+      "slug": "ivica_zubac",
+      "team": "LAC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631167,
+      "name": "Izaiah Brockington",
+      "slug": "izaiah_brockington",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1643593,
+      "name": "Izaiyah Nelson",
+      "slug": "izaiyah_nelson",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631120,
+      "name": "JD Davison",
+      "slug": "jd_davison",
+      "team": "BOS",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 200755,
+      "name": "JJ Redick",
+      "slug": "jj_redick",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1630550,
+      "name": "JT Thor",
+      "slug": "jt_thor",
+      "team": "WAS",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1629630,
+      "name": "Ja Morant",
+      "slug": "ja_morant",
+      "team": "MEM",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642266,
+      "name": "Ja'Kobe Walter",
+      "slug": "jakobe_walter",
+      "team": "TOR",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1643551,
+      "name": "Ja'Kobi Gillespie",
+      "slug": "jakobi_gillespie",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203960,
+      "name": "JaKarr Sampson",
+      "slug": "jakarr_sampson",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 203210,
+      "name": "JaMychal Green",
+      "slug": "jamychal_green",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1630605,
+      "name": "JaQuori McLaughlin",
+      "slug": "jaquori_mclaughlin",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 201580,
+      "name": "JaVale McGee",
+      "slug": "javale_mcgee",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 203953,
+      "name": "Jabari Parker",
+      "slug": "jabari_parker",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1631095,
+      "name": "Jabari Smith Jr.",
+      "slug": "jabari_smith_jr",
+      "team": "HOU",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631133,
+      "name": "Jabari Walker",
+      "slug": "jabari_walker",
+      "team": "POR",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1643583,
+      "name": "Jack Kayil",
+      "slug": "jack_kayil",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629098,
+      "name": "Jack McVeigh",
+      "slug": "jack_mcveigh",
+      "team": "HOU",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1631298,
+      "name": "Jack White",
+      "slug": "jack_white",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1642050,
+      "name": "Jackson Rowe",
+      "slug": "jackson_rowe",
+      "team": "GSW",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1631367,
+      "name": "Jacob Gilyard",
+      "slug": "jacob_gilyard",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1631210,
+      "name": "Jacob Toppin",
+      "slug": "jacob_toppin",
+      "team": "ATL",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1643558,
+      "name": "Jaden Bradley",
+      "slug": "jaden_bradley",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630702,
+      "name": "Jaden Hardy",
+      "slug": "jaden_hardy",
+      "team": "DAL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631093,
+      "name": "Jaden Ivey",
+      "slug": "jaden_ivey",
+      "team": "DET",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1630183,
+      "name": "Jaden McDaniels",
+      "slug": "jaden_mcdaniels",
+      "team": "MIN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630531,
+      "name": "Jaden Springer",
+      "slug": "jaden_springer",
+      "team": "UTA",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 203109,
+      "name": "Jae Crowder",
+      "slug": "jae_crowder",
+      "team": "SAC",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1630256,
+      "name": "Jae'Sean Tate",
+      "slug": "jaesean_tate",
+      "team": "HOU",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1626143,
+      "name": "Jahlil Okafor",
+      "slug": "jahlil_okafor",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1642942,
+      "name": "Jahmai Mashack",
+      "slug": "jahmai_mashack",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630186,
+      "name": "Jahmi'us Ramsey",
+      "slug": "jahmius_ramsey",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1642443,
+      "name": "Jahmir Young",
+      "slug": "jahmir_young",
+      "team": "CHI",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1643141,
+      "name": "Jahmyl Telfort",
+      "slug": "jahmyl_telfort",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1630693,
+      "name": "Jaime Echenique",
+      "slug": "jaime_echenique",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1631170,
+      "name": "Jaime Jaquez Jr.",
+      "slug": "jaime_jaquez_jr",
+      "team": "MIA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631222,
+      "name": "Jake LaRavia",
+      "slug": "jake_laravia",
+      "team": "SAC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1627774,
+      "name": "Jake Layman",
+      "slug": "jake_layman",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1627751,
+      "name": "Jakob Poeltl",
+      "slug": "jakob_poeltl",
+      "team": "TOR",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641779,
+      "name": "Jalen Bridges",
+      "slug": "jalen_bridges",
+      "team": "PHX",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1628973,
+      "name": "Jalen Brunson",
+      "slug": "jalen_brunson",
+      "team": "NYK",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630622,
+      "name": "Jalen Crutcher",
+      "slug": "jalen_crutcher",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1631105,
+      "name": "Jalen Duren",
+      "slug": "jalen_duren",
+      "team": "DET",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630224,
+      "name": "Jalen Green",
+      "slug": "jalen_green",
+      "team": "HOU",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630223,
+      "name": "Jalen Harris",
+      "slug": "jalen_harris",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1641720,
+      "name": "Jalen Hood-Schifino",
+      "slug": "jalen_hood-schifino",
+      "team": "PHI",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1630552,
+      "name": "Jalen Johnson",
+      "slug": "jalen_johnson",
+      "team": "ATL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629665,
+      "name": "Jalen Lecque",
+      "slug": "jalen_lecque",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1629667,
+      "name": "Jalen McDaniels",
+      "slug": "jalen_mcdaniels",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1629618,
+      "name": "Jalen Pickett",
+      "slug": "jalen_pickett",
+      "team": "DEN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641771,
+      "name": "Jalen Slawson",
+      "slug": "jalen_slawson",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630188,
+      "name": "Jalen Smith",
+      "slug": "jalen_smith",
+      "team": "CHI",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630591,
+      "name": "Jalen Suggs",
+      "slug": "jalen_suggs",
+      "team": "ORL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631114,
+      "name": "Jalen Williams",
+      "slug": "jalen_williams",
+      "team": "OKC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630592,
+      "name": "Jalen Wilson",
+      "slug": "jalen_wilson",
+      "team": "BKN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631288,
+      "name": "Jamal Cain",
+      "slug": "jamal_cain",
+      "team": "NOP",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1627750,
+      "name": "Jamal Murray",
+      "slug": "jamal_murray",
+      "team": "DEN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642347,
+      "name": "Jamal Shead",
+      "slug": "jamal_shead",
+      "team": "TOR",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631123,
+      "name": "Jamaree Bouyea",
+      "slug": "jamaree_bouyea",
+      "team": "MIL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642481,
+      "name": "Jamarion Sharp",
+      "slug": "jamarion_sharp",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630547,
+      "name": "James Bouknight",
+      "slug": "james_bouknight",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 203516,
+      "name": "James Ennis III",
+      "slug": "james_ennis_iii",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 201935,
+      "name": "James Harden",
+      "slug": "james_harden",
+      "team": "LAC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 201949,
+      "name": "James Johnson",
+      "slug": "james_johnson",
+      "team": "IND",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 203263,
+      "name": "James Nunnally",
+      "slug": "james_nunnally",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1630164,
+      "name": "James Wiseman",
+      "slug": "james_wiseman",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1642364,
+      "name": "Jamir Watkins",
+      "slug": "jamir_watkins",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642419,
+      "name": "Jamison Battle",
+      "slug": "jamison_battle",
+      "team": "TOR",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630691,
+      "name": "Jamorko Pickett",
+      "slug": "jamorko_pickett",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1641716,
+      "name": "Jarace Walker",
+      "slug": "jarace_walker",
+      "team": "IND",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630215,
+      "name": "Jared Butler",
+      "slug": "jared_butler",
+      "team": "PHI",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 201162,
+      "name": "Jared Dudley",
+      "slug": "jared_dudley",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1629607,
+      "name": "Jared Harper",
+      "slug": "jared_harper",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1642272,
+      "name": "Jared McCain",
+      "slug": "jared_mccain",
+      "team": "PHI",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631197,
+      "name": "Jared Rhoden",
+      "slug": "jared_rhoden",
+      "team": "TOR",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1628991,
+      "name": "Jaren Jackson Jr.",
+      "slug": "jaren_jackson_jr",
+      "team": "MEM",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1643555,
+      "name": "Jaron Pierre Jr.",
+      "slug": "jaron_pierre_jr",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629020,
+      "name": "Jarred Vanderbilt",
+      "slug": "jarred_vanderbilt",
+      "team": "LAL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629714,
+      "name": "Jarrell Brantley",
+      "slug": "jarrell_brantley",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1628386,
+      "name": "Jarrett Allen",
+      "slug": "jarrett_allen",
+      "team": "CLE",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629633,
+      "name": "Jarrett Culver",
+      "slug": "jarrett_culver",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1629600,
+      "name": "Jarron Cumberland",
+      "slug": "jarron_cumberland",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1642859,
+      "name": "Jase Richardson",
+      "slug": "jase_richardson",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630554,
+      "name": "Jason Preston",
+      "slug": "jason_preston",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1629602,
+      "name": "Javin DeLaurier",
+      "slug": "javin_delaurier",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1631241,
+      "name": "Javon Freeman-Liberty",
+      "slug": "javon_freeman-liberty",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1642914,
+      "name": "Javon Small",
+      "slug": "javon_small",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631451,
+      "name": "Javonte Cooke",
+      "slug": "javonte_cooke",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1629750,
+      "name": "Javonte Green",
+      "slug": "javonte_green",
+      "team": "CLE",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630606,
+      "name": "Javonte Smart",
+      "slug": "javonte_smart",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1629637,
+      "name": "Jaxson Hayes",
+      "slug": "jaxson_hayes",
+      "team": "LAL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630643,
+      "name": "Jay Huff",
+      "slug": "jay_huff",
+      "team": "MEM",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630206,
+      "name": "Jay Scrubb",
+      "slug": "jay_scrubb",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1643519,
+      "name": "Jayden Quaintance",
+      "slug": "jayden_quaintance",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629121,
+      "name": "Jaylen Adams",
+      "slug": "jaylen_adams",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1627759,
+      "name": "Jaylen Brown",
+      "slug": "jaylen_brown",
+      "team": "BOS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641740,
+      "name": "Jaylen Clark",
+      "slug": "jaylen_clark",
+      "team": "MIN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629658,
+      "name": "Jaylen Hoard",
+      "slug": "jaylen_hoard",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1641798,
+      "name": "Jaylen Martin",
+      "slug": "jaylen_martin",
+      "team": "WAS",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1628537,
+      "name": "Jaylen Morris",
+      "slug": "jaylen_morris",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1629669,
+      "name": "Jaylen Nowell",
+      "slug": "jaylen_nowell",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1631301,
+      "name": "Jaylen Sims",
+      "slug": "jaylen_sims",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1642377,
+      "name": "Jaylen Wells",
+      "slug": "jaylen_wells",
+      "team": "MEM",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641945,
+      "name": "Jaylin Galloway",
+      "slug": "jaylin_galloway",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1643637,
+      "name": "Jaylin Sellers",
+      "slug": "jaylin_sellers",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631119,
+      "name": "Jaylin Williams",
+      "slug": "jaylin_williams",
+      "team": "OKC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642281,
+      "name": "Jaylon Tyson",
+      "slug": "jaylon_tyson",
+      "team": "CLE",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629873,
+      "name": "Jaysean Paige",
+      "slug": "jaysean_paige",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1643257,
+      "name": "Jayson Kent",
+      "slug": "jayson_kent",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628369,
+      "name": "Jayson Tatum",
+      "slug": "jayson_tatum",
+      "team": "BOS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641789,
+      "name": "Jazian Gortman",
+      "slug": "jazian_gortman",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1630288,
+      "name": "Jeff Dowtin Jr.",
+      "slug": "jeff_dowtin_jr",
+      "team": "PHI",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 201145,
+      "name": "Jeff Green",
+      "slug": "jeff_green",
+      "team": "HOU",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 201952,
+      "name": "Jeff Teague",
+      "slug": "jeff_teague",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1629203,
+      "name": "Jemerrio Jones",
+      "slug": "jemerrio_jones",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 203924,
+      "name": "Jerami Grant",
+      "slug": "jerami_grant",
+      "team": "POR",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642847,
+      "name": "Jeremiah Fears",
+      "slug": "jeremiah_fears",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629725,
+      "name": "Jeremiah Martin",
+      "slug": "jeremiah_martin",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1630526,
+      "name": "Jeremiah Robinson-Earl",
+      "slug": "jeremiah_robinson-earl",
+      "team": "NOP",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 203087,
+      "name": "Jeremy Lamb",
+      "slug": "jeremy_lamb",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1631110,
+      "name": "Jeremy Sochan",
+      "slug": "jeremy_sochan",
+      "team": "SAS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630579,
+      "name": "Jericho Sims",
+      "slug": "jericho_sims",
+      "team": "MIL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631257,
+      "name": "Jermaine Samuels Jr.",
+      "slug": "jermaine_samuels_jr",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1629010,
+      "name": "Jerome Robinson",
+      "slug": "jerome_robinson",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1642399,
+      "name": "Jesse Edwards",
+      "slug": "jesse_edwards",
+      "team": "MIN",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1641724,
+      "name": "Jett Howard",
+      "slug": "jett_howard",
+      "team": "ORL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628975,
+      "name": "Jevon Carter",
+      "slug": "jevon_carter",
+      "team": "CHI",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 202710,
+      "name": "Jimmy Butler III",
+      "slug": "jimmy_butler_iii",
+      "team": "GSW",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642866,
+      "name": "Joan Beringer",
+      "slug": "joan_beringer",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629111,
+      "name": "Jock Landale",
+      "slug": "jock_landale",
+      "team": "HOU",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203925,
+      "name": "Joe Harris",
+      "slug": "joe_harris",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 204060,
+      "name": "Joe Ingles",
+      "slug": "joe_ingles",
+      "team": "MIN",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 2207,
+      "name": "Joe Johnson",
+      "slug": "joe_johnson",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1630580,
+      "name": "Joe Wieskamp",
+      "slug": "joe_wieskamp",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1630555,
+      "name": "Joel Ayayi",
+      "slug": "joel_ayayi",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 203954,
+      "name": "Joel Embiid",
+      "slug": "joel_embiid",
+      "team": "PHI",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631219,
+      "name": "John Butler Jr.",
+      "slug": "john_butler_jr",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1628381,
+      "name": "John Collins",
+      "slug": "john_collins",
+      "team": "UTA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629723,
+      "name": "John Konchar",
+      "slug": "john_konchar",
+      "team": "MEM",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642967,
+      "name": "John Poulakidas",
+      "slug": "john_poulakidas",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642910,
+      "name": "John Tonje",
+      "slug": "john_tonje",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 202322,
+      "name": "John Wall",
+      "slug": "john_wall",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1641780,
+      "name": "Johni Broome",
+      "slug": "johni_broome",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631098,
+      "name": "Johnny Davis",
+      "slug": "johnny_davis",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1642277,
+      "name": "Johnny Furphy",
+      "slug": "johnny_furphy",
+      "team": "IND",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630548,
+      "name": "Johnny Juzang",
+      "slug": "johnny_juzang",
+      "team": "UTA",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1630257,
+      "name": "Jon Teske",
+      "slug": "jon_teske",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 202685,
+      "name": "Jonas Valanciunas",
+      "slug": "jonas_valanciunas",
+      "team": "SAC",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1628371,
+      "name": "Jonathan Isaac",
+      "slug": "jonathan_isaac",
+      "team": "ORL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630228,
+      "name": "Jonathan Kuminga",
+      "slug": "jonathan_kuminga",
+      "team": "GSW",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642367,
+      "name": "Jonathan Mogbo",
+      "slug": "jonathan_mogbo",
+      "team": "TOR",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629007,
+      "name": "Jontay Porter",
+      "slug": "jontay_porter",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1628395,
+      "name": "Jordan Bell",
+      "slug": "jordan_bell",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1629648,
+      "name": "Jordan Bone",
+      "slug": "jordan_bone",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 203903,
+      "name": "Jordan Clarkson",
+      "slug": "jordan_clarkson",
+      "team": "UTA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630259,
+      "name": "Jordan Ford",
+      "slug": "jordan_ford",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1630692,
+      "name": "Jordan Goodwin",
+      "slug": "jordan_goodwin",
+      "team": "LAL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631160,
+      "name": "Jordan Hall",
+      "slug": "jordan_hall",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1641722,
+      "name": "Jordan Hawkins",
+      "slug": "jordan_hawkins",
+      "team": "NOP",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629162,
+      "name": "Jordan McLaughlin",
+      "slug": "jordan_mclaughlin",
+      "team": "SAS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641757,
+      "name": "Jordan Miller",
+      "slug": "jordan_miller",
+      "team": "LAC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629670,
+      "name": "Jordan Nwora",
+      "slug": "jordan_nwora",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1629673,
+      "name": "Jordan Poole",
+      "slug": "jordan_poole",
+      "team": "WAS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630648,
+      "name": "Jordan Schakel",
+      "slug": "jordan_schakel",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1641775,
+      "name": "Jordan Walsh",
+      "slug": "jordan_walsh",
+      "team": "BOS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630631,
+      "name": "Jose Alvarado",
+      "slug": "jose_alvarado",
+      "team": "NOP",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630528,
+      "name": "Josh Christopher",
+      "slug": "josh_christopher",
+      "team": "MIA",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1643717,
+      "name": "Josh Dix",
+      "slug": "josh_dix",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630581,
+      "name": "Josh Giddey",
+      "slug": "josh_giddey",
+      "team": "CHI",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630182,
+      "name": "Josh Green",
+      "slug": "josh_green",
+      "team": "CHA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630221,
+      "name": "Josh Hall",
+      "slug": "josh_hall",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1628404,
+      "name": "Josh Hart",
+      "slug": "josh_hart",
+      "team": "NYK",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628367,
+      "name": "Josh Jackson",
+      "slug": "josh_jackson",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1631169,
+      "name": "Josh Minott",
+      "slug": "josh_minott",
+      "team": "MIN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642490,
+      "name": "Josh Oduro",
+      "slug": "josh_oduro",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1629006,
+      "name": "Josh Okogie",
+      "slug": "josh_okogie",
+      "team": "CHA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1626196,
+      "name": "Josh Richardson",
+      "slug": "josh_richardson",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1643538,
+      "name": "Joshua Jefferson",
+      "slug": "joshua_jefferson",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630563,
+      "name": "Joshua Primo",
+      "slug": "joshua_primo",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 201950,
+      "name": "Jrue Holiday",
+      "slug": "jrue_holiday",
+      "team": "BOS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629308,
+      "name": "Juan Toscano-Anderson",
+      "slug": "juan_toscano-anderson",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1627823,
+      "name": "Juancho Hernangomez",
+      "slug": "juancho_hernangomez",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1631262,
+      "name": "Jules Bernard",
+      "slug": "jules_bernard",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1630577,
+      "name": "Julian Champagnie",
+      "slug": "julian_champagnie",
+      "team": "SAS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641763,
+      "name": "Julian Phillips",
+      "slug": "julian_phillips",
+      "team": "CHI",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642882,
+      "name": "Julian Reese",
+      "slug": "julian_reese",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631124,
+      "name": "Julian Strawther",
+      "slug": "julian_strawther",
+      "team": "DEN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203944,
+      "name": "Julius Randle",
+      "slug": "julius_randle",
+      "team": "MIN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1626147,
+      "name": "Justin Anderson",
+      "slug": "justin_anderson",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1630551,
+      "name": "Justin Champagnie",
+      "slug": "justin_champagnie",
+      "team": "WAS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642348,
+      "name": "Justin Edwards",
+      "slug": "justin_edwards",
+      "team": "PHI",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203200,
+      "name": "Justin Holiday",
+      "slug": "justin_holiday",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1628382,
+      "name": "Justin Jackson",
+      "slug": "justin_jackson",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1629713,
+      "name": "Justin James",
+      "slug": "justin_james",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1631171,
+      "name": "Justin Lewis",
+      "slug": "justin_lewis",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1631303,
+      "name": "Justin Minaya",
+      "slug": "justin_minaya",
+      "team": "POR",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1628383,
+      "name": "Justin Patton",
+      "slug": "justin_patton",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1629620,
+      "name": "Justin Robinson",
+      "slug": "justin_robinson",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1626159,
+      "name": "Justise Winslow",
+      "slug": "justise_winslow",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 203994,
+      "name": "Jusuf Nurkić",
+      "slug": "jusuf_nurkić",
+      "team": "CHA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629752,
+      "name": "Juwan Morgan",
+      "slug": "juwan_morgan",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1630231,
+      "name": "KJ Martin",
+      "slug": "kj_martin",
+      "team": "UTA",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1642354,
+      "name": "KJ Simpson",
+      "slug": "kj_simpson",
+      "team": "CHA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629644,
+      "name": "KZ Okpala",
+      "slug": "kz_okpala",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1642955,
+      "name": "Kadary Richmond",
+      "slug": "kadary_richmond",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1630539,
+      "name": "Kai Jones",
+      "slug": "kai_jones",
+      "team": "DAL",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1629232,
+      "name": "Kaiser Gates",
+      "slug": "kaiser_gates",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1642880,
+      "name": "Kam Jones",
+      "slug": "kam_jones",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1643510,
+      "name": "Karim Lopez",
+      "slug": "karim_lopez",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630211,
+      "name": "Karim Mane",
+      "slug": "karim_mane",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1626157,
+      "name": "Karl-Anthony Towns",
+      "slug": "karl-anthony_towns",
+      "team": "NYK",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631255,
+      "name": "Karlo Matković",
+      "slug": "karlo_matković",
+      "team": "NOP",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642857,
+      "name": "Kasparas Jakučionis",
+      "slug": "kasparas_jakučionis",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 202695,
+      "name": "Kawhi Leonard",
+      "slug": "kawhi_leonard",
+      "team": "LAC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1643413,
+      "name": "Keaton Wagler",
+      "slug": "keaton_wagler",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630811,
+      "name": "Keaton Wallace",
+      "slug": "keaton_wallace",
+      "team": "ATL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631099,
+      "name": "Keegan Murray",
+      "slug": "keegan_murray",
+      "team": "SAC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1626208,
+      "name": "Keifer Sykes",
+      "slug": "keifer_sykes",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1631232,
+      "name": "Keion Brooks Jr.",
+      "slug": "keion_brooks_jr",
+      "team": "NOP",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1628966,
+      "name": "Keita Bates-Diop",
+      "slug": "keita_bates-diop",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1642276,
+      "name": "Kel'el Ware",
+      "slug": "kelel_ware",
+      "team": "MIA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629103,
+      "name": "Kelan Martin",
+      "slug": "kelan_martin",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1629640,
+      "name": "Keldon Johnson",
+      "slug": "keldon_johnson",
+      "team": "SAS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629833,
+      "name": "Keljin Blevins",
+      "slug": "keljin_blevins",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 203482,
+      "name": "Kelly Olynyk",
+      "slug": "kelly_olynyk",
+      "team": "NOP",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1626162,
+      "name": "Kelly Oubre Jr.",
+      "slug": "kelly_oubre_jr",
+      "team": "PHI",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 202689,
+      "name": "Kemba Walker",
+      "slug": "kemba_walker",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1631112,
+      "name": "Kendall Brown",
+      "slug": "kendall_brown",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1629134,
+      "name": "Kendrick Nunn",
+      "slug": "kendrick_nunn",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1631113,
+      "name": "Kennedy Chandler",
+      "slug": "kennedy_chandler",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1631254,
+      "name": "Kenneth Lofton Jr.",
+      "slug": "kenneth_lofton_jr",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1629026,
+      "name": "Kenrich Williams",
+      "slug": "kenrich_williams",
+      "team": "OKC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203145,
+      "name": "Kent Bazemore",
+      "slug": "kent_bazemore",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 203484,
+      "name": "Kentavious Caldwell-Pope",
+      "slug": "kentavious_caldwell-pope",
+      "team": "MEM",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631165,
+      "name": "Keon Ellis",
+      "slug": "keon_ellis",
+      "team": "SAC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630553,
+      "name": "Keon Johnson",
+      "slug": "keon_johnson",
+      "team": "BKN",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1642352,
+      "name": "Keshad Johnson",
+      "slug": "keshad_johnson",
+      "team": "MIA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642933,
+      "name": "Keshon Gilbert",
+      "slug": "keshon_gilbert",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630556,
+      "name": "Kessler Edwards",
+      "slug": "kessler_edwards",
+      "team": "DAL",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 201142,
+      "name": "Kevin Durant",
+      "slug": "kevin_durant",
+      "team": "PHX",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628989,
+      "name": "Kevin Huerter",
+      "slug": "kevin_huerter",
+      "team": "CHI",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628995,
+      "name": "Kevin Knox II",
+      "slug": "kevin_knox_ii",
+      "team": "GSW",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 201567,
+      "name": "Kevin Love",
+      "slug": "kevin_love",
+      "team": "MIA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641755,
+      "name": "Kevin McCullar Jr.",
+      "slug": "kevin_mccullar_jr",
+      "team": "NYK",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630698,
+      "name": "Kevin Pangos",
+      "slug": "kevin_pangos",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1629645,
+      "name": "Kevin Porter Jr.",
+      "slug": "kevin_porter_jr",
+      "team": "MIL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630284,
+      "name": "Kevon Harris",
+      "slug": "kevon_harris",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1626172,
+      "name": "Kevon Looney",
+      "slug": "kevon_looney",
+      "team": "GSW",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641749,
+      "name": "Keyontae Johnson",
+      "slug": "keyontae_johnson",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1641718,
+      "name": "Keyonte George",
+      "slug": "keyonte_george",
+      "team": "UTA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642863,
+      "name": "Khaman Maluach",
+      "slug": "khaman_maluach",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203920,
+      "name": "Khem Birch",
+      "slug": "khem_birch",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 203114,
+      "name": "Khris Middleton",
+      "slug": "khris_middleton",
+      "team": "WAS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629017,
+      "name": "Khyri Thomas",
+      "slug": "khyri_thomas",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1630165,
+      "name": "Killian Hayes",
+      "slug": "killian_hayes",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1629681,
+      "name": "Killian Tillie",
+      "slug": "killian_tillie",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1643412,
+      "name": "Kingston Flemings",
+      "slug": "kingston_flemings",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630184,
+      "name": "Kira Lewis Jr.",
+      "slug": "kira_lewis_jr",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 202691,
+      "name": "Klay Thompson",
+      "slug": "klay_thompson",
+      "team": "DAL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1643520,
+      "name": "Koa Peat",
+      "slug": "koa_peat",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641738,
+      "name": "Kobe Brown",
+      "slug": "kobe_brown",
+      "team": "LAC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641723,
+      "name": "Kobe Bufkin",
+      "slug": "kobe_bufkin",
+      "team": "ATL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642920,
+      "name": "Kobe Sanders",
+      "slug": "kobe_sanders",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628424,
+      "name": "Kobi Simmons",
+      "slug": "kobi_simmons",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1642886,
+      "name": "Koby Brea",
+      "slug": "koby_brea",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642851,
+      "name": "Kon Knueppel",
+      "slug": "kon_knueppel",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628961,
+      "name": "Kostas Antetokounmpo",
+      "slug": "kostas_antetokounmpo",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1627739,
+      "name": "Kris Dunn",
+      "slug": "kris_dunn",
+      "team": "LAC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631200,
+      "name": "Kris Murray",
+      "slug": "kris_murray",
+      "team": "POR",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 204001,
+      "name": "Kristaps Porziņģis",
+      "slug": "kristaps_porziņģis",
+      "team": "BOS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1643573,
+      "name": "Kylan Boswell",
+      "slug": "kylan_boswell",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203937,
+      "name": "Kyle Anderson",
+      "slug": "kyle_anderson",
+      "team": "MIA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642271,
+      "name": "Kyle Filipowski",
+      "slug": "kyle_filipowski",
+      "team": "UTA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629657,
+      "name": "Kyle Guy",
+      "slug": "kyle_guy",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1628398,
+      "name": "Kyle Kuzma",
+      "slug": "kyle_kuzma",
+      "team": "MIL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 200768,
+      "name": "Kyle Lowry",
+      "slug": "kyle_lowry",
+      "team": "PHI",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630283,
+      "name": "Kylor Kelley",
+      "slug": "kylor_kelley",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 202681,
+      "name": "Kyrie Irving",
+      "slug": "kyrie_irving",
+      "team": "DAL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642273,
+      "name": "Kyshawn George",
+      "slug": "kyshawn_george",
+      "team": "WAS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1643018,
+      "name": "LJ Cryer",
+      "slug": "lj_cryer",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 200746,
+      "name": "LaMarcus Aldridge",
+      "slug": "lamarcus_aldridge",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1630163,
+      "name": "LaMelo Ball",
+      "slug": "lamelo_ball",
+      "team": "CHA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642889,
+      "name": "Labaron Philon",
+      "slug": "labaron_philon",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642950,
+      "name": "Lachlan Olbrich",
+      "slug": "lachlan_olbrich",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1643650,
+      "name": "Lajae Jones",
+      "slug": "lajae_jones",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630205,
+      "name": "Lamar Stevens",
+      "slug": "lamar_stevens",
+      "team": "MEM",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 202362,
+      "name": "Lance Stephenson",
+      "slug": "lance_stephenson",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1629013,
+      "name": "Landry Shamet",
+      "slug": "landry_shamet",
+      "team": "NYK",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 204038,
+      "name": "Langston Galloway",
+      "slug": "langston_galloway",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1626204,
+      "name": "Larry Nance Jr.",
+      "slug": "larry_nance_jr",
+      "team": "ATL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628374,
+      "name": "Lauri Markkanen",
+      "slug": "lauri_markkanen",
+      "team": "UTA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1643133,
+      "name": "Lawson Lovering",
+      "slug": "lawson_lovering",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 2544,
+      "name": "LeBron James",
+      "slug": "lebron_james",
+      "team": "LAL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641778,
+      "name": "Leaky Black",
+      "slug": "leaky_black",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1630195,
+      "name": "Leandro Bolmaro",
+      "slug": "leandro_bolmaro",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1631159,
+      "name": "Leonard Miller",
+      "slug": "leonard_miller",
+      "team": "MIN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631311,
+      "name": "Lester Quiñones",
+      "slug": "lester_quiñones",
+      "team": "NOP",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1642862,
+      "name": "Liam McNeeley",
+      "slug": "liam_mcneeley",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641857,
+      "name": "Liam Robbins",
+      "slug": "liam_robbins",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1629623,
+      "name": "Lindell Wigginton",
+      "slug": "lindell_wigginton",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1630322,
+      "name": "Lindy Waters III",
+      "slug": "lindy_waters_iii",
+      "team": "DET",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1629022,
+      "name": "Lonnie Walker IV",
+      "slug": "lonnie_walker_iv",
+      "team": "PHI",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1628366,
+      "name": "Lonzo Ball",
+      "slug": "lonzo_ball",
+      "team": "CHI",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 101150,
+      "name": "Lou Williams",
+      "slug": "lou_williams",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1629663,
+      "name": "Louis King",
+      "slug": "louis_king",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1630492,
+      "name": "Luca Vildoza",
+      "slug": "luca_vildoza",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1631351,
+      "name": "Lucas Williamson",
+      "slug": "lucas_williamson",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1629652,
+      "name": "Luguentz Dort",
+      "slug": "luguentz_dort",
+      "team": "OKC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629029,
+      "name": "Luka Dončić",
+      "slug": "luka_dončić",
+      "team": "LAL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630568,
+      "name": "Luka Garza",
+      "slug": "luka_garza",
+      "team": "MIN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629677,
+      "name": "Luka Samanic",
+      "slug": "luka_samanic",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1628379,
+      "name": "Luke Kennard",
+      "slug": "luke_kennard",
+      "team": "MEM",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628436,
+      "name": "Luke Kornet",
+      "slug": "luke_kornet",
+      "team": "BOS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631247,
+      "name": "Luke Travers",
+      "slug": "luke_travers",
+      "team": "CLE",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1630640,
+      "name": "MJ Walker",
+      "slug": "mj_walker",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1630644,
+      "name": "Mac McClung",
+      "slug": "mac_mcclung",
+      "team": "ORL",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1630201,
+      "name": "Malachi Flynn",
+      "slug": "malachi_flynn",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1641869,
+      "name": "Malachi Smith",
+      "slug": "malachi_smith",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631103,
+      "name": "Malaki Branham",
+      "slug": "malaki_branham",
+      "team": "SAS",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1627763,
+      "name": "Malcolm Brogdon",
+      "slug": "malcolm_brogdon",
+      "team": "WAS",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1630608,
+      "name": "Malcolm Cazalon",
+      "slug": "malcolm_cazalon",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1630792,
+      "name": "Malcolm Hill",
+      "slug": "malcolm_hill",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1642502,
+      "name": "Malevy Leons",
+      "slug": "malevy_leons",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1627736,
+      "name": "Malik Beasley",
+      "slug": "malik_beasley",
+      "team": "DET",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1643738,
+      "name": "Malik Dia",
+      "slug": "malik_dia",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630238,
+      "name": "Malik Fitts",
+      "slug": "malik_fitts",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1628370,
+      "name": "Malik Monk",
+      "slug": "malik_monk",
+      "team": "SAC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629005,
+      "name": "Malik Newman",
+      "slug": "malik_newman",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1642013,
+      "name": "Malik Williams",
+      "slug": "malik_williams",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1643576,
+      "name": "Maliq Brown",
+      "slug": "maliq_brown",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641831,
+      "name": "Malique Lewis",
+      "slug": "malique_lewis",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629603,
+      "name": "Mamadi Diakite",
+      "slug": "mamadi_diakite",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1641970,
+      "name": "Maozinha Pereira",
+      "slug": "maozinha_pereira",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1630699,
+      "name": "MarJon Beauchamp",
+      "slug": "marjon_beauchamp",
+      "team": "NYK",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 201188,
+      "name": "Marc Gasol",
+      "slug": "marc_gasol",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1630542,
+      "name": "Marcus Bagley",
+      "slug": "marcus_bagley",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1630585,
+      "name": "Marcus Garrett",
+      "slug": "marcus_garrett",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 202694,
+      "name": "Marcus Morris Sr.",
+      "slug": "marcus_morris_sr",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1631204,
+      "name": "Marcus Sasser",
+      "slug": "marcus_sasser",
+      "team": "DET",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203935,
+      "name": "Marcus Smart",
+      "slug": "marcus_smart",
+      "team": "WAS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1626209,
+      "name": "Mario Hezonja",
+      "slug": "mario_hezonja",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641813,
+      "name": "Mark Sears",
+      "slug": "mark_sears",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1631109,
+      "name": "Mark Williams",
+      "slug": "mark_williams",
+      "team": "CHA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628365,
+      "name": "Markelle Fultz",
+      "slug": "markelle_fultz",
+      "team": "SAC",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 202693,
+      "name": "Markieff Morris",
+      "slug": "markieff_morris",
+      "team": "LAL",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1630250,
+      "name": "Marko Simonovic",
+      "slug": "marko_simonovic",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1641806,
+      "name": "Markquis Nowell",
+      "slug": "markquis_nowell",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1630210,
+      "name": "Markus Howard",
+      "slug": "markus_howard",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1629716,
+      "name": "Marques Bolden",
+      "slug": "marques_bolden",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1627737,
+      "name": "Marquese Chriss",
+      "slug": "marquese_chriss",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1628963,
+      "name": "Marvin Bagley III",
+      "slug": "marvin_bagley_iii",
+      "team": "MEM",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630222,
+      "name": "Mason Jones",
+      "slug": "mason_jones",
+      "team": "SAC",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 203486,
+      "name": "Mason Plumlee",
+      "slug": "mason_plumlee",
+      "team": "PHX",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1641824,
+      "name": "Matas Buzelis",
+      "slug": "matas_buzelis",
+      "team": "CHI",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629680,
+      "name": "Matisse Thybulle",
+      "slug": "matisse_thybulle",
+      "team": "POR",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630562,
+      "name": "Matt Hurt",
+      "slug": "matt_hurt",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1629760,
+      "name": "Matt Mooney",
+      "slug": "matt_mooney",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1630346,
+      "name": "Matt Ryan",
+      "slug": "matt_ryan",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1629744,
+      "name": "Matt Thomas",
+      "slug": "matt_thomas",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 203521,
+      "name": "Matthew Dellavedova",
+      "slug": "matthew_dellavedova",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 203090,
+      "name": "Maurice Harkless",
+      "slug": "maurice_harkless",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1631108,
+      "name": "Max Christie",
+      "slug": "max_christie",
+      "team": "DAL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642917,
+      "name": "Max Shulga",
+      "slug": "max_shulga",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629622,
+      "name": "Max Strus",
+      "slug": "max_strus",
+      "team": "CLE",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628467,
+      "name": "Maxi Kleber",
+      "slug": "maxi_kleber",
+      "team": "LAL",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1642875,
+      "name": "Maxime Raynaud",
+      "slug": "maxime_raynaud",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641721,
+      "name": "Maxwell Lewis",
+      "slug": "maxwell_lewis",
+      "team": "BKN",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1630593,
+      "name": "McKinley Wright IV",
+      "slug": "mckinley_wright_iv",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1643509,
+      "name": "Meleek Thomas",
+      "slug": "meleek_thomas",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628982,
+      "name": "Melvin Frazier Jr.",
+      "slug": "melvin_frazier_jr",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 203086,
+      "name": "Meyers Leonard",
+      "slug": "meyers_leonard",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1629662,
+      "name": "Mfiondu Kabengele",
+      "slug": "mfiondu_kabengele",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1642877,
+      "name": "Micah Peavy",
+      "slug": "micah_peavy",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630695,
+      "name": "Micah Potter",
+      "slug": "micah_potter",
+      "team": "UTA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642369,
+      "name": "Michael Ajayi",
+      "slug": "michael_ajayi",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203487,
+      "name": "Michael Carter-Williams",
+      "slug": "michael_carter-williams",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1630701,
+      "name": "Michael Foster Jr.",
+      "slug": "michael_foster_jr",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1629008,
+      "name": "Michael Porter Jr.",
+      "slug": "michael_porter_jr",
+      "team": "DEN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628969,
+      "name": "Mikal Bridges",
+      "slug": "mikal_bridges",
+      "team": "NYK",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 201144,
+      "name": "Mike Conley",
+      "slug": "mike_conley",
+      "team": "MIN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628455,
+      "name": "Mike James",
+      "slug": "mike_james",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 203488,
+      "name": "Mike Muscala",
+      "slug": "mike_muscala",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 203118,
+      "name": "Mike Scott",
+      "slug": "mike_scott",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1643414,
+      "name": "Mikel Brown Jr.",
+      "slug": "mikel_brown_jr",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628970,
+      "name": "Miles Bridges",
+      "slug": "miles_bridges",
+      "team": "CHA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642939,
+      "name": "Miles Kelly",
+      "slug": "miles_kelly",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1630540,
+      "name": "Miles McBride",
+      "slug": "miles_mcbride",
+      "team": "NYK",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641936,
+      "name": "Miles Norris",
+      "slug": "miles_norris",
+      "team": "BOS",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1642870,
+      "name": "Milos Uzan",
+      "slug": "milos_uzan",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629011,
+      "name": "Mitchell Robinson",
+      "slug": "mitchell_robinson",
+      "team": "NYK",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629671,
+      "name": "Miye Oni",
+      "slug": "miye_oni",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1628964,
+      "name": "Mo Bamba",
+      "slug": "mo_bamba",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642885,
+      "name": "Mohamed Diawara",
+      "slug": "mohamed_diawara",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628420,
+      "name": "Monte Morris",
+      "slug": "monte_morris",
+      "team": "PHX",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1626149,
+      "name": "Montrezl Harrell",
+      "slug": "montrezl_harrell",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1643516,
+      "name": "Morez Johnson",
+      "slug": "morez_johnson",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629021,
+      "name": "Moritz Wagner",
+      "slug": "moritz_wagner",
+      "team": "ORL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629650,
+      "name": "Moses Brown",
+      "slug": "moses_brown",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1630541,
+      "name": "Moses Moody",
+      "slug": "moses_moody",
+      "team": "GSW",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630589,
+      "name": "Moses Wright",
+      "slug": "moses_wright",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1631338,
+      "name": "Mouhamadou Gueye",
+      "slug": "mouhamadou_gueye",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1631243,
+      "name": "Mouhamed Gueye",
+      "slug": "mouhamed_gueye",
+      "team": "ATL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630619,
+      "name": "Moussa Cisse",
+      "slug": "moussa_cisse",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631217,
+      "name": "Moussa Diabaté",
+      "slug": "moussa_diabaté",
+      "team": "CHA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628539,
+      "name": "Mychal Mulder",
+      "slug": "mychal_mulder",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1629619,
+      "name": "Myles Powell",
+      "slug": "myles_powell",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1626167,
+      "name": "Myles Turner",
+      "slug": "myles_turner",
+      "team": "IND",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642066,
+      "name": "Myron Gardner",
+      "slug": "myron_gardner",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642368,
+      "name": "N'Faly Dante",
+      "slug": "nfaly_dante",
+      "team": "HOU",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1641772,
+      "name": "Nae'Qwan Tomlin",
+      "slug": "naeqwan_tomlin",
+      "team": "CLE",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630230,
+      "name": "Naji Marshall",
+      "slug": "naji_marshall",
+      "team": "DAL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1643712,
+      "name": "Narcisse Ngoy",
+      "slug": "narcisse_ngoy",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629642,
+      "name": "Nassir Little",
+      "slug": "nassir_little",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1643417,
+      "name": "Nate Ament",
+      "slug": "nate_ament",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642927,
+      "name": "Nate Bittle",
+      "slug": "nate_bittle",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630268,
+      "name": "Nate Darling",
+      "slug": "nate_darling",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1630207,
+      "name": "Nate Hinton",
+      "slug": "nate_hinton",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1641877,
+      "name": "Nate Mensah",
+      "slug": "nate_mensah",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1631466,
+      "name": "Nate Williams",
+      "slug": "nate_williams",
+      "team": "HOU",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630233,
+      "name": "Nathan Knight",
+      "slug": "nathan_knight",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1629675,
+      "name": "Naz Reid",
+      "slug": "naz_reid",
+      "team": "MIN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629674,
+      "name": "Neemias Queta",
+      "slug": "neemias_queta",
+      "team": "BOS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 202357,
+      "name": "Nemanja Bjelica",
+      "slug": "nemanja_bjelica",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 203457,
+      "name": "Nerlens Noel",
+      "slug": "nerlens_noel",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1629651,
+      "name": "Nic Claxton",
+      "slug": "nic_claxton",
+      "team": "BKN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1643568,
+      "name": "Nick Martinelli",
+      "slug": "nick_martinelli",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630208,
+      "name": "Nick Richards",
+      "slug": "nick_richards",
+      "team": "PHX",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641733,
+      "name": "Nick Smith Jr.",
+      "slug": "nick_smith_jr",
+      "team": "CHA",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1629638,
+      "name": "Nickeil Alexander-Walker",
+      "slug": "nickeil_alexander-walker",
+      "team": "MIN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630185,
+      "name": "Nico Mannion",
+      "slug": "nico_mannion",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 201587,
+      "name": "Nicolas Batum",
+      "slug": "nicolas_batum",
+      "team": "LAC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629740,
+      "name": "Nicolo Melli",
+      "slug": "nicolo_melli",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1628502,
+      "name": "Nigel Hayes-Davis",
+      "slug": "nigel_hayes-davis",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 203917,
+      "name": "Nik Stauskas",
+      "slug": "nik_stauskas",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 203999,
+      "name": "Nikola Jokić",
+      "slug": "nikola_jokić",
+      "team": "DEN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631107,
+      "name": "Nikola Jović",
+      "slug": "nikola_jović",
+      "team": "MIA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642260,
+      "name": "Nikola Topić",
+      "slug": "nikola_topić",
+      "team": "OKC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 202696,
+      "name": "Nikola Vučević",
+      "slug": "nikola_vučević",
+      "team": "CHI",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642363,
+      "name": "Nique Clifford",
+      "slug": "nique_clifford",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642855,
+      "name": "Noa Essengue",
+      "slug": "noa_essengue",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641730,
+      "name": "Noah Clowney",
+      "slug": "noah_clowney",
+      "team": "BKN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642869,
+      "name": "Noah Penda",
+      "slug": "noah_penda",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203943,
+      "name": "Noah Vonleh",
+      "slug": "noah_vonleh",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1642849,
+      "name": "Nolan Traore",
+      "slug": "nolan_traore",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641807,
+      "name": "Norchad Omier",
+      "slug": "norchad_omier",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1626181,
+      "name": "Norman Powell",
+      "slug": "norman_powell",
+      "team": "LAC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203658,
+      "name": "Norvel Pelle",
+      "slug": "norvel_pelle",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1628384,
+      "name": "OG Anunoby",
+      "slug": "og_anunoby",
+      "team": "NYK",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630167,
+      "name": "Obi Toppin",
+      "slug": "obi_toppin",
+      "team": "IND",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630534,
+      "name": "Ochai Agbaji",
+      "slug": "ochai_agbaji",
+      "team": "TOR",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1630846,
+      "name": "Olivier Sarr",
+      "slug": "olivier_sarr",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1641765,
+      "name": "Olivier-Maxence Prosper",
+      "slug": "olivier-maxence_prosper",
+      "team": "DAL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630209,
+      "name": "Omer Yurtseven",
+      "slug": "omer_yurtseven",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1641931,
+      "name": "Onuralp Bitim",
+      "slug": "onuralp_bitim",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1630168,
+      "name": "Onyeka Okongwu",
+      "slug": "onyeka_okongwu",
+      "team": "ATL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631115,
+      "name": "Orlando Robinson",
+      "slug": "orlando_robinson",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1631131,
+      "name": "Oscar Tshiebwe",
+      "slug": "oscar_tshiebwe",
+      "team": "UTA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629052,
+      "name": "Oshae Brissett",
+      "slug": "oshae_brissett",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1642345,
+      "name": "Oso Ighodaro",
+      "slug": "oso_ighodaro",
+      "team": "PHX",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642923,
+      "name": "Otega Oweh",
+      "slug": "otega_oweh",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203490,
+      "name": "Otto Porter Jr.",
+      "slug": "otto_porter_jr",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1631172,
+      "name": "Ousmane Dieng",
+      "slug": "ousmane_dieng",
+      "team": "OKC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 200782,
+      "name": "P.J. Tucker",
+      "slug": "pj_tucker",
+      "team": "NYK",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1629023,
+      "name": "P.J. Washington",
+      "slug": "pj_washington",
+      "team": "DAL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628408,
+      "name": "PJ Dozier",
+      "slug": "pj_dozier",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1641790,
+      "name": "PJ Hall",
+      "slug": "pj_hall",
+      "team": "DEN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642359,
+      "name": "Pacôme Dadiet",
+      "slug": "pacôme_dadiet",
+      "team": "NYK",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631094,
+      "name": "Paolo Banchero",
+      "slug": "paolo_banchero",
+      "team": "ORL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628238,
+      "name": "Paris Bass",
+      "slug": "paris_bass",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1627783,
+      "name": "Pascal Siakam",
+      "slug": "pascal_siakam",
+      "team": "IND",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1626192,
+      "name": "Pat Connaughton",
+      "slug": "pat_connaughton",
+      "team": "MIL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630311,
+      "name": "Pat Spencer",
+      "slug": "pat_spencer",
+      "team": "GSW",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631116,
+      "name": "Patrick Baldwin Jr.",
+      "slug": "patrick_baldwin_jr",
+      "team": "LAC",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 201976,
+      "name": "Patrick Beverley",
+      "slug": "patrick_beverley",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1627775,
+      "name": "Patrick McCaw",
+      "slug": "patrick_mccaw",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 202335,
+      "name": "Patrick Patterson",
+      "slug": "patrick_patterson",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1630172,
+      "name": "Patrick Williams",
+      "slug": "patrick_williams",
+      "team": "CHI",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 201988,
+      "name": "Patty Mills",
+      "slug": "patty_mills",
+      "team": "LAC",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 202331,
+      "name": "Paul George",
+      "slug": "paul_george",
+      "team": "PHI",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 200794,
+      "name": "Paul Millsap",
+      "slug": "paul_millsap",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1630194,
+      "name": "Paul Reed",
+      "slug": "paul_reed",
+      "team": "DET",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628778,
+      "name": "Paul Watson",
+      "slug": "paul_watson",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1630202,
+      "name": "Payton Pritchard",
+      "slug": "payton_pritchard",
+      "team": "BOS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642362,
+      "name": "Payton Sandfort",
+      "slug": "payton_sandfort",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1641796,
+      "name": "Pelle Larsson",
+      "slug": "pelle_larsson",
+      "team": "MIA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631250,
+      "name": "Pete Nance",
+      "slug": "pete_nance",
+      "team": "MIL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1627822,
+      "name": "Petr Cornelie",
+      "slug": "petr_cornelie",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1631212,
+      "name": "Peyton Watson",
+      "slug": "peyton_watson",
+      "team": "DEN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630762,
+      "name": "Phillip Wheeler",
+      "slug": "phillip_wheeler",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1630173,
+      "name": "Precious Achiuwa",
+      "slug": "precious_achiuwa",
+      "team": "NYK",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1643595,
+      "name": "Quadir Copeland",
+      "slug": "quadir_copeland",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629656,
+      "name": "Quentin Grimes",
+      "slug": "quentin_grimes",
+      "team": "PHI",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631245,
+      "name": "Quenton Jackson",
+      "slug": "quenton_jackson",
+      "team": "IND",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642439,
+      "name": "Quincy Olivari",
+      "slug": "quincy_olivari",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1626188,
+      "name": "Quinn Cook",
+      "slug": "quinn_cook",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1629683,
+      "name": "Quinndary Weatherspoon",
+      "slug": "quinndary_weatherspoon",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1642366,
+      "name": "Quinten Post",
+      "slug": "quinten_post",
+      "team": "GSW",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630181,
+      "name": "R.J. Hampton",
+      "slug": "rj_hampton",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1629628,
+      "name": "RJ Barrett",
+      "slug": "rj_barrett",
+      "team": "TOR",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630612,
+      "name": "RJ Nembhard Jr.",
+      "slug": "rj_nembhard_jr",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1643572,
+      "name": "Rafael Castro",
+      "slug": "rafael_castro",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630564,
+      "name": "RaiQuan Gray",
+      "slug": "raiquan_gray",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 200765,
+      "name": "Rajon Rondo",
+      "slug": "rajon_rondo",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1642853,
+      "name": "Rasheer Fleming",
+      "slug": "rasheer_fleming",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203526,
+      "name": "Raul Neto",
+      "slug": "raul_neto",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1629034,
+      "name": "Ray Spalding",
+      "slug": "ray_spalding",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1642484,
+      "name": "RayJ Dennis",
+      "slug": "rayj_dennis",
+      "team": "IND",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641712,
+      "name": "Rayan Rupert",
+      "slug": "rayan_rupert",
+      "team": "POR",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629730,
+      "name": "Rayjon Tucker",
+      "slug": "rayjon_tucker",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1641736,
+      "name": "Reece Beekman",
+      "slug": "reece_beekman",
+      "team": "BKN",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1642263,
+      "name": "Reed Sheppard",
+      "slug": "reed_sheppard",
+      "team": "HOU",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203493,
+      "name": "Reggie Bullock Jr.",
+      "slug": "reggie_bullock_jr",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 202704,
+      "name": "Reggie Jackson",
+      "slug": "reggie_jackson",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1629617,
+      "name": "Reggie Perry",
+      "slug": "reggie_perry",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1626158,
+      "name": "Richaun Holmes",
+      "slug": "richaun_holmes",
+      "team": "WAS",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1643563,
+      "name": "Richie Saunders",
+      "slug": "richie_saunders",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641741,
+      "name": "Ricky Council IV",
+      "slug": "ricky_council_iv",
+      "team": "PHI",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 201937,
+      "name": "Ricky Rubio",
+      "slug": "ricky_rubio",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1642434,
+      "name": "Riley Minix",
+      "slug": "riley_minix",
+      "team": "SAS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642265,
+      "name": "Rob Dillingham",
+      "slug": "rob_dillingham",
+      "team": "MIN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630306,
+      "name": "Rob Edwards",
+      "slug": "rob_edwards",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 203496,
+      "name": "Robert Covington",
+      "slug": "robert_covington",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1629606,
+      "name": "Robert Franks",
+      "slug": "robert_franks",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1629057,
+      "name": "Robert Williams III",
+      "slug": "robert_williams_iii",
+      "team": "POR",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630218,
+      "name": "Robert Woodard II",
+      "slug": "robert_woodard_ii",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 201577,
+      "name": "Robin Lopez",
+      "slug": "robin_lopez",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1642911,
+      "name": "Rocco Zikarsky",
+      "slug": "rocco_zikarsky",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629066,
+      "name": "Rodions Kurucs",
+      "slug": "rodions_kurucs",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 203918,
+      "name": "Rodney Hood",
+      "slug": "rodney_hood",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 203585,
+      "name": "Rodney McGruder",
+      "slug": "rodney_mcgruder",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1629641,
+      "name": "Romeo Langford",
+      "slug": "romeo_langford",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1631199,
+      "name": "Ron Harper Jr.",
+      "slug": "ron_harper_jr",
+      "team": "DET",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641842,
+      "name": "Ronald Holland II",
+      "slug": "ronald_holland_ii",
+      "team": "DET",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1626178,
+      "name": "Rondae Hollis-Jefferson",
+      "slug": "rondae_hollis-jefferson",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1626220,
+      "name": "Royce O'Neale",
+      "slug": "royce_oneale",
+      "team": "PHX",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 200752,
+      "name": "Rudy Gay",
+      "slug": "rudy_gay",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 203497,
+      "name": "Rudy Gobert",
+      "slug": "rudy_gobert",
+      "team": "MIN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629060,
+      "name": "Rui Hachimura",
+      "slug": "rui_hachimura",
+      "team": "LAL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 201566,
+      "name": "Russell Westbrook",
+      "slug": "russell_westbrook",
+      "team": "DEN",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1627853,
+      "name": "Ryan Arcidiacono",
+      "slug": "ryan_arcidiacono",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1643553,
+      "name": "Ryan Conwell",
+      "slug": "ryan_conwell",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642346,
+      "name": "Ryan Dunn",
+      "slug": "ryan_dunn",
+      "team": "PHX",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641750,
+      "name": "Ryan Kalkbrenner",
+      "slug": "ryan_kalkbrenner",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642948,
+      "name": "Ryan Nembhard",
+      "slug": "ryan_nembhard",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631157,
+      "name": "Ryan Rollins",
+      "slug": "ryan_rollins",
+      "team": "MIL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630240,
+      "name": "Saben Lee",
+      "slug": "saben_lee",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1630180,
+      "name": "Saddiq Bey",
+      "slug": "saddiq_bey",
+      "team": "WAS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1626155,
+      "name": "Sam Dekker",
+      "slug": "sam_dekker",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1630573,
+      "name": "Sam Hauser",
+      "slug": "sam_hauser",
+      "team": "BOS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630241,
+      "name": "Sam Merrill",
+      "slug": "sam_merrill",
+      "team": "CLE",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630572,
+      "name": "Sandro Mamukelashvili",
+      "slug": "sandro_mamukelashvili",
+      "team": "SAS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630583,
+      "name": "Santi Aldama",
+      "slug": "santi_aldama",
+      "team": "MEM",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628426,
+      "name": "Sasha Vezenkov",
+      "slug": "sasha_vezenkov",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1630703,
+      "name": "Scoot Henderson",
+      "slug": "scoot_henderson",
+      "team": "POR",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630567,
+      "name": "Scottie Barnes",
+      "slug": "scottie_barnes",
+      "team": "TOR",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630575,
+      "name": "Scottie Lewis",
+      "slug": "scottie_lewis",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 203816,
+      "name": "Scotty Hopson",
+      "slug": "scotty_hopson",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1630590,
+      "name": "Scotty Pippen Jr.",
+      "slug": "scotty_pippen_jr",
+      "team": "MEM",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630253,
+      "name": "Sean McDermott",
+      "slug": "sean_mcdermott",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1642951,
+      "name": "Sean Pedulla",
+      "slug": "sean_pedulla",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629635,
+      "name": "Sekou Doumbouya",
+      "slug": "sekou_doumbouya",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1628400,
+      "name": "Semi Ojeleye",
+      "slug": "semi_ojeleye",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 201586,
+      "name": "Serge Ibaka",
+      "slug": "serge_ibaka",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1643547,
+      "name": "Sergio de Larrea",
+      "slug": "sergio_de_larrea",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203552,
+      "name": "Seth Curry",
+      "slug": "seth_curry",
+      "team": "CHA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641754,
+      "name": "Seth Lundy",
+      "slug": "seth_lundy",
+      "team": "LAC",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1631101,
+      "name": "Shaedon Sharpe",
+      "slug": "shaedon_sharpe",
+      "team": "POR",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628983,
+      "name": "Shai Gilgeous-Alexander",
+      "slug": "shai_gilgeous-alexander",
+      "team": "OKC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629003,
+      "name": "Shake Milton",
+      "slug": "shake_milton",
+      "team": "LAL",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1629783,
+      "name": "Shaq Buchanan",
+      "slug": "shaq_buchanan",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1627885,
+      "name": "Shaquille Harrison",
+      "slug": "shaquille_harrison",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1630536,
+      "name": "Sharife Cooper",
+      "slug": "sharife_cooper",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631321,
+      "name": "Sidy Cissoko",
+      "slug": "sidy_cissoko",
+      "team": "POR",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631323,
+      "name": "Simone Fontecchio",
+      "slug": "simone_fontecchio",
+      "team": "DET",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628414,
+      "name": "Sindarius Thornwell",
+      "slug": "sindarius_thornwell",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1642883,
+      "name": "Sion James",
+      "slug": "sion_james",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1627746,
+      "name": "Skal Labissiere",
+      "slug": "skal_labissiere",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1630219,
+      "name": "Skylar Mays",
+      "slug": "skylar_mays",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 203524,
+      "name": "Solomon Hill",
+      "slug": "solomon_hill",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 203915,
+      "name": "Spencer Dinwiddie",
+      "slug": "spencer_dinwiddie",
+      "team": "DAL",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1642461,
+      "name": "Spencer Jones",
+      "slug": "spencer_jones",
+      "team": "DEN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1626169,
+      "name": "Stanley Johnson",
+      "slug": "stanley_johnson",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1630649,
+      "name": "Stanley Umude",
+      "slug": "stanley_umude",
+      "team": "MIL",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 201939,
+      "name": "Stephen Curry",
+      "slug": "stephen_curry",
+      "team": "GSW",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642264,
+      "name": "Stephon Castle",
+      "slug": "stephon_castle",
+      "team": "SAS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628425,
+      "name": "Sterling Brown",
+      "slug": "sterling_brown",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 203500,
+      "name": "Steven Adams",
+      "slug": "steven_adams",
+      "team": "HOU",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629004,
+      "name": "Svi Mykhailiuk",
+      "slug": "svi_mykhailiuk",
+      "team": "UTA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628388,
+      "name": "T.J. Leaf",
+      "slug": "tj_leaf",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 204456,
+      "name": "T.J. McConnell",
+      "slug": "tj_mcconnell",
+      "team": "IND",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203933,
+      "name": "T.J. Warren",
+      "slug": "tj_warren",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1629605,
+      "name": "Tacko Fall",
+      "slug": "tacko_fall",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1643007,
+      "name": "Taelon Peter",
+      "slug": "taelon_peter",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 201959,
+      "name": "Taj Gibson",
+      "slug": "taj_gibson",
+      "team": "CHA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629659,
+      "name": "Talen Horton-Tucker",
+      "slug": "talen_horton-tucker",
+      "team": "CHI",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1642926,
+      "name": "Tamar Bates",
+      "slug": "tamar_bates",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642379,
+      "name": "Taran Armstrong",
+      "slug": "taran_armstrong",
+      "team": "GSW",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1631106,
+      "name": "Tari Eason",
+      "slug": "tari_eason",
+      "team": "HOU",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641844,
+      "name": "Tarik Biberovic",
+      "slug": "tarik_biberovic",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1643542,
+      "name": "Tarris Reed Jr.",
+      "slug": "tarris_reed_jr",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1627752,
+      "name": "Taurean Prince",
+      "slug": "taurean_prince",
+      "team": "MIL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641707,
+      "name": "Taylor Hendricks",
+      "slug": "taylor_hendricks",
+      "team": "UTA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631386,
+      "name": "Taze Moore",
+      "slug": "taze_moore",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1629611,
+      "name": "Terance Mann",
+      "slug": "terance_mann",
+      "team": "ATL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629056,
+      "name": "Terence Davis",
+      "slug": "terence_davis",
+      "team": "SAC",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1631173,
+      "name": "Terquavion Smith",
+      "slug": "terquavion_smith",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1628390,
+      "name": "Terrance Ferguson",
+      "slug": "terrance_ferguson",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 203082,
+      "name": "Terrence Ross",
+      "slug": "terrence_ross",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1630545,
+      "name": "Terrence Shannon Jr",
+      "slug": "terrence_shannon_jr",
+      "team": "MIN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1626179,
+      "name": "Terry Rozier",
+      "slug": "terry_rozier",
+      "team": "MIA",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1630678,
+      "name": "Terry Taylor",
+      "slug": "terry_taylor",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 201152,
+      "name": "Thaddeus Young",
+      "slug": "thaddeus_young",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 203648,
+      "name": "Thanasis Antetokounmpo",
+      "slug": "thanasis_antetokounmpo",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630177,
+      "name": "Theo Maledon",
+      "slug": "theo_maledon",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1629033,
+      "name": "Theo Pinson",
+      "slug": "theo_pinson",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1628418,
+      "name": "Thomas Bryant",
+      "slug": "thomas_bryant",
+      "team": "IND",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642850,
+      "name": "Thomas Sorber",
+      "slug": "thomas_sorber",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1627748,
+      "name": "Thon Maker",
+      "slug": "thon_maker",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1642275,
+      "name": "Tidjane Salaün",
+      "slug": "tidjane_salaün",
+      "team": "CHA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 204025,
+      "name": "Tim Frazier",
+      "slug": "tim_frazier",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 203501,
+      "name": "Tim Hardaway Jr.",
+      "slug": "tim_hardaway_jr",
+      "team": "DET",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641851,
+      "name": "Timmy Allen",
+      "slug": "timmy_allen",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1627789,
+      "name": "Timothe Luwawu-Cabarrot",
+      "slug": "timothe_luwawu-cabarrot",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1643591,
+      "name": "Tobe Awaka",
+      "slug": "tobe_awaka",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1643588,
+      "name": "Tobi Lawal",
+      "slug": "tobi_lawal",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 202699,
+      "name": "Tobias Harris",
+      "slug": "tobias_harris",
+      "team": "DET",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1643253,
+      "name": "Toby Okani",
+      "slug": "toby_okani",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1642449,
+      "name": "Tolu Smith",
+      "slug": "tolu_smith",
+      "team": "DET",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203107,
+      "name": "Tomas Satoransky",
+      "slug": "tomas_satoransky",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1628396,
+      "name": "Tony Bradley",
+      "slug": "tony_bradley",
+      "team": "IND",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203503,
+      "name": "Tony Snell",
+      "slug": "tony_snell",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1628470,
+      "name": "Torrey Craig",
+      "slug": "torrey_craig",
+      "team": "BOS",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1641787,
+      "name": "Tosan Evbuomwan",
+      "slug": "tosan_evbuomwan",
+      "team": "BKN",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1641739,
+      "name": "Toumani Camara",
+      "slug": "toumani_camara",
+      "team": "POR",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629027,
+      "name": "Trae Young",
+      "slug": "trae_young",
+      "team": "ATL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631218,
+      "name": "Trayce Jackson-Davis",
+      "slug": "trayce_jackson-davis",
+      "team": "GSW",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629309,
+      "name": "Trayvon Palmer",
+      "slug": "trayvon_palmer",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1643621,
+      "name": "Tre Donaldson",
+      "slug": "tre_donaldson",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642848,
+      "name": "Tre Johnson",
+      "slug": "tre_johnson",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630200,
+      "name": "Tre Jones",
+      "slug": "tre_jones",
+      "team": "CHI",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630544,
+      "name": "Tre Mann",
+      "slug": "tre_mann",
+      "team": "CHA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629682,
+      "name": "Tremont Waters",
+      "slug": "tremont_waters",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1630570,
+      "name": "Trendon Watford",
+      "slug": "trendon_watford",
+      "team": "BKN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630235,
+      "name": "Trent Forrest",
+      "slug": "trent_forrest",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1642280,
+      "name": "Trentyn Flowers",
+      "slug": "trentyn_flowers",
+      "team": "LAC",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1630243,
+      "name": "Trevelin Queen",
+      "slug": "trevelin_queen",
+      "team": "ORL",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1642350,
+      "name": "Trevon Brazile",
+      "slug": "trevon_brazile",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630286,
+      "name": "Trevon Scott",
+      "slug": "trevon_scott",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 2772,
+      "name": "Trevor Ariza",
+      "slug": "trevor_ariza",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1631309,
+      "name": "Trevor Hudgins",
+      "slug": "trevor_hudgins",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1631211,
+      "name": "Trevor Keels",
+      "slug": "trevor_keels",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641725,
+      "name": "Trey Alexander",
+      "slug": "trey_alexander",
+      "team": "DEN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203504,
+      "name": "Trey Burke",
+      "slug": "trey_burke",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1641998,
+      "name": "Trey Jemison III",
+      "slug": "trey_jemison_iii",
+      "team": "LAL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1643626,
+      "name": "Trey Kaufman-Renn",
+      "slug": "trey_kaufman-renn",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1626168,
+      "name": "Trey Lyles",
+      "slug": "trey_lyles",
+      "team": "SAC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630530,
+      "name": "Trey Murphy III",
+      "slug": "trey_murphy_iii",
+      "team": "NOP",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642400,
+      "name": "Tristan Enaruna",
+      "slug": "tristan_enaruna",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 202684,
+      "name": "Tristan Thompson",
+      "slug": "tristan_thompson",
+      "team": "CLE",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1641774,
+      "name": "Tristan Vukcevic",
+      "slug": "tristan_vukcevic",
+      "team": "WAS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641783,
+      "name": "Tristan da Silva",
+      "slug": "tristan_da_silva",
+      "team": "ORL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641803,
+      "name": "Tristen Newton",
+      "slug": "tristen_newton",
+      "team": "MIN",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1628972,
+      "name": "Troy Brown Jr.",
+      "slug": "troy_brown_jr",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1643620,
+      "name": "Tucker DeVries",
+      "slug": "tucker_devries",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629660,
+      "name": "Ty Jerome",
+      "slug": "ty_jerome",
+      "team": "CLE",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630234,
+      "name": "Ty-Shon Alexander",
+      "slug": "ty-shon_alexander",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1631102,
+      "name": "TyTy Washington Jr.",
+      "slug": "tyty_washington_jr",
+      "team": "PHX",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630189,
+      "name": "Tyler Bey",
+      "slug": "tyler_bey",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1643548,
+      "name": "Tyler Bilodeau",
+      "slug": "tyler_bilodeau",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631174,
+      "name": "Tyler Burton",
+      "slug": "tyler_burton",
+      "team": "",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1629076,
+      "name": "Tyler Cook",
+      "slug": "tyler_cook",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1628416,
+      "name": "Tyler Dorsey",
+      "slug": "tyler_dorsey",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1629788,
+      "name": "Tyler Hall",
+      "slug": "tyler_hall",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1629639,
+      "name": "Tyler Herro",
+      "slug": "tyler_herro",
+      "team": "MIA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 204020,
+      "name": "Tyler Johnson",
+      "slug": "tyler_johnson",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1642278,
+      "name": "Tyler Kolek",
+      "slug": "tyler_kolek",
+      "team": "NYK",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1643589,
+      "name": "Tyler Nickel",
+      "slug": "tyler_nickel",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641890,
+      "name": "Tyler Smith",
+      "slug": "tyler_smith",
+      "team": "MIL",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1630179,
+      "name": "Tyrell Terry",
+      "slug": "tyrell_terry",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1630169,
+      "name": "Tyrese Haliburton",
+      "slug": "tyrese_haliburton",
+      "team": "IND",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631213,
+      "name": "Tyrese Martin",
+      "slug": "tyrese_martin",
+      "team": "BKN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630178,
+      "name": "Tyrese Maxey",
+      "slug": "tyrese_maxey",
+      "team": "PHI",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642878,
+      "name": "Tyrese Proctor",
+      "slug": "tyrese_proctor",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1627820,
+      "name": "Tyrone Wallace",
+      "slug": "tyrone_wallace",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1630623,
+      "name": "Tyson Etienne",
+      "slug": "tyson_etienne",
+      "team": "BKN",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1626145,
+      "name": "Tyus Jones",
+      "slug": "tyus_jones",
+      "team": "PHX",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628962,
+      "name": "Udoka Azubuike",
+      "slug": "udoka_azubuike",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 2617,
+      "name": "Udonis Haslem",
+      "slug": "udonis_haslem",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1642391,
+      "name": "Ugonna Onyenso",
+      "slug": "ugonna_onyenso",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642279,
+      "name": "Ulrich Chomche",
+      "slug": "ulrich_chomche",
+      "team": "TOR",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1630586,
+      "name": "Usman Garuba",
+      "slug": "usman_garuba",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1642845,
+      "name": "VJ Edgecombe",
+      "slug": "vj_edgecombe",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203995,
+      "name": "Vasilije Micic",
+      "slug": "vasilije_micic",
+      "team": "PHX",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1630176,
+      "name": "Vernon Carey Jr.",
+      "slug": "vernon_carey_jr",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 203506,
+      "name": "Victor Oladipo",
+      "slug": "victor_oladipo",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1641705,
+      "name": "Victor Wembanyama",
+      "slug": "victor_wembanyama",
+      "team": "SAS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631246,
+      "name": "Vince Williams Jr.",
+      "slug": "vince_williams_jr",
+      "team": "MEM",
+      "toYear": 2025
+    },
+    {
+      "nbaId": 1629738,
+      "name": "Vincent Poirier",
+      "slug": "vincent_poirier",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1642884,
+      "name": "Vladislav Goldin",
+      "slug": "vladislav_goldin",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628427,
+      "name": "Vlatko Cancar",
+      "slug": "vlatko_cancar",
+      "team": "DEN",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1643585,
+      "name": "Vsevolod Ishchenko",
+      "slug": "vsevolod_ishchenko",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630249,
+      "name": "Vít Krejčí",
+      "slug": "vít_krejčí",
+      "team": "ATL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631117,
+      "name": "Walker Kessler",
+      "slug": "walker_kessler",
+      "team": "UTA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642383,
+      "name": "Walter Clayton Jr.",
+      "slug": "walter_clayton_jr",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 201961,
+      "name": "Wayne Ellington",
+      "slug": "wayne_ellington",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1627782,
+      "name": "Wayne Selden",
+      "slug": "wayne_selden",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1628976,
+      "name": "Wendell Carter Jr.",
+      "slug": "wendell_carter_jr",
+      "team": "ORL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1631111,
+      "name": "Wendell Moore Jr.",
+      "slug": "wendell_moore_jr",
+      "team": "CHA",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629117,
+      "name": "Wenyen Gabriel",
+      "slug": "wenyen_gabriel",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1628411,
+      "name": "Wes Iwundu",
+      "slug": "wes_iwundu",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 202083,
+      "name": "Wesley Matthews",
+      "slug": "wesley_matthews",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 203115,
+      "name": "Will Barton",
+      "slug": "will_barton",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1630266,
+      "name": "Will Magnay",
+      "slug": "will_magnay",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1642954,
+      "name": "Will Richard",
+      "slug": "will_richard",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642860,
+      "name": "Will Riley",
+      "slug": "will_riley",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1626161,
+      "name": "Willie Cauley-Stein",
+      "slug": "willie_cauley-stein",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1626195,
+      "name": "Willy Hernangomez",
+      "slug": "willy_hernangomez",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1641645,
+      "name": "Xavier Cooks",
+      "slug": "xavier_cooks",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1629875,
+      "name": "Xavier Moon",
+      "slug": "xavier_moon",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1630270,
+      "name": "Xavier Sneed",
+      "slug": "xavier_sneed",
+      "team": "",
+      "toYear": 2022
+    },
+    {
+      "nbaId": 1630214,
+      "name": "Xavier Tillman",
+      "slug": "xavier_tillman",
+      "team": "BOS",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642905,
+      "name": "Yang Hansen",
+      "slug": "hansen_yang",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642949,
+      "name": "Yanic Konan Niederhäuser",
+      "slug": "yanic_konan_niederhäuser",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1642865,
+      "name": "Yaxel Lendeborg",
+      "slug": "yaxel_lendeborg",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1627812,
+      "name": "Yogi Ferrell",
+      "slug": "yogi_ferrell",
+      "team": "",
+      "toYear": 2020
+    },
+    {
+      "nbaId": 1642530,
+      "name": "Yuki Kawamura",
+      "slug": "yuki_kawamura",
+      "team": "MEM",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641879,
+      "name": "Yuri Collins",
+      "slug": "yuri_collins",
+      "team": "",
+      "toYear": 2024
+    },
+    {
+      "nbaId": 1629139,
+      "name": "Yuta Watanabe",
+      "slug": "yuta_watanabe",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1642274,
+      "name": "Yves Missi",
+      "slug": "yves_missi",
+      "team": "NOP",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630582,
+      "name": "Yves Pons",
+      "slug": "yves_pons",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1642258,
+      "name": "Zaccharie Risacher",
+      "slug": "zaccharie_risacher",
+      "team": "ATL",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1628380,
+      "name": "Zach Collins",
+      "slug": "zach_collins",
+      "team": "CHI",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1641744,
+      "name": "Zach Edey",
+      "slug": "zach_edey",
+      "team": "MEM",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 203897,
+      "name": "Zach LaVine",
+      "slug": "zach_lavine",
+      "team": "SAC",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630285,
+      "name": "Zavier Simpson",
+      "slug": "zavier_simpson",
+      "team": "",
+      "toYear": 2023
+    },
+    {
+      "nbaId": 1630192,
+      "name": "Zeke Nnaji",
+      "slug": "zeke_nnaji",
+      "team": "DEN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1630533,
+      "name": "Ziaire Williams",
+      "slug": "ziaire_williams",
+      "team": "BKN",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629627,
+      "name": "Zion Williamson",
+      "slug": "zion_williamson",
+      "team": "NOP",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1643544,
+      "name": "Zuby Ejiofor",
+      "slug": "zuby_ejiofor",
+      "team": "",
+      "toYear": 2026
+    },
+    {
+      "nbaId": 1629597,
+      "name": "Zylan Cheatham",
+      "slug": "zylan_cheatham",
+      "team": "",
+      "toYear": 2021
+    },
+    {
+      "nbaId": 1642389,
+      "name": "Zyon Pullin",
+      "slug": "zyon_pullin",
+      "team": "MEM",
+      "toYear": 2026
+    }
+  ]
+}

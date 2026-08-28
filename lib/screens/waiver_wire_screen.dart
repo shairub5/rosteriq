@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../engine/ranking_engine.dart';
 import '../models/player.dart';
 import '../models/stat_category.dart';
+import '../widgets/player_avatar.dart';
 import '../state/league_data_provider.dart';
 import '../state/ranking_provider.dart';
 import '../state/saved_roster_provider.dart';
@@ -412,16 +413,10 @@ class _WaiverTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: CircleAvatar(
-        backgroundColor: needImpact > 1
-            ? Colors.teal.shade700
-            : needImpact > 0.3
-                ? Colors.teal.shade400
-                : Colors.grey.shade400,
-        child: Text(
-          '$rank',
-          style: const TextStyle(color: Colors.white, fontSize: 12),
-        ),
+      leading: PlayerAvatar(
+        nbaId: player.nbaId,
+        playerName: player.name,
+        radius: 22,
       ),
       title: Text(
         player.name,

@@ -7,6 +7,7 @@ import '../state/league_data_provider.dart';
 import '../state/ranking_provider.dart';
 import '../state/saved_roster_provider.dart';
 import '../widgets/category_radar_chart.dart';
+import '../widgets/player_avatar.dart';
 import 'settings_screen.dart';
 
 class MyTeamScreen extends ConsumerWidget {
@@ -235,6 +236,12 @@ class _TeamPlayerRow extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         children: [
+          PlayerAvatar(
+            nbaId: player.nbaId,
+            playerName: player.name,
+            radius: 20,
+          ),
+          const SizedBox(width: 10),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -348,6 +355,11 @@ class _AddPlayerDialogState extends State<_AddPlayerDialog> {
                   final z = widget.zByPlayerId[player.id];
                   return ListTile(
                     dense: true,
+                    leading: PlayerAvatar(
+                      nbaId: player.nbaId,
+                      playerName: player.name,
+                      radius: 16,
+                    ),
                     title: Text(player.name, style: const TextStyle(fontSize: 13)),
                     subtitle: Text(
                       '${player.eligiblePositions.join(",")} · ${player.team}',

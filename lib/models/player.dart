@@ -103,6 +103,11 @@ class Player {
   /// screen; ranking always uses the projected fields above.
   final StatLine? priorSeason;
 
+  /// NBA Stats player ID, used to load the official headshot from the CDN:
+  /// https://cdn.nba.com/headshots/nba/latest/260x190/{nbaId}.png
+  /// Null for players not yet matched (e.g. 2026-27 draft picks).
+  final int? nbaId;
+
   const Player({
     required this.id,
     required this.name,
@@ -124,6 +129,7 @@ class Player {
     this.sourceRank,
     this.dataSource = DataSource.screenshotProjection,
     this.priorSeason,
+    this.nbaId,
   });
 
   StatLine get projectedStatLine => StatLine(
@@ -164,6 +170,7 @@ class Player {
       priorSeason: json['priorSeason'] == null
           ? null
           : StatLine.fromJson(json['priorSeason'] as Map<String, dynamic>),
+      nbaId: (json['nbaId'] as num?)?.toInt(),
     );
   }
 

@@ -3,9 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../state/draft_state_provider.dart';
 import '../state/league_data_provider.dart';
-import 'settings_screen.dart';
 import '../state/team_names_provider.dart';
+import '../widgets/player_avatar.dart';
 import 'draft_recap_screen.dart';
+import 'settings_screen.dart';
 
 class DraftBoardScreen extends ConsumerWidget {
   const DraftBoardScreen({super.key});
@@ -59,7 +60,11 @@ class DraftBoardScreen extends ConsumerWidget {
                     final player = playersById[pick.playerId];
                     final isMe = pick.teamSlot == leagueData.config.myDraftSlot;
                     return ListTile(
-                      leading: CircleAvatar(child: Text('${pick.pickNumber}')),
+                      leading: PlayerAvatar(
+                        nbaId: player?.nbaId,
+                        playerName: player?.name ?? pick.playerId,
+                        radius: 20,
+                      ),
                       title: Text(player?.name ?? pick.playerId),
                       subtitle: Text(displayNameForSlot(teamNames, pick.teamSlot, leagueData.config.myDraftSlot)),
                       tileColor: isMe ? Colors.green.withValues(alpha: 0.08) : null,
