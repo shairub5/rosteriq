@@ -21,6 +21,26 @@ Also read [`data_prep/README.md`](../../data_prep/README.md) before touching
 anything in `data_prep/` - it covers the screenshot-projection data shape and
 the pipeline's run order.
 
+## Keep the docs in sync - this is not optional
+
+**Any change to rules, conventions, app settings, or project information
+must be reflected in `README.md` and/or this agent file in the same piece of
+work that makes the change** - not deferred, not left for someone else to
+notice later. Concretely:
+
+- A new architectural decision, a changed convention, a new gotcha discovered
+  the hard way -> add it to this file's relevant section.
+- A change to what's built, what's broken, what's blocked, or what's next ->
+  update `README.md`'s "Status" section.
+- A change to league/roster settings, data sources, or how the data pipeline
+  works -> update `data_prep/README.md` too if it's affected.
+- If you're not sure which doc a change belongs in: status/progress goes in
+  `README.md`, durable conventions/gotchas go here.
+
+Treat an unfinished doc update as an unfinished task, not a follow-up. A
+future session (or agent invocation) will trust these files at face value -
+letting them drift silently is worse than not having them at all.
+
 ## Architecture, in one pass
 
 ```
