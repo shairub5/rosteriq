@@ -113,6 +113,96 @@ purposes:
   for the in-app Flutter login. Client ID has been added to `secrets.json`
   by the user; the actual in-app login flow has not been test-run yet.
 
+- Sort by ADP in the available pool screen (ascending, nulls last); ADP
+  value shown inline on each tile when ADP sort is active.
+- Roster Slot Composition View on My Roster screen: structured
+  Starters/Bench slot layout (PG, SG, G, SF, PF, F, C, UTIL x3, BN x3)
+  with player name or "Empty" per slot, using the same greedy assignment
+  logic as the roster-fit warning badge.
+- Mock Draft Analyzer (4th tab, "Analyzer"): paste a full snake draft,
+  pick your slot, and get per-pick swap suggestions showing which better
+  player was on the board at each of your selections and the z-score gain.
+- NBA schedule features (5th tab, "Playoffs"):
+  - `assets/data/nba_schedule.json` bundles per-team game dates and back-to-back
+    flags. Currently a placeholder with 3 games per team; replace with real
+    2026-27 data when available (season Oct 2026 – Apr 2027, fantasy playoffs
+    2027-03-15 to 2027-04-11).
+  - `lib/services/schedule_service.dart` / `lib/state/schedule_provider.dart`:
+    loads and exposes the schedule via a Riverpod `FutureProvider`.
+  - Playoff Schedule screen: ranks available pool players by games in the
+    fantasy playoff window, grouped into tiers (Elite 15+, Good 13-14,
+    Average 11-12, Weak <11), with per-player B2B counts and z-score shown.
+  - "Games This Week" badge on each player tile in the Pool screen: colored
+    chip (green=3+, yellow=2, grey=0-1) showing how many games the player's
+    team plays in the current Mon-Sun week. Null/hidden while schedule loads.
+  - Back-to-back warning chip ("B2B" in orange) on player tile title row when
+    the team plays tonight AND tomorrow (load-management risk signal).
+
+- Category radar chart on My Roster screen: 9-axis spider chart
+  (CustomPainter, no extra package) visualises team z-scores per category.
+  Scale: center = 0, outer ring = +3, clamped at ±4.
+- Trade Evaluator tab (6th tab, "Trade", `Icons.swap_horiz`): pick players
+  to give/get with a searchable per-column list; shows per-category z-score
+  delta and a "you win X categories, lose Y, tie Z" summary. Engine logic in
+  `lib/engine/trade_evaluator.dart`.
+- Waiver Wire Advisor (Need Impact sort mode): pool screen sort dropdown now
+  has a "Need Impact" option that reorders players by how much they fill your
+  weakest categories. Score = weighted sum of player z-scores where weight =
+  max(0, -teamStanding[cat]). Stored on `RankingResult.needImpact`, computed
+  inside `computeRankings`. Engine logic in `lib/engine/waiver_advisor.dart`.
+- Onboarding: 3-page PageView shown on first launch (gated by
+  `shared_preferences` key `onboarding_complete`). Explains draft assistant,
+  z-score ranking, and punt strategy.
+- Draft Recap screen: accessible via "Recap" button on the Board tab. Shows
+  your picks in pick order with current z-scores, the radar chart, per-
+  category A–F grades, strengths/weaknesses summary, and a copy-to-clipboard
+  text summary.
+
+- Playoff schedule strength integrated into the "Need" ranking column:
+  - `lib/state/settings_provider.dart` — `AppSettings` (schedule boost weight,
+    positional need weight, playoff start/end ISO dates) persisted via
+    `shared_preferences`. Exposed as `settingsProvider` (StateNotifierProvider).
+  - `lib/engine/ranking_engine.dart` — `computeRankings()` now accepts optional
+    `playoffGamesByTeam`, `scheduleBoostWeight`, and `positionalNeedWeight`.
+    `needAdjustedZ = puntAdjustedZ + (positionalNeedWeight * positionalBonus) + (scheduleBoostWeight * playoffBonus)`.
+    Playoff bonus is 0..1 normalised across the pool; teams not in the map get
+    neutral 0.5; inactive when schedule hasn't loaded (null map).
+  - `lib/state/ranking_provider.dart` — watches `scheduleProvider` and
+    `settingsProvider`; builds `playoffGamesByTeam` from `gamesInWindow()` using
+    the configured playoff window; passes all new params to `computeRankings()`.
+  - `lib/screens/available_pool_screen.dart` — "Need" column header shows
+    "pos+sched" subtitle when `scheduleBoostWeight > 0`.
+  - `lib/screens/settings_screen.dart` — Settings screen with Fantasy Playoffs
+    section (date pickers for window start/end, live top-3 team preview),
+    Ranking Weights section (sliders for schedule boost and positional need),
+    and Draft section (reset button). Accessible via the settings gear icon added
+    to every tab's AppBar.
+
+- Persistent "My Team" saved roster (post-draft in-season mode):
+  - `lib/state/saved_roster_provider.dart` — `SavedRosterNotifier` persists
+    player IDs to `shared_preferences` key `saved_roster_player_ids` as a
+    JSON list. Exposes `savedRosterProvider` (AsyncNotifierProvider) and
+    `savedRosterPlayersProvider` (convenience Provider resolving IDs to Player
+    objects).
+  - Draft Recap screen (`lib/screens/draft_recap_screen.dart`) — "Save My
+    Team" / "Update Saved Team" FilledButton writes the draft picks to the
+    saved roster. Shows a confirmation snackbar and a replacement warning when
+    a roster is already saved.
+  - My Team screen (`lib/screens/my_team_screen.dart`) — new 3rd tab ("My
+    Team", `Icons.group`) in the shell. Shows the category radar chart,
+    per-player z-scores with remove (drop) and placeholder replace buttons,
+    and an "Add Player" dialog with name search. Empty state directs the user
+    to the Recap screen to save a team.
+  - Trade Evaluator (`lib/screens/trade_evaluator_screen.dart`) — auto-
+    populates "You Give" from the saved roster when one exists; shows a teal
+    banner "Using your saved team · N players". Falls back to the active draft
+    roster if no saved team.
+  - Waiver Wire / Need Impact (`lib/state/ranking_provider.dart`) — uses the
+    saved roster as the need-impact baseline when the draft is either empty or
+    complete (in-season mode); uses the live draft roster during an active
+    draft. A teal info banner in the Pool screen ("Showing Need Impact vs.
+    your saved team") appears when a saved team exists and no draft is active.
+
 **Still open / next steps:**
 1. Test the in-app Yahoo login on the simulator (`make run`, go to Manage
    Roster, tap Connect to Yahoo) - was in progress when this note was

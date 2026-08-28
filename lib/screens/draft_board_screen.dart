@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../state/draft_state_provider.dart';
 import '../state/league_data_provider.dart';
+import 'settings_screen.dart';
 import '../state/team_names_provider.dart';
+import 'draft_recap_screen.dart';
 
 class DraftBoardScreen extends ConsumerWidget {
   const DraftBoardScreen({super.key});
@@ -25,12 +27,26 @@ class DraftBoardScreen extends ConsumerWidget {
           appBar: AppBar(
             title: const Text('Draft Board'),
             actions: [
+              TextButton.icon(
+                icon: const Icon(Icons.summarize_outlined, size: 18),
+                label: const Text('Recap'),
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const DraftRecapScreen()),
+                ),
+              ),
               IconButton(
                 icon: const Icon(Icons.undo),
                 tooltip: 'Undo last pick',
                 onPressed: draftState.picks.isEmpty
                     ? null
                     : () => ref.read(draftStateProvider.notifier).undoLastPick(),
+              ),
+              IconButton(
+                icon: const Icon(Icons.settings_outlined),
+                tooltip: 'Settings',
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const SettingsScreen()),
+                ),
               ),
             ],
           ),
