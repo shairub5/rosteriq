@@ -7,6 +7,7 @@ import 'my_roster_screen.dart';
 import 'my_team_screen.dart';
 import 'playoff_schedule_screen.dart';
 import 'trade_evaluator_screen.dart';
+import 'waiver_wire_screen.dart';
 
 class DraftHomeShell extends StatefulWidget {
   const DraftHomeShell({super.key});
@@ -26,6 +27,7 @@ class _DraftHomeShellState extends State<DraftHomeShell> {
     MockDraftAnalyzerScreen(),
     PlayoffScheduleScreen(),
     TradeEvaluatorScreen(),
+    WaiverWireScreen(),
   ];
 
   @override
@@ -43,6 +45,7 @@ class _DraftHomeShellState extends State<DraftHomeShell> {
           NavigationDestination(icon: Icon(Icons.analytics_outlined), label: 'Analyzer'),
           NavigationDestination(icon: Icon(Icons.event_available), label: 'Playoffs'),
           NavigationDestination(icon: Icon(Icons.swap_horiz), label: 'Trade'),
+          NavigationDestination(icon: Icon(Icons.person_search_outlined), label: 'Waiver'),
         ],
       ),
     );
