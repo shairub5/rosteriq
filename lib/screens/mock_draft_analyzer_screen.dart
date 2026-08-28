@@ -28,16 +28,54 @@ class _MockDraftAnalyzerScreenState extends ConsumerState<MockDraftAnalyzerScree
     super.dispose();
   }
 
-  void _analyze(List<Player> allPlayers, List<RankingResult> rankings, int teamsCount) {
-    final rawText = _picksController.text.trim();
-    if (rawText.isEmpty) return;
+  /// Parses pasted draft text in either format:
+  ///   • Yahoo email: `(1) TeamName - LastName, FirstName (TEAM - POS)`
+  ///   • Plain: one player name per line or comma-separated
+  ///
+  /// Returns player names in global pick order (round 1 first, then round 2…).
+  List<String> _parsePaste(String rawText) {
+    final lines = rawText
+        .split('\n')
+        .map((s) => s.trim())
+        .where((s) => s.isNotEmpty)
+        .toList();
 
-    // Accept one name per line or comma-separated (or a mix).
-    final names = rawText
+    // Yahoo format detector: `(N) anything - LastName, FirstName (TEAM -`
+    final yahooRe = RegExp(
+      r'^\(\d+\)\s+.+\s+-\s+(.+?),\s+(.+?)\s+\([A-Z]{2,3}\s+-',
+    );
+    final roundRe = RegExp(r'^Round \d+', caseSensitive: false);
+
+    final hasYahoo = lines.any((l) => yahooRe.hasMatch(l));
+
+    if (hasYahoo) {
+      final names = <String>[];
+      for (final line in lines) {
+        if (roundRe.hasMatch(line)) continue; // skip "Round 1" headers
+        final m = yahooRe.firstMatch(line);
+        if (m != null) {
+          final last = m.group(1)!.trim();
+          final first = m.group(2)!.trim();
+          // Reconstruct as "First Last" (handles "Jackson Jr., Jaren" → "Jaren Jackson Jr.")
+          names.add('$first $last');
+        }
+      }
+      return names;
+    }
+
+    // Plain format.
+    return rawText
         .split(RegExp(r'[\n,]+'))
         .map((s) => s.trim())
         .where((s) => s.isNotEmpty)
         .toList();
+  }
+
+  void _analyze(List<Player> allPlayers, List<RankingResult> rankings, int teamsCount) {
+    final rawText = _picksController.text.trim();
+    if (rawText.isEmpty) return;
+
+    final names = _parsePaste(rawText);
 
     final suggestions = analyzeMockDraft(
       allPicksInOrder: names,
@@ -81,8 +119,8 @@ class _MockDraftAnalyzerScreenState extends ConsumerState<MockDraftAnalyzerScree
             padding: const EdgeInsets.all(16),
             children: [
               const Text(
-                'Paste all draft picks in order (one per line or comma-separated). '
-                'Include every pick from every team.',
+                'Paste your Yahoo draft email directly — the full round-by-round '
+                'recap including all teams. Plain names (one per line) also work.',
                 style: TextStyle(color: Colors.grey),
               ),
               const SizedBox(height: 12),
@@ -93,7 +131,7 @@ class _MockDraftAnalyzerScreenState extends ConsumerState<MockDraftAnalyzerScree
                   labelText: 'Draft picks (all teams, in order)',
                   alignLabelWithHint: true,
                   border: OutlineInputBorder(),
-                  hintText: 'Nikola Jokic\nLuka Doncic\nShai Gilgeous-Alexander\n...',
+                  hintText: 'Round 1\n(1) Team - Wembanyama, Victor (SAS - C)\n(2) Team - Jokić, Nikola (DEN - C)\n...',
                 ),
               ),
               const SizedBox(height: 16),

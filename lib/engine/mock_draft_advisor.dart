@@ -3,22 +3,63 @@ import '../models/ranking_result.dart';
 import '../models/swap_suggestion.dart';
 import 'snake_position.dart';
 
+/// Strips accents and non-alphanumeric characters for accent/encoding-tolerant
+/// matching. Handles `?` artifacts from Yahoo email encoding of accented chars
+/// (e.g. "Joki?" → "joki" matches "Jokić" → "jokic").
+String _normalizeForMatch(String s) {
+  const accents = {
+    'é': 'e', 'è': 'e', 'ê': 'e', 'ë': 'e',
+    'á': 'a', 'à': 'a', 'â': 'a', 'ã': 'a', 'ä': 'a',
+    'í': 'i', 'ì': 'i', 'î': 'i', 'ï': 'i',
+    'ó': 'o', 'ò': 'o', 'ô': 'o', 'õ': 'o', 'ö': 'o',
+    'ú': 'u', 'ù': 'u', 'û': 'u', 'ü': 'u',
+    'ý': 'y', 'ÿ': 'y', 'ç': 'c', 'ñ': 'n',
+    'ć': 'c', 'č': 'c', 'š': 's', 'ž': 'z', 'đ': 'd',
+    'ā': 'a', 'ē': 'e', 'ī': 'i', 'ō': 'o', 'ū': 'u',
+    'ņ': 'n', 'ģ': 'g', 'ļ': 'l', 'ķ': 'k', 'ř': 'r',
+    '’': '', "'": '',
+  };
+  var result = s.toLowerCase();
+  for (final entry in accents.entries) {
+    result = result.replaceAll(entry.key, entry.value);
+  }
+  // Strip anything remaining that isn't a-z, 0-9, space, or hyphen
+  // (this also removes '?' email-encoding artifacts)
+  return result.replaceAll(RegExp(r"[^a-z0-9 \-]"), '').trim();
+}
+
 /// Matches a raw name string from the mock-draft input to a [Player] in the
-/// player list. Tries exact case-insensitive match first, then falls back to
-/// a "contains" check so slight typos or abbreviated names still resolve.
-/// Returns null when no match can be found.
+/// player list. Tries exact case-insensitive match first, then a contains
+/// check, then an ASCII-normalized check that handles accented characters and
+/// `?` encoding artifacts from Yahoo draft emails.
 Player? _resolvePlayer(String name, List<Player> players) {
   final lower = name.trim().toLowerCase();
   if (lower.isEmpty) return null;
-  // Exact match (case-insensitive).
+
+  // 1. Exact match (case-insensitive).
   for (final p in players) {
     if (p.name.toLowerCase() == lower) return p;
   }
-  // Fuzzy: player name contains the input or input contains player name.
+
+  // 2. Fuzzy contains.
   for (final p in players) {
     final pLower = p.name.toLowerCase();
     if (pLower.contains(lower) || lower.contains(pLower)) return p;
   }
+
+  // 3. ASCII-normalized match — tolerates accents and '?' encoding artifacts.
+  final normInput = _normalizeForMatch(name);
+  if (normInput.length >= 3) {
+    for (final p in players) {
+      final normP = _normalizeForMatch(p.name);
+      if (normP == normInput ||
+          normP.contains(normInput) ||
+          normInput.contains(normP)) {
+        return p;
+      }
+    }
+  }
+
   return null;
 }
 
