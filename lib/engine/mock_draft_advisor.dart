@@ -47,7 +47,7 @@ Player? _resolvePlayer(String name, List<Player> players) {
     if (pLower.contains(lower) || lower.contains(pLower)) return p;
   }
 
-  // 3. ASCII-normalized match — tolerates accents and '?' encoding artifacts.
+  // 3. ASCII-normalized contains.
   final normInput = _normalizeForMatch(name);
   if (normInput.length >= 3) {
     for (final p in players) {
@@ -60,8 +60,27 @@ Player? _resolvePlayer(String name, List<Player> players) {
     }
   }
 
+  // 4. Wildcard regex — each '?' from Yahoo email encoding matches any char.
+  //    e.g. "Don?i?" → pattern "don.i." matches "doncic".
+  if (name.contains('?')) {
+    final normWild = _normalizeKeepWildcard(name);
+    if (normWild.length >= 3) {
+      final pattern = RegExp(normWild.replaceAll('?', '.'));
+      for (final p in players) {
+        final normP = _normalizeForMatch(p.name);
+        if (pattern.hasMatch(normP)) return p;
+      }
+    }
+  }
+
   return null;
 }
+
+/// Same as [_normalizeForMatch] but preserves '?' as single-char wildcards.
+/// Splits on '?', normalizes each segment, then rejoins with '?'.
+/// "Don?i?" → ["Don","i",""] → ["don","i",""] → "don?i?"
+String _normalizeKeepWildcard(String s) =>
+    s.split('?').map(_normalizeForMatch).join('?');
 
 /// Identifies which global pick numbers belong to the user and analyzes each
 /// of their picks to see whether a better-ranked player was still available

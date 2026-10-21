@@ -9,6 +9,7 @@ import '../state/saved_roster_provider.dart';
 import '../state/schedule_provider.dart';
 import '../state/settings_provider.dart';
 import '../state/sort_mode_provider.dart';
+import '../state/stats_display_mode_provider.dart';
 import '../state/stats_view_mode_provider.dart';
 import '../state/team_names_provider.dart';
 import '../widgets/player_tile.dart';
@@ -35,6 +36,7 @@ class AvailablePoolScreen extends ConsumerWidget {
         final positionalRun = ref.watch(positionalRunProvider);
         final puntedCategories = draftState.puntedCategories;
         final statsViewMode = ref.watch(statsViewModeProvider);
+        final statsDisplayMode = ref.watch(statsDisplayModeProvider);
         final teamNames = ref.watch(teamNamesProvider);
         final sortMode = ref.watch(sortModeProvider);
         final settings = ref.watch(settingsProvider);
@@ -75,7 +77,7 @@ class AvailablePoolScreen extends ConsumerWidget {
             actions: [
               IconButton(
                 icon: const Icon(Icons.filter_list),
-                tooltip: 'Punt settings',
+                tooltip: 'Filter & Sort',
                 onPressed: () => showPuntSettingsSheet(context, ref),
               ),
               IconButton(
@@ -110,76 +112,23 @@ class AvailablePoolScreen extends ConsumerWidget {
                     ],
                   ),
                 ),
+              // Column headers
               Padding(
-                padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: DropdownButtonFormField<SortMode>(
-                        initialValue: sortMode,
-                        decoration: const InputDecoration(
-                          labelText: 'Sort',
-                          isDense: true,
-                          border: OutlineInputBorder(),
-                          contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                        ),
-                        items: const [
-                          DropdownMenuItem(value: SortMode.ourRanking, child: Text('Our Ranking')),
-                          DropdownMenuItem(value: SortMode.sourceRank, child: Text('Source Rank')),
-                          DropdownMenuItem(value: SortMode.adp, child: Text('ADP')),
-                          DropdownMenuItem(value: SortMode.needImpact, child: Text('Need Impact')),
-                        ],
-                        onChanged: (value) {
-                          if (value != null) ref.read(sortModeProvider.notifier).state = value;
-                        },
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: DropdownButtonFormField<StatsViewMode>(
-                        initialValue: statsViewMode,
-                        decoration: const InputDecoration(
-                          labelText: 'Stats',
-                          isDense: true,
-                          border: OutlineInputBorder(),
-                          contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                        ),
-                        items: const [
-                          DropdownMenuItem(value: StatsViewMode.projected, child: Text('Projected')),
-                          DropdownMenuItem(value: StatsViewMode.lastYear, child: Text('Last Year')),
-                        ],
-                        onChanged: (value) {
-                          if (value != null) ref.read(statsViewModeProvider.notifier).state = value;
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              // Column headers aligned with the PlayerTile trailing section.
-              // 16px left padding matches ListTile's default leading inset;
-              // right side mirrors: 40 Z + 6 gap + 44 Need + 4 gap + 48 + 48 buttons.
-              Padding(
-                padding: const EdgeInsets.fromLTRB(72, 0, 16, 2),
+                padding: const EdgeInsets.fromLTRB(72, 4, 12, 2),
                 child: Row(
                   children: [
                     const Expanded(child: SizedBox()),
                     SizedBox(
-                      width: 40,
+                      width: 42,
                       child: Text(
                         'Z',
                         textAlign: TextAlign.right,
-                        style: TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.grey[600],
-                          letterSpacing: 0.5,
-                        ),
+                        style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.grey[600], letterSpacing: 0.5),
                       ),
                     ),
                     const SizedBox(width: 6),
                     SizedBox(
-                      width: 44,
+                      width: 42,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisSize: MainAxisSize.min,
@@ -187,27 +136,17 @@ class AvailablePoolScreen extends ConsumerWidget {
                           Text(
                             'Need',
                             textAlign: TextAlign.right,
-                            style: TextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.teal[700],
-                              letterSpacing: 0.5,
-                            ),
+                            style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.teal[700], letterSpacing: 0.5),
                           ),
                           if (settings.scheduleBoostWeight > 0)
                             Text(
                               'pos+sched',
                               textAlign: TextAlign.right,
-                              style: TextStyle(
-                                fontSize: 8,
-                                color: Colors.teal[400],
-                                letterSpacing: 0.2,
-                              ),
+                              style: TextStyle(fontSize: 8, color: Colors.teal[400], letterSpacing: 0.2),
                             ),
                         ],
                       ),
                     ),
-                    const SizedBox(width: 100), // button area spacer
                   ],
                 ),
               ),
@@ -233,6 +172,7 @@ class AvailablePoolScreen extends ConsumerWidget {
                       showPuntAdjusted: puntedCategories.isNotEmpty,
                       showAdp: sortMode == SortMode.adp,
                       displayStats: displayStats,
+                      statsDisplayMode: statsDisplayMode,
                       teamsCount: leagueData.config.teamsCount,
                       myDraftSlot: leagueData.config.myDraftSlot,
                       teamNames: teamNames,

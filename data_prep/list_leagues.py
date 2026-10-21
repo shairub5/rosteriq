@@ -34,3 +34,13 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
+def res(tree, level=0) -> list[list[int]]:
+    if tree.left is None and tree.right is None:
+        return [[tree.val]]
+    if tree.left is None:
+        left = [tree.val] + res(tree.right, level+1)
+    if tree.right is None:
+        right = [tree.val] + res(tree.left, level+1)
+    return [[tree.val]].append(left).append(right)

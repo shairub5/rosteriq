@@ -21,8 +21,24 @@
     "adp": 2.3,
     "sourceRank": 1,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1641705
+    "priorSeason": {
+      "fgPct": 0.512,
+      "fgAttempted": 1080,
+      "ftPct": 0.8267,
+      "ftAttempted": 450,
+      "threePM": 122,
+      "pts": 1600,
+      "reb": 736,
+      "ast": 199,
+      "stl": 66,
+      "blk": 197,
+      "to": 155
+    },
+    "nbaId": 1641705,
+    "careerGpHistory": [
+      64,
+      46
+    ]
   },
   {
     "id": "nikola-jokic",
@@ -46,8 +62,24 @@
     "adp": 4.1,
     "sourceRank": 2,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 203999
+    "priorSeason": {
+      "fgPct": 0.5689,
+      "fgAttempted": 1132,
+      "ftPct": 0.8313,
+      "ftAttempted": 480,
+      "threePM": 112,
+      "pts": 1799,
+      "reb": 836,
+      "ast": 697,
+      "stl": 92,
+      "blk": 53,
+      "to": 243
+    },
+    "nbaId": 203999,
+    "careerGpHistory": [
+      65,
+      70
+    ]
   },
   {
     "id": "luka-doncic",
@@ -72,8 +104,24 @@
     "adp": 7.2,
     "sourceRank": 3,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629029
+    "priorSeason": {
+      "fgPct": 0.4756,
+      "fgAttempted": 1457,
+      "ftPct": 0.7798,
+      "ftAttempted": 645,
+      "threePM": 254,
+      "pts": 2143,
+      "reb": 495,
+      "ast": 530,
+      "stl": 105,
+      "blk": 34,
+      "to": 255
+    },
+    "nbaId": 1629029,
+    "careerGpHistory": [
+      64,
+      50
+    ]
   },
   {
     "id": "shai-gilgeous-alexander",
@@ -97,8 +145,24 @@
     "adp": 9.4,
     "sourceRank": 4,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1628983
+    "priorSeason": {
+      "fgPct": 0.5534,
+      "fgAttempted": 1321,
+      "ftPct": 0.8795,
+      "ftAttempted": 614,
+      "threePM": 115,
+      "pts": 2117,
+      "reb": 292,
+      "ast": 448,
+      "stl": 95,
+      "blk": 52,
+      "to": 151
+    },
+    "nbaId": 1628983,
+    "careerGpHistory": [
+      68,
+      76
+    ]
   },
   {
     "id": "cade-cunningham",
@@ -123,8 +187,24 @@
     "adp": 12.9,
     "sourceRank": 5,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630595
+    "priorSeason": {
+      "fgPct": 0.4609,
+      "fgAttempted": 1189,
+      "ftPct": 0.8115,
+      "ftAttempted": 382,
+      "threePM": 125,
+      "pts": 1531,
+      "reb": 355,
+      "ast": 634,
+      "stl": 92,
+      "blk": 54,
+      "to": 236
+    },
+    "nbaId": 1630595,
+    "careerGpHistory": [
+      64,
+      70
+    ]
   },
   {
     "id": "tyrese-maxey",
@@ -148,8 +228,24 @@
     "adp": 16.3,
     "sourceRank": 6,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630178
+    "priorSeason": {
+      "fgPct": 0.4624,
+      "fgAttempted": 1501,
+      "ftPct": 0.8921,
+      "ftAttempted": 417,
+      "threePM": 220,
+      "pts": 1980,
+      "reb": 290,
+      "ast": 461,
+      "stl": 130,
+      "blk": 55,
+      "to": 171
+    },
+    "nbaId": 1630178,
+    "careerGpHistory": [
+      70,
+      52
+    ]
   },
   {
     "id": "jayson-tatum",
@@ -174,8 +270,24 @@
     "adp": 18.2,
     "sourceRank": 7,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1628369
+    "priorSeason": {
+      "fgPct": 0.4111,
+      "fgAttempted": 287,
+      "ftPct": 0.8228,
+      "ftAttempted": 79,
+      "threePM": 47,
+      "pts": 348,
+      "reb": 160,
+      "ast": 85,
+      "stl": 22,
+      "blk": 3,
+      "to": 39
+    },
+    "nbaId": 1628369,
+    "careerGpHistory": [
+      16,
+      72
+    ]
   },
   {
     "id": "anthony-edwards",
@@ -200,8 +312,24 @@
     "adp": 25.3,
     "sourceRank": 8,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630162
+    "priorSeason": {
+      "fgPct": 0.489,
+      "fgAttempted": 1231,
+      "ftPct": 0.7963,
+      "ftAttempted": 437,
+      "threePM": 205,
+      "pts": 1757,
+      "reb": 302,
+      "ast": 226,
+      "stl": 83,
+      "blk": 49,
+      "to": 174
+    },
+    "nbaId": 1630162,
+    "careerGpHistory": [
+      61,
+      79
+    ]
   },
   {
     "id": "giannis-antetokounmpo",
@@ -226,8 +354,24 @@
     "adp": 18.9,
     "sourceRank": 9,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 203507
+    "priorSeason": {
+      "fgPct": 0.6237,
+      "fgAttempted": 598,
+      "ftPct": 0.6499,
+      "ftAttempted": 357,
+      "threePM": 15,
+      "pts": 993,
+      "reb": 352,
+      "ast": 196,
+      "stl": 34,
+      "blk": 24,
+      "to": 115
+    },
+    "nbaId": 203507,
+    "careerGpHistory": [
+      36,
+      67
+    ]
   },
   {
     "id": "jalen-johnson",
@@ -252,8 +396,24 @@
     "adp": 23.9,
     "sourceRank": 10,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630552
+    "priorSeason": {
+      "fgPct": 0.4886,
+      "fgAttempted": 1228,
+      "ftPct": 0.788,
+      "ftAttempted": 382,
+      "threePM": 120,
+      "pts": 1621,
+      "reb": 740,
+      "ast": 566,
+      "stl": 89,
+      "blk": 31,
+      "to": 244
+    },
+    "nbaId": 1630552,
+    "careerGpHistory": [
+      72,
+      36
+    ]
   },
   {
     "id": "donovan-mitchell",
@@ -278,8 +438,24 @@
     "adp": 30.3,
     "sourceRank": 11,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1628378
+    "priorSeason": {
+      "fgPct": 0.4833,
+      "fgAttempted": 1403,
+      "ftPct": 0.8651,
+      "ftAttempted": 430,
+      "threePM": 224,
+      "pts": 1952,
+      "reb": 316,
+      "ast": 398,
+      "stl": 104,
+      "blk": 20,
+      "to": 198
+    },
+    "nbaId": 1628378,
+    "careerGpHistory": [
+      70,
+      71
+    ]
   },
   {
     "id": "tyrese-haliburton",
@@ -304,8 +480,23 @@
     "adp": 34.0,
     "sourceRank": 12,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630169
+    "priorSeason": {
+      "fgPct": 0.4732,
+      "fgAttempted": 1006,
+      "ftPct": 0.8514,
+      "ftAttempted": 222,
+      "threePM": 218,
+      "pts": 1359,
+      "reb": 258,
+      "ast": 673,
+      "stl": 105,
+      "blk": 49,
+      "to": 120
+    },
+    "nbaId": 1630169,
+    "careerGpHistory": [
+      73
+    ]
   },
   {
     "id": "cooper-flagg",
@@ -331,8 +522,23 @@
     "adp": 10.7,
     "sourceRank": 13,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1642843
+    "priorSeason": {
+      "fgPct": 0.4682,
+      "fgAttempted": 1194,
+      "ftPct": 0.8275,
+      "ftAttempted": 342,
+      "threePM": 72,
+      "pts": 1473,
+      "reb": 466,
+      "ast": 316,
+      "stl": 84,
+      "blk": 64,
+      "to": 161
+    },
+    "nbaId": 1642843,
+    "careerGpHistory": [
+      70
+    ]
   },
   {
     "id": "kevin-durant",
@@ -358,8 +564,24 @@
     "adp": 14.0,
     "sourceRank": 14,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 201142
+    "priorSeason": {
+      "fgPct": 0.5203,
+      "fgAttempted": 1376,
+      "ftPct": 0.8737,
+      "ftAttempted": 467,
+      "threePM": 186,
+      "pts": 2026,
+      "reb": 426,
+      "ast": 372,
+      "stl": 62,
+      "blk": 71,
+      "to": 246
+    },
+    "nbaId": 201142,
+    "careerGpHistory": [
+      78,
+      62
+    ]
   },
   {
     "id": "scottie-barnes",
@@ -385,8 +607,24 @@
     "adp": 12.7,
     "sourceRank": 15,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630567
+    "priorSeason": {
+      "fgPct": 0.5067,
+      "fgAttempted": 1123,
+      "ftPct": 0.8148,
+      "ftAttempted": 297,
+      "threePM": 68,
+      "pts": 1448,
+      "reb": 600,
+      "ast": 474,
+      "stl": 114,
+      "blk": 116,
+      "to": 210
+    },
+    "nbaId": 1630567,
+    "careerGpHistory": [
+      80,
+      65
+    ]
   },
   {
     "id": "karl-anthony-towns",
@@ -411,8 +649,24 @@
     "adp": 13.7,
     "sourceRank": 16,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1626157
+    "priorSeason": {
+      "fgPct": 0.501,
+      "fgAttempted": 1032,
+      "ftPct": 0.8582,
+      "ftAttempted": 416,
+      "threePM": 113,
+      "pts": 1504,
+      "reb": 889,
+      "ast": 226,
+      "stl": 65,
+      "blk": 40,
+      "to": 187
+    },
+    "nbaId": 1626157,
+    "careerGpHistory": [
+      75,
+      72
+    ]
   },
   {
     "id": "jamal-murray",
@@ -436,8 +690,24 @@
     "adp": 17.3,
     "sourceRank": 17,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1627750
+    "priorSeason": {
+      "fgPct": 0.4831,
+      "fgAttempted": 1360,
+      "ftPct": 0.8872,
+      "ftAttempted": 390,
+      "threePM": 245,
+      "pts": 1905,
+      "reb": 330,
+      "ast": 535,
+      "stl": 66,
+      "blk": 29,
+      "to": 171
+    },
+    "nbaId": 1627750,
+    "careerGpHistory": [
+      75,
+      67
+    ]
   },
   {
     "id": "kawhi-leonard",
@@ -463,8 +733,24 @@
     "adp": 18.3,
     "sourceRank": 18,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 202695
+    "priorSeason": {
+      "fgPct": 0.5048,
+      "fgAttempted": 1258,
+      "ftPct": 0.8918,
+      "ftAttempted": 416,
+      "threePM": 172,
+      "pts": 1813,
+      "reb": 413,
+      "ast": 234,
+      "stl": 122,
+      "blk": 27,
+      "to": 133
+    },
+    "nbaId": 202695,
+    "careerGpHistory": [
+      65,
+      37
+    ]
   },
   {
     "id": "chet-holmgren",
@@ -489,12 +775,28 @@
     "adp": 19.8,
     "sourceRank": 19,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1631096
+    "priorSeason": {
+      "fgPct": 0.5571,
+      "fgAttempted": 779,
+      "ftPct": 0.7923,
+      "ftAttempted": 284,
+      "threePM": 88,
+      "pts": 1181,
+      "reb": 615,
+      "ast": 115,
+      "stl": 43,
+      "blk": 131,
+      "to": 107
+    },
+    "nbaId": 1631096,
+    "careerGpHistory": [
+      69,
+      32
+    ]
   },
   {
-    "id": "lonzo-ball",
-    "name": "Lonzo Ball",
+    "id": "lamelo-ball",
+    "name": "LaMelo Ball",
     "team": "MIN",
     "eligiblePositions": [
       "PG"
@@ -514,8 +816,24 @@
     "adp": 21.8,
     "sourceRank": 20,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1628366
+    "priorSeason": {
+      "fgPct": 0.4068,
+      "fgAttempted": 1244,
+      "ftPct": 0.8994,
+      "ftAttempted": 179,
+      "threePM": 272,
+      "pts": 1445,
+      "reb": 347,
+      "ast": 514,
+      "stl": 87,
+      "blk": 17,
+      "to": 202
+    },
+    "nbaId": 1630163,
+    "careerGpHistory": [
+      72,
+      47
+    ]
   },
   {
     "id": "anthony-davis",
@@ -540,8 +858,24 @@
     "adp": 23.5,
     "sourceRank": 21,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 203076
+    "priorSeason": {
+      "fgPct": 0.506,
+      "fgAttempted": 334,
+      "ftPct": 0.7284,
+      "ftAttempted": 81,
+      "threePM": 10,
+      "pts": 407,
+      "reb": 221,
+      "ast": 56,
+      "stl": 22,
+      "blk": 33,
+      "to": 41
+    },
+    "nbaId": 203076,
+    "careerGpHistory": [
+      20,
+      51
+    ]
   },
   {
     "id": "trae-young",
@@ -565,8 +899,24 @@
     "adp": 24.6,
     "sourceRank": 22,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629027
+    "priorSeason": {
+      "fgPct": 0.4576,
+      "fgAttempted": 177,
+      "ftPct": 0.8247,
+      "ftAttempted": 97,
+      "threePM": 27,
+      "pts": 269,
+      "reb": 30,
+      "ast": 120,
+      "stl": 13,
+      "blk": 2,
+      "to": 39
+    },
+    "nbaId": 1629027,
+    "careerGpHistory": [
+      15,
+      76
+    ]
   },
   {
     "id": "alperen-sengun",
@@ -591,8 +941,24 @@
     "adp": 16.1,
     "sourceRank": 23,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630578
+    "priorSeason": {
+      "fgPct": 0.5191,
+      "fgAttempted": 1123,
+      "ftPct": 0.6915,
+      "ftAttempted": 376,
+      "threePM": 40,
+      "pts": 1466,
+      "reb": 640,
+      "ast": 445,
+      "stl": 85,
+      "blk": 77,
+      "to": 227
+    },
+    "nbaId": 1630578,
+    "careerGpHistory": [
+      72,
+      76
+    ]
   },
   {
     "id": "austin-reaves",
@@ -618,8 +984,24 @@
     "adp": 21.1,
     "sourceRank": 24,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630559
+    "priorSeason": {
+      "fgPct": 0.4895,
+      "fgAttempted": 762,
+      "ftPct": 0.8706,
+      "ftAttempted": 371,
+      "threePM": 118,
+      "pts": 1187,
+      "reb": 240,
+      "ast": 280,
+      "stl": 56,
+      "blk": 20,
+      "to": 151
+    },
+    "nbaId": 1630559,
+    "careerGpHistory": [
+      51,
+      73
+    ]
   },
   {
     "id": "stephen-curry",
@@ -643,8 +1025,24 @@
     "adp": 23.1,
     "sourceRank": 25,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 201939
+    "priorSeason": {
+      "fgPct": 0.4681,
+      "fgAttempted": 799,
+      "ftPct": 0.9231,
+      "ftAttempted": 221,
+      "threePM": 190,
+      "pts": 1142,
+      "reb": 154,
+      "ast": 203,
+      "stl": 49,
+      "blk": 17,
+      "to": 121
+    },
+    "nbaId": 201939,
+    "careerGpHistory": [
+      43,
+      70
+    ]
   },
   {
     "id": "walker-kessler",
@@ -668,8 +1066,24 @@
     "adp": 28.0,
     "sourceRank": 26,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1631117
+    "priorSeason": {
+      "fgPct": 0.7027,
+      "fgAttempted": 37,
+      "ftPct": 0.7,
+      "ftAttempted": 20,
+      "threePM": 6,
+      "pts": 72,
+      "reb": 54,
+      "ast": 15,
+      "stl": 7,
+      "blk": 9,
+      "to": 16
+    },
+    "nbaId": 1631117,
+    "careerGpHistory": [
+      5,
+      58
+    ]
   },
   {
     "id": "josh-giddey",
@@ -694,8 +1108,24 @@
     "adp": 28.3,
     "sourceRank": 27,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630581
+    "priorSeason": {
+      "fgPct": 0.4477,
+      "fgAttempted": 717,
+      "ftPct": 0.7632,
+      "ftAttempted": 228,
+      "threePM": 103,
+      "pts": 919,
+      "reb": 448,
+      "ast": 494,
+      "stl": 55,
+      "blk": 27,
+      "to": 196
+    },
+    "nbaId": 1630581,
+    "careerGpHistory": [
+      54,
+      70
+    ]
   },
   {
     "id": "jalen-brunson",
@@ -719,8 +1149,24 @@
     "adp": 20.7,
     "sourceRank": 28,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1628973
+    "priorSeason": {
+      "fgPct": 0.4671,
+      "fgAttempted": 1475,
+      "ftPct": 0.8409,
+      "ftAttempted": 421,
+      "threePM": 195,
+      "pts": 1927,
+      "reb": 247,
+      "ast": 503,
+      "stl": 57,
+      "blk": 8,
+      "to": 175
+    },
+    "nbaId": 1628973,
+    "careerGpHistory": [
+      74,
+      65
+    ]
   },
   {
     "id": "jalen-duren",
@@ -744,8 +1190,24 @@
     "adp": 30.3,
     "sourceRank": 29,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1631105
+    "priorSeason": {
+      "fgPct": 0.6501,
+      "fgAttempted": 803,
+      "ftPct": 0.7465,
+      "ftAttempted": 430,
+      "threePM": 0,
+      "pts": 1365,
+      "reb": 737,
+      "ast": 138,
+      "stl": 57,
+      "blk": 59,
+      "to": 130
+    },
+    "nbaId": 1631105,
+    "careerGpHistory": [
+      70,
+      78
+    ]
   },
   {
     "id": "trey-murphy-iii",
@@ -770,8 +1232,24 @@
     "adp": 34.3,
     "sourceRank": 30,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630530
+    "priorSeason": {
+      "fgPct": 0.4705,
+      "fgAttempted": 1050,
+      "ftPct": 0.8862,
+      "ftAttempted": 246,
+      "threePM": 214,
+      "pts": 1420,
+      "reb": 377,
+      "ast": 250,
+      "stl": 99,
+      "blk": 24,
+      "to": 120
+    },
+    "nbaId": 1630530,
+    "careerGpHistory": [
+      66,
+      53
+    ]
   },
   {
     "id": "amen-thompson",
@@ -796,8 +1274,24 @@
     "adp": 27.1,
     "sourceRank": 31,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1641708
+    "priorSeason": {
+      "fgPct": 0.5335,
+      "fgAttempted": 1044,
+      "ftPct": 0.7795,
+      "ftAttempted": 390,
+      "threePM": 25,
+      "pts": 1443,
+      "reb": 614,
+      "ast": 420,
+      "stl": 119,
+      "blk": 48,
+      "to": 190
+    },
+    "nbaId": 1641708,
+    "careerGpHistory": [
+      79,
+      69
+    ]
   },
   {
     "id": "evan-mobley",
@@ -822,8 +1316,24 @@
     "adp": 30.5,
     "sourceRank": 32,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630596
+    "priorSeason": {
+      "fgPct": 0.546,
+      "fgAttempted": 859,
+      "ftPct": 0.6061,
+      "ftAttempted": 297,
+      "threePM": 62,
+      "pts": 1180,
+      "reb": 586,
+      "ast": 234,
+      "stl": 48,
+      "blk": 113,
+      "to": 122
+    },
+    "nbaId": 1630596,
+    "careerGpHistory": [
+      65,
+      71
+    ]
   },
   {
     "id": "devin-booker",
@@ -848,8 +1358,24 @@
     "adp": 30.5,
     "sourceRank": 33,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1626164
+    "priorSeason": {
+      "fgPct": 0.4558,
+      "fgAttempted": 1198,
+      "ftPct": 0.8731,
+      "ftAttempted": 520,
+      "threePM": 122,
+      "pts": 1668,
+      "reb": 248,
+      "ast": 386,
+      "stl": 51,
+      "blk": 18,
+      "to": 201
+    },
+    "nbaId": 1626164,
+    "careerGpHistory": [
+      64,
+      75
+    ]
   },
   {
     "id": "domantas-sabonis",
@@ -874,8 +1400,24 @@
     "adp": 32.8,
     "sourceRank": 34,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1627734
+    "priorSeason": {
+      "fgPct": 0.543,
+      "fgAttempted": 221,
+      "ftPct": 0.7273,
+      "ftAttempted": 77,
+      "threePM": 5,
+      "pts": 301,
+      "reb": 216,
+      "ast": 78,
+      "stl": 18,
+      "blk": 4,
+      "to": 51
+    },
+    "nbaId": 1627734,
+    "careerGpHistory": [
+      19,
+      70
+    ]
   },
   {
     "id": "james-harden",
@@ -900,8 +1442,24 @@
     "adp": 36.3,
     "sourceRank": 35,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 201935
+    "priorSeason": {
+      "fgPct": 0.4337,
+      "fgAttempted": 1123,
+      "ftPct": 0.8836,
+      "ftAttempted": 524,
+      "threePM": 215,
+      "pts": 1652,
+      "reb": 336,
+      "ast": 557,
+      "stl": 79,
+      "blk": 28,
+      "to": 245
+    },
+    "nbaId": 201935,
+    "careerGpHistory": [
+      70,
+      79
+    ]
   },
   {
     "id": "bam-adebayo",
@@ -926,8 +1484,24 @@
     "adp": 31.8,
     "sourceRank": 36,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1628389
+    "priorSeason": {
+      "fgPct": 0.4419,
+      "fgAttempted": 1145,
+      "ftPct": 0.7778,
+      "ftAttempted": 423,
+      "threePM": 127,
+      "pts": 1468,
+      "reb": 732,
+      "ast": 232,
+      "stl": 86,
+      "blk": 49,
+      "to": 120
+    },
+    "nbaId": 1628389,
+    "careerGpHistory": [
+      73,
+      78
+    ]
   },
   {
     "id": "kon-knueppel",
@@ -952,8 +1526,23 @@
     "adp": 35.5,
     "sourceRank": 37,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1642851
+    "priorSeason": {
+      "fgPct": 0.4751,
+      "fgAttempted": 1084,
+      "ftPct": 0.8628,
+      "ftAttempted": 226,
+      "threePM": 273,
+      "pts": 1498,
+      "reb": 432,
+      "ast": 274,
+      "stl": 57,
+      "blk": 19,
+      "to": 161
+    },
+    "nbaId": 1642851,
+    "careerGpHistory": [
+      81
+    ]
   },
   {
     "id": "donovan-clingan",
@@ -977,8 +1566,24 @@
     "adp": 38.5,
     "sourceRank": 38,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1642270
+    "priorSeason": {
+      "fgPct": 0.5205,
+      "fgAttempted": 684,
+      "ftPct": 0.6798,
+      "ftAttempted": 203,
+      "threePM": 84,
+      "pts": 934,
+      "reb": 892,
+      "ast": 162,
+      "stl": 44,
+      "blk": 130,
+      "to": 95
+    },
+    "nbaId": 1642270,
+    "careerGpHistory": [
+      77,
+      67
+    ]
   },
   {
     "id": "derrick-white",
@@ -1003,8 +1608,24 @@
     "adp": 43.9,
     "sourceRank": 39,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1628401
+    "priorSeason": {
+      "fgPct": 0.3944,
+      "fgAttempted": 1108,
+      "ftPct": 0.902,
+      "ftAttempted": 204,
+      "threePM": 209,
+      "pts": 1267,
+      "reb": 339,
+      "ast": 414,
+      "stl": 88,
+      "blk": 98,
+      "to": 134
+    },
+    "nbaId": 1628401,
+    "careerGpHistory": [
+      77,
+      76
+    ]
   },
   {
     "id": "jaylen-brown",
@@ -1030,8 +1651,24 @@
     "adp": 30.6,
     "sourceRank": 40,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1627759
+    "priorSeason": {
+      "fgPct": 0.477,
+      "fgAttempted": 1543,
+      "ftPct": 0.7948,
+      "ftAttempted": 536,
+      "threePM": 140,
+      "pts": 2038,
+      "reb": 492,
+      "ast": 364,
+      "stl": 72,
+      "blk": 27,
+      "to": 259
+    },
+    "nbaId": 1627759,
+    "careerGpHistory": [
+      71,
+      63
+    ]
   },
   {
     "id": "deni-avdija",
@@ -1057,8 +1694,24 @@
     "adp": 32.4,
     "sourceRank": 41,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630166
+    "priorSeason": {
+      "fgPct": 0.4624,
+      "fgAttempted": 1064,
+      "ftPct": 0.8016,
+      "ftAttempted": 610,
+      "threePM": 125,
+      "pts": 1598,
+      "reb": 454,
+      "ast": 442,
+      "stl": 51,
+      "blk": 41,
+      "to": 253
+    },
+    "nbaId": 1630166,
+    "careerGpHistory": [
+      66,
+      72
+    ]
   },
   {
     "id": "lebron-james",
@@ -1083,8 +1736,24 @@
     "adp": 40.4,
     "sourceRank": 42,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 2544
+    "priorSeason": {
+      "fgPct": 0.5147,
+      "fgAttempted": 919,
+      "ftPct": 0.7373,
+      "ftAttempted": 316,
+      "threePM": 77,
+      "pts": 1256,
+      "reb": 364,
+      "ast": 432,
+      "stl": 72,
+      "blk": 35,
+      "to": 179
+    },
+    "nbaId": 2544,
+    "careerGpHistory": [
+      60,
+      70
+    ]
   },
   {
     "id": "jalen-williams",
@@ -1109,8 +1778,24 @@
     "adp": 42.7,
     "sourceRank": 43,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1631114
+    "priorSeason": {
+      "fgPct": 0.4843,
+      "fgAttempted": 446,
+      "ftPct": 0.8372,
+      "ftAttempted": 129,
+      "threePM": 23,
+      "pts": 563,
+      "reb": 152,
+      "ast": 181,
+      "stl": 39,
+      "blk": 9,
+      "to": 63
+    },
+    "nbaId": 1631114,
+    "careerGpHistory": [
+      33,
+      69
+    ]
   },
   {
     "id": "lauri-markkanen",
@@ -1135,8 +1820,24 @@
     "adp": 42.7,
     "sourceRank": 44,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1628374
+    "priorSeason": {
+      "fgPct": 0.477,
+      "fgAttempted": 805,
+      "ftPct": 0.8955,
+      "ftAttempted": 268,
+      "threePM": 115,
+      "pts": 1123,
+      "reb": 289,
+      "ast": 89,
+      "stl": 42,
+      "blk": 21,
+      "to": 63
+    },
+    "nbaId": 1628374,
+    "careerGpHistory": [
+      42,
+      47
+    ]
   },
   {
     "id": "kyrie-irving",
@@ -1160,8 +1861,23 @@
     "adp": 46.7,
     "sourceRank": 45,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 202681
+    "priorSeason": {
+      "fgPct": 0.473,
+      "fgAttempted": 945,
+      "ftPct": 0.9159,
+      "ftAttempted": 214,
+      "threePM": 144,
+      "pts": 1234,
+      "reb": 240,
+      "ast": 231,
+      "stl": 66,
+      "blk": 23,
+      "to": 111
+    },
+    "nbaId": 202681,
+    "careerGpHistory": [
+      50
+    ]
   },
   {
     "id": "brandon-miller",
@@ -1186,8 +1902,24 @@
     "adp": 47.1,
     "sourceRank": 46,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1641706
+    "priorSeason": {
+      "fgPct": 0.4349,
+      "fgAttempted": 1044,
+      "ftPct": 0.8924,
+      "ftAttempted": 223,
+      "threePM": 204,
+      "pts": 1311,
+      "reb": 319,
+      "ast": 217,
+      "stl": 66,
+      "blk": 44,
+      "to": 163
+    },
+    "nbaId": 1641706,
+    "careerGpHistory": [
+      65,
+      27
+    ]
   },
   {
     "id": "keyonte-george",
@@ -1212,8 +1944,24 @@
     "adp": 50.6,
     "sourceRank": 47,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1641718
+    "priorSeason": {
+      "fgPct": 0.4563,
+      "fgAttempted": 881,
+      "ftPct": 0.8915,
+      "ftAttempted": 378,
+      "threePM": 134,
+      "pts": 1275,
+      "reb": 199,
+      "ast": 332,
+      "stl": 58,
+      "blk": 14,
+      "to": 166
+    },
+    "nbaId": 1641718,
+    "careerGpHistory": [
+      54,
+      67
+    ]
   },
   {
     "id": "joel-embiid",
@@ -1237,8 +1985,24 @@
     "adp": 47.5,
     "sourceRank": 48,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 203954
+    "priorSeason": {
+      "fgPct": 0.4892,
+      "fgAttempted": 697,
+      "ftPct": 0.8537,
+      "ftAttempted": 335,
+      "threePM": 53,
+      "pts": 1021,
+      "reb": 293,
+      "ast": 150,
+      "stl": 21,
+      "blk": 46,
+      "to": 109
+    },
+    "nbaId": 203954,
+    "careerGpHistory": [
+      38,
+      19
+    ]
   },
   {
     "id": "desmond-bane",
@@ -1263,8 +2027,24 @@
     "adp": 53.4,
     "sourceRank": 49,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630217
+    "priorSeason": {
+      "fgPct": 0.4838,
+      "fgAttempted": 1205,
+      "ftPct": 0.9075,
+      "ftAttempted": 346,
+      "threePM": 167,
+      "pts": 1647,
+      "reb": 338,
+      "ast": 338,
+      "stl": 86,
+      "blk": 37,
+      "to": 164
+    },
+    "nbaId": 1630217,
+    "careerGpHistory": [
+      82,
+      69
+    ]
   },
   {
     "id": "jaren-jackson-jr",
@@ -1289,8 +2069,24 @@
     "adp": 52.7,
     "sourceRank": 50,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1628991
+    "priorSeason": {
+      "fgPct": 0.4757,
+      "fgAttempted": 719,
+      "ftPct": 0.803,
+      "ftAttempted": 203,
+      "threePM": 84,
+      "pts": 931,
+      "reb": 272,
+      "ast": 94,
+      "stl": 53,
+      "blk": 69,
+      "to": 107
+    },
+    "nbaId": 1628991,
+    "careerGpHistory": [
+      48,
+      74
+    ]
   },
   {
     "id": "franz-wagner",
@@ -1315,8 +2111,24 @@
     "adp": 52.2,
     "sourceRank": 51,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630532
+    "priorSeason": {
+      "fgPct": 0.4813,
+      "fgAttempted": 507,
+      "ftPct": 0.8232,
+      "ftAttempted": 198,
+      "threePM": 48,
+      "pts": 699,
+      "reb": 177,
+      "ast": 113,
+      "stl": 32,
+      "blk": 11,
+      "to": 58
+    },
+    "nbaId": 1630532,
+    "careerGpHistory": [
+      34,
+      60
+    ]
   },
   {
     "id": "pascal-siakam",
@@ -1341,8 +2153,24 @@
     "adp": 46.8,
     "sourceRank": 52,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1627783
+    "priorSeason": {
+      "fgPct": 0.484,
+      "fgAttempted": 1155,
+      "ftPct": 0.6931,
+      "ftAttempted": 378,
+      "threePM": 105,
+      "pts": 1485,
+      "reb": 411,
+      "ast": 236,
+      "stl": 69,
+      "blk": 25,
+      "to": 138
+    },
+    "nbaId": 1627783,
+    "careerGpHistory": [
+      62,
+      78
+    ]
   },
   {
     "id": "darius-garland",
@@ -1366,8 +2194,24 @@
     "adp": 57.7,
     "sourceRank": 53,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629636
+    "priorSeason": {
+      "fgPct": 0.4598,
+      "fgAttempted": 672,
+      "ftPct": 0.8607,
+      "ftAttempted": 122,
+      "threePM": 122,
+      "pts": 845,
+      "reb": 107,
+      "ast": 301,
+      "stl": 43,
+      "blk": 8,
+      "to": 130
+    },
+    "nbaId": 1629636,
+    "careerGpHistory": [
+      45,
+      75
+    ]
   },
   {
     "id": "paolo-banchero",
@@ -1391,8 +2235,24 @@
     "adp": 35.7,
     "sourceRank": 54,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1631094
+    "priorSeason": {
+      "fgPct": 0.4592,
+      "fgAttempted": 1152,
+      "ftPct": 0.7746,
+      "ftAttempted": 590,
+      "threePM": 84,
+      "pts": 1599,
+      "reb": 604,
+      "ast": 373,
+      "stl": 51,
+      "blk": 40,
+      "to": 222
+    },
+    "nbaId": 1631094,
+    "careerGpHistory": [
+      72,
+      46
+    ]
   },
   {
     "id": "nickeil-alexander-walker",
@@ -1417,8 +2277,24 @@
     "adp": 58.3,
     "sourceRank": 55,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629638
+    "priorSeason": {
+      "fgPct": 0.4586,
+      "fgAttempted": 1195,
+      "ftPct": 0.9023,
+      "ftAttempted": 307,
+      "threePM": 251,
+      "pts": 1624,
+      "reb": 268,
+      "ast": 286,
+      "stl": 102,
+      "blk": 42,
+      "to": 162
+    },
+    "nbaId": 1629638,
+    "careerGpHistory": [
+      78,
+      82
+    ]
   },
   {
     "id": "alex-sarr",
@@ -1442,8 +2318,24 @@
     "adp": 60.4,
     "sourceRank": 56,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1642259
+    "priorSeason": {
+      "fgPct": 0.4817,
+      "fgAttempted": 656,
+      "ftPct": 0.6918,
+      "ftAttempted": 146,
+      "threePM": 50,
+      "pts": 783,
+      "reb": 355,
+      "ast": 130,
+      "stl": 39,
+      "blk": 95,
+      "to": 82
+    },
+    "nbaId": 1642259,
+    "careerGpHistory": [
+      48,
+      67
+    ]
   },
   {
     "id": "onyeka-okongwu",
@@ -1467,8 +2359,24 @@
     "adp": 55.7,
     "sourceRank": 57,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630168
+    "priorSeason": {
+      "fgPct": 0.4802,
+      "fgAttempted": 860,
+      "ftPct": 0.7574,
+      "ftAttempted": 202,
+      "threePM": 144,
+      "pts": 1123,
+      "reb": 562,
+      "ast": 231,
+      "stl": 82,
+      "blk": 79,
+      "to": 127
+    },
+    "nbaId": 1630168,
+    "careerGpHistory": [
+      74,
+      74
+    ]
   },
   {
     "id": "tyler-herro",
@@ -1493,8 +2401,24 @@
     "adp": 61.6,
     "sourceRank": 58,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629639
+    "priorSeason": {
+      "fgPct": 0.4796,
+      "fgAttempted": 515,
+      "ftPct": 0.9167,
+      "ftAttempted": 108,
+      "threePM": 84,
+      "pts": 677,
+      "reb": 158,
+      "ast": 136,
+      "stl": 23,
+      "blk": 12,
+      "to": 64
+    },
+    "nbaId": 1629639,
+    "careerGpHistory": [
+      33,
+      77
+    ]
   },
   {
     "id": "dejounte-murray",
@@ -1518,8 +2442,24 @@
     "adp": 65.1,
     "sourceRank": 59,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1627749
+    "priorSeason": {
+      "fgPct": 0.4835,
+      "fgAttempted": 182,
+      "ftPct": 0.8667,
+      "ftAttempted": 45,
+      "threePM": 19,
+      "pts": 234,
+      "reb": 75,
+      "ast": 89,
+      "stl": 23,
+      "blk": 3,
+      "to": 47
+    },
+    "nbaId": 1627749,
+    "careerGpHistory": [
+      14,
+      31
+    ]
   },
   {
     "id": "og-anunoby",
@@ -1544,8 +2484,24 @@
     "adp": 60.9,
     "sourceRank": 60,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1628384
+    "priorSeason": {
+      "fgPct": 0.4838,
+      "fgAttempted": 804,
+      "ftPct": 0.8281,
+      "ftAttempted": 221,
+      "threePM": 157,
+      "pts": 1118,
+      "reb": 351,
+      "ast": 145,
+      "stl": 104,
+      "blk": 48,
+      "to": 123
+    },
+    "nbaId": 1628384,
+    "careerGpHistory": [
+      67,
+      74
+    ]
   },
   {
     "id": "naz-reid",
@@ -1570,8 +2526,24 @@
     "adp": 65.3,
     "sourceRank": 61,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629675
+    "priorSeason": {
+      "fgPct": 0.4558,
+      "fgAttempted": 871,
+      "ftPct": 0.7317,
+      "ftAttempted": 123,
+      "threePM": 162,
+      "pts": 1046,
+      "reb": 477,
+      "ast": 170,
+      "stl": 76,
+      "blk": 78,
+      "to": 126
+    },
+    "nbaId": 1629675,
+    "careerGpHistory": [
+      77,
+      80
+    ]
   },
   {
     "id": "zach-edey",
@@ -1595,8 +2567,24 @@
     "adp": 68.3,
     "sourceRank": 62,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1641744
+    "priorSeason": {
+      "fgPct": 0.6327,
+      "fgAttempted": 98,
+      "ftPct": 0.7812,
+      "ftAttempted": 32,
+      "threePM": 1,
+      "pts": 150,
+      "reb": 122,
+      "ast": 12,
+      "stl": 7,
+      "blk": 21,
+      "to": 26
+    },
+    "nbaId": 1641744,
+    "careerGpHistory": [
+      11,
+      66
+    ]
   },
   {
     "id": "dyson-daniels",
@@ -1621,8 +2609,24 @@
     "adp": 60.6,
     "sourceRank": 63,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630700
+    "priorSeason": {
+      "fgPct": 0.5174,
+      "fgAttempted": 777,
+      "ftPct": 0.6148,
+      "ftAttempted": 122,
+      "threePM": 22,
+      "pts": 901,
+      "reb": 520,
+      "ast": 449,
+      "stl": 149,
+      "blk": 31,
+      "to": 135
+    },
+    "nbaId": 1630700,
+    "careerGpHistory": [
+      76,
+      76
+    ]
   },
   {
     "id": "julius-randle",
@@ -1646,8 +2650,24 @@
     "adp": 63.1,
     "sourceRank": 64,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 203944
+    "priorSeason": {
+      "fgPct": 0.4805,
+      "fgAttempted": 1207,
+      "ftPct": 0.8024,
+      "ftAttempted": 496,
+      "threePM": 109,
+      "pts": 1667,
+      "reb": 532,
+      "ast": 398,
+      "stl": 86,
+      "blk": 18,
+      "to": 217
+    },
+    "nbaId": 203944,
+    "careerGpHistory": [
+      79,
+      69
+    ]
   },
   {
     "id": "cameron-boozer",
@@ -1696,8 +2716,23 @@
     "adp": 72.5,
     "sourceRank": 66,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 203081
+    "priorSeason": {
+      "fgPct": 0.4476,
+      "fgAttempted": 992,
+      "ftPct": 0.9211,
+      "ftAttempted": 393,
+      "threePM": 197,
+      "pts": 1447,
+      "reb": 272,
+      "ast": 410,
+      "stl": 70,
+      "blk": 10,
+      "to": 162
+    },
+    "nbaId": 203081,
+    "careerGpHistory": [
+      58
+    ]
   },
   {
     "id": "michael-porter-jr",
@@ -1722,8 +2757,24 @@
     "adp": 68.1,
     "sourceRank": 67,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629008
+    "priorSeason": {
+      "fgPct": 0.4635,
+      "fgAttempted": 958,
+      "ftPct": 0.859,
+      "ftAttempted": 227,
+      "threePM": 176,
+      "pts": 1259,
+      "reb": 367,
+      "ast": 158,
+      "stl": 55,
+      "blk": 13,
+      "to": 122
+    },
+    "nbaId": 1629008,
+    "careerGpHistory": [
+      52,
+      77
+    ]
   },
   {
     "id": "ivica-zubac",
@@ -1747,8 +2798,24 @@
     "adp": 67.0,
     "sourceRank": 68,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1627826
+    "priorSeason": {
+      "fgPct": 0.5975,
+      "fgAttempted": 482,
+      "ftPct": 0.7113,
+      "ftAttempted": 142,
+      "threePM": 0,
+      "pts": 677,
+      "reb": 509,
+      "ast": 105,
+      "stl": 18,
+      "blk": 40,
+      "to": 86
+    },
+    "nbaId": 1627826,
+    "careerGpHistory": [
+      48,
+      80
+    ]
   },
   {
     "id": "ryan-rollins",
@@ -1773,8 +2840,24 @@
     "adp": 72.1,
     "sourceRank": 69,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1631157
+    "priorSeason": {
+      "fgPct": 0.4718,
+      "fgAttempted": 1030,
+      "ftPct": 0.7962,
+      "ftAttempted": 157,
+      "threePM": 184,
+      "pts": 1281,
+      "reb": 338,
+      "ast": 414,
+      "stl": 110,
+      "blk": 31,
+      "to": 201
+    },
+    "nbaId": 1631157,
+    "careerGpHistory": [
+      74,
+      56
+    ]
   },
   {
     "id": "stephon-castle",
@@ -1799,8 +2882,24 @@
     "adp": 55.2,
     "sourceRank": 70,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1642264
+    "priorSeason": {
+      "fgPct": 0.4712,
+      "fgAttempted": 817,
+      "ftPct": 0.7344,
+      "ftAttempted": 384,
+      "threePM": 81,
+      "pts": 1133,
+      "reb": 362,
+      "ast": 502,
+      "stl": 78,
+      "blk": 19,
+      "to": 217
+    },
+    "nbaId": 1642264,
+    "careerGpHistory": [
+      68,
+      81
+    ]
   },
   {
     "id": "vj-edgecombe",
@@ -1825,8 +2924,23 @@
     "adp": 64.5,
     "sourceRank": 71,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1642845
+    "priorSeason": {
+      "fgPct": 0.4379,
+      "fgAttempted": 1030,
+      "ftPct": 0.8177,
+      "ftAttempted": 181,
+      "threePM": 149,
+      "pts": 1199,
+      "reb": 423,
+      "ast": 315,
+      "stl": 107,
+      "blk": 39,
+      "to": 137
+    },
+    "nbaId": 1642845,
+    "careerGpHistory": [
+      75
+    ]
   },
   {
     "id": "zion-williamson",
@@ -1851,8 +2965,24 @@
     "adp": 70.3,
     "sourceRank": 72,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629627
+    "priorSeason": {
+      "fgPct": 0.5998,
+      "fgAttempted": 807,
+      "ftPct": 0.7161,
+      "ftAttempted": 465,
+      "threePM": 1,
+      "pts": 1302,
+      "reb": 353,
+      "ast": 199,
+      "stl": 60,
+      "blk": 34,
+      "to": 126
+    },
+    "nbaId": 1629627,
+    "careerGpHistory": [
+      62,
+      30
+    ]
   },
   {
     "id": "mikal-bridges",
@@ -1877,8 +3007,24 @@
     "adp": 76.1,
     "sourceRank": 73,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1628969
+    "priorSeason": {
+      "fgPct": 0.4901,
+      "fgAttempted": 963,
+      "ftPct": 0.8265,
+      "ftAttempted": 98,
+      "threePM": 156,
+      "pts": 1181,
+      "reb": 312,
+      "ast": 304,
+      "stl": 107,
+      "blk": 62,
+      "to": 83
+    },
+    "nbaId": 1628969,
+    "careerGpHistory": [
+      82,
+      82
+    ]
   },
   {
     "id": "jaden-mcdaniels",
@@ -1902,8 +3048,24 @@
     "adp": 77.7,
     "sourceRank": 74,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630183
+    "priorSeason": {
+      "fgPct": 0.5155,
+      "fgAttempted": 809,
+      "ftPct": 0.8352,
+      "ftAttempted": 176,
+      "threePM": 103,
+      "pts": 1084,
+      "reb": 310,
+      "ast": 199,
+      "stl": 81,
+      "blk": 73,
+      "to": 131
+    },
+    "nbaId": 1630183,
+    "careerGpHistory": [
+      73,
+      82
+    ]
   },
   {
     "id": "paul-george",
@@ -1928,8 +3090,24 @@
     "adp": 78.3,
     "sourceRank": 75,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 202331
+    "priorSeason": {
+      "fgPct": 0.4386,
+      "fgAttempted": 513,
+      "ftPct": 0.8198,
+      "ftAttempted": 111,
+      "threePM": 100,
+      "pts": 641,
+      "reb": 196,
+      "ast": 133,
+      "stl": 62,
+      "blk": 16,
+      "to": 64
+    },
+    "nbaId": 202331,
+    "careerGpHistory": [
+      37,
+      41
+    ]
   },
   {
     "id": "jarrett-allen",
@@ -1953,8 +3131,24 @@
     "adp": 77.9,
     "sourceRank": 76,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1628386
+    "priorSeason": {
+      "fgPct": 0.6383,
+      "fgAttempted": 528,
+      "ftPct": 0.7088,
+      "ftAttempted": 261,
+      "threePM": 1,
+      "pts": 860,
+      "reb": 476,
+      "ast": 100,
+      "stl": 55,
+      "blk": 47,
+      "to": 75
+    },
+    "nbaId": 1628386,
+    "careerGpHistory": [
+      56,
+      82
+    ]
   },
   {
     "id": "brandon-ingram",
@@ -1980,8 +3174,24 @@
     "adp": 72.4,
     "sourceRank": 77,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1627742
+    "priorSeason": {
+      "fgPct": 0.4767,
+      "fgAttempted": 1288,
+      "ftPct": 0.8202,
+      "ftAttempted": 356,
+      "threePM": 135,
+      "pts": 1655,
+      "reb": 430,
+      "ast": 284,
+      "stl": 58,
+      "blk": 55,
+      "to": 187
+    },
+    "nbaId": 1627742,
+    "careerGpHistory": [
+      77,
+      18
+    ]
   },
   {
     "id": "rudy-gobert",
@@ -2005,8 +3215,24 @@
     "adp": 76.2,
     "sourceRank": 78,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 203497
+    "priorSeason": {
+      "fgPct": 0.6823,
+      "fgAttempted": 491,
+      "ftPct": 0.5265,
+      "ftAttempted": 302,
+      "threePM": 0,
+      "pts": 829,
+      "reb": 872,
+      "ast": 128,
+      "stl": 58,
+      "blk": 124,
+      "to": 106
+    },
+    "nbaId": 203497,
+    "careerGpHistory": [
+      76,
+      72
+    ]
   },
   {
     "id": "dylan-harper",
@@ -2031,8 +3257,23 @@
     "adp": 80.2,
     "sourceRank": 79,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1642844
+    "priorSeason": {
+      "fgPct": 0.5046,
+      "fgAttempted": 656,
+      "ftPct": 0.7563,
+      "ftAttempted": 119,
+      "threePM": 61,
+      "pts": 813,
+      "reb": 234,
+      "ast": 266,
+      "stl": 54,
+      "blk": 24,
+      "to": 99
+    },
+    "nbaId": 1642844,
+    "careerGpHistory": [
+      69
+    ]
   },
   {
     "id": "payton-pritchard",
@@ -2056,8 +3297,24 @@
     "adp": 76.0,
     "sourceRank": 80,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630202
+    "priorSeason": {
+      "fgPct": 0.4638,
+      "fgAttempted": 1091,
+      "ftPct": 0.8897,
+      "ftAttempted": 136,
+      "threePM": 212,
+      "pts": 1345,
+      "reb": 312,
+      "ast": 408,
+      "stl": 58,
+      "blk": 10,
+      "to": 109
+    },
+    "nbaId": 1630202,
+    "careerGpHistory": [
+      79,
+      80
+    ]
   },
   {
     "id": "chris-wilson",
@@ -2106,8 +3363,24 @@
     "adp": 74.4,
     "sourceRank": 82,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1642276
+    "priorSeason": {
+      "fgPct": 0.53,
+      "fgAttempted": 649,
+      "ftPct": 0.7396,
+      "ftAttempted": 96,
+      "threePM": 92,
+      "pts": 851,
+      "reb": 694,
+      "ast": 56,
+      "stl": 59,
+      "blk": 84,
+      "to": 62
+    },
+    "nbaId": 1642276,
+    "careerGpHistory": [
+      77,
+      64
+    ]
   },
   {
     "id": "matas-buzelis",
@@ -2132,8 +3405,24 @@
     "adp": 57.8,
     "sourceRank": 83,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1641824
+    "priorSeason": {
+      "fgPct": 0.4631,
+      "fgAttempted": 963,
+      "ftPct": 0.7857,
+      "ftAttempted": 238,
+      "threePM": 173,
+      "pts": 1252,
+      "reb": 448,
+      "ast": 158,
+      "stl": 55,
+      "blk": 116,
+      "to": 159
+    },
+    "nbaId": 1641824,
+    "careerGpHistory": [
+      77,
+      80
+    ]
   },
   {
     "id": "de-aaron-fox",
@@ -2157,8 +3446,24 @@
     "adp": 79.1,
     "sourceRank": 84,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1628368
+    "priorSeason": {
+      "fgPct": 0.4862,
+      "fgAttempted": 1047,
+      "ftPct": 0.7602,
+      "ftAttempted": 246,
+      "threePM": 131,
+      "pts": 1336,
+      "reb": 270,
+      "ast": 445,
+      "stl": 89,
+      "blk": 19,
+      "to": 164
+    },
+    "nbaId": 1628368,
+    "careerGpHistory": [
+      72,
+      62
+    ]
   },
   {
     "id": "coby-white",
@@ -2183,8 +3488,24 @@
     "adp": 86.7,
     "sourceRank": 85,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629632
+    "priorSeason": {
+      "fgPct": 0.4462,
+      "fgAttempted": 623,
+      "ftPct": 0.8174,
+      "ftAttempted": 241,
+      "threePM": 115,
+      "pts": 868,
+      "reb": 170,
+      "ast": 200,
+      "stl": 25,
+      "blk": 5,
+      "to": 128
+    },
+    "nbaId": 1629632,
+    "careerGpHistory": [
+      50,
+      74
+    ]
   },
   {
     "id": "aj-dybantsa",
@@ -2234,8 +3555,24 @@
     "adp": 95.0,
     "sourceRank": 87,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629660
+    "priorSeason": {
+      "fgPct": 0.4744,
+      "fgAttempted": 215,
+      "ftPct": 0.875,
+      "ftAttempted": 56,
+      "threePM": 42,
+      "pts": 295,
+      "reb": 42,
+      "ast": 85,
+      "stl": 16,
+      "blk": 4,
+      "to": 27
+    },
+    "nbaId": 1629660,
+    "careerGpHistory": [
+      15,
+      70
+    ]
   },
   {
     "id": "day-ron-sharpe",
@@ -2259,8 +3596,24 @@
     "adp": 92.0,
     "sourceRank": 88,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630549
+    "priorSeason": {
+      "fgPct": 0.6011,
+      "fgAttempted": 356,
+      "ftPct": 0.6776,
+      "ftAttempted": 152,
+      "threePM": 9,
+      "pts": 540,
+      "reb": 413,
+      "ast": 145,
+      "stl": 67,
+      "blk": 26,
+      "to": 106
+    },
+    "nbaId": 1630549,
+    "careerGpHistory": [
+      62,
+      50
+    ]
   },
   {
     "id": "ja-morant",
@@ -2284,8 +3637,24 @@
     "adp": 90.4,
     "sourceRank": 89,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629630
+    "priorSeason": {
+      "fgPct": 0.4099,
+      "fgAttempted": 322,
+      "ftPct": 0.8974,
+      "ftAttempted": 117,
+      "threePM": 20,
+      "pts": 389,
+      "reb": 65,
+      "ast": 161,
+      "stl": 20,
+      "blk": 6,
+      "to": 71
+    },
+    "nbaId": 1629630,
+    "careerGpHistory": [
+      20,
+      50
+    ]
   },
   {
     "id": "immanuel-quickley",
@@ -2310,8 +3679,24 @@
     "adp": 97.6,
     "sourceRank": 90,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630193
+    "priorSeason": {
+      "fgPct": 0.4431,
+      "fgAttempted": 905,
+      "ftPct": 0.8213,
+      "ftAttempted": 207,
+      "threePM": 178,
+      "pts": 1150,
+      "reb": 282,
+      "ast": 415,
+      "stl": 92,
+      "blk": 5,
+      "to": 102
+    },
+    "nbaId": 1630193,
+    "careerGpHistory": [
+      70,
+      33
+    ]
   },
   {
     "id": "norman-powell",
@@ -2336,8 +3721,24 @@
     "adp": 94.7,
     "sourceRank": 91,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1626181
+    "priorSeason": {
+      "fgPct": 0.4704,
+      "fgAttempted": 895,
+      "ftPct": 0.827,
+      "ftAttempted": 318,
+      "threePM": 156,
+      "pts": 1261,
+      "reb": 203,
+      "ast": 143,
+      "stl": 64,
+      "blk": 14,
+      "to": 111
+    },
+    "nbaId": 1626181,
+    "careerGpHistory": [
+      58,
+      60
+    ]
   },
   {
     "id": "ausar-thompson",
@@ -2363,8 +3764,24 @@
     "adp": 91.8,
     "sourceRank": 92,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1641709
+    "priorSeason": {
+      "fgPct": 0.5251,
+      "fgAttempted": 577,
+      "ftPct": 0.5707,
+      "ftAttempted": 191,
+      "threePM": 6,
+      "pts": 721,
+      "reb": 418,
+      "ast": 228,
+      "stl": 146,
+      "blk": 69,
+      "to": 110
+    },
+    "nbaId": 1641709,
+    "careerGpHistory": [
+      73,
+      59
+    ]
   },
   {
     "id": "david-peterson",
@@ -2414,8 +3831,23 @@
     "adp": 80.7,
     "sourceRank": 94,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1642852
+    "priorSeason": {
+      "fgPct": 0.4733,
+      "fgAttempted": 748,
+      "ftPct": 0.7949,
+      "ftAttempted": 273,
+      "threePM": 23,
+      "pts": 948,
+      "reb": 572,
+      "ast": 298,
+      "stl": 84,
+      "blk": 74,
+      "to": 190
+    },
+    "nbaId": 1642852,
+    "careerGpHistory": [
+      81
+    ]
   },
   {
     "id": "myles-turner",
@@ -2439,8 +3871,24 @@
     "adp": 95.8,
     "sourceRank": 95,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1626167
+    "priorSeason": {
+      "fgPct": 0.4396,
+      "fgAttempted": 646,
+      "ftPct": 0.7401,
+      "ftAttempted": 177,
+      "threePM": 147,
+      "pts": 846,
+      "reb": 378,
+      "ast": 103,
+      "stl": 50,
+      "blk": 115,
+      "to": 83
+    },
+    "nbaId": 1626167,
+    "careerGpHistory": [
+      71,
+      72
+    ]
   },
   {
     "id": "mark-williams",
@@ -2464,8 +3912,24 @@
     "adp": 103.5,
     "sourceRank": 96,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1631109
+    "priorSeason": {
+      "fgPct": 0.6438,
+      "fgAttempted": 438,
+      "ftPct": 0.7714,
+      "ftAttempted": 175,
+      "threePM": 1,
+      "pts": 700,
+      "reb": 477,
+      "ast": 58,
+      "stl": 55,
+      "blk": 55,
+      "to": 65
+    },
+    "nbaId": 1631109,
+    "careerGpHistory": [
+      60,
+      44
+    ]
   },
   {
     "id": "josh-hart",
@@ -2490,8 +3954,24 @@
     "adp": 96.4,
     "sourceRank": 97,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1628404
+    "priorSeason": {
+      "fgPct": 0.5084,
+      "fgAttempted": 592,
+      "ftPct": 0.72,
+      "ftAttempted": 125,
+      "threePM": 100,
+      "pts": 792,
+      "reb": 486,
+      "ast": 317,
+      "stl": 75,
+      "blk": 17,
+      "to": 128
+    },
+    "nbaId": 1628404,
+    "careerGpHistory": [
+      66,
+      77
+    ]
   },
   {
     "id": "nic-claxton",
@@ -2515,8 +3995,24 @@
     "adp": 93.5,
     "sourceRank": 98,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629651
+    "priorSeason": {
+      "fgPct": 0.5712,
+      "fgAttempted": 583,
+      "ftPct": 0.6157,
+      "ftAttempted": 229,
+      "threePM": 3,
+      "pts": 810,
+      "reb": 478,
+      "ast": 253,
+      "stl": 45,
+      "blk": 77,
+      "to": 96
+    },
+    "nbaId": 1629651,
+    "careerGpHistory": [
+      69,
+      70
+    ]
   },
   {
     "id": "isaiah-hartenstein",
@@ -2540,8 +4036,24 @@
     "adp": 104.7,
     "sourceRank": 99,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1628392
+    "priorSeason": {
+      "fgPct": 0.6216,
+      "fgAttempted": 296,
+      "ftPct": 0.6095,
+      "ftAttempted": 105,
+      "threePM": 0,
+      "pts": 432,
+      "reb": 443,
+      "ast": 166,
+      "stl": 48,
+      "blk": 36,
+      "to": 82
+    },
+    "nbaId": 1628392,
+    "careerGpHistory": [
+      47,
+      57
+    ]
   },
   {
     "id": "neemias-queta",
@@ -2565,8 +4077,24 @@
     "adp": 104.7,
     "sourceRank": 100,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629674
+    "priorSeason": {
+      "fgPct": 0.6533,
+      "fgAttempted": 499,
+      "ftPct": 0.7029,
+      "ftAttempted": 175,
+      "threePM": 1,
+      "pts": 776,
+      "reb": 636,
+      "ast": 126,
+      "stl": 60,
+      "blk": 100,
+      "to": 75
+    },
+    "nbaId": 1629674,
+    "careerGpHistory": [
+      76,
+      62
+    ]
   },
   {
     "id": "ayo-dosunmu",
@@ -2591,8 +4119,24 @@
     "adp": 106.7,
     "sourceRank": 101,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630245
+    "priorSeason": {
+      "fgPct": 0.5167,
+      "fgAttempted": 747,
+      "ftPct": 0.8759,
+      "ftAttempted": 145,
+      "threePM": 123,
+      "pts": 1022,
+      "reb": 237,
+      "ast": 249,
+      "stl": 58,
+      "blk": 18,
+      "to": 96
+    },
+    "nbaId": 1630245,
+    "careerGpHistory": [
+      69,
+      46
+    ]
   },
   {
     "id": "jalen-suggs",
@@ -2617,8 +4161,24 @@
     "adp": 108.5,
     "sourceRank": 102,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630591
+    "priorSeason": {
+      "fgPct": 0.4345,
+      "fgAttempted": 649,
+      "ftPct": 0.8547,
+      "ftAttempted": 117,
+      "threePM": 122,
+      "pts": 786,
+      "reb": 220,
+      "ast": 312,
+      "stl": 105,
+      "blk": 40,
+      "to": 152
+    },
+    "nbaId": 1630591,
+    "careerGpHistory": [
+      57,
+      35
+    ]
   },
   {
     "id": "wendell-carter-jr",
@@ -2642,8 +4202,24 @@
     "adp": 109.9,
     "sourceRank": 103,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1628976
+    "priorSeason": {
+      "fgPct": 0.5118,
+      "fgAttempted": 637,
+      "ftPct": 0.792,
+      "ftAttempted": 250,
+      "threePM": 72,
+      "pts": 922,
+      "reb": 577,
+      "ast": 154,
+      "stl": 60,
+      "blk": 49,
+      "to": 100
+    },
+    "nbaId": 1628976,
+    "careerGpHistory": [
+      78,
+      68
+    ]
   },
   {
     "id": "miles-bridges",
@@ -2667,8 +4243,24 @@
     "adp": 97.7,
     "sourceRank": 104,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1628970
+    "priorSeason": {
+      "fgPct": 0.4597,
+      "fgAttempted": 1042,
+      "ftPct": 0.8221,
+      "ftAttempted": 253,
+      "threePM": 148,
+      "pts": 1314,
+      "reb": 450,
+      "ast": 246,
+      "stl": 46,
+      "blk": 34,
+      "to": 107
+    },
+    "nbaId": 1628970,
+    "careerGpHistory": [
+      77,
+      64
+    ]
   },
   {
     "id": "kristaps-porzingis",
@@ -2692,8 +4284,24 @@
     "adp": 105.7,
     "sourceRank": 105,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 204001
+    "priorSeason": {
+      "fgPct": 0.4459,
+      "fgAttempted": 388,
+      "ftPct": 0.8418,
+      "ftAttempted": 158,
+      "threePM": 54,
+      "pts": 533,
+      "reb": 167,
+      "ast": 81,
+      "stl": 18,
+      "blk": 38,
+      "to": 41
+    },
+    "nbaId": 204001,
+    "careerGpHistory": [
+      32,
+      42
+    ]
   },
   {
     "id": "kyshawn-george",
@@ -2719,8 +4327,24 @@
     "adp": 112.8,
     "sourceRank": 106,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1642273
+    "priorSeason": {
+      "fgPct": 0.4385,
+      "fgAttempted": 577,
+      "ftPct": 0.8015,
+      "ftAttempted": 131,
+      "threePM": 99,
+      "pts": 710,
+      "reb": 245,
+      "ast": 214,
+      "stl": 48,
+      "blk": 43,
+      "to": 125
+    },
+    "nbaId": 1642273,
+    "careerGpHistory": [
+      48,
+      68
+    ]
   },
   {
     "id": "brandin-podziemski",
@@ -2745,8 +4369,24 @@
     "adp": 114.7,
     "sourceRank": 107,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1641764
+    "priorSeason": {
+      "fgPct": 0.455,
+      "fgAttempted": 866,
+      "ftPct": 0.7967,
+      "ftAttempted": 241,
+      "threePM": 153,
+      "pts": 1133,
+      "reb": 419,
+      "ast": 304,
+      "stl": 88,
+      "blk": 15,
+      "to": 131
+    },
+    "nbaId": 1641764,
+    "careerGpHistory": [
+      82,
+      64
+    ]
   },
   {
     "id": "cedric-coward",
@@ -2771,8 +4411,23 @@
     "adp": 100.1,
     "sourceRank": 108,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1642907
+    "priorSeason": {
+      "fgPct": 0.4707,
+      "fgAttempted": 648,
+      "ftPct": 0.8434,
+      "ftAttempted": 166,
+      "threePM": 93,
+      "pts": 843,
+      "reb": 364,
+      "ast": 171,
+      "stl": 40,
+      "blk": 27,
+      "to": 105
+    },
+    "nbaId": 1642907,
+    "careerGpHistory": [
+      62
+    ]
   },
   {
     "id": "andrew-wiggins",
@@ -2798,8 +4453,24 @@
     "adp": 110.2,
     "sourceRank": 109,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 203952
+    "priorSeason": {
+      "fgPct": 0.475,
+      "fgAttempted": 821,
+      "ftPct": 0.784,
+      "ftAttempted": 162,
+      "threePM": 138,
+      "pts": 1045,
+      "reb": 329,
+      "ast": 182,
+      "stl": 76,
+      "blk": 69,
+      "to": 103
+    },
+    "nbaId": 203952,
+    "careerGpHistory": [
+      68,
+      60
+    ]
   },
   {
     "id": "kevin-porter-jr",
@@ -2824,8 +4495,24 @@
     "adp": 117.2,
     "sourceRank": 110,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629645
+    "priorSeason": {
+      "fgPct": 0.465,
+      "fgAttempted": 514,
+      "ftPct": 0.8782,
+      "ftAttempted": 156,
+      "threePM": 46,
+      "pts": 661,
+      "reb": 198,
+      "ast": 280,
+      "stl": 83,
+      "blk": 19,
+      "to": 110
+    },
+    "nbaId": 1629645,
+    "careerGpHistory": [
+      38,
+      75
+    ]
   },
   {
     "id": "jabari-smith-jr",
@@ -2850,8 +4537,24 @@
     "adp": 95.3,
     "sourceRank": 111,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1631095
+    "priorSeason": {
+      "fgPct": 0.4497,
+      "fgAttempted": 974,
+      "ftPct": 0.7751,
+      "ftAttempted": 209,
+      "threePM": 177,
+      "pts": 1215,
+      "reb": 529,
+      "ast": 143,
+      "stl": 56,
+      "blk": 71,
+      "to": 105
+    },
+    "nbaId": 1631095,
+    "careerGpHistory": [
+      77,
+      57
+    ]
   },
   {
     "id": "sandro-mamukelashvili",
@@ -2876,8 +4579,24 @@
     "adp": 113.6,
     "sourceRank": 112,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630572
+    "priorSeason": {
+      "fgPct": 0.523,
+      "fgAttempted": 631,
+      "ftPct": 0.7468,
+      "ftAttempted": 158,
+      "threePM": 115,
+      "pts": 893,
+      "reb": 395,
+      "ast": 151,
+      "stl": 64,
+      "blk": 41,
+      "to": 67
+    },
+    "nbaId": 1630572,
+    "careerGpHistory": [
+      80,
+      61
+    ]
   },
   {
     "id": "peyton-watson",
@@ -2902,8 +4621,24 @@
     "adp": 113.2,
     "sourceRank": 113,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1631212
+    "priorSeason": {
+      "fgPct": 0.4905,
+      "fgAttempted": 581,
+      "ftPct": 0.7302,
+      "ftAttempted": 189,
+      "threePM": 81,
+      "pts": 789,
+      "reb": 264,
+      "ast": 111,
+      "stl": 50,
+      "blk": 61,
+      "to": 93
+    },
+    "nbaId": 1631212,
+    "careerGpHistory": [
+      54,
+      68
+    ]
   },
   {
     "id": "jusuf-nurkic",
@@ -2927,8 +4662,24 @@
     "adp": 116.7,
     "sourceRank": 114,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 203994
+    "priorSeason": {
+      "fgPct": 0.5028,
+      "fgAttempted": 358,
+      "ftPct": 0.5487,
+      "ftAttempted": 113,
+      "threePM": 25,
+      "pts": 447,
+      "reb": 425,
+      "ast": 196,
+      "stl": 52,
+      "blk": 22,
+      "to": 101
+    },
+    "nbaId": 203994,
+    "careerGpHistory": [
+      41,
+      51
+    ]
   },
   {
     "id": "cj-mccollum",
@@ -2953,8 +4704,24 @@
     "adp": 110.7,
     "sourceRank": 115,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 203468
+    "priorSeason": {
+      "fgPct": 0.4549,
+      "fgAttempted": 1154,
+      "ftPct": 0.7722,
+      "ftAttempted": 237,
+      "threePM": 191,
+      "pts": 1424,
+      "reb": 252,
+      "ast": 293,
+      "stl": 64,
+      "blk": 35,
+      "to": 135
+    },
+    "nbaId": 203468,
+    "careerGpHistory": [
+      76,
+      56
+    ]
   },
   {
     "id": "duke-acuff-jr",
@@ -3005,8 +4772,24 @@
     "adp": 101.5,
     "sourceRank": 117,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1631170
+    "priorSeason": {
+      "fgPct": 0.5071,
+      "fgAttempted": 915,
+      "ftPct": 0.7685,
+      "ftAttempted": 216,
+      "threePM": 58,
+      "pts": 1152,
+      "reb": 375,
+      "ast": 352,
+      "stl": 51,
+      "blk": 21,
+      "to": 152
+    },
+    "nbaId": 1631170,
+    "careerGpHistory": [
+      75,
+      66
+    ]
   },
   {
     "id": "keegan-murray",
@@ -3031,8 +4814,24 @@
     "adp": 120.6,
     "sourceRank": 118,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1631099
+    "priorSeason": {
+      "fgPct": 0.42,
+      "fgAttempted": 300,
+      "ftPct": 0.7755,
+      "ftAttempted": 49,
+      "threePM": 31,
+      "pts": 321,
+      "reb": 132,
+      "ast": 38,
+      "stl": 24,
+      "blk": 36,
+      "to": 27
+    },
+    "nbaId": 1631099,
+    "careerGpHistory": [
+      23,
+      76
+    ]
   },
   {
     "id": "fred-vanvleet",
@@ -3056,8 +4855,23 @@
     "adp": 119.5,
     "sourceRank": 119,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1627832
+    "priorSeason": {
+      "fgPct": 0.3781,
+      "fgAttempted": 759,
+      "ftPct": 0.8102,
+      "ftAttempted": 137,
+      "threePM": 159,
+      "pts": 844,
+      "reb": 221,
+      "ast": 333,
+      "stl": 94,
+      "blk": 25,
+      "to": 87
+    },
+    "nbaId": 1627832,
+    "careerGpHistory": [
+      60
+    ]
   },
   {
     "id": "toumani-camara",
@@ -3082,8 +4896,24 @@
     "adp": 117.7,
     "sourceRank": 120,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1641739
+    "priorSeason": {
+      "fgPct": 0.44,
+      "fgAttempted": 891,
+      "ftPct": 0.708,
+      "ftAttempted": 137,
+      "threePM": 219,
+      "pts": 1100,
+      "reb": 421,
+      "ast": 201,
+      "stl": 94,
+      "blk": 35,
+      "to": 144
+    },
+    "nbaId": 1641739,
+    "careerGpHistory": [
+      82,
+      78
+    ]
   },
   {
     "id": "john-collins",
@@ -3108,8 +4938,24 @@
     "adp": 117.9,
     "sourceRank": 121,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1628381
+    "priorSeason": {
+      "fgPct": 0.5524,
+      "fgAttempted": 659,
+      "ftPct": 0.7662,
+      "ftAttempted": 154,
+      "threePM": 89,
+      "pts": 935,
+      "reb": 367,
+      "ast": 70,
+      "stl": 60,
+      "blk": 51,
+      "to": 95
+    },
+    "nbaId": 1628381,
+    "careerGpHistory": [
+      69,
+      40
+    ]
   },
   {
     "id": "demar-derozan",
@@ -3134,8 +4980,24 @@
     "adp": 116.2,
     "sourceRank": 122,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 201942
+    "priorSeason": {
+      "fgPct": 0.4965,
+      "fgAttempted": 1005,
+      "ftPct": 0.8677,
+      "ftAttempted": 431,
+      "threePM": 47,
+      "pts": 1419,
+      "reb": 226,
+      "ast": 316,
+      "stl": 80,
+      "blk": 23,
+      "to": 96
+    },
+    "nbaId": 201942,
+    "careerGpHistory": [
+      77,
+      77
+    ]
   },
   {
     "id": "rj-barrett",
@@ -3161,8 +5023,24 @@
     "adp": 107.6,
     "sourceRank": 123,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629628
+    "priorSeason": {
+      "fgPct": 0.4914,
+      "fgAttempted": 816,
+      "ftPct": 0.7168,
+      "ftAttempted": 279,
+      "threePM": 96,
+      "pts": 1098,
+      "reb": 300,
+      "ast": 189,
+      "stl": 42,
+      "blk": 19,
+      "to": 99
+    },
+    "nbaId": 1629628,
+    "careerGpHistory": [
+      57,
+      58
+    ]
   },
   {
     "id": "jalen-green",
@@ -3187,8 +5065,24 @@
     "adp": 108.7,
     "sourceRank": 124,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630224
+    "priorSeason": {
+      "fgPct": 0.4219,
+      "fgAttempted": 512,
+      "ftPct": 0.7471,
+      "ftAttempted": 87,
+      "threePM": 71,
+      "pts": 568,
+      "reb": 116,
+      "ast": 91,
+      "stl": 34,
+      "blk": 8,
+      "to": 72
+    },
+    "nbaId": 1630224,
+    "careerGpHistory": [
+      32,
+      82
+    ]
   },
   {
     "id": "zach-lavine",
@@ -3214,8 +5108,24 @@
     "adp": 119.0,
     "sourceRank": 125,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 203897
+    "priorSeason": {
+      "fgPct": 0.479,
+      "fgAttempted": 547,
+      "ftPct": 0.8803,
+      "ftAttempted": 142,
+      "threePM": 99,
+      "pts": 748,
+      "reb": 108,
+      "ast": 89,
+      "stl": 28,
+      "blk": 10,
+      "to": 74
+    },
+    "nbaId": 203897,
+    "careerGpHistory": [
+      39,
+      74
+    ]
   },
   {
     "id": "saddiq-bey",
@@ -3240,8 +5150,23 @@
     "adp": 122.0,
     "sourceRank": 126,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630180
+    "priorSeason": {
+      "fgPct": 0.4509,
+      "fgAttempted": 967,
+      "ftPct": 0.8407,
+      "ftAttempted": 295,
+      "threePM": 151,
+      "pts": 1271,
+      "reb": 400,
+      "ast": 182,
+      "stl": 68,
+      "blk": 7,
+      "to": 68
+    },
+    "nbaId": 1630180,
+    "careerGpHistory": [
+      72
+    ]
   },
   {
     "id": "matthew-raynaud",
@@ -3317,8 +5242,24 @@
     "adp": 119.3,
     "sourceRank": 129,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 202710
+    "priorSeason": {
+      "fgPct": 0.5195,
+      "fgAttempted": 462,
+      "ftPct": 0.8641,
+      "ftAttempted": 287,
+      "threePM": 32,
+      "pts": 760,
+      "reb": 211,
+      "ast": 185,
+      "stl": 55,
+      "blk": 8,
+      "to": 60
+    },
+    "nbaId": 202710,
+    "careerGpHistory": [
+      38,
+      55
+    ]
   },
   {
     "id": "andrew-nembhard",
@@ -3343,8 +5284,24 @@
     "adp": 126.4,
     "sourceRank": 130,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629614
+    "priorSeason": {
+      "fgPct": 0.4422,
+      "fgAttempted": 753,
+      "ftPct": 0.8248,
+      "ftAttempted": 234,
+      "threePM": 107,
+      "pts": 966,
+      "reb": 160,
+      "ast": 437,
+      "stl": 51,
+      "blk": 8,
+      "to": 137
+    },
+    "nbaId": 1629614,
+    "careerGpHistory": [
+      57,
+      65
+    ]
   },
   {
     "id": "collin-gillespie",
@@ -3369,8 +5326,24 @@
     "adp": 127.6,
     "sourceRank": 131,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1631221
+    "priorSeason": {
+      "fgPct": 0.4181,
+      "fgAttempted": 842,
+      "ftPct": 0.8736,
+      "ftAttempted": 87,
+      "threePM": 232,
+      "pts": 1012,
+      "reb": 327,
+      "ast": 371,
+      "stl": 99,
+      "blk": 16,
+      "to": 125
+    },
+    "nbaId": 1631221,
+    "careerGpHistory": [
+      80,
+      33
+    ]
   },
   {
     "id": "yaxel-lendeborg",
@@ -3420,8 +5393,24 @@
     "adp": 117.1,
     "sourceRank": 133,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 201950
+    "priorSeason": {
+      "fgPct": 0.4513,
+      "fgAttempted": 709,
+      "ftPct": 0.8381,
+      "ftAttempted": 105,
+      "threePM": 137,
+      "pts": 865,
+      "reb": 245,
+      "ast": 322,
+      "stl": 54,
+      "blk": 6,
+      "to": 146
+    },
+    "nbaId": 201950,
+    "careerGpHistory": [
+      53,
+      62
+    ]
   },
   {
     "id": "daniel-gafford",
@@ -3445,8 +5434,24 @@
     "adp": 122.6,
     "sourceRank": 134,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629655
+    "priorSeason": {
+      "fgPct": 0.6551,
+      "fgAttempted": 316,
+      "ftPct": 0.6832,
+      "ftAttempted": 161,
+      "threePM": 0,
+      "pts": 524,
+      "reb": 378,
+      "ast": 58,
+      "stl": 42,
+      "blk": 69,
+      "to": 63
+    },
+    "nbaId": 1629655,
+    "careerGpHistory": [
+      55,
+      57
+    ]
   },
   {
     "id": "egor-demin",
@@ -3471,8 +5476,23 @@
     "adp": 120.7,
     "sourceRank": 135,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1642856
+    "priorSeason": {
+      "fgPct": 0.3987,
+      "fgAttempted": 449,
+      "ftPct": 0.8308,
+      "ftAttempted": 65,
+      "threePM": 124,
+      "pts": 536,
+      "reb": 165,
+      "ast": 173,
+      "stl": 42,
+      "blk": 17,
+      "to": 86
+    },
+    "nbaId": 1642856,
+    "careerGpHistory": [
+      52
+    ]
   },
   {
     "id": "jakob-poeltl",
@@ -3496,8 +5516,24 @@
     "adp": 123.0,
     "sourceRank": 136,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1627751
+    "priorSeason": {
+      "fgPct": 0.7,
+      "fgAttempted": 310,
+      "ftPct": 0.602,
+      "ftAttempted": 98,
+      "threePM": 0,
+      "pts": 493,
+      "reb": 323,
+      "ast": 93,
+      "stl": 40,
+      "blk": 32,
+      "to": 57
+    },
+    "nbaId": 1627751,
+    "careerGpHistory": [
+      46,
+      57
+    ]
   },
   {
     "id": "davion-mitchell",
@@ -3521,8 +5557,24 @@
     "adp": 122.5,
     "sourceRank": 137,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630558
+    "priorSeason": {
+      "fgPct": 0.4897,
+      "fgAttempted": 533,
+      "ftPct": 0.6462,
+      "ftAttempted": 65,
+      "threePM": 90,
+      "pts": 654,
+      "reb": 186,
+      "ast": 453,
+      "stl": 68,
+      "blk": 11,
+      "to": 108
+    },
+    "nbaId": 1630558,
+    "careerGpHistory": [
+      70,
+      74
+    ]
   },
   {
     "id": "reed-sheppard",
@@ -3547,8 +5599,24 @@
     "adp": 115.7,
     "sourceRank": 138,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1642263
+    "priorSeason": {
+      "fgPct": 0.4302,
+      "fgAttempted": 946,
+      "ftPct": 0.8023,
+      "ftAttempted": 86,
+      "threePM": 227,
+      "pts": 1110,
+      "reb": 238,
+      "ast": 277,
+      "stl": 122,
+      "blk": 54,
+      "to": 123
+    },
+    "nbaId": 1642263,
+    "careerGpHistory": [
+      82,
+      52
+    ]
   },
   {
     "id": "brook-lopez",
@@ -3572,8 +5640,24 @@
     "adp": null,
     "sourceRank": 139,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 201572
+    "priorSeason": {
+      "fgPct": 0.428,
+      "fgAttempted": 542,
+      "ftPct": 0.7568,
+      "ftAttempted": 74,
+      "threePM": 114,
+      "pts": 634,
+      "reb": 273,
+      "ast": 97,
+      "stl": 45,
+      "blk": 87,
+      "to": 61
+    },
+    "nbaId": 201572,
+    "careerGpHistory": [
+      75,
+      80
+    ]
   },
   {
     "id": "quentin-grimes",
@@ -3598,8 +5682,24 @@
     "adp": 118.2,
     "sourceRank": 140,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629656
+    "priorSeason": {
+      "fgPct": 0.4503,
+      "fgAttempted": 755,
+      "ftPct": 0.8397,
+      "ftAttempted": 237,
+      "threePM": 127,
+      "pts": 1006,
+      "reb": 273,
+      "ast": 244,
+      "stl": 64,
+      "blk": 28,
+      "to": 133
+    },
+    "nbaId": 1629656,
+    "careerGpHistory": [
+      75,
+      75
+    ]
   },
   {
     "id": "paul-reed",
@@ -3624,8 +5724,24 @@
     "adp": 130.0,
     "sourceRank": 141,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630194
+    "priorSeason": {
+      "fgPct": 0.6165,
+      "fgAttempted": 339,
+      "ftPct": 0.6636,
+      "ftAttempted": 110,
+      "threePM": 13,
+      "pts": 504,
+      "reb": 294,
+      "ast": 80,
+      "stl": 57,
+      "blk": 60,
+      "to": 58
+    },
+    "nbaId": 1630194,
+    "careerGpHistory": [
+      65,
+      45
+    ]
   },
   {
     "id": "ajay-mitchell",
@@ -3650,8 +5766,24 @@
     "adp": 123.4,
     "sourceRank": 142,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1642349
+    "priorSeason": {
+      "fgPct": 0.4847,
+      "fgAttempted": 590,
+      "ftPct": 0.8704,
+      "ftAttempted": 162,
+      "threePM": 61,
+      "pts": 774,
+      "reb": 190,
+      "ast": 206,
+      "stl": 71,
+      "blk": 18,
+      "to": 81
+    },
+    "nbaId": 1642349,
+    "careerGpHistory": [
+      57,
+      36
+    ]
   },
   {
     "id": "anthony-black",
@@ -3677,8 +5809,24 @@
     "adp": 119.6,
     "sourceRank": 143,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1641710
+    "priorSeason": {
+      "fgPct": 0.4469,
+      "fgAttempted": 772,
+      "ftPct": 0.7316,
+      "ftAttempted": 231,
+      "threePM": 100,
+      "pts": 959,
+      "reb": 244,
+      "ast": 236,
+      "stl": 91,
+      "blk": 45,
+      "to": 132
+    },
+    "nbaId": 1641710,
+    "careerGpHistory": [
+      64,
+      78
+    ]
   },
   {
     "id": "pj-washington",
@@ -3703,8 +5851,24 @@
     "adp": 120.1,
     "sourceRank": 144,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629023
+    "priorSeason": {
+      "fgPct": 0.4498,
+      "fgAttempted": 658,
+      "ftPct": 0.6868,
+      "ftAttempted": 182,
+      "threePM": 76,
+      "pts": 793,
+      "reb": 394,
+      "ast": 98,
+      "stl": 55,
+      "blk": 60,
+      "to": 94
+    },
+    "nbaId": 1629023,
+    "careerGpHistory": [
+      56,
+      57
+    ]
   },
   {
     "id": "kelly-oubre-jr",
@@ -3729,8 +5893,24 @@
     "adp": 122.7,
     "sourceRank": 145,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1626162
+    "priorSeason": {
+      "fgPct": 0.4669,
+      "fgAttempted": 544,
+      "ftPct": 0.7655,
+      "ftAttempted": 145,
+      "threePM": 86,
+      "pts": 705,
+      "reb": 252,
+      "ast": 80,
+      "stl": 68,
+      "blk": 24,
+      "to": 69
+    },
+    "nbaId": 1626162,
+    "careerGpHistory": [
+      50,
+      60
+    ]
   },
   {
     "id": "shaedon-sharpe",
@@ -3755,8 +5935,24 @@
     "adp": 113.9,
     "sourceRank": 146,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1631101
+    "priorSeason": {
+      "fgPct": 0.4516,
+      "fgAttempted": 868,
+      "ftPct": 0.7868,
+      "ftAttempted": 197,
+      "threePM": 103,
+      "pts": 1042,
+      "reb": 217,
+      "ast": 132,
+      "stl": 70,
+      "blk": 6,
+      "to": 147
+    },
+    "nbaId": 1631101,
+    "careerGpHistory": [
+      50,
+      72
+    ]
   },
   {
     "id": "draymond-green",
@@ -3781,8 +5977,24 @@
     "adp": 117.9,
     "sourceRank": 147,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 203110
+    "priorSeason": {
+      "fgPct": 0.4175,
+      "fgAttempted": 491,
+      "ftPct": 0.7024,
+      "ftAttempted": 84,
+      "threePM": 101,
+      "pts": 570,
+      "reb": 375,
+      "ast": 376,
+      "stl": 61,
+      "blk": 42,
+      "to": 181
+    },
+    "nbaId": 203110,
+    "careerGpHistory": [
+      68,
+      68
+    ]
   },
   {
     "id": "cameron-johnson",
@@ -3807,8 +6019,24 @@
     "adp": 115.0,
     "sourceRank": 148,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629661
+    "priorSeason": {
+      "fgPct": 0.48,
+      "fgAttempted": 475,
+      "ftPct": 0.8393,
+      "ftAttempted": 112,
+      "threePM": 110,
+      "pts": 660,
+      "reb": 206,
+      "ast": 132,
+      "stl": 40,
+      "blk": 21,
+      "to": 47
+    },
+    "nbaId": 1629661,
+    "careerGpHistory": [
+      54,
+      57
+    ]
   },
   {
     "id": "kobe-wagler",
@@ -3858,8 +6086,24 @@
     "adp": 119.3,
     "sourceRank": 150,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1626171
+    "priorSeason": {
+      "fgPct": 0.488,
+      "fgAttempted": 750,
+      "ftPct": 0.7059,
+      "ftAttempted": 68,
+      "threePM": 135,
+      "pts": 915,
+      "reb": 428,
+      "ast": 105,
+      "stl": 41,
+      "blk": 12,
+      "to": 66
+    },
+    "nbaId": 1626171,
+    "careerGpHistory": [
+      67,
+      49
+    ]
   },
   {
     "id": "julian-champagnie",
@@ -3884,8 +6128,24 @@
     "adp": null,
     "sourceRank": 151,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630577
+    "priorSeason": {
+      "fgPct": 0.4369,
+      "fgAttempted": 689,
+      "ftPct": 0.8444,
+      "ftAttempted": 135,
+      "threePM": 195,
+      "pts": 911,
+      "reb": 473,
+      "ast": 127,
+      "stl": 62,
+      "blk": 38,
+      "to": 69
+    },
+    "nbaId": 1630577,
+    "careerGpHistory": [
+      82,
+      82
+    ]
   },
   {
     "id": "ajay-bailey",
@@ -3962,8 +6222,24 @@
     "adp": 114.0,
     "sourceRank": 154,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1641717
+    "priorSeason": {
+      "fgPct": 0.4315,
+      "fgAttempted": 584,
+      "ftPct": 0.8088,
+      "ftAttempted": 68,
+      "threePM": 101,
+      "pts": 660,
+      "reb": 238,
+      "ast": 200,
+      "stl": 150,
+      "blk": 28,
+      "to": 73
+    },
+    "nbaId": 1641717,
+    "careerGpHistory": [
+      77,
+      68
+    ]
   },
   {
     "id": "dillon-brooks",
@@ -3988,8 +6264,24 @@
     "adp": 117.0,
     "sourceRank": 155,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1628415
+    "priorSeason": {
+      "fgPct": 0.4348,
+      "fgAttempted": 959,
+      "ftPct": 0.8416,
+      "ftAttempted": 202,
+      "threePM": 127,
+      "pts": 1131,
+      "reb": 203,
+      "ast": 99,
+      "stl": 57,
+      "blk": 9,
+      "to": 98
+    },
+    "nbaId": 1628415,
+    "careerGpHistory": [
+      56,
+      75
+    ]
   },
   {
     "id": "aaron-gordon",
@@ -4014,8 +6306,24 @@
     "adp": 118.5,
     "sourceRank": 156,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 203932
+    "priorSeason": {
+      "fgPct": 0.4975,
+      "fgAttempted": 398,
+      "ftPct": 0.7669,
+      "ftAttempted": 163,
+      "threePM": 61,
+      "pts": 582,
+      "reb": 209,
+      "ast": 96,
+      "stl": 21,
+      "blk": 10,
+      "to": 38
+    },
+    "nbaId": 203932,
+    "careerGpHistory": [
+      36,
+      51
+    ]
   },
   {
     "id": "isaiah-stewart",
@@ -4040,8 +6348,24 @@
     "adp": 115.0,
     "sourceRank": 157,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630191
+    "priorSeason": {
+      "fgPct": 0.5498,
+      "fgAttempted": 402,
+      "ftPct": 0.7557,
+      "ftAttempted": 131,
+      "threePM": 40,
+      "pts": 581,
+      "reb": 290,
+      "ast": 66,
+      "stl": 16,
+      "blk": 93,
+      "to": 67
+    },
+    "nbaId": 1630191,
+    "careerGpHistory": [
+      58,
+      72
+    ]
   },
   {
     "id": "tari-eason",
@@ -4067,8 +6391,24 @@
     "adp": null,
     "sourceRank": 158,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1631106
+    "priorSeason": {
+      "fgPct": 0.4155,
+      "fgAttempted": 580,
+      "ftPct": 0.7761,
+      "ftAttempted": 67,
+      "threePM": 93,
+      "pts": 627,
+      "reb": 376,
+      "ast": 90,
+      "stl": 72,
+      "blk": 28,
+      "to": 81
+    },
+    "nbaId": 1631106,
+    "careerGpHistory": [
+      60,
+      57
+    ]
   },
   {
     "id": "jeremiah-fears",
@@ -4093,8 +6433,23 @@
     "adp": 117.2,
     "sourceRank": 159,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1642847
+    "priorSeason": {
+      "fgPct": 0.4344,
+      "fgAttempted": 1006,
+      "ftPct": 0.7886,
+      "ftAttempted": 246,
+      "threePM": 101,
+      "pts": 1169,
+      "reb": 300,
+      "ast": 279,
+      "stl": 97,
+      "blk": 30,
+      "to": 178
+    },
+    "nbaId": 1642847,
+    "careerGpHistory": [
+      82
+    ]
   },
   {
     "id": "deandre-ayton",
@@ -4118,8 +6473,24 @@
     "adp": 121.7,
     "sourceRank": 160,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629028
+    "priorSeason": {
+      "fgPct": 0.6705,
+      "fgAttempted": 601,
+      "ftPct": 0.6454,
+      "ftAttempted": 141,
+      "threePM": 0,
+      "pts": 897,
+      "reb": 575,
+      "ast": 59,
+      "stl": 41,
+      "blk": 70,
+      "to": 83
+    },
+    "nbaId": 1629028,
+    "careerGpHistory": [
+      72,
+      40
+    ]
   },
   {
     "id": "devin-vassell",
@@ -4144,8 +6515,24 @@
     "adp": 117.3,
     "sourceRank": 161,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630170
+    "priorSeason": {
+      "fgPct": 0.4371,
+      "fgAttempted": 755,
+      "ftPct": 0.8154,
+      "ftAttempted": 130,
+      "threePM": 166,
+      "pts": 932,
+      "reb": 269,
+      "ast": 167,
+      "stl": 57,
+      "blk": 25,
+      "to": 60
+    },
+    "nbaId": 1630170,
+    "careerGpHistory": [
+      67,
+      64
+    ]
   },
   {
     "id": "moses-brown-jr",
@@ -4169,8 +6556,23 @@
     "adp": 126.3,
     "sourceRank": 162,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629650
+    "priorSeason": {
+      "fgPct": 0.6939,
+      "fgAttempted": 49,
+      "ftPct": 0.7273,
+      "ftAttempted": 11,
+      "threePM": 0,
+      "pts": 76,
+      "reb": 44,
+      "ast": 2,
+      "stl": 6,
+      "blk": 4,
+      "to": 11
+    },
+    "nbaId": 1629650,
+    "careerGpHistory": [
+      13
+    ]
   },
   {
     "id": "hansen-steinbach",
@@ -4220,8 +6622,24 @@
     "adp": 120.0,
     "sourceRank": 164,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1642268
+    "priorSeason": {
+      "fgPct": 0.4951,
+      "fgAttempted": 515,
+      "ftPct": 0.7225,
+      "ftAttempted": 209,
+      "threePM": 27,
+      "pts": 688,
+      "reb": 150,
+      "ast": 423,
+      "stl": 66,
+      "blk": 20,
+      "to": 148
+    },
+    "nbaId": 1642268,
+    "careerGpHistory": [
+      59,
+      71
+    ]
   },
   {
     "id": "jonathan-huff",
@@ -4298,8 +6716,24 @@
     "adp": 118.2,
     "sourceRank": 167,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1631128
+    "priorSeason": {
+      "fgPct": 0.5193,
+      "fgAttempted": 389,
+      "ftPct": 0.7822,
+      "ftAttempted": 101,
+      "threePM": 43,
+      "pts": 526,
+      "reb": 211,
+      "ast": 120,
+      "stl": 30,
+      "blk": 12,
+      "to": 43
+    },
+    "nbaId": 1631128,
+    "careerGpHistory": [
+      44,
+      79
+    ]
   },
   {
     "id": "khaman-maluach",
@@ -4323,8 +6757,23 @@
     "adp": null,
     "sourceRank": 168,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1642863
+    "priorSeason": {
+      "fgPct": 0.5333,
+      "fgAttempted": 105,
+      "ftPct": 0.7097,
+      "ftAttempted": 31,
+      "threePM": 5,
+      "pts": 139,
+      "reb": 133,
+      "ast": 6,
+      "stl": 5,
+      "blk": 33,
+      "to": 25
+    },
+    "nbaId": 1642863,
+    "careerGpHistory": [
+      46
+    ]
   },
   {
     "id": "jesse-beringer",
@@ -4374,8 +6823,24 @@
     "adp": 125.0,
     "sourceRank": 170,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629057
+    "priorSeason": {
+      "fgPct": 0.708,
+      "fgAttempted": 250,
+      "ftPct": 0.5965,
+      "ftAttempted": 57,
+      "threePM": 9,
+      "pts": 397,
+      "reb": 415,
+      "ast": 60,
+      "stl": 35,
+      "blk": 87,
+      "to": 49
+    },
+    "nbaId": 1629057,
+    "careerGpHistory": [
+      59,
+      20
+    ]
   },
   {
     "id": "grayson-allen",
@@ -4400,8 +6865,24 @@
     "adp": null,
     "sourceRank": 171,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1628960
+    "priorSeason": {
+      "fgPct": 0.4033,
+      "fgAttempted": 667,
+      "ftPct": 0.8571,
+      "ftAttempted": 168,
+      "threePM": 159,
+      "pts": 841,
+      "reb": 155,
+      "ast": 195,
+      "stl": 69,
+      "blk": 13,
+      "to": 83
+    },
+    "nbaId": 1628960,
+    "careerGpHistory": [
+      51,
+      64
+    ]
   },
   {
     "id": "jerami-grant",
@@ -4426,8 +6907,24 @@
     "adp": null,
     "sourceRank": 172,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 203924
+    "priorSeason": {
+      "fgPct": 0.4534,
+      "fgAttempted": 730,
+      "ftPct": 0.8137,
+      "ftAttempted": 322,
+      "threePM": 136,
+      "pts": 1060,
+      "reb": 198,
+      "ast": 122,
+      "stl": 42,
+      "blk": 36,
+      "to": 119
+    },
+    "nbaId": 203924,
+    "careerGpHistory": [
+      57,
+      47
+    ]
   },
   {
     "id": "tre-jones",
@@ -4452,8 +6949,24 @@
     "adp": null,
     "sourceRank": 173,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630200
+    "priorSeason": {
+      "fgPct": 0.5527,
+      "fgAttempted": 617,
+      "ftPct": 0.8414,
+      "ftAttempted": 227,
+      "threePM": 41,
+      "pts": 914,
+      "reb": 204,
+      "ast": 350,
+      "stl": 76,
+      "blk": 11,
+      "to": 92
+    },
+    "nbaId": 1630200,
+    "careerGpHistory": [
+      65,
+      46
+    ]
   },
   {
     "id": "nikola-vucevic",
@@ -4477,8 +6990,24 @@
     "adp": 110.3,
     "sourceRank": 174,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 202696
+    "priorSeason": {
+      "fgPct": 0.4931,
+      "fgAttempted": 799,
+      "ftPct": 0.828,
+      "ftAttempted": 93,
+      "threePM": 100,
+      "pts": 965,
+      "reb": 537,
+      "ast": 213,
+      "stl": 39,
+      "blk": 41,
+      "to": 85
+    },
+    "nbaId": 202696,
+    "careerGpHistory": [
+      64,
+      73
+    ]
   },
   {
     "id": "bennedict-mathurin",
@@ -4503,8 +7032,24 @@
     "adp": 118.8,
     "sourceRank": 175,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1631097
+    "priorSeason": {
+      "fgPct": 0.4298,
+      "fgAttempted": 677,
+      "ftPct": 0.869,
+      "ftAttempted": 336,
+      "threePM": 75,
+      "pts": 949,
+      "reb": 293,
+      "ast": 129,
+      "stl": 43,
+      "blk": 13,
+      "to": 118
+    },
+    "nbaId": 1631097,
+    "careerGpHistory": [
+      54,
+      72
+    ]
   },
   {
     "id": "scotty-pippen-jr",
@@ -4528,8 +7073,24 @@
     "adp": null,
     "sourceRank": 176,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630590
+    "priorSeason": {
+      "fgPct": 0.4479,
+      "fgAttempted": 96,
+      "ftPct": 0.7826,
+      "ftAttempted": 23,
+      "threePM": 10,
+      "pts": 114,
+      "reb": 22,
+      "ast": 47,
+      "stl": 19,
+      "blk": 4,
+      "to": 27
+    },
+    "nbaId": 1630590,
+    "careerGpHistory": [
+      10,
+      79
+    ]
   },
   {
     "id": "moussa-diabate",
@@ -4553,8 +7114,24 @@
     "adp": 120.5,
     "sourceRank": 177,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1631217
+    "priorSeason": {
+      "fgPct": 0.6309,
+      "fgAttempted": 363,
+      "ftPct": 0.6591,
+      "ftAttempted": 176,
+      "threePM": 1,
+      "pts": 575,
+      "reb": 635,
+      "ast": 141,
+      "stl": 56,
+      "blk": 72,
+      "to": 73
+    },
+    "nbaId": 1631217,
+    "careerGpHistory": [
+      73,
+      71
+    ]
   },
   {
     "id": "will-riley",
@@ -4579,8 +7156,23 @@
     "adp": null,
     "sourceRank": 178,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1642860
+    "priorSeason": {
+      "fgPct": 0.4385,
+      "fgAttempted": 618,
+      "ftPct": 0.8,
+      "ftAttempted": 180,
+      "threePM": 78,
+      "pts": 764,
+      "reb": 212,
+      "ast": 146,
+      "stl": 54,
+      "blk": 9,
+      "to": 94
+    },
+    "nbaId": 1642860,
+    "careerGpHistory": [
+      74
+    ]
   },
   {
     "id": "herbert-jones",
@@ -4605,8 +7197,24 @@
     "adp": null,
     "sourceRank": 179,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630529
+    "priorSeason": {
+      "fgPct": 0.3828,
+      "fgAttempted": 478,
+      "ftPct": 0.8065,
+      "ftAttempted": 62,
+      "threePM": 80,
+      "pts": 496,
+      "reb": 190,
+      "ast": 155,
+      "stl": 88,
+      "blk": 27,
+      "to": 73
+    },
+    "nbaId": 1630529,
+    "careerGpHistory": [
+      56,
+      20
+    ]
   },
   {
     "id": "ben-burries",
@@ -4656,8 +7264,24 @@
     "adp": null,
     "sourceRank": 181,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629014
+    "priorSeason": {
+      "fgPct": 0.4398,
+      "fgAttempted": 648,
+      "ftPct": 0.8961,
+      "ftAttempted": 77,
+      "threePM": 146,
+      "pts": 785,
+      "reb": 135,
+      "ast": 134,
+      "stl": 27,
+      "blk": 8,
+      "to": 68
+    },
+    "nbaId": 1629014,
+    "careerGpHistory": [
+      55,
+      70
+    ]
   },
   {
     "id": "ousmane-dieng",
@@ -4682,8 +7306,24 @@
     "adp": null,
     "sourceRank": 182,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1631172
+    "priorSeason": {
+      "fgPct": 0.4221,
+      "fgAttempted": 398,
+      "ftPct": 0.7111,
+      "ftAttempted": 45,
+      "threePM": 63,
+      "pts": 431,
+      "reb": 180,
+      "ast": 136,
+      "stl": 25,
+      "blk": 17,
+      "to": 75
+    },
+    "nbaId": 1631172,
+    "careerGpHistory": [
+      57,
+      37
+    ]
   },
   {
     "id": "tobias-harris",
@@ -4707,8 +7347,24 @@
     "adp": 122.7,
     "sourceRank": 183,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 202699
+    "priorSeason": {
+      "fgPct": 0.4689,
+      "fgAttempted": 659,
+      "ftPct": 0.8662,
+      "ftAttempted": 157,
+      "threePM": 82,
+      "pts": 836,
+      "reb": 323,
+      "ast": 157,
+      "stl": 58,
+      "blk": 26,
+      "to": 63
+    },
+    "nbaId": 202699,
+    "careerGpHistory": [
+      63,
+      73
+    ]
   },
   {
     "id": "tim-hardaway-jr",
@@ -4733,8 +7389,24 @@
     "adp": null,
     "sourceRank": 184,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 203501
+    "priorSeason": {
+      "fgPct": 0.4467,
+      "fgAttempted": 779,
+      "ftPct": 0.8112,
+      "ftAttempted": 196,
+      "threePM": 224,
+      "pts": 1079,
+      "reb": 206,
+      "ast": 108,
+      "stl": 42,
+      "blk": 10,
+      "to": 43
+    },
+    "nbaId": 203501,
+    "careerGpHistory": [
+      80,
+      77
+    ]
   },
   {
     "id": "bilal-coulibaly",
@@ -4759,8 +7431,24 @@
     "adp": null,
     "sourceRank": 185,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1641731
+    "priorSeason": {
+      "fgPct": 0.4251,
+      "fgAttempted": 541,
+      "ftPct": 0.7458,
+      "ftAttempted": 177,
+      "threePM": 65,
+      "pts": 657,
+      "reb": 243,
+      "ast": 145,
+      "stl": 75,
+      "blk": 54,
+      "to": 81
+    },
+    "nbaId": 1641731,
+    "careerGpHistory": [
+      56,
+      59
+    ]
   },
   {
     "id": "yves-missi",
@@ -4784,8 +7472,24 @@
     "adp": null,
     "sourceRank": 186,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1642274
+    "priorSeason": {
+      "fgPct": 0.5442,
+      "fgAttempted": 294,
+      "ftPct": 0.5588,
+      "ftAttempted": 102,
+      "threePM": 0,
+      "pts": 377,
+      "reb": 385,
+      "ast": 84,
+      "stl": 20,
+      "blk": 101,
+      "to": 54
+    },
+    "nbaId": 1642274,
+    "careerGpHistory": [
+      66,
+      73
+    ]
   },
   {
     "id": "collin-sexton",
@@ -4810,8 +7514,24 @@
     "adp": 118.8,
     "sourceRank": 187,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629012
+    "priorSeason": {
+      "fgPct": 0.4852,
+      "fgAttempted": 742,
+      "ftPct": 0.8549,
+      "ftAttempted": 255,
+      "threePM": 112,
+      "pts": 1050,
+      "reb": 155,
+      "ast": 223,
+      "stl": 76,
+      "blk": 10,
+      "to": 141
+    },
+    "nbaId": 1629012,
+    "careerGpHistory": [
+      68,
+      63
+    ]
   },
   {
     "id": "duop-reath",
@@ -4835,8 +7555,24 @@
     "adp": 120.8,
     "sourceRank": 188,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1641871
+    "priorSeason": {
+      "fgPct": 0.4459,
+      "fgAttempted": 74,
+      "ftPct": 0.8333,
+      "ftAttempted": 6,
+      "threePM": 23,
+      "pts": 94,
+      "reb": 38,
+      "ast": 10,
+      "stl": 5,
+      "blk": 8,
+      "to": 7
+    },
+    "nbaId": 1641871,
+    "careerGpHistory": [
+      32,
+      46
+    ]
   },
   {
     "id": "adama-bona",
@@ -4885,8 +7621,24 @@
     "adp": null,
     "sourceRank": 190,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630583
+    "priorSeason": {
+      "fgPct": 0.479,
+      "fgAttempted": 476,
+      "ftPct": 0.6667,
+      "ftAttempted": 114,
+      "threePM": 70,
+      "pts": 602,
+      "reb": 287,
+      "ast": 126,
+      "stl": 37,
+      "blk": 31,
+      "to": 55
+    },
+    "nbaId": 1630583,
+    "careerGpHistory": [
+      43,
+      65
+    ]
   },
   {
     "id": "kylan-flemings",
@@ -4963,8 +7715,24 @@
     "adp": null,
     "sourceRank": 193,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1631119
+    "priorSeason": {
+      "fgPct": 0.4233,
+      "fgAttempted": 352,
+      "ftPct": 0.7935,
+      "ftAttempted": 92,
+      "threePM": 98,
+      "pts": 469,
+      "reb": 358,
+      "ast": 158,
+      "stl": 31,
+      "blk": 42,
+      "to": 67
+    },
+    "nbaId": 1631119,
+    "careerGpHistory": [
+      65,
+      47
+    ]
   },
   {
     "id": "ryan-kalkbrenner",
@@ -4988,8 +7756,23 @@
     "adp": null,
     "sourceRank": 194,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1641750
+    "priorSeason": {
+      "fgPct": 0.7526,
+      "fgAttempted": 291,
+      "ftPct": 0.7155,
+      "ftAttempted": 116,
+      "threePM": 0,
+      "pts": 521,
+      "reb": 377,
+      "ast": 54,
+      "stl": 32,
+      "blk": 101,
+      "to": 62
+    },
+    "nbaId": 1641750,
+    "careerGpHistory": [
+      69
+    ]
   },
   {
     "id": "rui-hachimura",
@@ -5014,8 +7797,24 @@
     "adp": 112.5,
     "sourceRank": 195,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629060
+    "priorSeason": {
+      "fgPct": 0.5142,
+      "fgAttempted": 597,
+      "ftPct": 0.6944,
+      "ftAttempted": 72,
+      "threePM": 116,
+      "pts": 780,
+      "reb": 226,
+      "ast": 57,
+      "stl": 39,
+      "blk": 21,
+      "to": 42
+    },
+    "nbaId": 1629060,
+    "careerGpHistory": [
+      68,
+      59
+    ]
   },
   {
     "id": "keldon-johnson",
@@ -5040,8 +7839,24 @@
     "adp": null,
     "sourceRank": 196,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629640
+    "priorSeason": {
+      "fgPct": 0.5194,
+      "fgAttempted": 797,
+      "ftPct": 0.7938,
+      "ftAttempted": 194,
+      "threePM": 99,
+      "pts": 1081,
+      "reb": 440,
+      "ast": 111,
+      "stl": 46,
+      "blk": 11,
+      "to": 70
+    },
+    "nbaId": 1629640,
+    "careerGpHistory": [
+      82,
+      77
+    ]
   },
   {
     "id": "malik-monk",
@@ -5066,8 +7881,24 @@
     "adp": null,
     "sourceRank": 197,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1628370
+    "priorSeason": {
+      "fgPct": 0.4383,
+      "fgAttempted": 632,
+      "ftPct": 0.8785,
+      "ftAttempted": 107,
+      "threePM": 124,
+      "pts": 772,
+      "reb": 117,
+      "ast": 185,
+      "stl": 37,
+      "blk": 24,
+      "to": 91
+    },
+    "nbaId": 1628370,
+    "careerGpHistory": [
+      62,
+      65
+    ]
   },
   {
     "id": "precious-achiuwa",
@@ -5092,8 +7923,24 @@
     "adp": null,
     "sourceRank": 198,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630173
+    "priorSeason": {
+      "fgPct": 0.5284,
+      "fgAttempted": 598,
+      "ftPct": 0.554,
+      "ftAttempted": 139,
+      "threePM": 27,
+      "pts": 736,
+      "reb": 492,
+      "ast": 101,
+      "stl": 65,
+      "blk": 50,
+      "to": 65
+    },
+    "nbaId": 1630173,
+    "careerGpHistory": [
+      73,
+      57
+    ]
   },
   {
     "id": "aaron-nesmith",
@@ -5118,8 +7965,24 @@
     "adp": null,
     "sourceRank": 199,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630174
+    "priorSeason": {
+      "fgPct": 0.4141,
+      "fgAttempted": 512,
+      "ftPct": 0.8288,
+      "ftAttempted": 111,
+      "threePM": 105,
+      "pts": 621,
+      "reb": 187,
+      "ast": 86,
+      "stl": 26,
+      "blk": 23,
+      "to": 63
+    },
+    "nbaId": 1630174,
+    "careerGpHistory": [
+      45,
+      45
+    ]
   },
   {
     "id": "gui-santos",
@@ -5144,8 +8007,24 @@
     "adp": null,
     "sourceRank": 200,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630611
+    "priorSeason": {
+      "fgPct": 0.5,
+      "fgAttempted": 460,
+      "ftPct": 0.725,
+      "ftAttempted": 120,
+      "threePM": 78,
+      "pts": 625,
+      "reb": 266,
+      "ast": 159,
+      "stl": 61,
+      "blk": 22,
+      "to": 102
+    },
+    "nbaId": 1630611,
+    "careerGpHistory": [
+      68,
+      56
+    ]
   },
   {
     "id": "pelle-larsson",
@@ -5170,8 +8049,24 @@
     "adp": null,
     "sourceRank": 201,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1641796
+    "priorSeason": {
+      "fgPct": 0.4955,
+      "fgAttempted": 559,
+      "ftPct": 0.7965,
+      "ftAttempted": 231,
+      "threePM": 62,
+      "pts": 800,
+      "reb": 244,
+      "ast": 236,
+      "stl": 49,
+      "blk": 16,
+      "to": 101
+    },
+    "nbaId": 1641796,
+    "careerGpHistory": [
+      70,
+      55
+    ]
   },
   {
     "id": "shaedon-henderson",
@@ -5222,8 +8117,24 @@
     "adp": null,
     "sourceRank": 203,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630230
+    "priorSeason": {
+      "fgPct": 0.5104,
+      "fgAttempted": 821,
+      "ftPct": 0.76,
+      "ftAttempted": 300,
+      "threePM": 62,
+      "pts": 1128,
+      "reb": 348,
+      "ast": 241,
+      "stl": 82,
+      "blk": 6,
+      "to": 119
+    },
+    "nbaId": 1630230,
+    "careerGpHistory": [
+      74,
+      69
+    ]
   },
   {
     "id": "de-anthony-melton",
@@ -5248,8 +8159,24 @@
     "adp": null,
     "sourceRank": 204,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629001
+    "priorSeason": {
+      "fgPct": 0.4072,
+      "fgAttempted": 528,
+      "ftPct": 0.8264,
+      "ftAttempted": 121,
+      "threePM": 72,
+      "pts": 602,
+      "reb": 158,
+      "ast": 125,
+      "stl": 77,
+      "blk": 20,
+      "to": 91
+    },
+    "nbaId": 1629001,
+    "careerGpHistory": [
+      49,
+      6
+    ]
   },
   {
     "id": "duncan-robinson",
@@ -5274,8 +8201,24 @@
     "adp": null,
     "sourceRank": 205,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629130
+    "priorSeason": {
+      "fgPct": 0.4556,
+      "fgAttempted": 698,
+      "ftPct": 0.7545,
+      "ftAttempted": 110,
+      "threePM": 220,
+      "pts": 939,
+      "reb": 205,
+      "ast": 159,
+      "stl": 44,
+      "blk": 22,
+      "to": 54
+    },
+    "nbaId": 1629130,
+    "careerGpHistory": [
+      77,
+      74
+    ]
   },
   {
     "id": "de-andre-cardwell",
@@ -5326,8 +8269,24 @@
     "adp": 115.5,
     "sourceRank": 207,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630228
+    "priorSeason": {
+      "fgPct": 0.4631,
+      "fgAttempted": 339,
+      "ftPct": 0.7236,
+      "ftAttempted": 123,
+      "threePM": 35,
+      "pts": 438,
+      "reb": 202,
+      "ast": 83,
+      "stl": 22,
+      "blk": 11,
+      "to": 67
+    },
+    "nbaId": 1630228,
+    "careerGpHistory": [
+      36,
+      47
+    ]
   },
   {
     "id": "cedric-spencer",
@@ -5403,8 +8362,24 @@
     "adp": null,
     "sourceRank": 210,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1631248
+    "priorSeason": {
+      "fgPct": 0.4535,
+      "fgAttempted": 333,
+      "ftPct": 0.9032,
+      "ftAttempted": 31,
+      "threePM": 97,
+      "pts": 427,
+      "reb": 269,
+      "ast": 116,
+      "stl": 42,
+      "blk": 6,
+      "to": 46
+    },
+    "nbaId": 1631248,
+    "careerGpHistory": [
+      77,
+      31
+    ]
   },
   {
     "id": "dereck-lively-ii",
@@ -5428,8 +8403,24 @@
     "adp": null,
     "sourceRank": 211,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1641726
+    "priorSeason": {
+      "fgPct": 0.6111,
+      "fgAttempted": 18,
+      "ftPct": 0.8,
+      "ftAttempted": 10,
+      "threePM": 0,
+      "pts": 30,
+      "reb": 37,
+      "ast": 13,
+      "stl": 4,
+      "blk": 11,
+      "to": 10
+    },
+    "nbaId": 1641726,
+    "careerGpHistory": [
+      7,
+      36
+    ]
   },
   {
     "id": "kyle-kuzma",
@@ -5454,8 +8445,24 @@
     "adp": 121.0,
     "sourceRank": 212,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1628398
+    "priorSeason": {
+      "fgPct": 0.492,
+      "fgAttempted": 689,
+      "ftPct": 0.7258,
+      "ftAttempted": 186,
+      "threePM": 83,
+      "pts": 896,
+      "reb": 313,
+      "ast": 184,
+      "stl": 46,
+      "blk": 28,
+      "to": 119
+    },
+    "nbaId": 1628398,
+    "careerGpHistory": [
+      69,
+      65
+    ]
   },
   {
     "id": "isaiah-joe",
@@ -5480,8 +8487,24 @@
     "adp": null,
     "sourceRank": 213,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630198
+    "priorSeason": {
+      "fgPct": 0.4549,
+      "fgAttempted": 543,
+      "ftPct": 0.8943,
+      "ftAttempted": 123,
+      "threePM": 181,
+      "pts": 785,
+      "reb": 181,
+      "ast": 94,
+      "stl": 50,
+      "blk": 11,
+      "to": 45
+    },
+    "nbaId": 1630198,
+    "careerGpHistory": [
+      71,
+      74
+    ]
   },
   {
     "id": "nick-clifford",
@@ -5532,8 +8555,24 @@
     "adp": null,
     "sourceRank": 215,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1642258
+    "priorSeason": {
+      "fgPct": 0.4552,
+      "fgAttempted": 536,
+      "ftPct": 0.6444,
+      "ftAttempted": 90,
+      "threePM": 95,
+      "pts": 641,
+      "reb": 257,
+      "ast": 76,
+      "stl": 59,
+      "blk": 36,
+      "to": 58
+    },
+    "nbaId": 1642258,
+    "careerGpHistory": [
+      67,
+      75
+    ]
   },
   {
     "id": "nolan-ament",
@@ -5583,8 +8622,24 @@
     "adp": null,
     "sourceRank": 217,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630188
+    "priorSeason": {
+      "fgPct": 0.4827,
+      "fgAttempted": 404,
+      "ftPct": 0.7419,
+      "ftAttempted": 93,
+      "threePM": 82,
+      "pts": 541,
+      "reb": 355,
+      "ast": 65,
+      "stl": 24,
+      "blk": 42,
+      "to": 53
+    },
+    "nbaId": 1630188,
+    "careerGpHistory": [
+      53,
+      64
+    ]
   },
   {
     "id": "mouhamed-cisse",
@@ -5634,8 +8689,24 @@
     "adp": null,
     "sourceRank": 219,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1631108
+    "priorSeason": {
+      "fgPct": 0.4414,
+      "fgAttempted": 725,
+      "ftPct": 0.8993,
+      "ftAttempted": 139,
+      "threePM": 180,
+      "pts": 945,
+      "reb": 249,
+      "ast": 151,
+      "stl": 47,
+      "blk": 27,
+      "to": 96
+    },
+    "nbaId": 1631108,
+    "careerGpHistory": [
+      77,
+      78
+    ]
   },
   {
     "id": "luke-kornet",
@@ -5659,8 +8730,24 @@
     "adp": null,
     "sourceRank": 220,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1628436
+    "priorSeason": {
+      "fgPct": 0.6434,
+      "fgAttempted": 272,
+      "ftPct": 0.8246,
+      "ftAttempted": 114,
+      "threePM": 0,
+      "pts": 444,
+      "reb": 414,
+      "ast": 126,
+      "stl": 32,
+      "blk": 65,
+      "to": 28
+    },
+    "nbaId": 1628436,
+    "careerGpHistory": [
+      68,
+      73
+    ]
   },
   {
     "id": "marvin-bagley-iii",
@@ -5685,8 +8772,24 @@
     "adp": null,
     "sourceRank": 221,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1628963
+    "priorSeason": {
+      "fgPct": 0.618,
+      "fgAttempted": 411,
+      "ftPct": 0.6597,
+      "ftAttempted": 144,
+      "threePM": 24,
+      "pts": 627,
+      "reb": 366,
+      "ast": 85,
+      "stl": 28,
+      "blk": 43,
+      "to": 61
+    },
+    "nbaId": 1628963,
+    "careerGpHistory": [
+      60,
+      31
+    ]
   },
   {
     "id": "sam-merrill",
@@ -5711,8 +8814,24 @@
     "adp": null,
     "sourceRank": 222,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630241
+    "priorSeason": {
+      "fgPct": 0.4607,
+      "fgAttempted": 484,
+      "ftPct": 0.8551,
+      "ftAttempted": 69,
+      "threePM": 158,
+      "pts": 663,
+      "reb": 133,
+      "ast": 125,
+      "stl": 33,
+      "blk": 7,
+      "to": 42
+    },
+    "nbaId": 1630241,
+    "careerGpHistory": [
+      52,
+      71
+    ]
   },
   {
     "id": "josh-mccain",
@@ -5789,8 +8908,24 @@
     "adp": null,
     "sourceRank": 225,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": null
+    "priorSeason": {
+      "fgPct": 0.432,
+      "fgAttempted": 544,
+      "ftPct": 0.8054,
+      "ftAttempted": 149,
+      "threePM": 50,
+      "pts": 640,
+      "reb": 315,
+      "ast": 95,
+      "stl": 92,
+      "blk": 27,
+      "to": 96
+    },
+    "nbaId": null,
+    "careerGpHistory": [
+      78,
+      81
+    ]
   },
   {
     "id": "jaylen-wells",
@@ -5815,8 +8950,24 @@
     "adp": null,
     "sourceRank": 226,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1642377
+    "priorSeason": {
+      "fgPct": 0.4312,
+      "fgAttempted": 698,
+      "ftPct": 0.7836,
+      "ftAttempted": 171,
+      "threePM": 129,
+      "pts": 865,
+      "reb": 220,
+      "ast": 111,
+      "stl": 61,
+      "blk": 9,
+      "to": 74
+    },
+    "nbaId": 1642377,
+    "careerGpHistory": [
+      69,
+      79
+    ]
   },
   {
     "id": "isaiah-jackson",
@@ -5840,8 +8991,24 @@
     "adp": null,
     "sourceRank": 227,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630543
+    "priorSeason": {
+      "fgPct": 0.6371,
+      "fgAttempted": 237,
+      "ftPct": 0.6476,
+      "ftAttempted": 105,
+      "threePM": 0,
+      "pts": 370,
+      "reb": 290,
+      "ast": 52,
+      "stl": 36,
+      "blk": 49,
+      "to": 58
+    },
+    "nbaId": 1630543,
+    "careerGpHistory": [
+      55,
+      5
+    ]
   },
   {
     "id": "jock-landale",
@@ -5865,8 +9032,24 @@
     "adp": null,
     "sourceRank": 228,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629111
+    "priorSeason": {
+      "fgPct": 0.5146,
+      "fgAttempted": 548,
+      "ftPct": 0.6349,
+      "ftAttempted": 126,
+      "threePM": 74,
+      "pts": 718,
+      "reb": 387,
+      "ast": 115,
+      "stl": 35,
+      "blk": 36,
+      "to": 60
+    },
+    "nbaId": 1629111,
+    "careerGpHistory": [
+      68,
+      42
+    ]
   },
   {
     "id": "keon-ellis",
@@ -5891,8 +9074,24 @@
     "adp": null,
     "sourceRank": 229,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1631165
+    "priorSeason": {
+      "fgPct": 0.4401,
+      "fgAttempted": 384,
+      "ftPct": 0.7286,
+      "ftAttempted": 70,
+      "threePM": 91,
+      "pts": 480,
+      "reb": 135,
+      "ast": 72,
+      "stl": 83,
+      "blk": 46,
+      "to": 41
+    },
+    "nbaId": 1631165,
+    "careerGpHistory": [
+      72,
+      80
+    ]
   },
   {
     "id": "terrence-shannon-jr",
@@ -5917,8 +9116,24 @@
     "adp": null,
     "sourceRank": 230,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630545
+    "priorSeason": {
+      "fgPct": 0.4503,
+      "fgAttempted": 171,
+      "ftPct": 0.8,
+      "ftAttempted": 70,
+      "threePM": 31,
+      "pts": 241,
+      "reb": 49,
+      "ast": 38,
+      "stl": 14,
+      "blk": 1,
+      "to": 24
+    },
+    "nbaId": 1630545,
+    "careerGpHistory": [
+      43,
+      32
+    ]
   },
   {
     "id": "hugo-gonzalez",
@@ -5943,8 +9158,23 @@
     "adp": null,
     "sourceRank": 231,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1642864
+    "priorSeason": {
+      "fgPct": 0.4756,
+      "fgAttempted": 246,
+      "ftPct": 0.5,
+      "ftAttempted": 26,
+      "threePM": 42,
+      "pts": 289,
+      "reb": 246,
+      "ast": 40,
+      "stl": 42,
+      "blk": 21,
+      "to": 38
+    },
+    "nbaId": 1642864,
+    "careerGpHistory": [
+      74
+    ]
   },
   {
     "id": "gg-jackson",
@@ -5970,8 +9200,24 @@
     "adp": null,
     "sourceRank": 232,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1641713
+    "priorSeason": {
+      "fgPct": 0.4961,
+      "fgAttempted": 514,
+      "ftPct": 0.7417,
+      "ftAttempted": 151,
+      "threePM": 64,
+      "pts": 686,
+      "reb": 235,
+      "ast": 81,
+      "stl": 31,
+      "blk": 44,
+      "to": 85
+    },
+    "nbaId": 1641713,
+    "careerGpHistory": [
+      55,
+      29
+    ]
   },
   {
     "id": "jamal-shead",
@@ -5995,8 +9241,24 @@
     "adp": null,
     "sourceRank": 233,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1642347
+    "priorSeason": {
+      "fgPct": 0.3671,
+      "fgAttempted": 504,
+      "ftPct": 0.7845,
+      "ftAttempted": 116,
+      "threePM": 84,
+      "pts": 545,
+      "reb": 143,
+      "ast": 444,
+      "stl": 76,
+      "blk": 15,
+      "to": 112
+    },
+    "nbaId": 1642347,
+    "careerGpHistory": [
+      82,
+      75
+    ]
   },
   {
     "id": "max-strus",
@@ -6021,8 +9283,24 @@
     "adp": null,
     "sourceRank": 234,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629622
+    "priorSeason": {
+      "fgPct": 0.4434,
+      "fgAttempted": 106,
+      "ftPct": 0.7778,
+      "ftAttempted": 9,
+      "threePM": 33,
+      "pts": 134,
+      "reb": 65,
+      "ast": 24,
+      "stl": 3,
+      "blk": 0,
+      "to": 9
+    },
+    "nbaId": 1629622,
+    "careerGpHistory": [
+      12,
+      50
+    ]
   },
   {
     "id": "de-andre-hunter",
@@ -6047,8 +9325,24 @@
     "adp": null,
     "sourceRank": 235,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629631
+    "priorSeason": {
+      "fgPct": 0.4152,
+      "fgAttempted": 501,
+      "ftPct": 0.8671,
+      "ftAttempted": 143,
+      "threePM": 75,
+      "pts": 615,
+      "reb": 185,
+      "ast": 90,
+      "stl": 30,
+      "blk": 6,
+      "to": 75
+    },
+    "nbaId": 1629631,
+    "careerGpHistory": [
+      45,
+      64
+    ]
   },
   {
     "id": "jordan-poole",
@@ -6073,8 +9367,24 @@
     "adp": null,
     "sourceRank": 236,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629673
+    "priorSeason": {
+      "fgPct": 0.3716,
+      "fgAttempted": 444,
+      "ftPct": 0.8596,
+      "ftAttempted": 114,
+      "threePM": 96,
+      "pts": 524,
+      "reb": 77,
+      "ast": 119,
+      "stl": 22,
+      "blk": 15,
+      "to": 69
+    },
+    "nbaId": 1629673,
+    "careerGpHistory": [
+      39,
+      68
+    ]
   },
   {
     "id": "t-hendricks",
@@ -6124,8 +9434,24 @@
     "adp": null,
     "sourceRank": 238,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1642345
+    "priorSeason": {
+      "fgPct": 0.653,
+      "fgAttempted": 366,
+      "ftPct": 0.453,
+      "ftAttempted": 117,
+      "threePM": 0,
+      "pts": 531,
+      "reb": 418,
+      "ast": 185,
+      "stl": 73,
+      "blk": 57,
+      "to": 101
+    },
+    "nbaId": 1642345,
+    "careerGpHistory": [
+      82,
+      61
+    ]
   },
   {
     "id": "bub-carrington",
@@ -6150,8 +9476,24 @@
     "adp": null,
     "sourceRank": 239,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1642267
+    "priorSeason": {
+      "fgPct": 0.4238,
+      "fgAttempted": 741,
+      "ftPct": 0.7297,
+      "ftAttempted": 111,
+      "threePM": 169,
+      "pts": 878,
+      "reb": 276,
+      "ast": 381,
+      "stl": 52,
+      "blk": 17,
+      "to": 191
+    },
+    "nbaId": 1642267,
+    "careerGpHistory": [
+      82,
+      82
+    ]
   },
   {
     "id": "andre-drummond",
@@ -6175,8 +9517,24 @@
     "adp": null,
     "sourceRank": 240,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 203083
+    "priorSeason": {
+      "fgPct": 0.4718,
+      "fgAttempted": 337,
+      "ftPct": 0.631,
+      "ftAttempted": 84,
+      "threePM": 32,
+      "pts": 403,
+      "reb": 532,
+      "ast": 80,
+      "stl": 38,
+      "blk": 49,
+      "to": 61
+    },
+    "nbaId": 203083,
+    "careerGpHistory": [
+      63,
+      40
+    ]
   },
   {
     "id": "tre-johnson",
@@ -6202,8 +9560,23 @@
     "adp": null,
     "sourceRank": 241,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1642848
+    "priorSeason": {
+      "fgPct": 0.4189,
+      "fgAttempted": 647,
+      "ftPct": 0.8736,
+      "ftAttempted": 87,
+      "threePM": 115,
+      "pts": 733,
+      "reb": 170,
+      "ast": 122,
+      "stl": 33,
+      "blk": 18,
+      "to": 93
+    },
+    "nbaId": 1642848,
+    "careerGpHistory": [
+      60
+    ]
   },
   {
     "id": "royce-o-neale",
@@ -6228,8 +9601,24 @@
     "adp": null,
     "sourceRank": 242,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1626220
+    "priorSeason": {
+      "fgPct": 0.4208,
+      "fgAttempted": 625,
+      "ftPct": 0.7105,
+      "ftAttempted": 38,
+      "threePM": 212,
+      "pts": 765,
+      "reb": 372,
+      "ast": 208,
+      "stl": 84,
+      "blk": 32,
+      "to": 103
+    },
+    "nbaId": 1626220,
+    "careerGpHistory": [
+      78,
+      75
+    ]
   },
   {
     "id": "s-de-larrea",
@@ -6305,8 +9694,24 @@
     "adp": null,
     "sourceRank": 245,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630573
+    "priorSeason": {
+      "fgPct": 0.4193,
+      "fgAttempted": 601,
+      "ftPct": 0.85,
+      "ftAttempted": 20,
+      "threePM": 198,
+      "pts": 719,
+      "reb": 300,
+      "ast": 114,
+      "stl": 38,
+      "blk": 23,
+      "to": 35
+    },
+    "nbaId": 1630573,
+    "careerGpHistory": [
+      78,
+      71
+    ]
   },
   {
     "id": "t-j-mcconnell",
@@ -6330,8 +9735,24 @@
     "adp": null,
     "sourceRank": 246,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 204456
+    "priorSeason": {
+      "fgPct": 0.5378,
+      "fgAttempted": 450,
+      "ftPct": 0.8621,
+      "ftAttempted": 29,
+      "threePM": 16,
+      "pts": 525,
+      "reb": 124,
+      "ast": 287,
+      "stl": 56,
+      "blk": 10,
+      "to": 64
+    },
+    "nbaId": 204456,
+    "careerGpHistory": [
+      56,
+      79
+    ]
   },
   {
     "id": "al-horford",
@@ -6356,8 +9777,24 @@
     "adp": null,
     "sourceRank": 247,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 201143
+    "priorSeason": {
+      "fgPct": 0.4259,
+      "fgAttempted": 324,
+      "ftPct": 0.8462,
+      "ftAttempted": 26,
+      "threePM": 74,
+      "pts": 372,
+      "reb": 219,
+      "ast": 116,
+      "stl": 30,
+      "blk": 51,
+      "to": 42
+    },
+    "nbaId": 201143,
+    "careerGpHistory": [
+      45,
+      60
+    ]
   },
   {
     "id": "j-laravia",
@@ -6433,8 +9870,24 @@
     "adp": null,
     "sourceRank": 250,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1628978
+    "priorSeason": {
+      "fgPct": 0.406,
+      "fgAttempted": 835,
+      "ftPct": 0.7429,
+      "ftAttempted": 105,
+      "threePM": 244,
+      "pts": 1000,
+      "reb": 336,
+      "ast": 313,
+      "stl": 104,
+      "blk": 34,
+      "to": 118
+    },
+    "nbaId": 1628978,
+    "careerGpHistory": [
+      82,
+      62
+    ]
   },
   {
     "id": "kris-dunn",
@@ -6459,8 +9912,24 @@
     "adp": null,
     "sourceRank": 251,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1627739
+    "priorSeason": {
+      "fgPct": 0.4759,
+      "fgAttempted": 477,
+      "ftPct": 0.7654,
+      "ftAttempted": 81,
+      "threePM": 80,
+      "pts": 596,
+      "reb": 271,
+      "ast": 295,
+      "stl": 131,
+      "blk": 14,
+      "to": 111
+    },
+    "nbaId": 1627739,
+    "careerGpHistory": [
+      82,
+      74
+    ]
   },
   {
     "id": "justin-champagnie",
@@ -6485,8 +9954,24 @@
     "adp": null,
     "sourceRank": 252,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630551
+    "priorSeason": {
+      "fgPct": 0.5022,
+      "fgAttempted": 462,
+      "ftPct": 0.7843,
+      "ftAttempted": 102,
+      "threePM": 53,
+      "pts": 597,
+      "reb": 384,
+      "ast": 84,
+      "stl": 59,
+      "blk": 43,
+      "to": 45
+    },
+    "nbaId": 1630551,
+    "careerGpHistory": [
+      69,
+      62
+    ]
   },
   {
     "id": "josh-green",
@@ -6511,8 +9996,24 @@
     "adp": null,
     "sourceRank": 253,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630182
+    "priorSeason": {
+      "fgPct": 0.4586,
+      "fgAttempted": 181,
+      "ftPct": 0.8929,
+      "ftAttempted": 28,
+      "threePM": 58,
+      "pts": 249,
+      "reb": 102,
+      "ast": 47,
+      "stl": 35,
+      "blk": 6,
+      "to": 35
+    },
+    "nbaId": 1630182,
+    "careerGpHistory": [
+      58,
+      68
+    ]
   },
   {
     "id": "luke-kennard",
@@ -6537,8 +10038,24 @@
     "adp": 114.3,
     "sourceRank": 254,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1628379
+    "priorSeason": {
+      "fgPct": 0.5327,
+      "fgAttempted": 443,
+      "ftPct": 0.913,
+      "ftAttempted": 69,
+      "threePM": 117,
+      "pts": 652,
+      "reb": 182,
+      "ast": 174,
+      "stl": 55,
+      "blk": 8,
+      "to": 60
+    },
+    "nbaId": 1628379,
+    "careerGpHistory": [
+      78,
+      65
+    ]
   },
   {
     "id": "harrison-barnes",
@@ -6562,8 +10079,24 @@
     "adp": null,
     "sourceRank": 255,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 203084
+    "priorSeason": {
+      "fgPct": 0.4557,
+      "fgAttempted": 575,
+      "ftPct": 0.8293,
+      "ftAttempted": 123,
+      "threePM": 139,
+      "pts": 765,
+      "reb": 213,
+      "ast": 148,
+      "stl": 50,
+      "blk": 12,
+      "to": 61
+    },
+    "nbaId": 203084,
+    "careerGpHistory": [
+      77,
+      82
+    ]
   },
   {
     "id": "kevin-huerter",
@@ -6588,8 +10121,24 @@
     "adp": null,
     "sourceRank": 256,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1628989
+    "priorSeason": {
+      "fgPct": 0.4513,
+      "fgAttempted": 596,
+      "ftPct": 0.7746,
+      "ftAttempted": 71,
+      "threePM": 100,
+      "pts": 693,
+      "reb": 240,
+      "ast": 178,
+      "stl": 63,
+      "blk": 33,
+      "to": 72
+    },
+    "nbaId": 1628989,
+    "careerGpHistory": [
+      69,
+      69
+    ]
   },
   {
     "id": "brice-sensabaugh",
@@ -6615,8 +10164,24 @@
     "adp": null,
     "sourceRank": 257,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1641729
+    "priorSeason": {
+      "fgPct": 0.4597,
+      "fgAttempted": 857,
+      "ftPct": 0.8259,
+      "ftAttempted": 201,
+      "threePM": 162,
+      "pts": 1116,
+      "reb": 231,
+      "ast": 143,
+      "stl": 54,
+      "blk": 12,
+      "to": 124
+    },
+    "nbaId": 1641729,
+    "careerGpHistory": [
+      75,
+      71
+    ]
   },
   {
     "id": "moses-moody",
@@ -6642,8 +10207,24 @@
     "adp": null,
     "sourceRank": 258,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630541
+    "priorSeason": {
+      "fgPct": 0.4399,
+      "fgAttempted": 557,
+      "ftPct": 0.7699,
+      "ftAttempted": 113,
+      "threePM": 151,
+      "pts": 728,
+      "reb": 200,
+      "ast": 98,
+      "stl": 58,
+      "blk": 34,
+      "to": 57
+    },
+    "nbaId": 1630541,
+    "careerGpHistory": [
+      60,
+      74
+    ]
   },
   {
     "id": "aj-green",
@@ -6669,8 +10250,24 @@
     "adp": null,
     "sourceRank": 259,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1631260
+    "priorSeason": {
+      "fgPct": 0.4239,
+      "fgAttempted": 618,
+      "ftPct": 0.8548,
+      "ftAttempted": 62,
+      "threePM": 232,
+      "pts": 809,
+      "reb": 213,
+      "ast": 152,
+      "stl": 39,
+      "blk": 8,
+      "to": 75
+    },
+    "nbaId": 1631260,
+    "careerGpHistory": [
+      78,
+      73
+    ]
   },
   {
     "id": "j-goodwin",
@@ -6721,8 +10318,24 @@
     "adp": null,
     "sourceRank": 261,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 201566
+    "priorSeason": {
+      "fgPct": 0.4267,
+      "fgAttempted": 839,
+      "ftPct": 0.694,
+      "ftAttempted": 183,
+      "threePM": 128,
+      "pts": 971,
+      "reb": 348,
+      "ast": 426,
+      "stl": 83,
+      "blk": 12,
+      "to": 209
+    },
+    "nbaId": 201566,
+    "careerGpHistory": [
+      64,
+      75
+    ]
   },
   {
     "id": "goga-bitadze",
@@ -6746,8 +10359,24 @@
     "adp": null,
     "sourceRank": 262,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629048
+    "priorSeason": {
+      "fgPct": 0.6756,
+      "fgAttempted": 225,
+      "ftPct": 0.7113,
+      "ftAttempted": 97,
+      "threePM": 2,
+      "pts": 375,
+      "reb": 320,
+      "ast": 84,
+      "stl": 37,
+      "blk": 61,
+      "to": 43
+    },
+    "nbaId": 1629048,
+    "careerGpHistory": [
+      64,
+      70
+    ]
   },
   {
     "id": "luguentz-dort",
@@ -6772,8 +10401,24 @@
     "adp": null,
     "sourceRank": 263,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629652
+    "priorSeason": {
+      "fgPct": 0.3855,
+      "fgAttempted": 524,
+      "ftPct": 0.7586,
+      "ftAttempted": 58,
+      "threePM": 128,
+      "pts": 576,
+      "reb": 245,
+      "ast": 85,
+      "stl": 62,
+      "blk": 27,
+      "to": 54
+    },
+    "nbaId": 1629652,
+    "careerGpHistory": [
+      69,
+      71
+    ]
   },
   {
     "id": "gary-payton-ii",
@@ -6798,8 +10443,24 @@
     "adp": null,
     "sourceRank": 264,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1627780
+    "priorSeason": {
+      "fgPct": 0.5831,
+      "fgAttempted": 415,
+      "ftPct": 0.65,
+      "ftAttempted": 40,
+      "threePM": 37,
+      "pts": 547,
+      "reb": 265,
+      "ast": 123,
+      "stl": 67,
+      "blk": 21,
+      "to": 62
+    },
+    "nbaId": 1627780,
+    "careerGpHistory": [
+      73,
+      62
+    ]
   },
   {
     "id": "bruce-brown",
@@ -6824,8 +10485,24 @@
     "adp": null,
     "sourceRank": 265,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1628971
+    "priorSeason": {
+      "fgPct": 0.4751,
+      "fgAttempted": 522,
+      "ftPct": 0.7619,
+      "ftAttempted": 126,
+      "threePM": 57,
+      "pts": 649,
+      "reb": 318,
+      "ast": 174,
+      "stl": 85,
+      "blk": 20,
+      "to": 91
+    },
+    "nbaId": 1628971,
+    "careerGpHistory": [
+      82,
+      41
+    ]
   },
   {
     "id": "jarace-walker",
@@ -6850,8 +10527,24 @@
     "adp": null,
     "sourceRank": 266,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1641716
+    "priorSeason": {
+      "fgPct": 0.4188,
+      "fgAttempted": 733,
+      "ftPct": 0.7486,
+      "ftAttempted": 183,
+      "threePM": 133,
+      "pts": 884,
+      "reb": 391,
+      "ast": 192,
+      "stl": 63,
+      "blk": 26,
+      "to": 139
+    },
+    "nbaId": 1641716,
+    "careerGpHistory": [
+      76,
+      75
+    ]
   },
   {
     "id": "derrick-jones-jr",
@@ -6876,8 +10569,24 @@
     "adp": null,
     "sourceRank": 267,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1627884
+    "priorSeason": {
+      "fgPct": 0.4987,
+      "fgAttempted": 379,
+      "ftPct": 0.7634,
+      "ftAttempted": 93,
+      "threePM": 55,
+      "pts": 504,
+      "reb": 173,
+      "ast": 69,
+      "stl": 45,
+      "blk": 50,
+      "to": 40
+    },
+    "nbaId": 1627884,
+    "careerGpHistory": [
+      50,
+      77
+    ]
   },
   {
     "id": "dennis-schroder",
@@ -6902,8 +10611,24 @@
     "adp": null,
     "sourceRank": 268,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 203471
+    "priorSeason": {
+      "fgPct": 0.4054,
+      "fgAttempted": 629,
+      "ftPct": 0.8341,
+      "ftAttempted": 205,
+      "threePM": 75,
+      "pts": 756,
+      "reb": 190,
+      "ast": 341,
+      "stl": 55,
+      "blk": 11,
+      "to": 124
+    },
+    "nbaId": 203471,
+    "careerGpHistory": [
+      70,
+      75
+    ]
   },
   {
     "id": "ziaire-williams",
@@ -6928,8 +10653,24 @@
     "adp": null,
     "sourceRank": 269,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630533
+    "priorSeason": {
+      "fgPct": 0.4249,
+      "fgAttempted": 433,
+      "ftPct": 0.85,
+      "ftAttempted": 140,
+      "threePM": 86,
+      "pts": 573,
+      "reb": 134,
+      "ast": 60,
+      "stl": 76,
+      "blk": 21,
+      "to": 59
+    },
+    "nbaId": 1630533,
+    "careerGpHistory": [
+      56,
+      63
+    ]
   },
   {
     "id": "aaron-wiggins",
@@ -6954,8 +10695,24 @@
     "adp": null,
     "sourceRank": 270,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630598
+    "priorSeason": {
+      "fgPct": 0.431,
+      "fgAttempted": 536,
+      "ftPct": 0.7361,
+      "ftAttempted": 72,
+      "threePM": 96,
+      "pts": 611,
+      "reb": 199,
+      "ast": 109,
+      "stl": 60,
+      "blk": 28,
+      "to": 81
+    },
+    "nbaId": 1630598,
+    "careerGpHistory": [
+      65,
+      76
+    ]
   },
   {
     "id": "j-walter",
@@ -7006,8 +10763,24 @@
     "adp": 102.6,
     "sourceRank": 272,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 202691
+    "priorSeason": {
+      "fgPct": 0.3929,
+      "fgAttempted": 728,
+      "ftPct": 0.766,
+      "ftAttempted": 47,
+      "threePM": 202,
+      "pts": 810,
+      "reb": 143,
+      "ast": 96,
+      "stl": 33,
+      "blk": 22,
+      "to": 63
+    },
+    "nbaId": 202691,
+    "careerGpHistory": [
+      69,
+      72
+    ]
   },
   {
     "id": "d-barlow",
@@ -7058,8 +10831,24 @@
     "adp": null,
     "sourceRank": 274,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629723
+    "priorSeason": {
+      "fgPct": 0.4724,
+      "fgAttempted": 199,
+      "ftPct": 0.7273,
+      "ftAttempted": 44,
+      "threePM": 28,
+      "pts": 248,
+      "reb": 240,
+      "ast": 118,
+      "stl": 83,
+      "blk": 38,
+      "to": 35
+    },
+    "nbaId": 1629723,
+    "careerGpHistory": [
+      56,
+      46
+    ]
   },
   {
     "id": "jose-alvarado",
@@ -7083,8 +10872,24 @@
     "adp": null,
     "sourceRank": 275,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630631
+    "priorSeason": {
+      "fgPct": 0.4165,
+      "fgAttempted": 449,
+      "ftPct": 0.7609,
+      "ftAttempted": 46,
+      "threePM": 101,
+      "pts": 510,
+      "reb": 171,
+      "ast": 234,
+      "stl": 66,
+      "blk": 8,
+      "to": 77
+    },
+    "nbaId": 1630631,
+    "careerGpHistory": [
+      69,
+      56
+    ]
   },
   {
     "id": "jonas-valanciunas",
@@ -7108,8 +10913,24 @@
     "adp": null,
     "sourceRank": 276,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 202685
+    "priorSeason": {
+      "fgPct": 0.5821,
+      "fgAttempted": 390,
+      "ftPct": 0.7721,
+      "ftAttempted": 136,
+      "threePM": 8,
+      "pts": 567,
+      "reb": 329,
+      "ast": 78,
+      "stl": 14,
+      "blk": 37,
+      "to": 73
+    },
+    "nbaId": 202685,
+    "careerGpHistory": [
+      65,
+      81
+    ]
   },
   {
     "id": "marcus-smart",
@@ -7134,8 +10955,24 @@
     "adp": null,
     "sourceRank": 277,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 203935
+    "priorSeason": {
+      "fgPct": 0.395,
+      "fgAttempted": 476,
+      "ftPct": 0.8217,
+      "ftAttempted": 129,
+      "threePM": 97,
+      "pts": 579,
+      "reb": 172,
+      "ast": 185,
+      "stl": 87,
+      "blk": 23,
+      "to": 92
+    },
+    "nbaId": 203935,
+    "careerGpHistory": [
+      62,
+      34
+    ]
   },
   {
     "id": "noah-clowney",
@@ -7160,8 +10997,24 @@
     "adp": null,
     "sourceRank": 278,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1641730
+    "priorSeason": {
+      "fgPct": 0.3962,
+      "fgAttempted": 631,
+      "ftPct": 0.8036,
+      "ftAttempted": 224,
+      "threePM": 129,
+      "pts": 809,
+      "reb": 273,
+      "ast": 108,
+      "stl": 50,
+      "blk": 45,
+      "to": 102
+    },
+    "nbaId": 1641730,
+    "careerGpHistory": [
+      66,
+      46
+    ]
   },
   {
     "id": "d-smith",
@@ -7212,8 +11065,24 @@
     "adp": null,
     "sourceRank": 280,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630249
+    "priorSeason": {
+      "fgPct": 0.4476,
+      "fgAttempted": 429,
+      "ftPct": 0.7451,
+      "ftAttempted": 51,
+      "threePM": 128,
+      "pts": 550,
+      "reb": 148,
+      "ast": 100,
+      "stl": 47,
+      "blk": 18,
+      "to": 41
+    },
+    "nbaId": 1630249,
+    "careerGpHistory": [
+      65,
+      57
+    ]
   },
   {
     "id": "alex-caruso",
@@ -7238,8 +11107,24 @@
     "adp": null,
     "sourceRank": 281,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1627936
+    "priorSeason": {
+      "fgPct": 0.4233,
+      "fgAttempted": 300,
+      "ftPct": 0.8039,
+      "ftAttempted": 51,
+      "threePM": 53,
+      "pts": 348,
+      "reb": 155,
+      "ast": 110,
+      "stl": 72,
+      "blk": 17,
+      "to": 48
+    },
+    "nbaId": 1627936,
+    "careerGpHistory": [
+      56,
+      54
+    ]
   },
   {
     "id": "jaxson-hayes",
@@ -7263,8 +11148,24 @@
     "adp": null,
     "sourceRank": 282,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629637
+    "priorSeason": {
+      "fgPct": 0.7557,
+      "fgAttempted": 262,
+      "ftPct": 0.6533,
+      "ftAttempted": 150,
+      "threePM": 3,
+      "pts": 497,
+      "reb": 271,
+      "ast": 59,
+      "stl": 29,
+      "blk": 52,
+      "to": 31
+    },
+    "nbaId": 1629637,
+    "careerGpHistory": [
+      66,
+      56
+    ]
   },
   {
     "id": "karlo-matkovic",
@@ -7289,8 +11190,24 @@
     "adp": null,
     "sourceRank": 283,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1631255
+    "priorSeason": {
+      "fgPct": 0.6043,
+      "fgAttempted": 235,
+      "ftPct": 0.7317,
+      "ftAttempted": 41,
+      "threePM": 38,
+      "pts": 352,
+      "reb": 229,
+      "ast": 50,
+      "stl": 25,
+      "blk": 54,
+      "to": 34
+    },
+    "nbaId": 1631255,
+    "careerGpHistory": [
+      62,
+      42
+    ]
   },
   {
     "id": "d-wade",
@@ -7341,8 +11258,24 @@
     "adp": null,
     "sourceRank": 285,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630171
+    "priorSeason": {
+      "fgPct": 0.4597,
+      "fgAttempted": 459,
+      "ftPct": 0.7946,
+      "ftAttempted": 112,
+      "threePM": 73,
+      "pts": 584,
+      "reb": 173,
+      "ast": 100,
+      "stl": 46,
+      "blk": 29,
+      "to": 46
+    },
+    "nbaId": 1630171,
+    "careerGpHistory": [
+      63,
+      55
+    ]
   },
   {
     "id": "r-dunn",
@@ -7418,8 +11351,24 @@
     "adp": null,
     "sourceRank": 288,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 201587
+    "priorSeason": {
+      "fgPct": 0.4034,
+      "fgAttempted": 238,
+      "ftPct": 0.8182,
+      "ftAttempted": 11,
+      "threePM": 92,
+      "pts": 293,
+      "reb": 184,
+      "ast": 64,
+      "stl": 47,
+      "blk": 23,
+      "to": 37
+    },
+    "nbaId": 201587,
+    "careerGpHistory": [
+      74,
+      78
+    ]
   },
   {
     "id": "mouhamed-gueye",
@@ -7444,8 +11393,24 @@
     "adp": null,
     "sourceRank": 289,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1631243
+    "priorSeason": {
+      "fgPct": 0.4517,
+      "fgAttempted": 290,
+      "ftPct": 0.6452,
+      "ftAttempted": 62,
+      "threePM": 40,
+      "pts": 342,
+      "reb": 275,
+      "ast": 69,
+      "stl": 61,
+      "blk": 39,
+      "to": 33
+    },
+    "nbaId": 1631243,
+    "careerGpHistory": [
+      77,
+      33
+    ]
   },
   {
     "id": "simone-fontecchio",
@@ -7470,8 +11435,24 @@
     "adp": null,
     "sourceRank": 290,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1631323
+    "priorSeason": {
+      "fgPct": 0.4119,
+      "fgAttempted": 471,
+      "ftPct": 0.8431,
+      "ftAttempted": 102,
+      "threePM": 123,
+      "pts": 597,
+      "reb": 211,
+      "ast": 101,
+      "stl": 37,
+      "blk": 9,
+      "to": 49
+    },
+    "nbaId": 1631323,
+    "careerGpHistory": [
+      70,
+      75
+    ]
   },
   {
     "id": "kentavious-caldwell-pope",
@@ -7496,8 +11477,24 @@
     "adp": null,
     "sourceRank": 291,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 203484
+    "priorSeason": {
+      "fgPct": 0.4098,
+      "fgAttempted": 366,
+      "ftPct": 0.9125,
+      "ftAttempted": 80,
+      "threePM": 55,
+      "pts": 428,
+      "reb": 125,
+      "ast": 139,
+      "stl": 43,
+      "blk": 8,
+      "to": 61
+    },
+    "nbaId": 203484,
+    "careerGpHistory": [
+      51,
+      77
+    ]
   },
   {
     "id": "quinten-post",
@@ -7521,8 +11518,24 @@
     "adp": null,
     "sourceRank": 292,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1642366
+    "priorSeason": {
+      "fgPct": 0.4396,
+      "fgAttempted": 439,
+      "ftPct": 0.7907,
+      "ftAttempted": 43,
+      "threePM": 93,
+      "pts": 513,
+      "reb": 269,
+      "ast": 94,
+      "stl": 26,
+      "blk": 35,
+      "to": 56
+    },
+    "nbaId": 1642366,
+    "careerGpHistory": [
+      67,
+      42
+    ]
   },
   {
     "id": "miles-mcbride",
@@ -7547,8 +11560,24 @@
     "adp": null,
     "sourceRank": 293,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1630540
+    "priorSeason": {
+      "fgPct": 0.4233,
+      "fgAttempted": 404,
+      "ftPct": 0.7872,
+      "ftAttempted": 47,
+      "threePM": 112,
+      "pts": 491,
+      "reb": 100,
+      "ast": 106,
+      "stl": 35,
+      "blk": 9,
+      "to": 33
+    },
+    "nbaId": 1630540,
+    "careerGpHistory": [
+      41,
+      64
+    ]
   },
   {
     "id": "terance-mann",
@@ -7573,8 +11602,24 @@
     "adp": null,
     "sourceRank": 294,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 1629611
+    "priorSeason": {
+      "fgPct": 0.4565,
+      "fgAttempted": 368,
+      "ftPct": 0.7875,
+      "ftAttempted": 80,
+      "threePM": 56,
+      "pts": 455,
+      "reb": 200,
+      "ast": 190,
+      "stl": 41,
+      "blk": 15,
+      "to": 71
+    },
+    "nbaId": 1629611,
+    "careerGpHistory": [
+      63,
+      67
+    ]
   },
   {
     "id": "clint-capela",
@@ -7598,8 +11643,24 @@
     "adp": null,
     "sourceRank": 295,
     "dataSource": "screenshotProjection",
-    "priorSeason": null,
-    "nbaId": 203991
+    "priorSeason": {
+      "fgPct": 0.5198,
+      "fgAttempted": 227,
+      "ftPct": 0.5769,
+      "ftAttempted": 78,
+      "threePM": 1,
+      "pts": 282,
+      "reb": 345,
+      "ast": 50,
+      "stl": 36,
+      "blk": 63,
+      "to": 41
+    },
+    "nbaId": 203991,
+    "careerGpHistory": [
+      75,
+      55
+    ]
   },
   {
     "id": "w-richard",

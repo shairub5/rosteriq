@@ -108,6 +108,13 @@ class Player {
   /// Null for players not yet matched (e.g. 2026-27 draft picks).
   final int? nbaId;
 
+  /// Games played in each of the last few completed NBA seasons, most recent
+  /// first, fetched from the NBA Stats API in data_prep. Null/empty for
+  /// rookies or players not yet matched - used by the ranking engine to
+  /// discount players whose projection assumes health but whose real
+  /// history shows a pattern of missed time.
+  final List<int>? careerGpHistory;
+
   const Player({
     required this.id,
     required this.name,
@@ -130,6 +137,7 @@ class Player {
     this.dataSource = DataSource.screenshotProjection,
     this.priorSeason,
     this.nbaId,
+    this.careerGpHistory,
   });
 
   StatLine get projectedStatLine => StatLine(
@@ -171,6 +179,7 @@ class Player {
           ? null
           : StatLine.fromJson(json['priorSeason'] as Map<String, dynamic>),
       nbaId: (json['nbaId'] as num?)?.toInt(),
+      careerGpHistory: (json['careerGpHistory'] as List?)?.map((g) => (g as num).toInt()).toList(),
     );
   }
 

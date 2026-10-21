@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../state/draft_state_provider.dart';
+import 'draft_home_shell.dart';
 import 'draft_setup_screen.dart';
 import 'roster_management_screen.dart';
 
@@ -8,11 +11,11 @@ import 'roster_management_screen.dart';
 /// (a stub today, the planned home for live Yahoo sync, injury/transaction
 /// alerts, etc.). Kept separate from DraftHomeShell so RosterIQ can grow
 /// into a season-long tool without draft night being the only entry point.
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(title: const Text('RosterIQ')),
       body: Padding(
@@ -25,9 +28,17 @@ class HomeScreen extends StatelessWidget {
               icon: Icons.sports_basketball,
               title: 'Draft Night',
               subtitle: 'Live rankings, punt strategy, and pick tracking for your draft.',
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const DraftSetupScreen()),
-              ),
+              onTap: () {
+                // A draft already in progress means team names were already
+                // entered (and persisted) last time - jump straight back in
+                // instead of re-asking.
+                final draftInProgress = ref.read(draftStateProvider).picks.isNotEmpty;
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => draftInProgress ? const DraftHomeShell() : const DraftSetupScreen(),
+                  ),
+                );
+              },
             ),
             const SizedBox(height: 16),
             _HomeCard(

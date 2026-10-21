@@ -9,6 +9,8 @@ import '../state/saved_roster_provider.dart';
 import '../widgets/category_radar_chart.dart';
 import '../widgets/player_avatar.dart';
 import 'settings_screen.dart';
+import 'trade_evaluator_screen.dart';
+import 'waiver_wire_screen.dart';
 
 class MyTeamScreen extends ConsumerWidget {
   const MyTeamScreen({super.key});
@@ -134,6 +136,32 @@ class MyTeamScreen extends ConsumerWidget {
                     onPressed: () => _showAddPlayerDialog(context, ref, otherPlayers, zByPlayerId),
                     icon: const Icon(Icons.person_add_outlined),
                     label: const Text('Add Player'),
+                  ),
+
+                  const SizedBox(height: 24),
+                  const Text(
+                    'Post-Draft Tools',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 10),
+                  _PostDraftActionCard(
+                    icon: Icons.person_search_outlined,
+                    color: Colors.teal,
+                    title: 'Waiver Wire',
+                    subtitle: 'Find free agents ranked by impact on your needs',
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => const WaiverWireScreen()),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  _PostDraftActionCard(
+                    icon: Icons.swap_horiz,
+                    color: Colors.deepPurple,
+                    title: 'Trade Evaluator',
+                    subtitle: 'Compare trade value using Z-scores by category',
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => const TradeEvaluatorScreen()),
+                    ),
                   ),
                 ],
               ),
@@ -282,6 +310,48 @@ class _TeamPlayerRow extends StatelessWidget {
             onPressed: null, // disabled until Yahoo sync is wired
           ),
         ],
+      ),
+    );
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Add-player dialog
+// ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+// Post-draft action card
+// ---------------------------------------------------------------------------
+
+class _PostDraftActionCard extends StatelessWidget {
+  final IconData icon;
+  final Color color;
+  final String title;
+  final String subtitle;
+  final VoidCallback onTap;
+
+  const _PostDraftActionCard({
+    required this.icon,
+    required this.color,
+    required this.title,
+    required this.subtitle,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: EdgeInsets.zero,
+      clipBehavior: Clip.antiAlias,
+      child: ListTile(
+        leading: CircleAvatar(
+          backgroundColor: color.withValues(alpha: 0.12),
+          child: Icon(icon, color: color, size: 22),
+        ),
+        title: Text(title, style: const TextStyle(fontWeight: FontWeight.w600)),
+        subtitle: Text(subtitle, style: const TextStyle(fontSize: 12)),
+        trailing: const Icon(Icons.chevron_right),
+        onTap: onTap,
       ),
     );
   }

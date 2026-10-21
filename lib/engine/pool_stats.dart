@@ -56,6 +56,27 @@ double poolAverageFtPct(List<Player> pool) {
   return totalMade / totalAttempts;
 }
 
+/// Blends this season's projected games with real recent-season history and
+/// applies an extra discount for a pattern of missed time, so a player whose
+/// projection assumes full health but who has actually missed significant
+/// time in multiple recent seasons doesn't get credited as if that risk
+/// weren't there. Players with no history (rookies, unmatched) are
+/// unaffected - we only discount when we have real data.
+double durabilityAdjustedGp(Player player) {
+  final history = player.careerGpHistory;
+  if (history == null || history.isEmpty) return player.gp.toDouble();
+
+  final avgCareerGp = history.reduce((a, b) => a + b) / history.length;
+  final blended = 0.5 * player.gp + 0.5 * avgCareerGp;
+
+  // A season under ~65 GP (missed 17+ of 82) counts as a significant-injury
+  // season; two or more in the lookback window compounds the discount.
+  final injurySeasons = history.where((gp) => gp < 65).length;
+  final penalty = injurySeasons >= 2 ? 0.90 : (injurySeasons == 1 ? 0.95 : 1.0);
+
+  return (blended * penalty).clamp(1.0, 82.0);
+}
+
 /// The per-player, per-category "raw value" that gets z-scored. This is
 /// where the FG%/FT% impact formula and the TO sign-inversion live - every
 /// other category is just the counting stat as-is.
@@ -64,16 +85,21 @@ Map<StatCategory, double> computeRawCategoryValues(
   required double poolAvgFgPct,
   required double poolAvgFtPct,
 }) {
+  final gp = player.gp > 0 ? player.gp.toDouble() : 1.0;
+  // Discounts the per-game rate down toward the durability-adjusted games
+  // expectation when real history says the projection is optimistic; never
+  // boosts it. Per-game ability (the rate itself) is untouched.
+  final durabilityMultiplier = (durabilityAdjustedGp(player) / gp).clamp(0.0, 1.0);
   return {
-    StatCategory.fgPct: (player.fgPct - poolAvgFgPct) * player.fgAttempted,
-    StatCategory.ftPct: (player.ftPct - poolAvgFtPct) * player.ftAttempted,
-    StatCategory.threePM: player.threePM.toDouble(),
-    StatCategory.pts: player.pts.toDouble(),
-    StatCategory.reb: player.reb.toDouble(),
-    StatCategory.ast: player.ast.toDouble(),
-    StatCategory.stl: player.stl.toDouble(),
-    StatCategory.blk: player.blk.toDouble(),
-    StatCategory.to: -player.to.toDouble(),
+    StatCategory.fgPct: (player.fgPct - poolAvgFgPct) * (player.fgAttempted / gp) * durabilityMultiplier,
+    StatCategory.ftPct: (player.ftPct - poolAvgFtPct) * (player.ftAttempted / gp) * durabilityMultiplier,
+    StatCategory.threePM: player.threePM / gp * durabilityMultiplier,
+    StatCategory.pts: player.pts / gp * durabilityMultiplier,
+    StatCategory.reb: player.reb / gp * durabilityMultiplier,
+    StatCategory.ast: player.ast / gp * durabilityMultiplier,
+    StatCategory.stl: player.stl / gp * durabilityMultiplier,
+    StatCategory.blk: player.blk / gp * durabilityMultiplier,
+    StatCategory.to: -player.to / gp * durabilityMultiplier,
   };
 }
 
