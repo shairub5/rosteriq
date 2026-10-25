@@ -231,6 +231,22 @@ void main() {
     expect(ordinal(22), '22nd');
   });
 
+  testWidgets('rank table shows every team\'s rank and sorts by a tapped category', (tester) async {
+    await tester.pumpWidget(MaterialApp(
+      theme: buildTheme(Brightness.light),
+      home: Scaffold(body: AllPlayTable(rows: allPlay(week1), myName: 'Ironi shaide')),
+    ));
+    await tester.tap(find.text('PTS'));
+    await tester.pump();
+    // Sorted by PTS: Ironi shaide (542) is first, ranked 1st.
+    final ironiY = tester.getTopLeft(find.text('Ironi shaide')).dy;
+    for (final other in ['Alon Tip-Top', 'henz1k', 'The White Answer']) {
+      expect(ironiY, lessThan(tester.getTopLeft(find.text(other)).dy));
+    }
+    expect(find.text('542'), findsOneWidget);
+    expect(find.text('1st'), findsWidgets);
+  });
+
   testWidgets('radar renders', (tester) async {
     await tester.pumpWidget(MaterialApp(
       theme: buildTheme(Brightness.light),

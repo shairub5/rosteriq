@@ -116,7 +116,7 @@ assistant. Plan: in-season worker + Matchup radar + Add/Drop + Config views.
   "compare with" any other team that week, and a season view (record,
   head-to-head filter, radar of weekly averages, how often I win each
   category), plus "My rank in the league" (each category: rank of 12, total).
-  League: "Category wins vs every team" (all-play: how many of the other 11
+  League: "Category ranks · all teams" (every team's rank of 12 per category, by all-play wins vs the other 11
   teams each team beats per category, with totals; sortable), standings
   ranked by categories won with per-team splits,
   a sortable table of category wins, and the week's matchups.

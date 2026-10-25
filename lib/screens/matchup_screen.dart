@@ -358,13 +358,12 @@ class MatchupScreen extends ConsumerWidget {
     final rows = leagueTable(period);
     final label = season ? 'season' : 'week ${period.first.week}';
     return [
-      SectionHeader('Category wins vs every team · $label'),
+      SectionHeader('Category ranks · all teams · $label'),
       Card(clipBehavior: Clip.antiAlias, child: AllPlayTable(rows: allPlay(period), myName: myName)),
       const SizedBox(height: 6),
       Text(
-        'How many teams each team beats in each category, as if everyone played everyone '
-        '(${season ? '11 per week' : 'out of 11'}). Small number = its total${season ? ' (weekly average)' : ''}. '
-        'Swipe sideways; tap a column to sort.',
+        'Each team\'s rank among all 12 in every category, with its total underneath'
+        '${season ? ' (weekly average)' : ''}. Swipe sideways for all 9; tap a column to sort.',
         style: Theme.of(context).textTheme.bodySmall,
         textAlign: TextAlign.center,
       ),
@@ -856,7 +855,8 @@ class MyRanks extends StatelessWidget {
   }
 }
 
-/// All-play wins per team and category; sortable by any column, best per column highlighted.
+/// Every team's league rank in each category (by all-play wins) with its total underneath;
+/// sortable by any column, top 3 green and bottom 3 red.
 class AllPlayTable extends StatefulWidget {
   final List<AllPlayRow> rows;
   final String? myName;
@@ -880,61 +880,87 @@ class _AllPlayTableState extends State<AllPlayTable> {
         final byValue = _value(b).compareTo(_value(a));
         return byValue != 0 ? byValue : b.total.w.compareTo(a.total.w);
       });
-    final best = {for (final c in allStatCategories) c: rows.fold(0, (m, r) => r.cats[c]!.w > m ? r.cats[c]!.w : m)};
-    final bestTotal = rows.fold(0, (m, r) => r.total.w > m ? r.total.w : m);
-    Widget cell(int wins, String sub, bool top) => Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Text('$wins',
-                style: theme.textTheme.titleSmall?.copyWith(
-                  color: top ? context.stat.win : null,
-                  fontWeight: top ? FontWeight.w800 : FontWeight.w600,
-                )),
-            Text(sub, style: theme.textTheme.labelSmall?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
-          ],
+    final n = rows.length;
+    // Rank = 1 + teams with more all-play wins (ties share a rank).
+    int rank(int Function(AllPlayRow r) wins, AllPlayRow r) => rows.where((o) => wins(o) > wins(r)).length + 1;
+    Widget cell(int rank, String sub) {
+      final color = rank <= 3
+          ? context.stat.win
+          : rank > n - 3
+              ? context.stat.loss
+              : null;
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Text(ordinal(rank),
+              style: theme.textTheme.titleSmall?.copyWith(
+                color: color,
+                fontWeight: rank == 1 ? FontWeight.w800 : FontWeight.w600,
+              )),
+          Text(sub, style: theme.textTheme.labelSmall?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
+        ],
+      );
+    }
+
+    Color? rowColor(AllPlayRow r) => r.name == widget.myName ? theme.colorScheme.primaryContainer : null;
+    // Team names stay put; the 10 numeric columns scroll sideways next to them. Both tables use
+    // the same fixed row heights so the rows line up.
+    DataTable table({required List<DataColumn> columns, required List<DataCell> Function(AllPlayRow r) cells, double spacing = 16}) =>
+        DataTable(
+          columnSpacing: spacing,
+          horizontalMargin: 12,
+          headingRowHeight: 44,
+          dataRowMinHeight: 56,
+          dataRowMaxHeight: 56,
+          sortColumnIndex: columns.length == 1 ? null : (_sortBy == null ? 0 : 1 + allStatCategories.indexOf(_sortBy!)),
+          sortAscending: false,
+          columns: columns,
+          rows: [for (final r in rows) DataRow(color: WidgetStatePropertyAll(rowColor(r)), cells: cells(r))],
         );
 
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: DataTable(
-        columnSpacing: 16,
-        horizontalMargin: 16,
-        headingRowHeight: 44,
-        dataRowMinHeight: 52,
-        dataRowMaxHeight: 56,
-        sortColumnIndex: _sortBy == null ? 1 : 2 + allStatCategories.indexOf(_sortBy!),
-        sortAscending: false,
-        columns: [
-          const DataColumn(label: Text('TEAM')),
-          DataColumn(label: const Text('TOTAL'), numeric: true, onSort: (_, _) => setState(() => _sortBy = null)),
-          for (final c in allStatCategories)
-            DataColumn(label: Text(c.label), numeric: true, onSort: (_, _) => setState(() => _sortBy = c)),
-        ],
-        rows: [
-          for (final r in rows)
-            DataRow(
-              color: WidgetStatePropertyAll(r.name == widget.myName ? theme.colorScheme.primaryContainer : null),
-              cells: [
-                DataCell(ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 110),
-                  child: Text(
-                    r.name,
-                    overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
-                  ),
-                )),
-                DataCell(cell(r.total.w, '${(100 * r.total.w / (r.total.w + r.total.l + r.total.t).clamp(1, 1 << 30)).round()}%',
-                    r.total.w == bestTotal)),
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        DecoratedBox(
+          decoration: BoxDecoration(border: Border(right: BorderSide(color: theme.colorScheme.outlineVariant))),
+          child: table(
+            columns: const [DataColumn(label: Text('TEAM'))],
+            cells: (r) => [
+              DataCell(ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 96),
+                child: Text(
+                  r.name,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600, height: 1.15),
+                ),
+              )),
+            ],
+          ),
+        ),
+        Expanded(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: table(
+              spacing: 14,
+              columns: [
+                DataColumn(label: const Text('OVERALL'), numeric: true, onSort: (_, _) => setState(() => _sortBy = null)),
                 for (final c in allStatCategories)
-                  DataCell(cell(r.cats[c]!.w, formatStat(c, r.avg[c]!), r.cats[c]!.w == best[c])),
+                  DataColumn(label: Text(c.label), numeric: true, onSort: (_, _) => setState(() => _sortBy = c)),
+              ],
+              cells: (r) => [
+                DataCell(cell(rank((x) => x.total.w, r), '${r.total.w} wins')),
+                for (final c in allStatCategories) DataCell(cell(rank((x) => x.cats[c]!.w, r), formatStat(c, r.avg[c]!))),
               ],
             ),
-        ],
-      ),
+          ),
+        ),
+      ],
     );
   }
 }
+
 
 /// Every team's record and category wins for the period; sortable by any column.
 class LeagueTable extends StatefulWidget {
