@@ -186,7 +186,7 @@ void main() {
       theme: buildTheme(Brightness.light),
       home: Scaffold(body: LeagueTable(rows: leagueTable(week1), myName: 'Ironi shaide')),
     ));
-    expect(find.text('Ironi shaide (you)'), findsOneWidget);
+    expect(find.text('Ironi shaide'), findsOneWidget);
     await tester.tap(find.text('3PM'));
     await tester.pump();
     // The White Answer (63) and Ironi shaide (60) won 3PM; they now lead the table.
@@ -217,6 +217,18 @@ void main() {
     await tester.tap(find.text('Alon Tip-Top'));
     await tester.pumpAndSettle();
     expect(find.text('Categories won'), findsOneWidget);
+  });
+
+  test('allPlay compares every team with every other team per category', () {
+    final rows = {for (final r in allPlay(week1)) r.name: r};
+    // Ironi shaide's 542 PTS beats all 3 other teams this week; TO 70 beats Alon (86) and White (90), loses to henz1k (67).
+    expect(rows['Ironi shaide']!.cats[StatCategory.pts], (w: 3, l: 0, t: 0));
+    expect(rows['Ironi shaide']!.cats[StatCategory.to], (w: 2, l: 1, t: 0));
+    expect(allPlayRank(allPlay(week1), 'Ironi shaide', StatCategory.pts), 1);
+    expect(rows['Ironi shaide']!.avg[StatCategory.pts], 542);
+    expect(ordinal(1), '1st');
+    expect(ordinal(12), '12th');
+    expect(ordinal(22), '22nd');
   });
 
   testWidgets('radar renders', (tester) async {
