@@ -4,9 +4,10 @@ One-time (rerunnable) pipeline that produces the two JSON files the Flutter
 app bundles: `../assets/data/players.json` and `../assets/data/league_config.json`.
 Runs on your Mac, not on the phone - the app itself makes no network calls.
 
-Kept as a standalone Python package (own venv, own requirements) specifically
-so it can later move to a scheduled AWS Lambda / GCP Cloud Run job for
-injury-report/transaction polling, without needing to touch the Flutter side.
+Kept as a standalone Python package (own venv, own requirements). In-season
+polling (injuries, alerts) ended up in the Dart worker instead
+(`../bin/worker.dart`, ESPN data, so it can reuse `lib/engine`). This module
+stays the preseason projections pipeline.
 
 ## Setup
 

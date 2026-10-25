@@ -54,3 +54,6 @@ data_prep/.venv/
 
 # --- Flutter app: Yahoo client id/secret for in-app login - never commit ---
 /secrets.json
+
+# --- Worker snapshot (lives on the `data` branch, not main) ---
+/state/

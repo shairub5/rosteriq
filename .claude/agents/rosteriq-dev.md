@@ -51,11 +51,34 @@ lib/
   services/   Bundled-JSON loading, local persistence, Yahoo OAuth service
   screens/    Home, draft setup, available pool, my roster, draft board, roster mgmt
   widgets/    Player tiles, pick indicator, category standing bars, etc.
+bin/worker.dart  In-season worker run by .github/workflows/scrape.yml (cron
+              */30). State = snapshot.json on the orphan `data` branch
+              (force-pushed single commit). Run locally with
+              `dart run bin/worker.dart <path> --dry-run`.
+lib/worker/   ESPN parsers (espn.dart) + injury diff (alerts.dart) - pure Dart
 data_prep/    Standalone Python module - Yahoo API pull + screenshot merge.
               Runs on the dev's Mac only, never on the phone.
 assets/data/  players.json / league_config.json - bundled, pre-generated
-test/         Engine unit tests
+test/         Engine + worker unit tests
 ```
+
+## Worker gotchas
+
+- ESPN is the only external data source that works from GitHub's runners.
+  stats.nba.com and cdn.nba.com return 403 there. Do not scrape Yahoo with
+  cookies (the user rejected it over ban risk). Wait for the API.
+- ESPN injury rows have no athlete id field: it's parsed out of the
+  player-card link (`/id/<n>/`). Players out since day one have no stats
+  row, so relevance must match preseason-projection names against injury
+  names too, not only against stats rows (a past bug hid Curry and Kyrie).
+- ESPN positions are only G/F/C, mapped by `espnPositions` onto PG/SG/SF/PF/C.
+- Alerts are dedup'd by status diff against the previous snapshot. With no
+  snapshot (first run), the worker sends one "live" message and nothing else,
+  so you never get 80 injury alerts at once.
+- GitHub pauses cron workflows after 60 days without repo activity. The
+  worker sends a daily ⏰ Telegram reminder from day 50 (main's last commit
+  date is passed in `LAST_COMMIT_AT`; reminders are throttled by
+  `lastReminderAt` in the snapshot).
 
 ## Ranking algorithm - the load-bearing details
 

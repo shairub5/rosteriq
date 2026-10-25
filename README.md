@@ -42,12 +42,16 @@ lib/
   services/   Bundled-JSON loading, local persistence (shared_preferences)
   screens/    Home, draft setup, available pool, my roster, draft board
   widgets/    Player tiles, pick indicator, category standing bars, etc.
+bin/worker.dart  Scheduled in-season worker (GitHub Actions, every 30 min):
+              ESPN stats + injuries -> Telegram alerts -> snapshot.json
+              on the `data` branch. Reuses lib/engine for rankings.
+lib/worker/   ESPN client/parsers and the injury-alert diff used by the worker
 data_prep/    Standalone Python module: Yahoo API pull (league settings +
               prior-season stats) + screenshot-projection merge -> the JSON
               files the app bundles. Never runs on the phone.
 assets/data/  players.json / league_config.json - bundled, pre-generated data
 test/         Unit tests for the engine (ranking, punt, roster-fit, snake
-              position, positional-run detection)
+              position, positional-run detection) and the worker
 ```
 
 ## Running it
@@ -71,7 +75,30 @@ season stats), so this season's projections come from a manually-curated
 prior-season actual stats (used specifically as the FG%/FT% attempt-volume
 proxy) via `python data_prep/main.py`.
 
-## Status (as of 2026-08-28)
+## Status (as of 2026-10-25)
+
+**In-season pivot (2026-10-25):** RosterIQ is becoming a season-long
+assistant. Plan: in-season worker + Matchup radar + Add/Drop + Config views.
+- **Built:** `bin/worker.dart` + `.github/workflows/scrape.yml`. Every 30 min
+  it pulls ESPN's public stats and injury report (no login), diffs them
+  against the previous `snapshot.json` (`data` branch), and sends Telegram
+  alerts: new/changed injury (🚑 OUT / ⚠️ DAY-TO-DAY) for fantasy-relevant
+  players, the teammates at that position who absorb the minutes (>= 10 min,
+  ranked by z), and ✅ BACK when a player leaves the report. "Relevant" means
+  the top 150 by preseason projection or by this season's z (5+ GP).
+  Alerts are league-wide for now, because the worker doesn't know anyone's
+  roster until Yahoo approves the API.
+- **Setup still needed:** repo secrets `TELEGRAM_TOKEN` and `TELEGRAM_CHAT_ID`,
+  then one manual run (Actions -> scrape -> Run workflow). The first run
+  sends only a "alerts are live" message and records the baseline.
+- **Next:** app views (Matchup radar of my saved team vs a picked opponent,
+  Add/Drop on live ESPN stats, Config), then Yahoo-roster-aware alerts once
+  approved.
+- **Data sources:** ESPN only. stats.nba.com / cdn.nba.com return 403 from
+  cloud IPs. Scraping Yahoo with a session cookie was rejected (ToS / ban
+  risk).
+
+### Draft-era status (as of 2026-08-28)
 
 **Done:**
 - Home screen -> Draft Setup (name the other 11 teams) -> Draft Night
@@ -105,7 +132,10 @@ proxy) via `python data_prep/main.py`.
 **Current blocker:** the Yahoo Fantasy Sports API requires a separate manual
 application/approval from Yahoo's Fantasy team beyond just registering a
 developer app (see https://sports.yahoo.com/developer/access/) - submitted,
-awaiting their review, no ETA. Two Yahoo apps exist for two different
+plus the follow-up form at https://sports.yahoo.com/developer/application-confirmation/
+(both 2026-10-25), awaiting review, no ETA. Until approval, the API returns
+`401 Jwt is not in the form of Header.Payload.Signature` even with a freshly
+refreshed token. Two Yahoo apps exist for two different
 purposes:
 - **Confidential Client** (`data_prep/.env`) - for the Python script's
   manual-code OAuth flow. This is the one the pending approval is for.
