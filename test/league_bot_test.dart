@@ -21,6 +21,7 @@ void main() {
   test('normalizeName folds accents', () {
     expect(normalizeName('Luka Dončić'), normalizeName('Luka Doncic'));
     expect(normalizeName('Egor Dëmin'), 'egor demin');
+    expect(normalizeName('Kristaps Porziņģis'), 'kristaps porzingis');
     expect(normalizeName('Jimmy Butler III'), 'jimmy butler');
   });
 
