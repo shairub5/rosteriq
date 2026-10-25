@@ -108,10 +108,13 @@ assistant. Plan: in-season worker + Matchup radar + Add/Drop + Config views.
 - **Real matchups:** send Yahoo matchup-page screenshots to the bot (no
   caption; any of the league's matchups). Both teams' weekly category totals
   are stored per week in `league.matchups`; the week comes from the image, the
-  caption ("Week 2"), or else the latest stored week. The Matchup tab shows
-  my real week (W-L-T, category table, categories still close), the rest of
-  the league, a season view (record, head-to-head filter, how often I win
-  each category) and a sortable league table of category wins per team.
+  caption ("Week 2"), or else the latest stored week. The Matchup tab has a
+  period dropdown (any week or Season) and a Me / League switch. Me: my real
+  week (W-L-T, radar vs the league, category table, categories still close),
+  "compare with" any other team that week, and a season view (record,
+  head-to-head filter, radar of weekly averages, how often I win each
+  category). League: standings ranked by categories won with per-team splits,
+  a sortable table of category wins, and the week's matchups.
   `bin/set_matchup.dart` adds one by hand. The old projection view is gone.
 - **Next:** hot-pickup digest, then Yahoo-roster-aware alerts and the real
   opponent once the API is approved.

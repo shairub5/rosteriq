@@ -8,29 +8,82 @@ import '../models/stat_category.dart';
 ///
 /// The bold middle ring is league average; farther out is better, closer to the
 /// center is worse, scaled to the largest value shown.
-/// The fill polygon uses a semi-transparent primary colour.
+/// The fill polygon uses a semi-transparent primary colour. An optional
+/// [opponent] is drawn as an unfilled tertiary outline with vertex dots, so
+/// the two teams differ by shape as well as hue, plus a legend.
 ///
 /// Uses a custom [CustomPainter] so there are no extra package dependencies.
 class CategoryRadarChart extends StatelessWidget {
   final Map<StatCategory, double> standing;
   final Set<StatCategory> puntedCategories;
+  final Map<StatCategory, double>? opponent;
+  final String opponentLabel;
 
   const CategoryRadarChart({
     super.key,
     required this.standing,
     required this.puntedCategories,
+    this.opponent,
+    this.opponentLabel = 'Opponent',
   });
 
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     // Explicit width: CustomPaint has no intrinsic size, so loose constraints (e.g. in a Column) would collapse it.
-    return SizedBox(
+    final chart = SizedBox(
       width: double.infinity,
       height: 280,
       child: CustomPaint(
-        painter: _RadarPainter(standing: standing, puntedCategories: puntedCategories, colors: colors),
+        painter: _RadarPainter(
+          standing: standing,
+          puntedCategories: puntedCategories,
+          opponent: opponent,
+          colors: colors,
+        ),
       ),
+    );
+    if (opponent == null) return chart;
+    return Column(
+      children: [
+        chart,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _LegendItem(color: colors.primary, label: 'You', filled: true),
+            const SizedBox(width: 16),
+            Flexible(child: _LegendItem(color: colors.tertiary, label: opponentLabel, filled: false)),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _LegendItem extends StatelessWidget {
+  final Color color;
+  final String label;
+  final bool filled;
+
+  const _LegendItem({required this.color, required this.label, required this.filled});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: 14,
+          height: 14,
+          decoration: BoxDecoration(
+            color: filled ? color.withValues(alpha: 0.25) : null,
+            border: Border.all(color: color, width: 2),
+            shape: filled ? BoxShape.rectangle : BoxShape.circle,
+          ),
+        ),
+        const SizedBox(width: 6),
+        Flexible(child: Text(label, overflow: TextOverflow.ellipsis)),
+      ],
     );
   }
 }
@@ -38,11 +91,13 @@ class CategoryRadarChart extends StatelessWidget {
 class _RadarPainter extends CustomPainter {
   final Map<StatCategory, double> standing;
   final Set<StatCategory> puntedCategories;
+  final Map<StatCategory, double>? opponent;
   final ColorScheme colors;
 
   _RadarPainter({
     required this.standing,
     required this.puntedCategories,
+    required this.opponent,
     required this.colors,
   });
 
@@ -64,11 +119,12 @@ class _RadarPainter extends CustomPainter {
       return Offset(cx + radius * fraction * math.cos(angle), cy + radius * fraction * math.sin(angle));
     }
 
-    // The middle ring is league average (0), the outer ring the largest |value| shown: team totals
-    // range far wider than one player's z, so no fixed scale fits.
+    // Both teams share one scale: the middle ring is league average (0), the outer ring is the
+    // largest |value| shown. Team totals range far wider than one player's z, so no fixed scale fits.
     final shown = [
-      for (final c in categories)
-        if (!puntedCategories.contains(c)) (standing[c] ?? 0).abs(),
+      for (final m in [standing, ?opponent])
+        for (final c in categories)
+          if (!puntedCategories.contains(c)) (m[c] ?? 0).abs(),
     ];
     final scale = math.max(1.0, shown.fold(0.0, math.max));
     double zToFraction(double z) => 0.5 + 0.5 * (z / scale).clamp(-1.0, 1.0);
@@ -126,6 +182,22 @@ class _RadarPainter extends CustomPainter {
         ..strokeWidth = 2,
     );
 
+    // --- Opponent outline + vertex dots ---
+    final opp = opponent;
+    if (opp != null) {
+      canvas.drawPath(
+        polygon(opp),
+        Paint()
+          ..color = colors.tertiary
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 2,
+      );
+      final dotPaint = Paint()..color = colors.tertiary;
+      for (var i = 0; i < n; i++) {
+        canvas.drawCircle(axisPoint(i, zToFraction(opp[categories[i]] ?? 0)), 4, dotPaint);
+      }
+    }
+
     // --- Axis labels ---
     for (var i = 0; i < n; i++) {
       final cat = categories[i];
@@ -160,5 +232,6 @@ class _RadarPainter extends CustomPainter {
   bool shouldRepaint(_RadarPainter old) =>
       old.standing != standing ||
       old.puntedCategories != puntedCategories ||
+      old.opponent != opponent ||
       old.colors != colors;
 }

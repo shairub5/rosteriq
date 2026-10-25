@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -5,6 +7,7 @@ import '../models/stat_category.dart';
 import '../services/player_repository.dart';
 import '../state/league_data_provider.dart';
 import '../theme.dart';
+import '../widgets/category_radar_chart.dart';
 import '../widgets/common.dart';
 import 'settings_screen.dart';
 
@@ -68,10 +71,51 @@ List<TeamPeriod> leagueTable(Iterable<LeagueMatchup> matchups) {
   return rows.values.toList();
 }
 
+/// Each team's category values over the period (weekly average) as z-scores across the
+/// league's teams, sign-flipped for TO so farther out is always better. Feeds the radar,
+/// whose middle ring is then "league average".
+Map<String, Map<StatCategory, double>> leagueZ(Iterable<LeagueMatchup> matchups) {
+  final sums = <String, Map<StatCategory, double>>{};
+  final weeks = <String, int>{};
+  for (final m in matchups) {
+    for (final t in [m.a, m.b]) {
+      final acc = sums.putIfAbsent(t.name, () => {for (final c in allStatCategories) c: 0});
+      for (final c in allStatCategories) {
+        acc[c] = acc[c]! + t.stats[c]!;
+      }
+      weeks[t.name] = (weeks[t.name] ?? 0) + 1;
+    }
+  }
+  final avg = {
+    for (final e in sums.entries) e.key: {for (final c in allStatCategories) c: e.value[c]! / weeks[e.key]!},
+  };
+  final out = {for (final t in avg.keys) t: <StatCategory, double>{}};
+  for (final c in allStatCategories) {
+    final values = [for (final t in avg.values) t[c]!];
+    final mean = values.reduce((a, b) => a + b) / values.length;
+    final sd = values.length < 2
+        ? 0.0
+        : (values.map((v) => (v - mean) * (v - mean)).reduce((a, b) => a + b) / values.length).sqrtOr0();
+    for (final t in avg.keys) {
+      final z = sd == 0 ? 0.0 : (avg[t]![c]! - mean) / sd;
+      out[t]![c] = c.lowerIsBetter ? -z : z;
+    }
+  }
+  return out;
+}
+
+extension on double {
+  double sqrtOr0() => this <= 0 ? 0 : math.sqrt(this);
+}
+
 /// Week chip selection: a week number, [_season], or null for the latest week.
 const _season = 0;
 final _selectedProvider = StateProvider<int?>((ref) => null);
 final _opponentFilterProvider = StateProvider<String?>((ref) => null);
+final _leagueViewProvider = StateProvider<bool>((ref) => false);
+
+/// Team to compare my week against; null = my real opponent.
+final _compareProvider = StateProvider<String?>((ref) => null);
 
 /// Real weekly matchups (from Yahoo screenshots): mine, the rest of the league,
 /// and a league table, for one week or the whole season.
@@ -97,46 +141,45 @@ class MatchupScreen extends ConsumerWidget {
           final weeks = {for (final m in all) m.week}.toList()..sort();
           final selected = ref.watch(_selectedProvider) ?? weeks.last;
           final period = selected == _season ? all : all.where((m) => m.week == selected).toList();
+          final league = ref.watch(_leagueViewProvider);
 
           return RefreshIndicator(
             onRefresh: () => ref.refresh(leagueDataProvider.future),
             child: ListView(
               padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
               children: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      for (final (value, label) in [
-                        (_season, 'Season'),
-                        for (final w in weeks.reversed) (w, 'Week $w'),
-                      ])
-                        Padding(
-                          padding: const EdgeInsets.only(right: 8),
-                          child: ChoiceChip(
-                            label: Text(label),
-                            selected: selected == value,
-                            onSelected: (_) => ref.read(_selectedProvider.notifier).state = value,
-                          ),
-                        ),
-                    ],
-                  ),
+                DropdownMenu<int>(
+                  key: ValueKey('period$selected'),
+                  initialSelection: selected,
+                  expandedInsets: EdgeInsets.zero,
+                  label: const Text('Period'),
+                  leadingIcon: const Icon(Icons.calendar_month_outlined),
+                  onSelected: (v) {
+                    ref.read(_selectedProvider.notifier).state = v;
+                    ref.read(_compareProvider.notifier).state = null;
+                  },
+                  dropdownMenuEntries: [
+                    for (final w in weeks.reversed)
+                      DropdownMenuEntry(value: w, label: w == weeks.last ? 'Week $w (current)' : 'Week $w'),
+                    const DropdownMenuEntry(value: _season, label: 'Season'),
+                  ],
                 ),
                 const SizedBox(height: 12),
-                if (selected == _season)
+                SegmentedButton<bool>(
+                  segments: const [
+                    ButtonSegment(value: false, label: Text('Me'), icon: Icon(Icons.person_outline)),
+                    ButtonSegment(value: true, label: Text('League'), icon: Icon(Icons.leaderboard_outlined)),
+                  ],
+                  selected: {league},
+                  onSelectionChanged: (v) => ref.read(_leagueViewProvider.notifier).state = v.first,
+                ),
+                const SizedBox(height: 12),
+                if (league)
+                  ..._leagueView(context, period, all, leagueData.myName, season: selected == _season)
+                else if (selected == _season)
                   ..._seasonView(context, ref, all, leagueData.myName)
                 else
-                  ..._weekView(context, period, leagueData.myName, isLatest: selected == weeks.last),
-                const SizedBox(height: 16),
-                SectionHeader(selected == _season ? 'League table · season' : 'League table · week $selected'),
-                Card(clipBehavior: Clip.antiAlias, child: LeagueTable(rows: leagueTable(period), myName: leagueData.myName)),
-                const SizedBox(height: 6),
-                Text(
-                  'Each number is how many times the team won that category. '
-                  'Swipe the table sideways for all 9; tap a column to sort.',
-                  style: Theme.of(context).textTheme.bodySmall,
-                  textAlign: TextAlign.center,
-                ),
+                  ..._weekView(context, ref, period, leagueData.myName, isLatest: selected == weeks.last),
               ],
             ),
           );
@@ -145,21 +188,58 @@ class MatchupScreen extends ConsumerWidget {
     );
   }
 
-  List<Widget> _weekView(BuildContext context, List<LeagueMatchup> week, String? myName, {required bool isLatest}) {
+  List<Widget> _weekView(
+    BuildContext context,
+    WidgetRef ref,
+    List<LeagueMatchup> week,
+    String? myName, {
+    required bool isLatest,
+  }) {
     final theme = Theme.of(context);
-    final mine = week.map((m) => sideOf(m, myName)).nonNulls.firstOrNull;
-    final others = week.where((m) => sideOf(m, myName) == null).toList();
+    final real = week.map((m) => sideOf(m, myName)).nonNulls.firstOrNull;
     final w = week.first;
+    // Every other team's totals this week, to compare against any of them.
+    final teams = {
+      for (final m in week)
+        for (final t in [m.a, m.b])
+          if (t.name != myName) t.name: t,
+    };
+    final compareName = ref.watch(_compareProvider);
+    final mine = real == null ? null : (me: real.me, opp: teams[compareName] ?? real.opp);
+    final hypothetical = mine != null && mine.opp.name != real!.opp.name;
     return [
       if (mine != null) ...[
+        DropdownMenu<String>(
+          key: ValueKey('cmp${mine.opp.name}'),
+          initialSelection: mine.opp.name,
+          expandedInsets: EdgeInsets.zero,
+          label: const Text('Compare with'),
+          leadingIcon: const Icon(Icons.compare_arrows),
+          onSelected: (v) => ref.read(_compareProvider.notifier).state = v == real.opp.name ? null : v,
+          dropdownMenuEntries: [
+            DropdownMenuEntry(value: real!.opp.name, label: '${real.opp.name} (my opponent)'),
+            for (final name in teams.keys.where((n) => n != real.opp.name).toList()..sort())
+              DropdownMenuEntry(value: name, label: name),
+          ],
+        ),
+        const SizedBox(height: 12),
         () {
           final s = score(mine.me, mine.opp);
           return _Scoreboard(
             title: 'Week ${w.week} · You vs ${mine.opp.name}',
-            subtitle: '${_verdict(s, inProgress: isLatest)} · updated ${_ago(w.updatedAt)}',
+            subtitle: hypothetical
+                ? 'If you had played them · ${s.w > s.l ? 'you\'d win' : s.w < s.l ? 'you\'d lose' : 'a tie'}'
+                : '${_verdict(s, inProgress: isLatest)} · updated ${_ago(w.updatedAt)}',
             score: s,
           );
         }(),
+        const SizedBox(height: 12),
+        _RadarCard(
+          me: leagueZ(week)[mine.me.name]!,
+          opp: leagueZ(week)[mine.opp.name],
+          oppName: mine.opp.name,
+          caption: 'Each category vs all 12 teams this week',
+        ),
         const SizedBox(height: 16),
         const SectionHeader('By category'),
         Card(
@@ -168,7 +248,7 @@ class MatchupScreen extends ConsumerWidget {
             child: MatchupTable(a: mine.me, b: mine.opp, aLabel: 'YOU', bLabel: 'OPP'),
           ),
         ),
-        if (isLatest)
+        if (isLatest && !hypothetical)
           () {
             final close = [
               for (final c in allStatCategories)
@@ -207,14 +287,37 @@ class MatchupScreen extends ConsumerWidget {
             subtitle: const Text('Send the screenshot of your own matchup page to the bot.'),
           ),
         ),
-      if (others.isNotEmpty) ...[
+    ];
+  }
+
+  List<Widget> _leagueView(
+    BuildContext context,
+    List<LeagueMatchup> period,
+    List<LeagueMatchup> all,
+    String? myName, {
+    required bool season,
+  }) {
+    final rows = leagueTable(period);
+    return [
+      SectionHeader(season ? 'Standings · season' : 'Standings · week ${period.first.week}'),
+      Card(clipBehavior: Clip.antiAlias, child: Standings(rows: rows, period: period, myName: myName)),
+      const SizedBox(height: 6),
+      Text('Ranked by categories won. Tap a team for its splits.',
+          style: Theme.of(context).textTheme.bodySmall, textAlign: TextAlign.center),
+      const SizedBox(height: 16),
+      const SectionHeader('Category wins by team'),
+      Card(clipBehavior: Clip.antiAlias, child: LeagueTable(rows: rows, myName: myName)),
+      const SizedBox(height: 6),
+      Text('Swipe sideways for all 9 categories; tap a column to sort.',
+          style: Theme.of(context).textTheme.bodySmall, textAlign: TextAlign.center),
+      if (!season) ...[
         const SizedBox(height: 16),
-        const SectionHeader('Around the league'),
+        const SectionHeader('Matchups'),
         Card(
           clipBehavior: Clip.antiAlias,
           child: Column(
             children: [
-              for (final (i, m) in others.indexed) ...[
+              for (final (i, m) in period.indexed) ...[
                 if (i > 0) const Divider(indent: 16),
                 _MatchupRow(m: m),
               ],
@@ -263,6 +366,15 @@ class MatchupScreen extends ConsumerWidget {
           t: scores.where((s) => s.w == s.l).length,
         ),
       ),
+      if (leagueZ(all)[myName] case final me?) ...[
+        const SizedBox(height: 12),
+        _RadarCard(
+          me: me,
+          opp: filter == null ? null : leagueZ(all)[filter],
+          oppName: filter,
+          caption: 'Weekly average vs all 12 teams this season',
+        ),
+      ],
       const SizedBox(height: 16),
       const SectionHeader('How often I win each category'),
       Card(
@@ -331,6 +443,138 @@ class MatchupScreen extends ConsumerWidget {
     if (s.w == s.l) return inProgress ? 'Tied right now' : 'Tie';
     final ahead = s.w > s.l;
     return inProgress ? (ahead ? 'Leading' : 'Trailing') : (ahead ? 'Won' : 'Lost');
+  }
+}
+
+/// Me (filled) vs an opponent (outline) on league-relative scales.
+class _RadarCard extends StatelessWidget {
+  final Map<StatCategory, double> me;
+  final Map<StatCategory, double>? opp;
+  final String? oppName;
+  final String caption;
+
+  const _RadarCard({required this.me, required this.opp, this.oppName, required this.caption});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(8, 12, 8, 12),
+        child: Column(
+          children: [
+            Text(caption, style: theme.textTheme.bodySmall),
+            Text('Bold ring = league average · farther out = better', style: theme.textTheme.bodySmall),
+            CategoryRadarChart(standing: me, puntedCategories: const {}, opponent: opp, opponentLabel: oppName ?? 'Opponent'),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Teams ranked by categories won in the period; each row expands into its splits.
+class Standings extends StatelessWidget {
+  final List<TeamPeriod> rows;
+  final List<LeagueMatchup> period;
+  final String? myName;
+
+  const Standings({super.key, required this.rows, required this.period, required this.myName});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    double pct(Score s) => s.w + s.l + s.t == 0 ? 0 : (s.w + s.t / 2) / (s.w + s.l + s.t);
+    final ranked = [...rows]..sort((a, b) {
+        final byWins = b.cats.w.compareTo(a.cats.w);
+        return byWins != 0 ? byWins : pct(b.cats).compareTo(pct(a.cats));
+      });
+    final weeks = {for (final m in period) m.week}.toList()..sort();
+
+    return Column(
+      children: [
+        for (final (i, r) in ranked.indexed) ...[
+          if (i > 0) const Divider(height: 1),
+          Theme(
+            data: theme.copyWith(dividerColor: Colors.transparent),
+            child: ExpansionTile(
+              backgroundColor: r.name == myName ? theme.colorScheme.primaryContainer : null,
+              collapsedBackgroundColor: r.name == myName ? theme.colorScheme.primaryContainer : null,
+              leading: SizedBox(
+                width: 28,
+                child: Text('${ranked.indexWhere((x) => x.cats.w == r.cats.w) + 1}',
+                    style: theme.textTheme.titleMedium, textAlign: TextAlign.center),
+              ),
+              title: Text(r.name == myName ? '${r.name} (you)' : r.name,
+                  overflow: TextOverflow.ellipsis, style: theme.textTheme.titleSmall),
+              subtitle: Text('Matchups ${r.record.w}-${r.record.l}-${r.record.t}'),
+              trailing: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text('${r.cats.w}-${r.cats.l}-${r.cats.t}', style: theme.textTheme.titleSmall),
+                  Text('${(pct(r.cats) * 100).round()}%', style: theme.textTheme.bodySmall),
+                ],
+              ),
+              childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+              expandedCrossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Categories won', style: theme.textTheme.labelMedium),
+                const SizedBox(height: 6),
+                Wrap(
+                  spacing: 6,
+                  runSpacing: 6,
+                  children: [
+                    for (final c in allStatCategories)
+                      _SplitChip(label: c.label, value: '${r.catWins[c]}/${r.record.w + r.record.l + r.record.t}'),
+                  ],
+                ),
+                if (weeks.length > 1) ...[
+                  const SizedBox(height: 10),
+                  Text('By week', style: theme.textTheme.labelMedium),
+                  const SizedBox(height: 6),
+                  Wrap(
+                    spacing: 6,
+                    runSpacing: 6,
+                    children: [
+                      for (final w in weeks)
+                        if (period.where((m) => m.week == w).map((m) => sideOf(m, r.name)).nonNulls.firstOrNull
+                            case final side?)
+                          () {
+                            final s = score(side.me, side.opp);
+                            return _SplitChip(label: 'W$w', value: '${s.w}-${s.l}-${s.t}', won: s.w > s.l);
+                          }(),
+                    ],
+                  ),
+                ],
+              ],
+            ),
+          ),
+        ],
+      ],
+    );
+  }
+}
+
+class _SplitChip extends StatelessWidget {
+  final String label;
+  final String value;
+  final bool? won;
+
+  const _SplitChip({required this.label, required this.value, this.won});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final color = won == null ? null : (won! ? context.stat.win : context.stat.loss);
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      decoration: BoxDecoration(color: theme.colorScheme.surfaceContainer, borderRadius: BorderRadius.circular(8)),
+      child: Text.rich(TextSpan(children: [
+        TextSpan(text: '$label ', style: theme.textTheme.labelMedium),
+        TextSpan(text: value, style: theme.textTheme.labelLarge?.copyWith(color: color)),
+      ])),
+    );
   }
 }
 

@@ -166,6 +166,31 @@ void main() {
     expect(first, lessThan(tester.getTopLeft(find.text('Alon Tip-Top')).dy));
   });
 
+  test('leagueZ puts each team on the league scale, with fewer turnovers counting as better', () {
+    final z = leagueZ(week1);
+    expect(z['Ironi shaide']![StatCategory.pts]!, greaterThan(0)); // 542: most points of the four
+    expect(z['The White Answer']![StatCategory.to]!, lessThan(0)); // 90 TO: the most
+    expect(z['henz1k']![StatCategory.to]!, greaterThan(0)); // 67 TO: the fewest
+  });
+
+  testWidgets('standings rank teams by categories won and expand into splits', (tester) async {
+    await tester.pumpWidget(MaterialApp(
+      theme: buildTheme(Brightness.light),
+      home: Scaffold(
+        body: SingleChildScrollView(
+          child: Standings(rows: leagueTable(week1), period: week1, myName: 'Ironi shaide'),
+        ),
+      ),
+    ));
+    // Alon won 6 categories: first. Ironi won 3: last.
+    final alonY = tester.getTopLeft(find.text('Alon Tip-Top')).dy;
+    expect(alonY, lessThan(tester.getTopLeft(find.text('Ironi shaide (you)')).dy));
+    expect(find.text('6-3-0'), findsOneWidget);
+    await tester.tap(find.text('Alon Tip-Top'));
+    await tester.pumpAndSettle();
+    expect(find.text('Categories won'), findsOneWidget);
+  });
+
   testWidgets('radar renders', (tester) async {
     await tester.pumpWidget(MaterialApp(
       theme: buildTheme(Brightness.light),
