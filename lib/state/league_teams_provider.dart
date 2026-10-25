@@ -72,13 +72,16 @@ class LeagueState {
         'remoteApplied': remoteApplied,
       };
 
-  /// Applies one remote roster: replaces the team with the same name, or fills the first
-  /// empty "Team N" slot. The players leave any other team and the taken list. Null when
-  /// there's no slot left for a new name.
+  /// Applies one remote roster: replaces the team with the same name, or takes over a
+  /// "Team N" slot. The players leave any other team and the taken list. Null when every
+  /// team already has a real name.
   LeagueState? withRemoteTeam(RemoteTeam r) {
     final key = normalizeName(r.name);
+    // Same name, else an unnamed "Team N" slot (an empty one first, so hand-entered rosters survive).
+    final unnamed = teams.where((t) => RegExp(r'^Team \d+$').hasMatch(t.name));
     final target = teams.where((t) => normalizeName(t.name) == key).firstOrNull ??
-        teams.where((t) => t.playerIds.isEmpty && RegExp(r'^Team \d+$').hasMatch(t.name)).firstOrNull;
+        unnamed.where((t) => t.playerIds.isEmpty).firstOrNull ??
+        unnamed.firstOrNull;
     if (target == null) return null;
     final ids = r.playerIds.toSet();
     return copyWith(
