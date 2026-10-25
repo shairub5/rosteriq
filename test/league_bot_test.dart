@@ -25,18 +25,48 @@ void main() {
     expect(normalizeName('Jimmy Butler III'), 'jimmy butler');
   });
 
-  test('groupRosterMessages joins an album, takes the caption from any photo, ignores other chats', () {
-    final g = groupRosterMessages([
+  test('groupPhotoMessages joins an album, takes the caption from any photo, ignores other chats', () {
+    final g = groupPhotoMessages([
       _photo(1, '42', group: 'a', caption: 'ForKobe', file: 'p1'),
       _photo(2, '42', group: 'a', file: 'p2'),
       _photo(3, '99', caption: 'Intruders', file: 'x'),
-      _photo(4, '42', file: 'lonely'),
+      _photo(4, '42', file: 'matchup'),
     ], '42');
-    expect(g.requests, hasLength(1));
-    expect(g.requests.single.teamName, 'ForKobe');
-    expect(g.requests.single.fileIds, ['p1', 'p2']);
-    expect(g.uncaptioned, 1);
+    expect(g.groups.map((x) => x.caption), ['ForKobe', null]);
+    expect(g.groups.map((x) => x.fileIds), [
+      ['p1', 'p2'],
+      ['matchup'],
+    ]);
     expect(g.lastUpdateId, 4);
+  });
+
+  test('upsertMatchup replaces the same week\'s matchup of either team, keeps other weeks', () {
+    final now = DateTime.utc(2026);
+    Map<String, dynamic> m(int week, String a, String b) => matchupEntry([
+          (name: a, stats: {for (final k in statKeys) k: 1}),
+          (name: b, stats: {for (final k in statKeys) k: 1}),
+        ], week, now);
+    var all = upsertMatchup([], m(2, 'A', 'B'));
+    all = upsertMatchup(all, m(1, 'A', 'B'));
+    all = upsertMatchup(all, m(1, 'C', 'D'));
+    all = upsertMatchup(all, m(1, 'b', 'A')); // mid-week update of A vs B
+    expect(all.map((x) => x['week']), [1, 1, 2]);
+    expect(all.where((x) => x['week'] == 1), hasLength(2));
+  });
+
+  test('inferMyName picks the one side that isn\'t a known league team', () {
+    final s = {for (final k in statKeys) k: 1};
+    expect(inferMyName([(name: 'Ironi shaide', stats: s), (name: 'Alon Tip-Top', stats: s)], ['Alon Tip-Top', 'ForKobe']),
+        'Ironi shaide');
+    expect(inferMyName([(name: 'ForKobe', stats: s), (name: 'Alon Tip-Top', stats: s)], ['Alon Tip-Top', 'ForKobe']), isNull);
+  });
+
+  test('weekFromCaption and matchupScore', () {
+    expect(weekFromCaption('Week 3'), 3);
+    expect(weekFromCaption(null), isNull);
+    final me = {'fgPct': .484, 'ftPct': .758, 'threePM': 60, 'pts': 542, 'reb': 178, 'ast': 106, 'stl': 27, 'blk': 14, 'to': 70};
+    final opp = {'fgPct': .497, 'ftPct': .773, 'threePM': 50, 'pts': 523, 'reb': 192, 'ast': 134, 'stl': 29, 'blk': 21, 'to': 86};
+    expect(matchupScore(me, opp), (w: 3, l: 6, t: 0));
   });
 
   test('matchRosterNames: exact, then unique initial + surname; ambiguous stays unmatched', () {

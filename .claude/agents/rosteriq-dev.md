@@ -101,6 +101,11 @@ test/         Engine + worker unit tests
   every run (it does, via `syncLeagueFromTelegram`). The app applies a remote
   team only when its `updatedAt` is newer than `remoteApplied[name]`, so hand
   edits on the phone survive until the next remote update of that team.
+- Matchups are league-wide: `league.matchups` = [{week, teams: [{name, stats}, {..}], updatedAt}],
+  stats keyed by `StatCategory.name`. `league.myName` (my Yahoo team name,
+  "Ironi shaide") is inferred from the first matchup whose other side is a
+  known roster team - roster screenshots never show it. A week's entry for a
+  team is replaced, not appended, so mid-week resends update it.
 - `normalizeName` folds accents (Dončić, Şengün, Porziņģis). Extend
   `_accentFold` in `lib/worker/espn.dart` when a new letter shows up unmatched.
 - Don't force-push the `data` branch by hand (blocked by the permission

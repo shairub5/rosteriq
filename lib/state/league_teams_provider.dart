@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../models/player.dart';
 import '../services/player_repository.dart';
 import '../worker/espn.dart' show normalizeName;
 import 'league_data_provider.dart';
@@ -36,16 +35,14 @@ class LeagueTeam {
 /// in [savedRosterProvider].
 class LeagueState {
   final List<LeagueTeam> teams;
-  final String? opponentId;
   final Set<String> takenIds;
 
   /// Remote team name (normalized) -> updatedAt of the version already applied, so a
   /// remote roster overwrites local edits only when it's newer.
   final Map<String, String> remoteApplied;
 
-  const LeagueState({required this.teams, this.opponentId, this.takenIds = const {}, this.remoteApplied = const {}});
+  const LeagueState({required this.teams, this.takenIds = const {}, this.remoteApplied = const {}});
 
-  LeagueTeam? get opponent => teams.where((t) => t.id == opponentId).firstOrNull;
 
   /// Everyone on another team or marked taken.
   Set<String> get rosteredIds => {for (final t in teams) ...t.playerIds, ...takenIds};
@@ -54,20 +51,17 @@ class LeagueState {
 
   LeagueState copyWith({
     List<LeagueTeam>? teams,
-    String? opponentId,
     Set<String>? takenIds,
     Map<String, String>? remoteApplied,
   }) =>
       LeagueState(
         teams: teams ?? this.teams,
-        opponentId: opponentId ?? this.opponentId,
         takenIds: takenIds ?? this.takenIds,
         remoteApplied: remoteApplied ?? this.remoteApplied,
       );
 
   Map<String, dynamic> toJson() => {
         'teams': teams.map((t) => t.toJson()).toList(),
-        'opponentId': opponentId,
         'takenIds': takenIds.toList(),
         'remoteApplied': remoteApplied,
       };
@@ -132,7 +126,6 @@ class LeagueTeamsNotifier extends AsyncNotifier<LeagueState> {
     final j = jsonDecode(raw) as Map<String, dynamic>;
     return LeagueState(
       teams: (j['teams'] as List).map((t) => LeagueTeam.fromJson(t as Map<String, dynamic>)).toList(),
-      opponentId: j['opponentId'] as String?,
       takenIds: (j['takenIds'] as List).cast<String>().toSet(),
       remoteApplied: ((j['remoteApplied'] as Map?) ?? const {}).cast<String, String>(),
     );
@@ -147,7 +140,6 @@ class LeagueTeamsNotifier extends AsyncNotifier<LeagueState> {
         for (var i = 1; i <= _otherTeamsCount; i++)
           LeagueTeam(id: 't$i', name: 'Team $i', playerIds: i == 1 ? oldOpponent ?? const [] : const []),
       ],
-      opponentId: 't1',
     );
   }
 
@@ -162,8 +154,6 @@ class LeagueTeamsNotifier extends AsyncNotifier<LeagueState> {
   Future<void> rename(String teamId, String name) => _save(_s.copyWith(teams: [
         for (final t in _s.teams) t.id == teamId ? t.copyWith(name: name.trim().isEmpty ? t.name : name.trim()) : t,
       ]));
-
-  Future<void> setOpponent(String teamId) => _save(_s.copyWith(opponentId: teamId));
 
   /// Adds [playerId] to [teamId] (moving it off any other team / the taken list), or removes it if already there.
   Future<void> togglePlayer(String teamId, String playerId) {
@@ -186,12 +176,6 @@ class LeagueTeamsNotifier extends AsyncNotifier<LeagueState> {
 }
 
 final leagueTeamsProvider = AsyncNotifierProvider<LeagueTeamsNotifier, LeagueState>(LeagueTeamsNotifier.new);
-
-final opponentRosterPlayersProvider = Provider<List<Player>>((ref) {
-  final ids = ref.watch(leagueTeamsProvider).value?.opponent?.playerIds ?? const [];
-  final byId = ref.watch(playersByIdProvider);
-  return ids.map((id) => byId[id]).whereType<Player>().toList();
-});
 
 /// True once every team (mine + the other 11) has a full roster, so free agents no longer need guessing.
 final leagueCompleteProvider = Provider<bool>((ref) {

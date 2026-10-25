@@ -109,39 +109,71 @@ void main() {
     });
   });
 
-  test('categoryOutcome treats near-equal standings as a tie', () {
-    expect(categoryOutcome(1.0, 0.5), CategoryOutcome.win);
-    expect(categoryOutcome(0.5, 1.0), CategoryOutcome.loss);
-    expect(categoryOutcome(1.0, 1.05), CategoryOutcome.tie);
+  // Week 1 numbers from the user's Yahoo screenshots (FG% FT% 3PM PTS REB AST STL BLK TO).
+  TeamWeek team(String name, List<double> v) =>
+      (name: name, stats: {for (var i = 0; i < 9; i++) allStatCategories[i]: v[i]});
+  final ironi = team('Ironi shaide', [.484, .758, 60, 542, 178, 106, 27, 14, 70]);
+  final alon = team('Alon Tip-Top', [.497, .773, 50, 523, 192, 134, 29, 21, 86]);
+  final henz = team('henz1k', [.452, .785, 48, 480, 166, 117, 25, 25, 67]);
+  final white = team('The White Answer', [.454, .800, 63, 527, 157, 97, 35, 22, 90]);
+  final week1 = [
+    (week: 1, a: ironi, b: alon, updatedAt: DateTime.utc(2026)),
+    (week: 1, a: henz, b: white, updatedAt: DateTime.utc(2026)),
+  ];
+
+  test('score matches Yahoo, with fewer turnovers winning TO', () {
+    expect(score(ironi, alon), (w: 3, l: 6, t: 0));
+    expect(score(henz, white), (w: 4, l: 5, t: 0));
+    expect(categoryOutcome(StatCategory.to, 70, 86), CategoryOutcome.win);
+    expect(categoryOutcome(StatCategory.pts, 500, 500), CategoryOutcome.tie);
   });
 
-  testWidgets('radar shows a legend only with an opponent', (tester) async {
-    final standing = {for (final c in allStatCategories) c: 1.0};
-    await tester.pumpWidget(MaterialApp(
-      theme: buildTheme(Brightness.light),
-      home: Scaffold(body: CategoryRadarChart(standing: standing, puntedCategories: const {})),
-    ));
-    expect(find.text('Opponent'), findsNothing);
-
-    await tester.pumpWidget(MaterialApp(
-      theme: buildTheme(Brightness.light),
-      home: Scaffold(body: CategoryRadarChart(standing: standing, puntedCategories: const {}, opponent: standing)),
-    ));
-    expect(find.text('You'), findsOneWidget);
-    expect(find.text('Opponent'), findsOneWidget);
+  test('leagueTable counts records and category wins per team', () {
+    final rows = {for (final r in leagueTable(week1)) r.name: r};
+    expect(rows['Ironi shaide']!.record, (w: 0, l: 1, t: 0));
+    expect(rows['Ironi shaide']!.cats.w, 3);
+    expect(rows['Alon Tip-Top']!.catWins[StatCategory.reb], 1);
+    expect(rows['Alon Tip-Top']!.catWins[StatCategory.to], 0);
+    expect(rows['The White Answer']!.record, (w: 1, l: 0, t: 0));
   });
 
-  testWidgets('matchup table labels results with text, and punts as Punt', (tester) async {
-    final you = {for (final c in allStatCategories) c: 1.0};
-    final opp = {...you, StatCategory.pts: 2.0, StatCategory.reb: 0.0};
+  test('sideOf flips the matchup to my side', () {
+    expect(sideOf(week1.first, 'Alon Tip-Top')!.opp.name, 'Ironi shaide');
+    expect(sideOf(week1.last, 'Ironi shaide'), isNull);
+    expect(formatStat(StatCategory.fgPct, .484), '.484');
+    expect(formatStat(StatCategory.pts, 542), '542');
+  });
+
+  testWidgets('matchup table labels each result with text, not color alone', (tester) async {
     await tester.pumpWidget(MaterialApp(
       theme: buildTheme(Brightness.light),
-      home: Scaffold(body: MatchupTable(you: you, opp: opp, punted: const {StatCategory.ftPct})),
+      home: Scaffold(body: MatchupTable(a: ironi, b: alon, aLabel: 'YOU', bLabel: 'OPP')),
     ));
-    expect(find.text('W'), findsOneWidget); // reb
-    expect(find.text('L'), findsOneWidget); // pts
-    expect(find.text('Punt'), findsOneWidget);
-    expect(find.text('T'), findsNWidgets(6));
+    expect(find.text('W'), findsNWidgets(3));
+    expect(find.text('L'), findsNWidgets(6));
+  });
+
+  testWidgets('league table sorts by a tapped category', (tester) async {
+    await tester.pumpWidget(MaterialApp(
+      theme: buildTheme(Brightness.light),
+      home: Scaffold(body: LeagueTable(rows: leagueTable(week1), myName: 'Ironi shaide')),
+    ));
+    expect(find.text('Ironi shaide (you)'), findsOneWidget);
+    await tester.tap(find.text('3PM'));
+    await tester.pump();
+    // The White Answer (63) and Ironi shaide (60) won 3PM; they now lead the table.
+    final first = tester.getTopLeft(find.text('The White Answer')).dy;
+    expect(first, lessThan(tester.getTopLeft(find.text('Alon Tip-Top')).dy));
+  });
+
+  testWidgets('radar renders', (tester) async {
+    await tester.pumpWidget(MaterialApp(
+      theme: buildTheme(Brightness.light),
+      home: Scaffold(
+        body: CategoryRadarChart(standing: {for (final c in allStatCategories) c: 1.0}, puntedCategories: const {}),
+      ),
+    ));
+    expect(find.byType(CategoryRadarChart), findsOneWidget);
   });
 
   test('likelyRosteredIds takes the top N by preseason rank and ignores unranked players', () {

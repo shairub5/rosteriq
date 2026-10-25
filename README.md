@@ -105,6 +105,14 @@ assistant. Plan: in-season worker + Matchup radar + Add/Drop + Config views.
   replaces that team, a new name takes an unnamed "Team N" slot.
   `dart run bin/set_team.dart <snapshot.json> "<team>" "<player>"...` does the
   same from the command line. All 12 rosters were loaded on 2026-10-25.
+- **Real matchups:** send Yahoo matchup-page screenshots to the bot (no
+  caption; any of the league's matchups). Both teams' weekly category totals
+  are stored per week in `league.matchups`; the week comes from the image, the
+  caption ("Week 2"), or else the latest stored week. The Matchup tab shows
+  my real week (W-L-T, category table, categories still close), the rest of
+  the league, a season view (record, head-to-head filter, how often I win
+  each category) and a sortable league table of category wins per team.
+  `bin/set_matchup.dart` adds one by hand. The old projection view is gone.
 - **Next:** hot-pickup digest, then Yahoo-roster-aware alerts and the real
   opponent once the API is approved.
 - **Data sources:** ESPN only. stats.nba.com / cdn.nba.com return 403 from

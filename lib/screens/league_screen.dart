@@ -8,6 +8,7 @@ import '../state/saved_roster_provider.dart';
 import '../widgets/common.dart';
 import '../widgets/player_picker_sheet.dart';
 import '../widgets/player_row.dart';
+import '../worker/espn.dart' show normalizeName;
 import 'in_season_shell.dart';
 import 'settings_screen.dart';
 
@@ -33,6 +34,9 @@ class LeagueScreen extends ConsumerWidget {
         builder: (league) {
           final filled = league.teams.where((t) => t.playerIds.length >= size).length + (mine.length >= size ? 1 : 0);
           final teamCount = league.teams.length + 1;
+          final myName = leagueData?.myName;
+          final myLast = leagueData?.matchups.where((m) => m.a.name == myName || m.b.name == myName).lastOrNull;
+          final lastOpponent = myLast == null ? null : (myLast.a.name == myName ? myLast.b.name : myLast.a.name);
           return ListView(
             padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
             children: [
@@ -79,7 +83,9 @@ class LeagueScreen extends ConsumerWidget {
                         name: t.name,
                         count: t.playerIds.length,
                         size: size,
-                        badge: t.id == league.opponentId ? 'This week' : null,
+                        badge: lastOpponent != null && normalizeName(lastOpponent) == normalizeName(t.name)
+                            ? 'Latest matchup'
+                            : null,
                         onTap: () => Navigator.of(context).push(
                           MaterialPageRoute(builder: (_) => TeamEditorScreen(teamId: t.id)),
                         ),
@@ -176,7 +182,6 @@ class TeamEditorScreen extends ConsumerWidget {
 
     final notifier = ref.read(leagueTeamsProvider.notifier);
     final players = team.playerIds.map((id) => byId[id]).whereType<Player>().toList();
-    final isOpponent = league.opponentId == teamId;
 
     return Scaffold(
       appBar: AppBar(
@@ -197,15 +202,6 @@ class TeamEditorScreen extends ConsumerWidget {
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 4, 16, 96),
         children: [
-          Card(
-            child: SwitchListTile(
-              value: isOpponent,
-              onChanged: isOpponent ? null : (_) => notifier.setOpponent(teamId),
-              title: const Text('My opponent this week'),
-              subtitle: const Text('Shown on the Matchup tab'),
-            ),
-          ),
-          const SizedBox(height: 16),
           SectionHeader('Roster · ${players.length}'),
           if (players.isEmpty)
             Padding(

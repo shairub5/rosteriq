@@ -5,7 +5,10 @@ import 'package:http/http.dart' as http;
 
 import '../models/league_config.dart';
 import '../models/player.dart';
+import '../models/stat_category.dart';
 import '../worker/espn.dart';
+
+export '../worker/league_bot.dart' show isMyTeamName;
 
 const _snapshotUrl = 'https://raw.githubusercontent.com/shairub5/rosteriq/data/snapshot.json';
 
@@ -22,19 +25,28 @@ class LeagueData {
   /// League rosters published through the snapshot (Telegram bot today, Yahoo later), player ids re-keyed.
   final List<RemoteTeam> remoteTeams;
 
+  /// Every league matchup entered so far with both teams' real weekly totals, sorted by week.
+  final List<LeagueMatchup> matchups;
+
+  /// My Yahoo team name as it appears in matchups (learned by the bot); null until known.
+  final String? myName;
+
   const LeagueData({
     required this.players,
     required this.config,
     this.injuries = const {},
     this.updatedAt,
     this.remoteTeams = const [],
+    this.matchups = const [],
+    this.myName,
   });
 }
 
+typedef TeamWeek = ({String name, Map<StatCategory, double> stats});
+typedef LeagueMatchup = ({int week, TeamWeek a, TeamWeek b, DateTime updatedAt});
+
 typedef RemoteTeam = ({String name, List<String> playerIds, DateTime updatedAt});
 
-/// Team names that mean "my own roster" when they arrive from the bot.
-bool isMyTeamName(String name) => const {'my team', 'me', 'mine', 'my roster'}.contains(normalizeName(name));
 
 
 /// Loads the bundled player pool + league config, then swaps in the live
@@ -141,6 +153,19 @@ LeagueData mergeSnapshot(List<Player> bundled, LeagueRosterConfig config, Map<St
           playerIds: [for (final id in (t['playerIds'] as List).cast<String>()) idByEspnId[id] ?? id],
           updatedAt: DateTime.parse(t['updatedAt'] as String),
         ),
+    ],
+    myName: (snapshot['league'] as Map?)?['myName'] as String?,
+    matchups: [
+      for (final m in ((snapshot['league'] as Map?)?['matchups'] as List? ?? const []).cast<Map<String, dynamic>>())
+        if ((m['teams'] as List?)?.length == 2)
+          () {
+            TeamWeek side(Map t) => (
+                  name: t['name'] as String,
+                  stats: {for (final c in allStatCategories) c: ((t['stats'] as Map)[c.name] as num).toDouble()},
+                );
+            final t = (m['teams'] as List).cast<Map>();
+            return (week: m['week'] as int, a: side(t[0]), b: side(t[1]), updatedAt: DateTime.parse(m['updatedAt'] as String));
+          }(),
     ],
   );
 }
