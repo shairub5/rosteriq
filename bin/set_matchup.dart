@@ -1,6 +1,7 @@
 // Stores one matchup's real weekly totals in a snapshot.json, like a matchup
 // screenshot sent to the Telegram bot. Values in category order:
-// FG% FT% 3PM PTS REB AST STL BLK TO (percentages as decimals).
+// FG% FT% 3PM PTS REB AST STL BLK TO (percentages as decimals), optionally followed by
+// FGM FGA FTM FTA GP REMAINING (for the projected final).
 //
 //   dart run bin/set_matchup.dart <snapshot.json> <week> "<team A>" ".484,.758,60,..." "<team B>" ".497,.773,50,..."
 import 'dart:convert';
@@ -15,8 +16,11 @@ void main(List<String> args) {
   }
   Map<String, num> stats(String csv) {
     final v = csv.split(',').map((s) => num.parse(s.trim())).toList();
-    if (v.length != statKeys.length) throw ArgumentError('need ${statKeys.length} values, got ${v.length}: $csv');
-    return {for (var i = 0; i < v.length; i++) statKeys[i]: v[i]};
+    final keys = [...statKeys, ...extraKeys];
+    if (v.length != statKeys.length && v.length != keys.length) {
+      throw ArgumentError('need ${statKeys.length} or ${keys.length} values, got ${v.length}: $csv');
+    }
+    return {for (var i = 0; i < v.length; i++) keys[i]: v[i]};
   }
 
   final file = File(args[0]);

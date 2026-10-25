@@ -11,6 +11,7 @@ import 'package:rosteriq/services/player_repository.dart';
 import 'package:rosteriq/state/ranking_provider.dart';
 import 'package:rosteriq/theme.dart';
 import 'package:rosteriq/widgets/category_radar_chart.dart';
+import 'package:rosteriq/worker/espn.dart' show InjuryEntry;
 
 Map<String, dynamic> _json(String id, String name, {int gp = 5, int pts = 100}) => {
       'id': id,
@@ -138,8 +139,8 @@ void main() {
   });
 
   // Week 1 numbers from the user's Yahoo screenshots (FG% FT% 3PM PTS REB AST STL BLK TO).
-  TeamWeek team(String name, List<double> v) =>
-      (name: name, stats: {for (var i = 0; i < 9; i++) allStatCategories[i]: v[i]});
+  TeamWeek team(String name, List<double> v, {Map<String, double> extra = const {}}) =>
+      (name: name, stats: {for (var i = 0; i < 9; i++) allStatCategories[i]: v[i]}, extra: extra);
   final ironi = team('Ironi shaide', [.484, .758, 60, 542, 178, 106, 27, 14, 70]);
   final alon = team('Alon Tip-Top', [.497, .773, 50, 523, 192, 134, 29, 21, 86]);
   final henz = team('henz1k', [.452, .785, 48, 480, 166, 117, 25, 25, 67]);
@@ -245,6 +246,22 @@ void main() {
     }
     expect(find.text('542'), findsOneWidget);
     expect(find.text('1st'), findsWidgets);
+  });
+
+  test('projectWeek adds games left x the roster\'s per-game line; percentages from makes/attempts', () {
+    final now = team('Ironi shaide', [.484, .758, 60, 542, 178, 106, 27, 14, 70],
+        extra: {'fgm': 194, 'fga': 401, 'ftm': 94, 'fta': 124, 'gp': 31, 'remaining': 6});
+    // Two healthy players: 20 and 10 PTS per game -> 15 per roster game; an OUT player is ignored.
+    final a = Player.fromJson({..._json('a', 'A', gp: 2, pts: 40), 'fgAttempted': 20, 'fgPct': .5});
+    final b = Player.fromJson({..._json('b', 'B', gp: 2, pts: 20), 'fgAttempted': 20, 'fgPct': .5});
+    final hurt = Player.fromJson({..._json('c', 'C', gp: 2, pts: 200)});
+    final p = projectWeek(now, [a, b, hurt], {
+      'c': InjuryEntry(playerId: 'c', name: 'C', team: 'SAS', position: 'C', status: 'Out', detail: ''),
+    })!;
+    expect(p.stats[StatCategory.pts], 542 + 6 * 15);
+    // FG: (194 + 6 x 5 made) / (401 + 6 x 10 attempted)
+    expect(p.stats[StatCategory.fgPct], closeTo((194 + 30) / (401 + 60), 1e-9));
+    expect(projectWeek(team('X', [.5, .5, 1, 1, 1, 1, 1, 1, 1]), [a], const {}), isNull); // no games left given
   });
 
   testWidgets('radar renders', (tester) async {

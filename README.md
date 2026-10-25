@@ -115,7 +115,10 @@ assistant. Plan: in-season worker + Matchup radar + Add/Drop + Config views.
   week (W-L-T, radar vs the league, category table, categories still close),
   "compare with" any other team that week, and a season view (record,
   head-to-head filter, radar of weekly averages, how often I win each
-  category), plus "My rank in the league" (each category: rank of 12, total).
+  category), plus "My rank in the league" (each category: rank of 12, total),
+  and a Now / Projected final switch for the current week: totals so far +
+  games remaining x each roster's average per-game line (FG%/FT% from
+  projected makes/attempts), with categories that flip marked.
   League: "Category ranks · all teams" (every team's rank of 12 per category, by all-play wins vs the other 11
   teams each team beats per category, with totals; sortable), standings
   ranked by categories won with per-team splits,

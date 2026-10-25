@@ -25,6 +25,10 @@ bool isMyTeamName(String name) => const {'my team', 'me', 'mine', 'my roster'}.c
 /// The 9 categories in the key order the app uses (`StatCategory.name`).
 const statKeys = ['fgPct', 'ftPct', 'threePM', 'pts', 'reb', 'ast', 'stl', 'blk', 'to'];
 
+/// Extra matchup-page numbers used to project the week's final totals: makes/attempts
+/// and games played / remaining (Yahoo's "31/37 Games Played", "6 Remaining"). 0 = not shown.
+const extraKeys = ['fgm', 'fga', 'ftm', 'fta', 'gp', 'remaining'];
+
 /// Groups this chat's updates into photo groups. Photos sent together share a
 /// media_group_id; the caption sits on just one of them. Other chats are
 /// ignored (the bot token is the only thing standing between strangers and the league).
@@ -177,9 +181,9 @@ Future<ScreenshotRead> readScreenshots(String apiKey, List<({List<int> bytes, St
                   'type': 'object',
                   'properties': {
                     'name': {'type': 'string'},
-                    for (final k in statKeys) k: {'type': 'number'},
+                    for (final k in [...statKeys, ...extraKeys]) k: {'type': 'number'},
                   },
-                  'required': ['name', ...statKeys],
+                  'required': ['name', ...statKeys, ...extraKeys],
                   'additionalProperties': false,
                 },
               },
@@ -205,7 +209,9 @@ Future<ScreenshotRead> readScreenshots(String apiKey, List<({List<int> bytes, St
                   'every NBA player including bench and IL slots, each once, exactly as written; teams empty, week 0.\n'
                   'If they show a head-to-head matchup with both teams\' category totals: kind "matchup", give both '
                   'team names exactly as written and each team\'s totals: fgPct and ftPct as decimals (".472" -> 0.472), '
-                  'threePM, pts, reb, ast, stl, blk, to as numbers; week = the matchup week number if shown, else 0; '
+                  'threePM, pts, reb, ast, stl, blk, to as numbers; fgm/fga and ftm/fta from the FGM/A and FTM/A '
+                  'columns; gp = games played and remaining = games remaining this week (e.g. "31/37 Games Played", '
+                  '"6 Remaining"); 0 for anything not shown; week = the matchup week number if shown, else 0; '
                   'players empty.',
             },
           ],
@@ -224,7 +230,7 @@ Future<ScreenshotRead> readScreenshots(String apiKey, List<({List<int> bytes, St
     week: j['week'] as int,
     teams: [
       for (final t in (j['teams'] as List).cast<Map<String, dynamic>>())
-        (name: t['name'] as String, stats: {for (final k in statKeys) k: t[k] as num}),
+        (name: t['name'] as String, stats: {for (final k in [...statKeys, ...extraKeys]) k: t[k] as num}),
     ],
   );
 }

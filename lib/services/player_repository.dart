@@ -10,6 +10,8 @@ import '../worker/espn.dart';
 
 export '../worker/league_bot.dart' show isMyTeamName;
 
+import '../worker/league_bot.dart' show extraKeys;
+
 const _snapshotUrl = 'https://raw.githubusercontent.com/shairub5/rosteriq/data/snapshot.json';
 
 class LeagueData {
@@ -42,7 +44,9 @@ class LeagueData {
   });
 }
 
-typedef TeamWeek = ({String name, Map<StatCategory, double> stats});
+/// One team's week: the 9 category totals, plus `extra` = fgm/fga/ftm/fta/gp/remaining when the
+/// screenshot showed them (used for the projected final).
+typedef TeamWeek = ({String name, Map<StatCategory, double> stats, Map<String, double> extra});
 typedef LeagueMatchup = ({int week, TeamWeek a, TeamWeek b, DateTime updatedAt});
 
 typedef RemoteTeam = ({String name, List<String> playerIds, DateTime updatedAt});
@@ -183,6 +187,10 @@ LeagueData mergeSnapshot(List<Player> bundled, LeagueRosterConfig config, Map<St
             TeamWeek side(Map t) => (
                   name: t['name'] as String,
                   stats: {for (final c in allStatCategories) c: ((t['stats'] as Map)[c.name] as num).toDouble()},
+                  extra: {
+                    for (final k in extraKeys)
+                      if ((t['stats'] as Map)[k] case final num v) k: v.toDouble(),
+                  },
                 );
             final t = (m['teams'] as List).cast<Map>();
             return (week: m['week'] as int, a: side(t[0]), b: side(t[1]), updatedAt: DateTime.parse(m['updatedAt'] as String));

@@ -3,9 +3,13 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../models/player.dart';
 import '../models/stat_category.dart';
 import '../services/player_repository.dart';
 import '../state/league_data_provider.dart';
+import '../state/league_teams_provider.dart';
+import '../state/saved_roster_provider.dart';
+import '../worker/espn.dart' show InjuryEntry, normalizeName;
 import '../theme.dart';
 import '../widgets/category_radar_chart.dart';
 import '../widgets/common.dart';
@@ -161,11 +165,46 @@ int allPlayRank(List<AllPlayRow> rows, String name, StatCategory c) {
 
 String ordinal(int n) => '$n${n % 100 >= 11 && n % 100 <= 13 ? 'th' : const {1: 'st', 2: 'nd', 3: 'rd'}[n % 10] ?? 'th'}';
 
+/// Projected final for the week: totals so far + games remaining x the roster's average
+/// per-game line this season (healthy players with games only). FG%/FT% are recomputed from
+/// projected makes/attempts when the screenshot gave them. Null when there's nothing to project.
+TeamWeek? projectWeek(TeamWeek t, List<Player> roster, Map<String, InjuryEntry> injuries) {
+  final remaining = t.extra['remaining'] ?? 0;
+  final active = roster.where((p) => p.gp > 0 && injuries[p.id]?.status != 'Out').toList();
+  if (remaining <= 0 || active.isEmpty) return null;
+  // shortcut: every remaining game counts as an average roster game; Yahoo's per-player schedule would be more exact.
+  double perGame(num Function(Player p) total) =>
+      active.map((p) => total(p) / p.gp).reduce((a, b) => a + b) / active.length * remaining;
+  double pct(StatCategory c, String made, String att, num Function(Player p) pctOf, num Function(Player p) attOf) {
+    final m = t.extra[made], a = t.extra[att];
+    if (m == null || a == null || a <= 0) return t.stats[c]!;
+    return (m + perGame((p) => pctOf(p) * attOf(p))) / (a + perGame(attOf));
+  }
+
+  return (
+    name: t.name,
+    extra: t.extra,
+    stats: {
+      StatCategory.fgPct: pct(StatCategory.fgPct, 'fgm', 'fga', (p) => p.fgPct, (p) => p.fgAttempted),
+      StatCategory.ftPct: pct(StatCategory.ftPct, 'ftm', 'fta', (p) => p.ftPct, (p) => p.ftAttempted),
+      StatCategory.threePM: t.stats[StatCategory.threePM]! + perGame((p) => p.threePM),
+      StatCategory.pts: t.stats[StatCategory.pts]! + perGame((p) => p.pts),
+      StatCategory.reb: t.stats[StatCategory.reb]! + perGame((p) => p.reb),
+      StatCategory.ast: t.stats[StatCategory.ast]! + perGame((p) => p.ast),
+      StatCategory.stl: t.stats[StatCategory.stl]! + perGame((p) => p.stl),
+      StatCategory.blk: t.stats[StatCategory.blk]! + perGame((p) => p.blk),
+      StatCategory.to: t.stats[StatCategory.to]! + perGame((p) => p.to),
+    },
+  );
+}
+
 /// Week chip selection: a week number, [_season], or null for the latest week.
 const _season = 0;
 final _selectedProvider = StateProvider<int?>((ref) => null);
 final _opponentFilterProvider = StateProvider<String?>((ref) => null);
 final _leagueViewProvider = StateProvider<bool>((ref) => false);
+
+final _projectedProvider = StateProvider<bool>((ref) => false);
 
 /// Team to compare my week against; null = my real opponent.
 final _compareProvider = StateProvider<String?>((ref) => null);
@@ -258,8 +297,38 @@ class MatchupScreen extends ConsumerWidget {
           if (t.name != myName) t.name: t,
     };
     final compareName = ref.watch(_compareProvider);
-    final mine = real == null ? null : (me: real.me, opp: teams[compareName] ?? real.opp);
-    final hypothetical = mine != null && mine.opp.name != real!.opp.name;
+    final now = real == null ? null : (me: real.me, opp: teams[compareName] ?? real.opp);
+    final hypothetical = now != null && now.opp.name != real!.opp.name;
+
+    // Projected final: needs each side's roster (mine from My Team, others from League by name).
+    final leagueData = ref.watch(leagueDataProvider).value;
+    final byId = ref.watch(playersByIdProvider);
+    List<Player> rosterOf(String name) => name == myName
+        ? ref.watch(savedRosterPlayersProvider)
+        : [
+            for (final id in ref
+                    .watch(leagueTeamsProvider)
+                    .value
+                    ?.teams
+                    .where((t) => normalizeName(t.name) == normalizeName(name))
+                    .firstOrNull
+                    ?.playerIds ??
+                const <String>[])
+              ?byId[id],
+          ];
+    final wantProjected = ref.watch(_projectedProvider) && isLatest;
+    final projected = now == null || !wantProjected
+        ? null
+        : (
+            me: projectWeek(now.me, rosterOf(now.me.name), leagueData?.injuries ?? const {}),
+            opp: projectWeek(now.opp, rosterOf(now.opp.name), leagueData?.injuries ?? const {}),
+          );
+    final showProjected = projected != null && (projected.me != null || projected.opp != null);
+    final mine = now == null
+        ? null
+        : showProjected
+            ? (me: projected.me ?? now.me, opp: projected.opp ?? now.opp)
+            : now;
     return [
       if (mine != null) ...[
         DropdownMenu<String>(
@@ -275,14 +344,38 @@ class MatchupScreen extends ConsumerWidget {
               DropdownMenuEntry(value: name, label: name),
           ],
         ),
+        if (isLatest) ...[
+          const SizedBox(height: 12),
+          SegmentedButton<bool>(
+            segments: const [
+              ButtonSegment(value: false, label: Text('Now'), icon: Icon(Icons.schedule)),
+              ButtonSegment(value: true, label: Text('Projected final'), icon: Icon(Icons.trending_up)),
+            ],
+            selected: {wantProjected},
+            onSelectionChanged: (v) => ref.read(_projectedProvider.notifier).state = v.first,
+          ),
+          if (wantProjected && !showProjected)
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Text(
+                'Can\'t project yet: the matchup screenshot needs games remaining, and both rosters need to be in League.',
+                style: theme.textTheme.bodySmall,
+              ),
+            ),
+        ],
         const SizedBox(height: 12),
         () {
           final s = score(mine.me, mine.opp);
+          final nowScore = score(now!.me, now.opp);
+          String games(TeamWeek t) => '${(t.extra['remaining'] ?? 0).round()}';
           return _Scoreboard(
             title: 'Week ${w.week} · You vs ${mine.opp.name}',
-            subtitle: hypothetical
-                ? 'If you had played them · ${s.w > s.l ? 'you\'d win' : s.w < s.l ? 'you\'d lose' : 'a tie'}'
-                : '${_verdict(s, inProgress: isLatest)} · updated ${_ago(w.updatedAt)}',
+            subtitle: showProjected
+                ? 'Projected final · now ${nowScore.w}-${nowScore.l}-${nowScore.t} · games left: '
+                    'you ${games(now.me)}, them ${games(now.opp)}'
+                : hypothetical
+                    ? 'If you had played them · ${s.w > s.l ? 'you\'d win' : s.w < s.l ? 'you\'d lose' : 'a tie'}'
+                    : '${_verdict(s, inProgress: isLatest)} · updated ${_ago(w.updatedAt)}',
             score: s,
           );
         }(),
@@ -303,7 +396,14 @@ class MatchupScreen extends ConsumerWidget {
         Card(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-            child: MatchupTable(a: mine.me, b: mine.opp, aLabel: 'YOU', bLabel: 'OPP'),
+            child: MatchupTable(
+              a: mine.me,
+              b: mine.opp,
+              aLabel: 'YOU',
+              bLabel: 'OPP',
+              aNow: showProjected ? now!.me : null,
+              bNow: showProjected ? now!.opp : null,
+            ),
           ),
         ),
         if (isLatest && !hypothetical)
@@ -749,7 +849,20 @@ class MatchupTable extends StatelessWidget {
   final String aLabel;
   final String bLabel;
 
-  const MatchupTable({super.key, required this.a, required this.b, required this.aLabel, required this.bLabel});
+  /// Current totals when [a]/[b] are projections: shown as "now X" under each value, and a
+  /// category whose result would change is marked.
+  final TeamWeek? aNow;
+  final TeamWeek? bNow;
+
+  const MatchupTable({
+    super.key,
+    required this.a,
+    required this.b,
+    required this.aLabel,
+    required this.bLabel,
+    this.aNow,
+    this.bNow,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -775,15 +888,32 @@ class MatchupTable extends StatelessWidget {
               CategoryOutcome.loss => (Icons.cancel, 'L', context.stat.loss),
               CategoryOutcome.tie => (Icons.remove_circle_outline, 'T', colors.onSurfaceVariant),
             };
+            Widget value(TeamWeek t, TeamWeek? was) => was == null
+                ? Text(formatStat(c, t.stats[c]!), textAlign: TextAlign.end)
+                : Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(formatStat(c, t.stats[c]!), style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600)),
+                      Text('now ${formatStat(c, was.stats[c]!)}',
+                          style: theme.textTheme.labelSmall?.copyWith(color: colors.onSurfaceVariant)),
+                    ],
+                  );
+            final flips = aNow != null &&
+                bNow != null &&
+                categoryOutcome(c, aNow!.stats[c]!, bNow!.stats[c]!) != categoryOutcome(c, a.stats[c]!, b.stats[c]!);
             return row([
               Text(c.label, style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700)),
-              Text(formatStat(c, a.stats[c]!), textAlign: TextAlign.end),
-              Text(formatStat(c, b.stats[c]!), textAlign: TextAlign.end),
+              value(a, aNow),
+              value(b, bNow),
               Row(children: [
                 const SizedBox(width: 16),
                 Icon(icon, size: 18, color: color),
                 const SizedBox(width: 6),
                 Text(label, style: theme.textTheme.labelLarge?.copyWith(color: color)),
+                if (flips) ...[
+                  const SizedBox(width: 4),
+                  Tooltip(message: 'Flips from now', child: Icon(Icons.swap_vert, size: 16, color: context.stat.warn)),
+                ],
               ]),
             ]);
           }(),

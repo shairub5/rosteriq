@@ -114,6 +114,10 @@ test/         Engine + worker unit tests
   Settings; stored in DraftState.puntedCategories. Add/Drop ranks by
   `puntAdjustedZ` (selected cats) or `totalZ` (all 9), hides 0-GP non-injured
   players and, by default, OUT players.
+- Matchup team stats may also carry fgm/fga/ftm/fta/gp/remaining (`extraKeys`,
+  read off the matchup page; 0 or missing = not shown). `projectWeek` needs
+  `remaining` and the team's roster (mine = My Team, others = League team with
+  the same name) and returns null otherwise.
 - `normalizeName` folds accents (Dončić, Şengün, Porziņģis). Extend
   `_accentFold` in `lib/worker/espn.dart` when a new letter shows up unmatched.
 - Don't force-push the `data` branch by hand (blocked by the permission
