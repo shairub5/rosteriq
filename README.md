@@ -92,6 +92,8 @@ assistant. Plan: in-season worker + Matchup radar + Add/Drop + Config views.
   team), W/L/T scoreboard, radar and per-category table. **Add/Drop**: free
   agents ranked for your weak categories or overall, games this week, injury
   badges, add/drop with undo, and "already rostered" to hide a player.
+  Add/Drop: "My categories" chips (add or remove any category; rankings count
+  only those, bolt = close in this week's matchup), "Hide injured" filter.
   **My Team**: roster with value, category strengths, trade evaluator.
   **League**: the other 11 teams' rosters, entered by hand until Yahoo sync.
   Settings holds punts, playoff window and data status. Player data comes

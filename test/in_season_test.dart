@@ -65,6 +65,34 @@ void main() {
       expect(data.updatedAt, DateTime.utc(2026, 10, 25, 10));
     });
 
+    test('injury-only players map to one player: rostered, badged, never a phantom free agent', () async {
+      final config = (await loadLeagueData(client: MockClient((_) async => http.Response('', 500)))).config;
+      final injury = {'team': 'GS', 'position': 'F', 'status': 'Out', 'detail': 'Knee'};
+      final data = mergeSnapshot(
+        [Player.fromJson({..._json('jimmy-butler-iii', 'Jimmy Butler III', gp: 60), 'team': 'GSW'})],
+        config,
+        {
+          'updatedAt': '2026-10-25T10:00:00Z',
+          'players': [_json('1', 'Some Player')],
+          'injuries': [
+            {...injury, 'playerId': '6430', 'name': 'Jimmy Butler'},
+            {...injury, 'playerId': '777', 'name': 'Rookie Hurt'},
+          ],
+          'league': {
+            'teams': [
+              {'name': 'Alon Tip-Top', 'playerIds': ['6430', '777'], 'updatedAt': '2026-10-25T10:00:00Z'},
+            ],
+          },
+        },
+      );
+      final ids = data.players.map((p) => p.id).toList();
+      expect(data.remoteTeams.single.playerIds, ['jimmy-butler-iii', '777']);
+      expect(ids.where((id) => id == 'jimmy-butler-iii'), hasLength(1)); // one zero-stat copy, no ESPN twin
+      expect(data.injuries['jimmy-butler-iii']!.status, 'Out');
+      final rookie = data.players.firstWhere((p) => p.id == '777');
+      expect((rookie.name, rookie.team, rookie.gp), ('Rookie Hurt', 'GSW', 0));
+    });
+
     test('falls back to initial + surname for OCR-garbled names, only when unambiguous', () async {
       final config = (await loadLeagueData(client: MockClient((_) async => http.Response('', 500)))).config;
       final data = mergeSnapshot(

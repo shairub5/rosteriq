@@ -55,7 +55,7 @@ class SettingsScreen extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: 16),
-          SectionHeader('Punted categories · ${punted.length}/2'),
+          SectionHeader('My categories · ${9 - punted.length} of 9'),
           Card(
             child: Padding(
               padding: const EdgeInsets.all(16),
@@ -63,7 +63,8 @@ class SettingsScreen extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Categories you\'re deliberately giving up. They\'re left out of matchup W/L and player value.',
+                    'The categories you play for. Player values and Add/Drop rankings count only these; '
+                    'unselected ones are punted. Same setting as the chips on Add/Drop.',
                     style: theme.textTheme.bodySmall?.copyWith(height: 1.4),
                   ),
                   const SizedBox(height: 12),
@@ -74,12 +75,10 @@ class SettingsScreen extends ConsumerWidget {
                       for (final c in allStatCategories)
                         FilterChip(
                           label: Text(c.label),
-                          selected: punted.contains(c),
-                          onSelected: !punted.contains(c) && punted.length >= 2
-                              ? null
-                              : (on) => ref.read(draftStateProvider.notifier).setPuntedCategories(
-                                    on ? {...punted, c} : ({...punted}..remove(c)),
-                                  ),
+                          selected: !punted.contains(c),
+                          onSelected: (on) => ref.read(draftStateProvider.notifier).setPuntedCategories(
+                                on ? ({...punted}..remove(c)) : {...punted, c},
+                              ),
                         ),
                     ],
                   ),

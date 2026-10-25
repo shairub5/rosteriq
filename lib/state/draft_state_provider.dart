@@ -20,8 +20,8 @@ class DraftStateNotifier extends StateNotifier<DraftState> {
   }
 
   Future<void> setPuntedCategories(Set<StatCategory> categories) async {
-    // At most 2 punted categories, per the league's punt-strategy design.
-    state = state.withPuntedCategories(categories.take(2).toSet());
+    // Any number: the user picks which categories they're playing for (Add/Drop, Settings).
+    state = state.withPuntedCategories(categories.toSet());
     await _persistence.save(state);
   }
 }

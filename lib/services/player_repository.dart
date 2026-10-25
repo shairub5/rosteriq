@@ -120,26 +120,47 @@ LeagueData mergeSnapshot(List<Player> bundled, LeagueRosterConfig config, Map<St
       }(),
   ];
 
+  // Injured players with no games yet are only in the injury report (ESPN id). Map them to the bundled
+  // player by name too, or add them, so rosters and injury badges point at one player, not two copies.
+  final snapIds = {for (final j in snapPlayers) j['id'] as String};
+  // Bundled players that got live stats; everyone else (incl. injury-only matches below) keeps a zero-stat copy.
+  final statsMatched = idByEspnId.values.toSet();
+  final zero = const ['gp', 'fgPct', 'fgAttempted', 'ftPct', 'ftAttempted', 'threePM', 'pts', 'reb', 'ast', 'stl', 'blk', 'to'];
+  final injuryEntries = [
+    for (final j in (snapshot['injuries'] as List).cast<Map<String, dynamic>>()) InjuryEntry.fromJson(j),
+  ];
+  for (final i in injuryEntries) {
+    if (snapIds.contains(i.playerId) || idByEspnId.containsKey(i.playerId)) continue;
+    final team = _espnTeams[i.team] ?? i.team;
+    final loose = looseBundled[_looseKey(i.name, team)];
+    final match = bundledByName[normalizeName(i.name)] ?? (loose?.length == 1 ? loose!.single : null);
+    if (match != null) {
+      idByEspnId[i.playerId] = match.id;
+    } else {
+      players.add(Player.fromJson({
+        'id': i.playerId,
+        'name': i.name,
+        'team': team,
+        'eligiblePositions': espnPositions(i.position),
+        for (final k in zero) k: 0,
+      }));
+    }
+  }
+
   // shortcut: the snapshot only has players with stats this season, so anyone outside it (often injured, 0 GP) is
   // kept with zero season-to-date stats instead of vanishing from saved rosters; widen the worker's fetch if that hides real production.
-  final matched = idByEspnId.values.toSet();
   players.addAll([
     for (final p in bundled)
-      if (!matched.contains(p.id))
+      if (!statsMatched.contains(p.id))
         Player.fromJson({
           ...p.toJson(),
-          for (final k in const ['gp', 'fgPct', 'fgAttempted', 'ftPct', 'ftAttempted', 'threePM', 'pts', 'reb', 'ast', 'stl', 'blk', 'to'])
-            k: 0,
+          for (final k in zero) k: 0,
           'nbaId': p.nbaId,
           'careerGpHistory': p.careerGpHistory,
         }),
   ]);
 
-  final injuries = <String, InjuryEntry>{};
-  for (final j in (snapshot['injuries'] as List).cast<Map<String, dynamic>>()) {
-    final entry = InjuryEntry.fromJson(j);
-    injuries[idByEspnId[entry.playerId] ?? entry.playerId] = entry;
-  }
+  final injuries = {for (final i in injuryEntries) idByEspnId[i.playerId] ?? i.playerId: i};
 
   return LeagueData(
     players: players,

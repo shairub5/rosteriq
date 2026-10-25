@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../engine/ranking_engine.dart';
 import '../models/player.dart';
+import '../models/ranking_result.dart';
 import '../models/stat_category.dart';
 import '../state/draft_state_provider.dart';
 import '../state/league_data_provider.dart';
@@ -15,10 +15,13 @@ import '../widgets/common.dart';
 import '../widgets/player_avatar.dart';
 import '../widgets/player_row.dart';
 import 'in_season_shell.dart';
+import 'matchup_screen.dart' show isClose, sideOf;
 import 'my_team_screen.dart';
 import 'settings_screen.dart';
 
-final _sortByNeedProvider = StateProvider<bool>((ref) => true);
+/// true: rank by my selected categories only; false: by all 9.
+final _myCatsProvider = StateProvider<bool>((ref) => true);
+final _hideInjuredProvider = StateProvider<bool>((ref) => true);
 
 /// Free agents ranked for my team, with add/drop and "already rostered" actions.
 class WaiverWireScreen extends ConsumerWidget {
@@ -37,7 +40,7 @@ class WaiverWireScreen extends ConsumerWidget {
             return EmptyState(
               icon: Icons.person_add_alt_outlined,
               title: 'Add your team first',
-              body: 'Pickups are ranked by how much they help your weakest categories.',
+              body: 'Pickups are ranked by how much they help the categories you play for.',
               action: FilledButton.icon(
                 onPressed: () => addPlayersToMyTeam(context, ref),
                 icon: const Icon(Icons.person_add_alt_1),
@@ -46,17 +49,34 @@ class WaiverWireScreen extends ConsumerWidget {
             );
           }
 
-          final byNeed = ref.watch(_sortByNeedProvider);
+          final byMyCats = ref.watch(_myCatsProvider);
+          final hideInjured = ref.watch(_hideInjuredProvider);
           final punted = ref.watch(draftStateProvider).puntedCategories;
           final playersById = ref.watch(playersByIdProvider);
           final schedule = ref.watch(scheduleProvider).value;
           final complete = ref.watch(leagueCompleteProvider);
           final today = DateTime.now();
-          final standing = computeTeamStanding(myRoster: mine, fullPoolForBaseline: leagueData.players);
-          final weak = allStatCategories.where((c) => !punted.contains(c) && (standing[c] ?? 0) < 0).toList()
-            ..sort((a, b) => (standing[a] ?? 0).compareTo(standing[b] ?? 0));
-          final candidates = [...ref.watch(rankingsProvider)]
-            ..sort((a, b) => byNeed ? b.needImpact.compareTo(a.needImpact) : b.puntAdjustedZ.compareTo(a.puntAdjustedZ));
+          // Categories that are close in my current real matchup: the ones a pickup can flip this week.
+          final current = leagueData.matchups.isEmpty ? null : leagueData.matchups.last.week;
+          final live = leagueData.matchups
+              .where((m) => m.week == current)
+              .map((m) => sideOf(m, leagueData.myName))
+              .nonNulls
+              .firstOrNull;
+          final close = {
+            if (live != null)
+              for (final c in allStatCategories)
+                if (isClose(c, live.me.stats[c]!, live.opp.stats[c]!)) c,
+          };
+          double value(RankingResult r) => byMyCats ? r.puntAdjustedZ : r.totalZ;
+          final candidates = [
+            for (final r in ref.watch(rankingsProvider))
+              if (playersById[r.playerId] case final p?)
+                // 0 games and not injured = unsigned or inactive; injured hidden unless asked for.
+                if ((p.gp > 0 || leagueData.injuries.containsKey(p.id)) &&
+                    !(hideInjured && leagueData.injuries[p.id]?.status == 'Out'))
+                  r,
+          ]..sort((a, b) => value(b).compareTo(value(a)));
 
           return RefreshIndicator(
             onRefresh: () => ref.refresh(leagueDataProvider.future),
@@ -70,30 +90,56 @@ class WaiverWireScreen extends ConsumerWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        if (weak.isNotEmpty)
-                          Card(
-                            child: Padding(
-                              padding: const EdgeInsets.all(16),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('Your weak spots', style: theme.textTheme.titleSmall),
-                                  const SizedBox(height: 8),
-                                  Wrap(
-                                    spacing: 6,
-                                    runSpacing: 6,
-                                    children: [
-                                      for (final c in weak.take(4))
-                                        Chip(
-                                          avatar: Icon(Icons.trending_down, size: 16, color: context.stat.loss),
-                                          label: Text('${c.label} ${(standing[c] ?? 0).toStringAsFixed(1)}'),
-                                        ),
+                        Card(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('My categories', style: theme.textTheme.titleSmall),
+                                Text.rich(
+                                  TextSpan(children: [
+                                    const TextSpan(text: 'Tap to add or remove. Rankings count only the selected ones.'),
+                                    if (close.isNotEmpty) ...[
+                                      const TextSpan(text: ' '),
+                                      WidgetSpan(
+                                        alignment: PlaceholderAlignment.middle,
+                                        child: Icon(Icons.bolt, size: 16, color: context.stat.warn),
+                                      ),
+                                      const TextSpan(text: ' = close in this week\'s matchup.'),
                                     ],
-                                  ),
-                                ],
-                              ),
+                                  ]),
+                                  style: theme.textTheme.bodySmall,
+                                ),
+                                const SizedBox(height: 10),
+                                Wrap(
+                                  spacing: 6,
+                                  runSpacing: 6,
+                                  children: [
+                                    for (final c in allStatCategories)
+                                      FilterChip(
+                                        label: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            if (close.contains(c)) ...[
+                                              Icon(Icons.bolt, size: 16, color: context.stat.warn),
+                                              const SizedBox(width: 2),
+                                            ],
+                                            Text(c.label),
+                                          ],
+                                        ),
+                                        tooltip: close.contains(c) ? '${c.label} is close in this week\'s matchup' : null,
+                                        selected: !punted.contains(c),
+                                        onSelected: (on) => ref.read(draftStateProvider.notifier).setPuntedCategories(
+                                              on ? ({...punted}..remove(c)) : {...punted, c},
+                                            ),
+                                      ),
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
+                        ),
                         if (!complete) ...[
                           const SizedBox(height: 8),
                           Material(
@@ -124,16 +170,25 @@ class WaiverWireScreen extends ConsumerWidget {
                         const SizedBox(height: 12),
                         SegmentedButton<bool>(
                           segments: const [
-                            ButtonSegment(value: true, label: Text('Best for my team'), icon: Icon(Icons.track_changes)),
-                            ButtonSegment(value: false, label: Text('Best overall'), icon: Icon(Icons.leaderboard)),
+                            ButtonSegment(value: true, label: Text('My categories'), icon: Icon(Icons.track_changes)),
+                            ButtonSegment(value: false, label: Text('All 9'), icon: Icon(Icons.leaderboard)),
                           ],
-                          selected: {byNeed},
-                          onSelectionChanged: (s) => ref.read(_sortByNeedProvider.notifier).state = s.first,
+                          selected: {byMyCats},
+                          onSelectionChanged: (s) => ref.read(_myCatsProvider.notifier).state = s.first,
                         ),
-                        const SizedBox(height: 8),
+                        const SizedBox(height: 4),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: FilterChip(
+                            label: const Text('Hide injured (OUT)'),
+                            selected: hideInjured,
+                            onSelected: (v) => ref.read(_hideInjuredProvider.notifier).state = v,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
                         SectionHeader(
                           '${candidates.length} free agents',
-                          trailing: Text(byNeed ? 'NEED FIT' : 'VALUE', style: theme.textTheme.labelSmall),
+                          trailing: Text('VALUE', style: theme.textTheme.labelSmall),
                         ),
                       ],
                     ),
@@ -144,11 +199,13 @@ class WaiverWireScreen extends ConsumerWidget {
                 final player = playersById[r.playerId];
                 if (player == null) return const SizedBox.shrink();
                 final games = schedule?.teams[player.team]?.gamesThisWeek(today);
-                final helps = allStatCategories
-                    .where((c) => (r.perCategoryZ[c] ?? 0) > 0.2 && (standing[c] ?? 0) < 0 && !punted.contains(c))
-                    .toList()
-                  ..sort((a, b) => (r.perCategoryZ[b] ?? 0).compareTo(r.perCategoryZ[a] ?? 0));
-                final score = byNeed ? r.needImpact : r.puntAdjustedZ;
+                // Strongest selected categories for this player, close-this-week ones first.
+                final helps = allStatCategories.where((c) => (r.perCategoryZ[c] ?? 0) > 0.2 && !punted.contains(c)).toList()
+                  ..sort((a, b) {
+                    final byClose = (close.contains(b) ? 1 : 0).compareTo(close.contains(a) ? 1 : 0);
+                    return byClose != 0 ? byClose : (r.perCategoryZ[b] ?? 0).compareTo(r.perCategoryZ[a] ?? 0);
+                  });
+                final score = value(r);
 
                 return PlayerRow(
                   player: player,
@@ -166,8 +223,19 @@ class WaiverWireScreen extends ConsumerWidget {
                                 children: [
                                   Icon(Icons.arrow_upward, size: 14, color: context.stat.win),
                                   const SizedBox(width: 2),
-                                  Text(
-                                    'Helps ${helps.take(3).map((c) => c.label).join(', ')}',
+                                  Text.rich(
+                                    TextSpan(children: [
+                                      const TextSpan(text: 'Helps '),
+                                      for (final (i, c) in helps.take(3).indexed) ...[
+                                        if (i > 0) const TextSpan(text: ', '),
+                                        if (close.contains(c))
+                                          WidgetSpan(
+                                            alignment: PlaceholderAlignment.middle,
+                                            child: Icon(Icons.bolt, size: 14, color: context.stat.warn),
+                                          ),
+                                        TextSpan(text: c.label),
+                                      ],
+                                    ]),
                                     style: theme.textTheme.labelMedium?.copyWith(color: context.stat.win),
                                   ),
                                 ],
@@ -177,7 +245,7 @@ class WaiverWireScreen extends ConsumerWidget {
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(score.toStringAsFixed(byNeed ? 2 : 1), style: theme.textTheme.titleMedium?.copyWith(color: context.zColor(score))),
+                      Text(score.toStringAsFixed(1), style: theme.textTheme.titleMedium?.copyWith(color: context.zColor(score))),
                       IconButton(
                         icon: Icon(Icons.add_circle, color: theme.colorScheme.primary),
                         tooltip: 'Add ${player.name}',

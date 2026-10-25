@@ -106,6 +106,14 @@ test/         Engine + worker unit tests
   "Ironi shaide") is inferred from the first matchup whose other side is a
   known roster team - roster screenshots never show it. A week's entry for a
   team is replaced, not appended, so mid-week resends update it.
+- Injured players with 0 GP are only in ESPN's injury report (ESPN id), not
+  the stats list. `mergeSnapshot` maps them to the bundled player by name, or
+  creates them, so a roster id and its injury badge land on one player. Before
+  this, they existed twice and showed up as phantom free agents.
+- Punts = "My categories" (any number, no cap), edited from Add/Drop chips or
+  Settings; stored in DraftState.puntedCategories. Add/Drop ranks by
+  `puntAdjustedZ` (selected cats) or `totalZ` (all 9), hides 0-GP non-injured
+  players and, by default, OUT players.
 - `normalizeName` folds accents (Dončić, Şengün, Porziņģis). Extend
   `_accentFold` in `lib/worker/espn.dart` when a new letter shows up unmatched.
 - Don't force-push the `data` branch by hand (blocked by the permission
