@@ -96,6 +96,15 @@ test/         Engine + worker unit tests
   Terance Mann vs Tre Mann is why the team is part of the key.
 - ESPN team codes differ from ours (`GS`, `NO`, `NY`, `SA`, `UTAH`, `WSH`).
   `_espnTeams` maps them, or `nba_schedule.json` lookups silently miss.
+- League rosters live in `snapshot.json` under `league` ({telegramOffset,
+  teams: [{name, playerIds, updatedAt}]}); the worker must carry it forward on
+  every run (it does, via `syncLeagueFromTelegram`). The app applies a remote
+  team only when its `updatedAt` is newer than `remoteApplied[name]`, so hand
+  edits on the phone survive until the next remote update of that team.
+- `normalizeName` folds accents (Dončić, Şengün, Porziņģis). Extend
+  `_accentFold` in `lib/worker/espn.dart` when a new letter shows up unmatched.
+- Don't force-push the `data` branch by hand (blocked by the permission
+  classifier); push a normal commit on top - the worker's own force-push is fine.
 - Bundled players missing from the snapshot (usually injured, 0 GP) are kept
   with zeroed stats, and `computePoolStats` skips `gp == 0` so they don't
   drag the z baseline down.

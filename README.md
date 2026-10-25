@@ -97,6 +97,14 @@ assistant. Plan: in-season worker + Matchup radar + Add/Drop + Config views.
   Settings holds punts, playoff window and data status. Player data comes
   from the worker's `snapshot.json`; offline it falls back to preseason
   projections. All draft-night screens were removed (2026-10-25).
+- **League rosters via Telegram:** send roster screenshots to the bot with
+  the team name as the caption ("My Team" = your own roster). On its next
+  run the worker reads them with Claude (`ANTHROPIC_API_KEY` secret), matches
+  the names, stores the team in `snapshot.json` (`league.teams`) and replies
+  with what it matched. The app applies newer rosters on refresh: same name
+  replaces that team, a new name takes an unnamed "Team N" slot.
+  `dart run bin/set_team.dart <snapshot.json> "<team>" "<player>"...` does the
+  same from the command line. All 12 rosters were loaded on 2026-10-25.
 - **Next:** hot-pickup digest, then Yahoo-roster-aware alerts and the real
   opponent once the API is approved.
 - **Data sources:** ESPN only. stats.nba.com / cdn.nba.com return 403 from
