@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'screens/home_screen.dart';
+import 'screens/in_season_shell.dart';
 import 'screens/onboarding_screen.dart';
+import 'theme.dart';
 
 void main() {
   runApp(const ProviderScope(child: RosterIQApp()));
@@ -15,19 +16,16 @@ class RosterIQApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'RosterIQ',
-      theme: ThemeData(colorSchemeSeed: Colors.deepOrange, useMaterial3: true),
-      darkTheme: ThemeData(
-        colorSchemeSeed: Colors.deepOrange,
-        brightness: Brightness.dark,
-        useMaterial3: true,
-      ),
+      debugShowCheckedModeBanner: false,
+      theme: buildTheme(Brightness.light),
+      darkTheme: buildTheme(Brightness.dark),
       home: const _RootGate(),
     );
   }
 }
 
 /// Checks shared_preferences for the onboarding flag before deciding whether
-/// to show [OnboardingScreen] or go straight to [HomeScreen].
+/// to show [OnboardingScreen] or go straight to [InSeasonShell].
 class _RootGate extends StatefulWidget {
   const _RootGate();
 
@@ -59,6 +57,6 @@ class _RootGateState extends State<_RootGate> {
     if (_onboardingDone == false) {
       return OnboardingScreen(onComplete: _completeOnboarding);
     }
-    return const HomeScreen();
+    return const InSeasonShell();
   }
 }

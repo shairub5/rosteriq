@@ -4,519 +4,373 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../engine/ranking_engine.dart';
 import '../models/player.dart';
 import '../models/stat_category.dart';
-import '../widgets/player_avatar.dart';
+import '../state/draft_state_provider.dart';
 import '../state/league_data_provider.dart';
+import '../state/league_teams_provider.dart';
 import '../state/ranking_provider.dart';
 import '../state/saved_roster_provider.dart';
 import '../state/schedule_provider.dart';
+import '../theme.dart';
+import '../widgets/common.dart';
+import '../widgets/player_avatar.dart';
+import '../widgets/player_row.dart';
+import 'in_season_shell.dart';
+import 'my_team_screen.dart';
 import 'settings_screen.dart';
 
+final _sortByNeedProvider = StateProvider<bool>((ref) => true);
+
+/// Free agents ranked for my team, with add/drop and "already rostered" actions.
 class WaiverWireScreen extends ConsumerWidget {
   const WaiverWireScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final leagueDataAsync = ref.watch(leagueDataProvider);
-
-    return leagueDataAsync.when(
-      loading: () => const Scaffold(body: Center(child: CircularProgressIndicator())),
-      error: (err, _) => Scaffold(body: Center(child: Text('Error: $err'))),
-      data: (leagueData) {
-        final savedPlayers = ref.watch(savedRosterPlayersProvider);
-        final rankings = ref.watch(rankingsProvider);
-        final playersById = ref.watch(playersByIdProvider);
-        final schedule = ref.watch(scheduleProvider).value;
-        final today = DateTime.now();
-
-        if (savedPlayers.isEmpty) {
-          return Scaffold(
-            appBar: AppBar(title: const Text('Waiver Wire')),
-            body: Center(
-              child: Padding(
-                padding: const EdgeInsets.all(32),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.group_add_outlined, size: 64, color: Colors.grey[400]),
-                    const SizedBox(height: 16),
-                    Text(
-                      'No saved team yet',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      'Draft your team, then save it from the Recap tab. '
-                      'Need Impact scores will be personalised to your weaknesses.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.grey[600]),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
-        }
-
-        final standing = computeTeamStanding(
-          myRoster: savedPlayers,
-          fullPoolForBaseline: leagueData.players,
-        );
-
-        final savedIds = savedPlayers.map((p) => p.id).toSet();
-
-        // Waiver candidates: not on my team, sorted by needImpact desc.
-        final candidates = rankings
-            .where((r) => !savedIds.contains(r.playerId))
-            .toList()
-          ..sort((a, b) => b.needImpact.compareTo(a.needImpact));
-
-        // Weak categories (standing < 0), worst first.
-        final weakCats = [...allStatCategories]
-          ..sort((a, b) => (standing[a] ?? 0).compareTo(standing[b] ?? 0));
-        final top3Weak = weakCats
-            .where((c) => (standing[c] ?? 0) < 0)
-            .take(3)
-            .toList();
-
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text('Waiver Wire'),
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.settings_outlined),
-                tooltip: 'Settings',
-                onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => const SettingsScreen()),
-                ),
-              ),
-            ],
-          ),
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (top3Weak.isNotEmpty)
-                _WeaknessHeader(weakCats: top3Weak, standing: standing),
-
-              Padding(
-                padding: const EdgeInsets.fromLTRB(72, 4, 16, 2),
-                child: Row(
-                  children: [
-                    const Expanded(child: SizedBox()),
-                    SizedBox(
-                      width: 40,
-                      child: Text(
-                        'Z',
-                        textAlign: TextAlign.right,
-                        style: TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.grey[600],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 6),
-                    SizedBox(
-                      width: 52,
-                      child: Text(
-                        'Need',
-                        textAlign: TextAlign.right,
-                        style: TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.teal[700],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 52),
-                  ],
-                ),
-              ),
-
-              Expanded(
-                child: candidates.isEmpty
-                    ? const Center(child: Text('No players available.'))
-                    : ListView.builder(
-                        itemCount: candidates.length,
-                        itemBuilder: (context, index) {
-                          final ranking = candidates[index];
-                          final player = playersById[ranking.playerId];
-                          if (player == null) return const SizedBox.shrink();
-
-                          final teamSched = schedule?.teams[player.team];
-                          final gamesThisWeek = teamSched?.gamesThisWeek(today);
-
-                          final helpCats = allStatCategories
-                              .where((c) =>
-                                  (ranking.perCategoryZ[c] ?? 0) > 0.2 &&
-                                  (standing[c] ?? 0) < 0)
-                              .toList()
-                            ..sort((a, b) => (ranking.perCategoryZ[b] ?? 0)
-                                .compareTo(ranking.perCategoryZ[a] ?? 0));
-                          final topHelp = helpCats.take(2).toList();
-
-                          return _WaiverTile(
-                            rank: index + 1,
-                            player: player,
-                            totalZ: ranking.totalZ,
-                            needImpact: ranking.needImpact,
-                            gamesThisWeek: gamesThisWeek,
-                            helpCategories: topHelp,
-                            onAdd: () => _showAddDropSheet(
-                              context,
-                              ref,
-                              addPlayer: player,
-                              myRoster: savedPlayers,
-                            ),
-                          );
-                        },
-                      ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  Future<void> _showAddDropSheet(
-    BuildContext context,
-    WidgetRef ref, {
-    required Player addPlayer,
-    required List<Player> myRoster,
-  }) async {
-    await showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (ctx) => _AddDropSheet(
-        addPlayer: addPlayer,
-        myRoster: myRoster,
-        onConfirm: (dropPlayer) async {
-          Navigator.of(ctx).pop();
-          final notifier = ref.read(savedRosterProvider.notifier);
-          if (dropPlayer != null) {
-            await notifier.removePlayer(dropPlayer.id);
-          }
-          await notifier.addPlayer(addPlayer.id);
-          if (context.mounted) {
-            final msg = dropPlayer != null
-                ? 'Added ${addPlayer.name}, dropped ${dropPlayer.name}'
-                : '${addPlayer.name} added to My Team';
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(msg),
-                action: SnackBarAction(
-                  label: 'Undo',
-                  onPressed: () async {
-                    await notifier.removePlayer(addPlayer.id);
-                    if (dropPlayer != null) {
-                      await notifier.addPlayer(dropPlayer.id);
-                    }
-                  },
-                ),
+    final theme = Theme.of(context);
+    return Scaffold(
+      appBar: AppBar(title: const Text('Add/Drop'), actions: const [SettingsButton()]),
+      body: AsyncBody(
+        value: ref.watch(leagueDataProvider),
+        builder: (leagueData) {
+          final mine = ref.watch(savedRosterPlayersProvider);
+          if (mine.isEmpty) {
+            return EmptyState(
+              icon: Icons.person_add_alt_outlined,
+              title: 'Add your team first',
+              body: 'Pickups are ranked by how much they help your weakest categories.',
+              action: FilledButton.icon(
+                onPressed: () => addPlayersToMyTeam(context, ref),
+                icon: const Icon(Icons.person_add_alt_1),
+                label: const Text('Add my players'),
               ),
             );
           }
+
+          final byNeed = ref.watch(_sortByNeedProvider);
+          final punted = ref.watch(draftStateProvider).puntedCategories;
+          final playersById = ref.watch(playersByIdProvider);
+          final schedule = ref.watch(scheduleProvider).value;
+          final complete = ref.watch(leagueCompleteProvider);
+          final today = DateTime.now();
+          final standing = computeTeamStanding(myRoster: mine, fullPoolForBaseline: leagueData.players);
+          final weak = allStatCategories.where((c) => !punted.contains(c) && (standing[c] ?? 0) < 0).toList()
+            ..sort((a, b) => (standing[a] ?? 0).compareTo(standing[b] ?? 0));
+          final candidates = [...ref.watch(rankingsProvider)]
+            ..sort((a, b) => byNeed ? b.needImpact.compareTo(a.needImpact) : b.puntAdjustedZ.compareTo(a.puntAdjustedZ));
+
+          return RefreshIndicator(
+            onRefresh: () => ref.refresh(leagueDataProvider.future),
+            child: ListView.builder(
+              padding: const EdgeInsets.only(bottom: 24),
+              itemCount: candidates.length + 1,
+              itemBuilder: (context, index) {
+                if (index == 0) {
+                  return Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        if (weak.isNotEmpty)
+                          Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Your weak spots', style: theme.textTheme.titleSmall),
+                                  const SizedBox(height: 8),
+                                  Wrap(
+                                    spacing: 6,
+                                    runSpacing: 6,
+                                    children: [
+                                      for (final c in weak.take(4))
+                                        Chip(
+                                          avatar: Icon(Icons.trending_down, size: 16, color: context.stat.loss),
+                                          label: Text('${c.label} ${(standing[c] ?? 0).toStringAsFixed(1)}'),
+                                        ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        if (!complete) ...[
+                          const SizedBox(height: 8),
+                          Material(
+                            color: context.stat.warnContainer,
+                            borderRadius: BorderRadius.circular(12),
+                            child: InkWell(
+                              borderRadius: BorderRadius.circular(12),
+                              onTap: () => ref.read(shellTabProvider.notifier).state = ShellTab.league,
+                              child: Padding(
+                                padding: const EdgeInsets.all(12),
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.info_outline, color: context.stat.onWarnContainer),
+                                    const SizedBox(width: 10),
+                                    Expanded(
+                                      child: Text(
+                                        'Top preseason players are hidden as "probably rostered" until all league rosters are entered.',
+                                        style: theme.textTheme.bodySmall?.copyWith(color: context.stat.onWarnContainer),
+                                      ),
+                                    ),
+                                    Icon(Icons.chevron_right, color: context.stat.onWarnContainer),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                        const SizedBox(height: 12),
+                        SegmentedButton<bool>(
+                          segments: const [
+                            ButtonSegment(value: true, label: Text('Best for my team'), icon: Icon(Icons.track_changes)),
+                            ButtonSegment(value: false, label: Text('Best overall'), icon: Icon(Icons.leaderboard)),
+                          ],
+                          selected: {byNeed},
+                          onSelectionChanged: (s) => ref.read(_sortByNeedProvider.notifier).state = s.first,
+                        ),
+                        const SizedBox(height: 8),
+                        SectionHeader(
+                          '${candidates.length} free agents',
+                          trailing: Text(byNeed ? 'NEED FIT' : 'VALUE', style: theme.textTheme.labelSmall),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+
+                final r = candidates[index - 1];
+                final player = playersById[r.playerId];
+                if (player == null) return const SizedBox.shrink();
+                final games = schedule?.teams[player.team]?.gamesThisWeek(today);
+                final helps = allStatCategories
+                    .where((c) => (r.perCategoryZ[c] ?? 0) > 0.2 && (standing[c] ?? 0) < 0 && !punted.contains(c))
+                    .toList()
+                  ..sort((a, b) => (r.perCategoryZ[b] ?? 0).compareTo(r.perCategoryZ[a] ?? 0));
+                final score = byNeed ? r.needImpact : r.puntAdjustedZ;
+
+                return PlayerRow(
+                  player: player,
+                  onTap: () => _showAddDropSheet(context, ref, player, mine),
+                  below: (games == null && helps.isEmpty)
+                      ? null
+                      : Wrap(
+                          spacing: 8,
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          children: [
+                            if (games != null) _GamesChip(games: games),
+                            if (helps.isNotEmpty)
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(Icons.arrow_upward, size: 14, color: context.stat.win),
+                                  const SizedBox(width: 2),
+                                  Text(
+                                    'Helps ${helps.take(3).map((c) => c.label).join(', ')}',
+                                    style: theme.textTheme.labelMedium?.copyWith(color: context.stat.win),
+                                  ),
+                                ],
+                              ),
+                          ],
+                        ),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(score.toStringAsFixed(byNeed ? 2 : 1), style: theme.textTheme.titleMedium?.copyWith(color: context.zColor(score))),
+                      IconButton(
+                        icon: Icon(Icons.add_circle, color: theme.colorScheme.primary),
+                        tooltip: 'Add ${player.name}',
+                        onPressed: () => _showAddDropSheet(context, ref, player, mine),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Future<void> _showAddDropSheet(BuildContext context, WidgetRef ref, Player add, List<Player> mine) {
+    return showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      useSafeArea: true,
+      builder: (ctx) => _AddDropSheet(
+        addPlayer: add,
+        myRoster: mine,
+        onConfirm: (drop) async {
+          Navigator.of(ctx).pop();
+          final notifier = ref.read(savedRosterProvider.notifier);
+          if (drop != null) await notifier.removePlayer(drop.id);
+          await notifier.addPlayer(add.id);
+          if (!context.mounted) return;
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(SnackBar(
+              content: Text(drop != null ? 'Added ${add.name}, dropped ${drop.name}' : 'Added ${add.name}'),
+              action: SnackBarAction(
+                label: 'Undo',
+                onPressed: () async {
+                  await notifier.removePlayer(add.id);
+                  if (drop != null) await notifier.addPlayer(drop.id);
+                },
+              ),
+            ));
+        },
+        onRostered: (teamId) async {
+          Navigator.of(ctx).pop();
+          final league = ref.read(leagueTeamsProvider.notifier);
+          teamId == null ? await league.markTaken(add.id) : await league.togglePlayer(teamId, add.id);
+          if (!context.mounted) return;
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(SnackBar(content: Text('${add.name} hidden from free agents')));
         },
       ),
     );
   }
 }
 
-/// Bottom sheet for picking who to drop (or just adding without a drop).
-class _AddDropSheet extends StatefulWidget {
+class _AddDropSheet extends ConsumerStatefulWidget {
   final Player addPlayer;
   final List<Player> myRoster;
-  final void Function(Player? dropPlayer) onConfirm;
+  final void Function(Player? drop) onConfirm;
 
-  const _AddDropSheet({
-    required this.addPlayer,
-    required this.myRoster,
-    required this.onConfirm,
-  });
+  /// Called with a league team id, or null for "taken, team unknown".
+  final void Function(String? teamId) onRostered;
+
+  const _AddDropSheet({required this.addPlayer, required this.myRoster, required this.onConfirm, required this.onRostered});
 
   @override
-  State<_AddDropSheet> createState() => _AddDropSheetState();
+  ConsumerState<_AddDropSheet> createState() => _AddDropSheetState();
 }
 
-class _AddDropSheetState extends State<_AddDropSheet> {
-  Player? _selectedDrop;
+class _AddDropSheetState extends ConsumerState<_AddDropSheet> {
+  Player? _drop;
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final z = ref.watch(leagueZProvider);
+    final add = widget.addPlayer;
+    final roster = [...widget.myRoster]..sort((a, b) => (z[a.id] ?? 0).compareTo(z[b.id] ?? 0));
+
     return DraggableScrollableSheet(
-      initialChildSize: 0.6,
-      minChildSize: 0.4,
-      maxChildSize: 0.9,
       expand: false,
-      builder: (context, scrollController) {
-        return Padding(
-          padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Handle
-              Center(
-                child: Container(
-                  width: 40,
-                  height: 4,
-                  margin: const EdgeInsets.only(bottom: 12),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[400],
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-              ),
-
-              // Header
-              Row(
-                children: [
-                  const Icon(Icons.add_circle, color: Colors.teal, size: 20),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      'Add ${widget.addPlayer.name}',
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+      initialChildSize: 0.75,
+      minChildSize: 0.4,
+      maxChildSize: 0.95,
+      builder: (context, scroll) => Column(
+        children: [
+          Expanded(
+            child: ListView(
+              controller: scroll,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                  child: Row(
+                    children: [
+                      PlayerAvatar(nbaId: add.nbaId, playerName: add.name, radius: 28),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Add ${add.name}', style: theme.textTheme.titleLarge, overflow: TextOverflow.ellipsis),
+                            Text('${add.eligiblePositions.join('/')} · ${add.team}', style: theme.textTheme.bodySmall),
+                          ],
+                        ),
                       ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                    ],
                   ),
-                ],
-              ),
-              Text(
-                '${widget.addPlayer.eligiblePositions.join(",")} · ${widget.addPlayer.team}',
-                style: TextStyle(color: Colors.grey[600], fontSize: 13),
-              ),
-              const SizedBox(height: 16),
-
-              const Text(
-                'Drop a player (optional):',
-                style: TextStyle(fontWeight: FontWeight.w600),
-              ),
-              const SizedBox(height: 4),
-
-              Expanded(
-                child: ListView(
-                  controller: scrollController,
-                  children: [
-                    _DropOption(
-                      label: 'Add only — no drop',
-                      subtitle: null,
-                      selected: _selectedDrop == null,
-                      onTap: () => setState(() => _selectedDrop = null),
-                    ),
-                    const Divider(height: 1),
-                    ...widget.myRoster.map((player) => _DropOption(
-                          label: player.name,
-                          subtitle:
-                              '${player.eligiblePositions.join(",")} · ${player.team}',
-                          selected: _selectedDrop?.id == player.id,
-                          onTap: () => setState(() => _selectedDrop = player),
-                          trailing: const Icon(
-                            Icons.remove_circle_outline,
-                            color: Colors.red,
-                            size: 20,
-                          ),
-                        )),
-                  ],
                 ),
-              ),
-
-              const SizedBox(height: 12),
-              SizedBox(
+                const Padding(padding: EdgeInsets.fromLTRB(16, 8, 16, 0), child: SectionHeader('Drop (weakest first)')),
+                RadioGroup<String?>(
+                  groupValue: _drop?.id,
+                  onChanged: (id) => setState(() => _drop = roster.where((p) => p.id == id).firstOrNull),
+                  child: Column(
+                    children: [
+                      const RadioListTile<String?>(value: null, title: Text('Nobody, I have an open spot')),
+                      for (final p in roster)
+                        RadioListTile<String?>(
+                          value: p.id,
+                          title: Text(p.name),
+                          subtitle: Text('${p.eligiblePositions.join('/')} · ${p.team}'),
+                          secondary: Text(
+                            z[p.id]?.toStringAsFixed(1) ?? '—',
+                            style: theme.textTheme.titleSmall?.copyWith(color: z[p.id] == null ? null : context.zColor(z[p.id]!)),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+                const Divider(height: 24),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Text('Not actually available?', style: theme.textTheme.titleSmall),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(8, 4, 8, 8),
+                  child: Wrap(
+                    spacing: 8,
+                    children: [
+                      TextButton.icon(
+                        onPressed: () => _pickTeam(context),
+                        icon: const Icon(Icons.groups_outlined),
+                        label: const Text('On another team…'),
+                      ),
+                      TextButton.icon(
+                        onPressed: () => widget.onRostered(null),
+                        icon: const Icon(Icons.block),
+                        label: const Text('Taken, team unknown'),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SafeArea(
+            top: false,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
+              child: SizedBox(
                 width: double.infinity,
                 child: FilledButton.icon(
-                  onPressed: () => widget.onConfirm(_selectedDrop),
+                  onPressed: () => widget.onConfirm(_drop),
                   icon: const Icon(Icons.check),
-                  label: Text(
-                    _selectedDrop != null
-                        ? 'Add ${widget.addPlayer.name} / Drop ${_selectedDrop!.name}'
-                        : 'Add ${widget.addPlayer.name}',
-                  ),
+                  label: Text(_drop == null ? 'Add ${add.name}' : 'Add ${add.name}, drop ${_drop!.name}',
+                      overflow: TextOverflow.ellipsis),
                 ),
               ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _WeaknessHeader extends StatelessWidget {
-  final List<StatCategory> weakCats;
-  final Map<StatCategory, double> standing;
-
-  const _WeaknessHeader({required this.weakCats, required this.standing});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.orange.shade50,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-      child: Row(
-        children: [
-          Icon(Icons.trending_down, size: 16, color: Colors.orange[800]),
-          const SizedBox(width: 8),
-          Text(
-            'Weakest: ',
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-              color: Colors.orange[800],
-            ),
-          ),
-          Expanded(
-            child: Wrap(
-              spacing: 6,
-              children: weakCats.map((cat) {
-                final z = standing[cat] ?? 0;
-                return Chip(
-                  label: Text(
-                    '${cat.label} ${z.toStringAsFixed(1)}',
-                    style: const TextStyle(fontSize: 11),
-                  ),
-                  backgroundColor: Colors.orange.shade100,
-                  side: BorderSide.none,
-                  visualDensity: VisualDensity.compact,
-                  padding: EdgeInsets.zero,
-                );
-              }).toList(),
             ),
           ),
         ],
       ),
     );
   }
-}
 
-class _WaiverTile extends StatelessWidget {
-  final int rank;
-  final Player player;
-  final double totalZ;
-  final double needImpact;
-  final int? gamesThisWeek;
-  final List<StatCategory> helpCategories;
-  final VoidCallback onAdd;
-
-  const _WaiverTile({
-    required this.rank,
-    required this.player,
-    required this.totalZ,
-    required this.needImpact,
-    required this.gamesThisWeek,
-    required this.helpCategories,
-    required this.onAdd,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: PlayerAvatar(
-        nbaId: player.nbaId,
-        playerName: player.name,
-        radius: 22,
-      ),
-      title: Text(
-        player.name,
-        style: const TextStyle(fontWeight: FontWeight.w600),
-        overflow: TextOverflow.ellipsis,
-      ),
-      subtitle: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+  Future<void> _pickTeam(BuildContext context) async {
+    final teams = ref.read(leagueTeamsProvider).value?.teams ?? const [];
+    final teamId = await showDialog<String>(
+      context: context,
+      builder: (ctx) => SimpleDialog(
+        title: Text('Who has ${widget.addPlayer.name}?'),
         children: [
-          Row(
-            children: [
-              Text('${player.eligiblePositions.join(",")} · ${player.team}'),
-              if (gamesThisWeek != null) ...[
-                const SizedBox(width: 8),
-                _GamesChip(games: gamesThisWeek!),
-              ],
-            ],
-          ),
-          if (helpCategories.isNotEmpty)
-            Padding(
-              padding: const EdgeInsets.only(top: 2),
-              child: Row(
-                children: [
-                  Icon(Icons.arrow_upward, size: 11, color: Colors.teal[600]),
-                  const SizedBox(width: 2),
-                  Text(
-                    helpCategories.map((c) => c.label).join(', '),
-                    style: TextStyle(fontSize: 11, color: Colors.teal[700]),
-                  ),
-                ],
-              ),
+          for (final t in teams)
+            SimpleDialogOption(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+              onPressed: () => Navigator.pop(ctx, t.id),
+              child: Text(t.name),
             ),
         ],
       ),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SizedBox(
-            width: 40,
-            child: Text(
-              totalZ.toStringAsFixed(2),
-              textAlign: TextAlign.right,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ),
-          const SizedBox(width: 6),
-          SizedBox(
-            width: 52,
-            child: Text(
-              needImpact.toStringAsFixed(2),
-              textAlign: TextAlign.right,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.teal,
-              ),
-            ),
-          ),
-          IconButton(
-            icon: const Icon(Icons.swap_horiz, color: Colors.teal),
-            tooltip: 'Add / Drop',
-            onPressed: onAdd,
-          ),
-        ],
-      ),
     );
-  }
-}
-
-class _DropOption extends StatelessWidget {
-  final String label;
-  final String? subtitle;
-  final bool selected;
-  final VoidCallback onTap;
-  final Widget? trailing;
-
-  const _DropOption({
-    required this.label,
-    required this.subtitle,
-    required this.selected,
-    required this.onTap,
-    this.trailing,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      dense: true,
-      leading: Icon(
-        selected ? Icons.radio_button_checked : Icons.radio_button_off,
-        color: selected ? Theme.of(context).colorScheme.primary : Colors.grey,
-        size: 20,
-      ),
-      title: Text(label),
-      subtitle: subtitle != null
-          ? Text(subtitle!, style: const TextStyle(fontSize: 12))
-          : null,
-      trailing: trailing,
-      onTap: onTap,
-      selected: selected,
-    );
+    if (teamId != null) widget.onRostered(teamId);
   }
 }
 
@@ -527,21 +381,14 @@ class _GamesChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color bg;
-    if (games >= 3) {
-      bg = Colors.green[700]!;
-    } else if (games == 2) {
-      bg = Colors.amber[700]!;
-    } else {
-      bg = Colors.grey[400]!;
-    }
+    final theme = Theme.of(context);
+    final (bg, fg) = games >= 4
+        ? (theme.colorScheme.primaryContainer, theme.colorScheme.onPrimaryContainer)
+        : (theme.colorScheme.surfaceContainerHighest, theme.colorScheme.onSurfaceVariant);
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
-      decoration: BoxDecoration(color: bg, borderRadius: BorderRadius.circular(4)),
-      child: Text(
-        '${games}G',
-        style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white),
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+      decoration: BoxDecoration(color: bg, borderRadius: BorderRadius.circular(6)),
+      child: Text('$games games this week', style: theme.textTheme.labelSmall?.copyWith(color: fg, fontWeight: FontWeight.w700)),
     );
   }
 }

@@ -1,269 +1,212 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../models/stat_category.dart';
+import '../services/schedule_service.dart';
 import '../state/draft_state_provider.dart';
+import '../state/league_data_provider.dart';
 import '../state/schedule_provider.dart';
 import '../state/settings_provider.dart';
+import '../widgets/common.dart';
 
-/// App settings: playoff window dates, ranking weight sliders, and draft reset.
+/// App-bar gear that opens [SettingsScreen]; used on every tab.
+class SettingsButton extends StatelessWidget {
+  const SettingsButton({super.key});
+
+  @override
+  Widget build(BuildContext context) => IconButton(
+        icon: const Icon(Icons.settings_outlined),
+        tooltip: 'Settings',
+        onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const SettingsScreen())),
+      );
+}
+
+/// Live-data status, punted categories, playoff window and ranking weights.
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
     final settings = ref.watch(settingsProvider);
     final notifier = ref.read(settingsProvider.notifier);
     final schedule = ref.watch(scheduleProvider).value;
-
-    // Compute top-3 teams by playoff games for the live preview.
-    final String playoffPreview = _buildPlayoffPreview(settings, schedule);
+    final leagueData = ref.watch(leagueDataProvider);
+    final punted = ref.watch(draftStateProvider).puntedCategories;
+    final playoffPreview = _playoffPreview(settings, schedule);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Settings')),
       body: ListView(
-        padding: const EdgeInsets.symmetric(vertical: 8),
+        padding: const EdgeInsets.fromLTRB(16, 4, 16, 32),
         children: [
-          // ── Fantasy Playoffs ──────────────────────────────────────────────
-          _SectionHeader(title: 'Fantasy Playoffs'),
-          _DateTile(
-            label: 'Playoff Start',
-            value: settings.playoffStart,
-            onChanged: notifier.setPlayoffStart,
+          const SectionHeader('Data'),
+          Card(
+            child: ListTile(
+              leading: const Icon(Icons.sync),
+              title: Text(switch (leagueData) {
+                AsyncData(value: final d) when d.updatedAt != null => 'Live stats updated ${_ago(d.updatedAt!)}',
+                AsyncData() => 'Offline: preseason projections',
+                AsyncError() => 'Couldn\'t load player data',
+                _ => 'Loading…',
+              }),
+              subtitle: const Text('ESPN stats and injuries, refreshed every 30 min. Tap to reload.'),
+              onTap: () => ref.invalidate(leagueDataProvider),
+            ),
           ),
-          _DateTile(
-            label: 'Playoff End',
-            value: settings.playoffEnd,
-            onChanged: notifier.setPlayoffEnd,
-          ),
-          if (playoffPreview.isNotEmpty)
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 4),
-              child: Text(
-                'Teams with most playoff games: $playoffPreview',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.grey[600],
-                  fontStyle: FontStyle.italic,
-                ),
+          const SizedBox(height: 16),
+          SectionHeader('Punted categories · ${punted.length}/2'),
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Categories you\'re deliberately giving up. They\'re left out of matchup W/L and player value.',
+                    style: theme.textTheme.bodySmall?.copyWith(height: 1.4),
+                  ),
+                  const SizedBox(height: 12),
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: [
+                      for (final c in allStatCategories)
+                        FilterChip(
+                          label: Text(c.label),
+                          selected: punted.contains(c),
+                          onSelected: !punted.contains(c) && punted.length >= 2
+                              ? null
+                              : (on) => ref.read(draftStateProvider.notifier).setPuntedCategories(
+                                    on ? {...punted, c} : ({...punted}..remove(c)),
+                                  ),
+                        ),
+                    ],
+                  ),
+                ],
               ),
             ),
-          const Divider(height: 24),
-
-          // ── Ranking Weights ───────────────────────────────────────────────
-          _SectionHeader(title: 'Ranking Weights'),
-          _SliderTile(
-            label: 'Schedule Boost',
-            value: settings.scheduleBoostWeight,
-            subtext:
-                'Boosts players whose teams have more games in your playoff window.',
-            rangeLabel: 'Off → Full',
-            onChanged: notifier.setScheduleBoostWeight,
           ),
-          _SliderTile(
-            label: 'Positional Need',
-            value: settings.positionalNeedWeight,
-            subtext: 'Boosts players who fill your scarcest roster slots.',
-            rangeLabel: 'Off → Full',
-            onChanged: notifier.setPositionalNeedWeight,
+          const SizedBox(height: 16),
+          const SectionHeader('Fantasy playoffs'),
+          Card(
+            clipBehavior: Clip.antiAlias,
+            child: Column(
+              children: [
+                _DateTile(label: 'Start', value: settings.playoffStart, onChanged: notifier.setPlayoffStart),
+                const Divider(indent: 16),
+                _DateTile(label: 'End', value: settings.playoffEnd, onChanged: notifier.setPlayoffEnd),
+                if (playoffPreview.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text('Most playoff games: $playoffPreview', style: theme.textTheme.bodySmall),
+                    ),
+                  ),
+              ],
+            ),
           ),
-          const Divider(height: 24),
-
-          // ── Draft ─────────────────────────────────────────────────────────
-          _SectionHeader(title: 'Draft'),
-          ListTile(
-            leading: const Icon(Icons.restart_alt, color: Colors.red),
-            title: const Text('Reset Draft'),
-            subtitle: const Text('Clears all picks and returns to the home screen.'),
-            onTap: () => _confirmReset(context, ref),
+          const SizedBox(height: 16),
+          const SectionHeader('Add/Drop ranking'),
+          Card(
+            child: Column(
+              children: [
+                _SliderTile(
+                  label: 'Playoff schedule boost',
+                  value: settings.scheduleBoostWeight,
+                  subtext: 'Favors players whose teams play more games in your playoff window.',
+                  onChanged: notifier.setScheduleBoostWeight,
+                ),
+                const Divider(indent: 16),
+                _SliderTile(
+                  label: 'Roster fit',
+                  value: settings.positionalNeedWeight,
+                  subtext: 'Favors players who fill positions your roster is short on.',
+                  onChanged: notifier.setPositionalNeedWeight,
+                ),
+              ],
+            ),
           ),
         ],
       ),
     );
   }
 
-  /// Returns a preview string like "DAL (12), MEM (12), PHX (11)" showing the
-  /// top-3 teams by games in the current playoff window. Returns empty string
-  /// when schedule hasn't loaded.
-  String _buildPlayoffPreview(AppSettings settings, dynamic schedule) {
-    if (schedule == null) return '';
+  /// "DAL (12), MEM (12), PHX (11)": top-3 teams by games in the playoff window.
+  String _playoffPreview(AppSettings settings, NbaSchedule? schedule) {
     final start = DateTime.tryParse(settings.playoffStart);
     final end = DateTime.tryParse(settings.playoffEnd);
-    if (start == null || end == null) return '';
-
-    final entries = <MapEntry<String, int>>[];
-    for (final entry in (schedule.teams as Map).entries) {
-      final games = entry.value.gamesInWindow(start, end) as int;
-      entries.add(MapEntry(entry.key as String, games));
-    }
-    entries.sort((a, b) => b.value.compareTo(a.value));
-
-    final top = entries.take(3).map((e) => '${e.key} (${e.value})').join(', ');
-    return top;
-  }
-
-  Future<void> _confirmReset(BuildContext context, WidgetRef ref) async {
-    final confirmed = await showDialog<bool>(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: const Text('Reset Draft?'),
-        content: const Text(
-          'This will erase all picks. This cannot be undone.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx, false),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () => Navigator.pop(ctx, true),
-            style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text('Reset'),
-          ),
-        ],
-      ),
-    );
-    if (confirmed == true && context.mounted) {
-      await ref.read(draftStateProvider.notifier).resetDraft();
-      if (context.mounted) Navigator.pop(context); // close settings
-    }
+    if (schedule == null || start == null || end == null) return '';
+    final entries = [for (final e in schedule.teams.entries) MapEntry(e.key, e.value.gamesInWindow(start, end))]
+      ..sort((a, b) => b.value.compareTo(a.value));
+    return entries.take(3).map((e) => '${e.key} (${e.value})').join(', ');
   }
 }
 
-// ── Private helper widgets ────────────────────────────────────────────────────
-
-class _SectionHeader extends StatelessWidget {
-  final String title;
-  const _SectionHeader({required this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
-      child: Text(
-        title,
-        style: TextStyle(
-          fontSize: 12,
-          fontWeight: FontWeight.w700,
-          color: Theme.of(context).colorScheme.primary,
-          letterSpacing: 0.8,
-        ),
-      ),
-    );
-  }
-}
-
-/// A list tile that shows an ISO date string and opens a [showDatePicker] on
-/// tap, writing the result back via [onChanged].
 class _DateTile extends StatelessWidget {
   final String label;
-  final String value; // ISO date string e.g. "2027-03-08"
+  final String value; // ISO date, e.g. "2027-03-08"
   final Future<void> Function(String) onChanged;
 
-  const _DateTile({
-    required this.label,
-    required this.value,
-    required this.onChanged,
-  });
+  const _DateTile({required this.label, required this.value, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
     final parsed = DateTime.tryParse(value);
-    final display = parsed != null
-        ? '${parsed.month}/${parsed.day}/${parsed.year}'
-        : value;
-
     return ListTile(
       title: Text(label),
       trailing: Text(
-        display,
-        style: const TextStyle(fontWeight: FontWeight.w600),
+        parsed == null ? value : MaterialLocalizations.of(context).formatMediumDate(parsed),
+        style: Theme.of(context).textTheme.titleSmall,
       ),
       onTap: () async {
-        final now = DateTime.now();
-        final initial = parsed ?? now;
         final picked = await showDatePicker(
           context: context,
-          initialDate: initial,
+          initialDate: parsed ?? DateTime.now(),
           firstDate: DateTime(2024),
           lastDate: DateTime(2030),
         );
-        if (picked != null) {
-          final iso =
-              '${picked.year.toString().padLeft(4, '0')}-'
-              '${picked.month.toString().padLeft(2, '0')}-'
-              '${picked.day.toString().padLeft(2, '0')}';
-          await onChanged(iso);
-        }
+        if (picked != null) await onChanged(picked.toIso8601String().substring(0, 10));
       },
     );
   }
 }
 
-/// A list tile with a [Slider] for a 0.0–1.0 weight value.
 class _SliderTile extends StatelessWidget {
   final String label;
   final double value;
   final String subtext;
-  final String rangeLabel;
   final void Function(double) onChanged;
 
-  const _SliderTile({
-    required this.label,
-    required this.value,
-    required this.subtext,
-    required this.rangeLabel,
-    required this.onChanged,
-  });
+  const _SliderTile({required this.label, required this.value, required this.subtext, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 4, 16, 0),
+      padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Expanded(
-                child: Text(
-                  label,
-                  style: const TextStyle(fontWeight: FontWeight.w500),
-                ),
-              ),
-              Text(
-                value.toStringAsFixed(2),
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ),
+              Expanded(child: Text(label, style: theme.textTheme.titleSmall)),
+              Text('${(value * 100).round()}%', style: theme.textTheme.titleSmall?.copyWith(color: theme.colorScheme.primary)),
             ],
           ),
-          Slider(
-            value: value,
-            min: 0,
-            max: 1,
-            divisions: 20,
-            onChanged: onChanged,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                rangeLabel,
-                style: TextStyle(fontSize: 11, color: Colors.grey[500]),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8),
-            child: Text(
-              subtext,
-              style: TextStyle(fontSize: 12, color: Colors.grey[600]),
-            ),
-          ),
+          Slider(value: value, divisions: 20, label: '${(value * 100).round()}%', onChanged: onChanged),
+          Text(subtext, style: theme.textTheme.bodySmall),
         ],
       ),
     );
   }
+}
+
+String _ago(DateTime t) {
+  final d = DateTime.now().difference(t);
+  if (d.inMinutes < 1) return 'just now';
+  if (d.inHours < 1) return '${d.inMinutes} min ago';
+  if (d.inDays < 1) return '${d.inHours} h ago';
+  return '${d.inDays} d ago';
 }

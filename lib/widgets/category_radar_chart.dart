@@ -6,33 +6,82 @@ import '../models/stat_category.dart';
 
 /// A 9-axis spider / radar chart visualising the user's team standing.
 ///
-/// Center = 0 (league average), outer ring = +3 (excellent), inner ring = -3.
-/// Values are clamped to ±4 so extreme outliers don't distort the shape.
-/// The fill polygon uses a semi-transparent primary colour.
+/// The bold middle ring is league average; farther out is better, closer to the
+/// center is worse, scaled to the largest value shown.
+/// The fill polygon uses a semi-transparent primary colour. An optional
+/// [opponent] is drawn as an unfilled tertiary outline with vertex dots, so
+/// the two teams differ by shape as well as hue, plus a legend.
 ///
 /// Uses a custom [CustomPainter] so there are no extra package dependencies.
 class CategoryRadarChart extends StatelessWidget {
   final Map<StatCategory, double> standing;
   final Set<StatCategory> puntedCategories;
+  final Map<StatCategory, double>? opponent;
 
   const CategoryRadarChart({
     super.key,
     required this.standing,
     required this.puntedCategories,
+    this.opponent,
   });
 
   @override
   Widget build(BuildContext context) {
-    final color = Theme.of(context).colorScheme.primary;
-    return SizedBox(
+    final colors = Theme.of(context).colorScheme;
+    // Explicit width: CustomPaint has no intrinsic size, so loose constraints (e.g. in a Column) would collapse it.
+    final chart = SizedBox(
+      width: double.infinity,
       height: 280,
       child: CustomPaint(
         painter: _RadarPainter(
           standing: standing,
           puntedCategories: puntedCategories,
-          primaryColor: color,
+          opponent: opponent,
+          colors: colors,
         ),
       ),
+    );
+    if (opponent == null) return chart;
+    return Column(
+      children: [
+        chart,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _LegendItem(color: colors.primary, label: 'You', filled: true),
+            const SizedBox(width: 16),
+            _LegendItem(color: colors.tertiary, label: 'Opponent', filled: false),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _LegendItem extends StatelessWidget {
+  final Color color;
+  final String label;
+  final bool filled;
+
+  const _LegendItem({required this.color, required this.label, required this.filled});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: 14,
+          height: 14,
+          decoration: BoxDecoration(
+            color: filled ? color.withValues(alpha: 0.25) : null,
+            border: Border.all(color: color, width: 2),
+            shape: filled ? BoxShape.rectangle : BoxShape.circle,
+          ),
+        ),
+        const SizedBox(width: 6),
+        Text(label),
+      ],
     );
   }
 }
@@ -40,18 +89,14 @@ class CategoryRadarChart extends StatelessWidget {
 class _RadarPainter extends CustomPainter {
   final Map<StatCategory, double> standing;
   final Set<StatCategory> puntedCategories;
-  final Color primaryColor;
-
-  static const double _clampMax = 4.0;
-  // Reference rings at ±1, ±2, ±3 z-score steps.
-  static const List<double> _rings = [1, 2, 3];
-  // Outer edge corresponds to +3 z units on the chart.
-  static const double _outerZ = 3.0;
+  final Map<StatCategory, double>? opponent;
+  final ColorScheme colors;
 
   _RadarPainter({
     required this.standing,
     required this.puntedCategories,
-    required this.primaryColor,
+    required this.opponent,
+    required this.colors,
   });
 
   @override
@@ -72,54 +117,54 @@ class _RadarPainter extends CustomPainter {
       return Offset(cx + radius * fraction * math.cos(angle), cy + radius * fraction * math.sin(angle));
     }
 
-    // Helper: convert a z-score to a radius fraction (0 at center, 1 at outer).
-    // Center = 0z, outer edge = _outerZ.
-    double zToFraction(double z) => (z.clamp(-_clampMax, _clampMax) / _outerZ).clamp(-1.0, 1.0);
+    // Both teams share one scale: the middle ring is league average (0), the outer ring is the
+    // largest |value| shown. Team totals range far wider than one player's z, so no fixed scale fits.
+    final shown = [
+      for (final m in [standing, ?opponent])
+        for (final c in categories)
+          if (!puntedCategories.contains(c)) (m[c] ?? 0).abs(),
+    ];
+    final scale = math.max(1.0, shown.fold(0.0, math.max));
+    double zToFraction(double z) => 0.5 + 0.5 * (z / scale).clamp(-1.0, 1.0);
 
-    // --- Draw reference rings (for ±1, ±2, ±3) ---
-    final ringPaint = Paint()
-      ..color = Colors.grey.shade300
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 0.8;
-
-    for (final ringZ in _rings) {
-      final fraction = ringZ / _outerZ;
+    // --- Reference rings; the bolder middle one is league average ---
+    for (final fraction in const [0.25, 0.5, 0.75, 1.0]) {
       final path = Path();
       for (var i = 0; i < n; i++) {
         final pt = axisPoint(i, fraction);
         i == 0 ? path.moveTo(pt.dx, pt.dy) : path.lineTo(pt.dx, pt.dy);
       }
       path.close();
-      canvas.drawPath(path, ringPaint);
-
-      // Negative ring (inner, dashed-style — drawn with lower opacity).
-      final negPath = Path();
-      for (var i = 0; i < n; i++) {
-        final pt = axisPoint(i, -fraction);
-        i == 0 ? negPath.moveTo(pt.dx, pt.dy) : negPath.lineTo(pt.dx, pt.dy);
-      }
-      negPath.close();
-      canvas.drawPath(negPath, ringPaint..color = Colors.grey.shade200);
+      canvas.drawPath(
+        path,
+        Paint()
+          ..color = fraction == 0.5 ? colors.outline : colors.outlineVariant
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = fraction == 0.5 ? 1.2 : 0.8,
+      );
     }
 
     // --- Draw axes ---
     final axisPaint = Paint()
-      ..color = Colors.grey.shade400
+      ..color = colors.outline
       ..strokeWidth = 0.8;
     for (var i = 0; i < n; i++) {
       final outer = axisPoint(i, 1.0);
       canvas.drawLine(Offset(cx, cy), outer, axisPaint);
     }
 
-    // --- Draw team fill polygon ---
-    final fillPath = Path();
-    final values = categories.map((c) => standing[c] ?? 0).toList();
-    for (var i = 0; i < n; i++) {
-      final fraction = zToFraction(values[i]);
-      final pt = axisPoint(i, fraction);
-      i == 0 ? fillPath.moveTo(pt.dx, pt.dy) : fillPath.lineTo(pt.dx, pt.dy);
+    Path polygon(Map<StatCategory, double> values) {
+      final path = Path();
+      for (var i = 0; i < n; i++) {
+        final pt = axisPoint(i, zToFraction(values[categories[i]] ?? 0));
+        i == 0 ? path.moveTo(pt.dx, pt.dy) : path.lineTo(pt.dx, pt.dy);
+      }
+      return path..close();
     }
-    fillPath.close();
+
+    // --- Draw team fill polygon ---
+    final fillPath = polygon(standing);
+    final primaryColor = colors.primary;
 
     canvas.drawPath(
       fillPath,
@@ -135,6 +180,22 @@ class _RadarPainter extends CustomPainter {
         ..strokeWidth = 2,
     );
 
+    // --- Opponent outline + vertex dots ---
+    final opp = opponent;
+    if (opp != null) {
+      canvas.drawPath(
+        polygon(opp),
+        Paint()
+          ..color = colors.tertiary
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 2,
+      );
+      final dotPaint = Paint()..color = colors.tertiary;
+      for (var i = 0; i < n; i++) {
+        canvas.drawCircle(axisPoint(i, zToFraction(opp[categories[i]] ?? 0)), 4, dotPaint);
+      }
+    }
+
     // --- Axis labels ---
     for (var i = 0; i < n; i++) {
       final cat = categories[i];
@@ -148,7 +209,7 @@ class _RadarPainter extends CustomPainter {
           style: TextStyle(
             fontSize: 11,
             fontWeight: FontWeight.w600,
-            color: isPunted ? Colors.grey.shade400 : Colors.black87,
+            color: isPunted ? colors.outline : colors.onSurface,
             decoration: isPunted ? TextDecoration.lineThrough : null,
           ),
         ),
@@ -162,12 +223,13 @@ class _RadarPainter extends CustomPainter {
     }
 
     // --- Center dot ---
-    canvas.drawCircle(Offset(cx, cy), 3, Paint()..color = Colors.grey.shade400);
+    canvas.drawCircle(Offset(cx, cy), 3, Paint()..color = colors.outline);
   }
 
   @override
   bool shouldRepaint(_RadarPainter old) =>
       old.standing != standing ||
       old.puntedCategories != puntedCategories ||
-      old.primaryColor != primaryColor;
+      old.opponent != opponent ||
+      old.colors != colors;
 }

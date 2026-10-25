@@ -53,6 +53,30 @@ class InjuryEntry {
       };
 }
 
+/// "Jaren Jackson Jr." and "jaren jackson" match, as do "Dončić" and "Doncic"; punctuation and suffixes ignored.
+String normalizeName(String name) => name
+    .toLowerCase()
+    .split('')
+    .map((c) => _accentFold[c] ?? c)
+    .join()
+    .replaceAll(RegExp(r'[^a-z ]'), '')
+    .split(' ')
+    .where((w) => w.isNotEmpty && !const {'jr', 'sr', 'ii', 'iii', 'iv'}.contains(w))
+    .join(' ');
+
+// Letters that appear in NBA names; anything else non a-z is dropped as punctuation.
+const _accentFold = {
+  'á': 'a', 'à': 'a', 'â': 'a', 'ä': 'a', 'ã': 'a', 'å': 'a', 'ā': 'a',
+  'č': 'c', 'ć': 'c', 'ç': 'c', 'đ': 'd',
+  'é': 'e', 'è': 'e', 'ê': 'e', 'ë': 'e', 'ē': 'e', 'ę': 'e',
+  'í': 'i', 'ì': 'i', 'î': 'i', 'ï': 'i', 'ī': 'i',
+  'ł': 'l', 'ñ': 'n', 'ń': 'n', 'ņ': 'n',
+  'ó': 'o', 'ò': 'o', 'ô': 'o', 'ö': 'o', 'õ': 'o', 'ø': 'o', 'ō': 'o',
+  'ř': 'r', 'š': 's', 'ś': 's', 'ş': 's', 'ț': 't', 'ţ': 't',
+  'ú': 'u', 'ù': 'u', 'û': 'u', 'ü': 'u', 'ū': 'u', 'ů': 'u',
+  'ý': 'y', 'ž': 'z', 'ź': 'z', 'ż': 'z',
+};
+
 /// ESPN only gives G / F / C (occasionally G-F); map onto the app's slot positions.
 List<String> espnPositions(String abbr) => [
       if (abbr.contains('G')) ...['PG', 'SG'],

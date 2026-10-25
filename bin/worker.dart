@@ -16,6 +16,7 @@ import 'package:rosteriq/models/player.dart';
 import 'package:rosteriq/models/ranking_result.dart';
 import 'package:rosteriq/worker/alerts.dart';
 import 'package:rosteriq/worker/espn.dart';
+import 'package:rosteriq/worker/league_bot.dart';
 
 // shortcut: league-wide relevance (no Yahoo rosters yet), switch to "my + opponent roster" once the Yahoo API is approved.
 const _relevantTopN = 150;
@@ -60,6 +61,22 @@ Future<void> main(List<String> args) async {
         );
 
   final now = DateTime.now().toUtc();
+  final prevLeague = prevJson?['league'] as Map<String, dynamic>?;
+  final league = dryRun
+      ? prevLeague
+      : await syncLeagueFromTelegram(
+          previous: prevLeague,
+          players: [
+            for (final p in stats.players) (name: p.name, id: p.id),
+            for (final i in injuries.values) (name: i.name, id: i.playerId),
+            // Bundled ids for anyone ESPN lists nowhere (no games, not injured); the app keeps them as-is.
+            for (final p in _bundledPlayers()) (name: p.name, id: p.id),
+          ],
+          token: Platform.environment['TELEGRAM_TOKEN'],
+          chatId: Platform.environment['TELEGRAM_CHAT_ID'],
+          apiKey: Platform.environment['ANTHROPIC_API_KEY'],
+          now: now,
+        );
   final reminder = keepAliveReminder(
     now: now,
     lastCommit: DateTime.tryParse(Platform.environment['LAST_COMMIT_AT'] ?? ''),
@@ -81,6 +98,7 @@ Future<void> main(List<String> args) async {
       for (final p in stats.players) {...p.toJson(), 'minutes': stats.minutes[p.id], 'totalZ': totalZById[p.id]},
     ],
     'alerts': alerts,
+    'league': league,
   }));
   stdout.writeln('${alerts.length} alerts, ${stats.players.length} players, ${injuries.length} injuries -> ${snapshotFile.path}');
 }
@@ -92,23 +110,17 @@ List<RankingResult> _rank(List<Player> pool) => computeRankings(
       slotConfig: LeagueRosterConfig.defaultConfig,
     );
 
+List<Player> _bundledPlayers() => (jsonDecode(File('assets/data/players.json').readAsStringSync()) as List)
+    .map((j) => Player.fromJson(j as Map<String, dynamic>))
+    .toList();
+
 /// ESPN ids of the top [_relevantTopN] players by the bundled preseason projections, matched by name.
 Set<String> _projectedTopIds(List<({String name, String id})> espnPlayers) {
-  final projected = (jsonDecode(File('assets/data/players.json').readAsStringSync()) as List)
-      .map((j) => Player.fromJson(j as Map<String, dynamic>))
-      .toList();
+  final projected = _bundledPlayers();
   final topNames = _rank(projected).take(_relevantTopN).map((r) => projected.firstWhere((p) => p.id == r.playerId).name);
   final espnByName = {for (final p in espnPlayers) normalizeName(p.name): p.id};
   return {for (final n in topNames) ?espnByName[normalizeName(n)]};
 }
-
-/// "Jaren Jackson Jr." and "jaren jackson" match; punctuation and suffixes ignored.
-String normalizeName(String name) => name
-    .toLowerCase()
-    .replaceAll(RegExp(r'[^a-z ]'), '')
-    .split(' ')
-    .where((w) => w.isNotEmpty && !const {'jr', 'sr', 'ii', 'iii', 'iv'}.contains(w))
-    .join(' ');
 
 Future<void> _sendTelegram(List<String> alerts) async {
   final token = Platform.environment['TELEGRAM_TOKEN'];

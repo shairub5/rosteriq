@@ -38,6 +38,7 @@ jobs:
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         # Last commit on main (the bot only pushes to `data`), for the 60-day keep-alive reminder.
         run: LAST_COMMIT_AT=$(git log -1 --format=%cI) dart run bin/worker.dart state/snapshot.json
 

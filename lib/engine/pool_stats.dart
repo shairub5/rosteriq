@@ -117,7 +117,9 @@ PoolStats computePoolStats(List<Player> pool) {
   final avgFg = poolAverageFgPct(pool);
   final avgFt = poolAverageFtPct(pool);
 
+  // Players who haven't played yet (in-season snapshot) would drag the baseline toward zero.
   final rawByPlayer = pool
+      .where((p) => p.gp > 0)
       .map((p) => computeRawCategoryValues(p, poolAvgFgPct: avgFg, poolAvgFtPct: avgFt))
       .toList();
 

@@ -1,14 +1,14 @@
 ---
 name: rosteriq-dev
-description: Use for any development work on RosterIQ - the Flutter NBA fantasy draft-night assistant in this repo. Covers the ranking engine, UI screens, the data_prep Yahoo pipeline, and the in-app Yahoo login. Has the project's architecture, conventions, and current blockers baked in so it doesn't need to rediscover them.
+description: Use for any development work on RosterIQ - the Flutter NBA fantasy season-long assistant in this repo. Covers the ranking engine, UI screens, the data_prep Yahoo pipeline, and the in-app Yahoo login. Has the project's architecture, conventions, and current blockers baked in so it doesn't need to rediscover them.
 model: sonnet
 ---
 
-You are working on **RosterIQ**, a Flutter app that helps its one user rank
-and track players live during a 9-category (FG%, FT%, 3PM, PTS, REB, AST,
-STL, BLK, TO) NBA fantasy snake draft, and is meant to grow into a
-season-long roster-management tool afterward (Yahoo sync, injury/transaction
-alerts - not built yet).
+You are working on **RosterIQ**, a Flutter app for one user's 12-team,
+9-category (FG%, FT%, 3PM, PTS, REB, AST, STL, BLK, TO) NBA fantasy league,
+in season: live ESPN stats and injuries, weekly matchup, add/drop and trade
+help. It started as a draft-night tool; all draft screens were deleted on
+2026-10-25 (in git history if ever needed). Yahoo sync is pending API approval.
 
 **Before touching anything, read [`README.md`](../../README.md)'s "Status"
 section** - it is the living source of truth for what's built, what's
@@ -45,12 +45,15 @@ letting them drift silently is worse than not having them at all.
 
 ```
 lib/
-  models/     Player, LeagueRosterConfig, DraftState, RankingResult, StatCategory
+  theme.dart  Light "Swiss" + dark "court" palettes (follow the phone), StatColors
+              (win/loss/warn) - screens use colorScheme / context.stat, never Colors.*
+  models/     Player, LeagueRosterConfig, DraftState (now only stores punts), RankingResult, StatCategory
   engine/     Pure ranking logic - no Flutter/UI deps, fully unit-tested
-  state/      Riverpod providers wiring the engine to live draft state
-  services/   Bundled-JSON loading, local persistence, Yahoo OAuth service
-  screens/    Home, draft setup, available pool, my roster, draft board, roster mgmt
-  widgets/    Player tiles, pick indicator, category standing bars, etc.
+  state/      Riverpod providers: leagueData (snapshot merge), savedRoster (my team),
+              leagueTeams (other 11 teams + opponent + "taken"), rankings (free agents)
+  services/   Bundled-JSON + snapshot loading, local persistence, Yahoo OAuth service
+  screens/    4-tab InSeasonShell: Matchup, Add/Drop, My Team, League; Settings, Trade, onboarding
+  widgets/    PlayerRow, player picker sheet, radar, injury badge, common (SectionHeader, EmptyState)
 bin/worker.dart  In-season worker run by .github/workflows/scrape.yml (cron
               */30). State = snapshot.json on the orphan `data` branch
               (force-pushed single commit). Run locally with
@@ -80,6 +83,23 @@ test/         Engine + worker unit tests
   date is passed in `LAST_COMMIT_AT`; reminders are throttled by
   `lastReminderAt` in the snapshot).
 
+## Live data in the app (snapshot merge)
+
+- `loadLeagueData()` (`lib/services/player_repository.dart`) fetches the
+  snapshot from `raw.githubusercontent.com/.../data/snapshot.json` and
+  `mergeSnapshot` re-keys ESPN players to the bundled ids, so saved rosters
+  and every `leagueDataProvider` consumer keep working unchanged. Don't add a
+  second player provider for live data.
+- Bundled names are OCR'd and often garbled ("C. Bryant", "Kobe Wagler" for
+  Keaton). The merge matches on the exact `normalizeName` first, then on
+  initial + surname + team, only when that key is unique on both sides.
+  Terance Mann vs Tre Mann is why the team is part of the key.
+- ESPN team codes differ from ours (`GS`, `NO`, `NY`, `SA`, `UTAH`, `WSH`).
+  `_espnTeams` maps them, or `nba_schedule.json` lookups silently miss.
+- Bundled players missing from the snapshot (usually injured, 0 GP) are kept
+  with zeroed stats, and `computePoolStats` skips `gp == 0` so they don't
+  drag the z baseline down.
+
 ## Ranking algorithm - the load-bearing details
 
 - Z-scores are computed against the **current available pool**, recomputed
@@ -96,10 +116,15 @@ test/         Engine + worker unit tests
   add a second re-normalization pass - it was deliberately rejected (see
   `lib/engine/ranking_engine.dart` comments) since it only rescales display
   magnitude, not rank order.
-- `lib/engine/positional_run_detector.dart` and
-  `lib/engine/snake_position.dart` are generic (any team count, any draft
-  slot) - never hardcode a specific slot number when touching these; the
-  test files exercise multiple slots specifically to catch that regression.
+- Free agents (`freeAgentsProvider`) = not on my team, not on an entered
+  league team, not marked taken, and - until every roster is full - not in
+  the top teams x roster-size by preseason `sourceRank` ("probably rostered").
+  Yahoo sync should replace the league teams, not add a second source.
+- Players with 0 GP contribute nothing to team standing and have no value
+  ("—") in `leagueZProvider`; scoring them as a game of zeros made injured
+  stars look like the worst players.
+- The radar scales both teams together around league average (middle ring);
+  team totals are sums over 13 players, far past any fixed z clamp.
 
 ## Two separate Yahoo apps - do not mix these up
 

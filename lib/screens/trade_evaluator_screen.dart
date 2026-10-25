@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../engine/ranking_engine.dart';
 import '../engine/trade_evaluator.dart';
 import '../models/player.dart';
 import '../models/stat_category.dart';
-import '../state/draft_state_provider.dart';
 import '../state/league_data_provider.dart';
+import '../state/league_teams_provider.dart';
 import '../state/saved_roster_provider.dart';
-import 'settings_screen.dart';
+import '../theme.dart';
+import '../widgets/common.dart';
+import '../widgets/player_picker_sheet.dart';
+import '../widgets/player_row.dart';
+import 'league_screen.dart';
 
+/// Pick players to give and get; shows how each of my categories changes.
 class TradeEvaluatorScreen extends ConsumerStatefulWidget {
   const TradeEvaluatorScreen({super.key});
 
@@ -18,422 +22,191 @@ class TradeEvaluatorScreen extends ConsumerStatefulWidget {
 }
 
 class _TradeEvaluatorScreenState extends ConsumerState<TradeEvaluatorScreen> {
-  final Set<String> _giveIds = {};
-  final Set<String> _getIds = {};
-  final _giveController = TextEditingController();
-  final _getController = TextEditingController();
-
-  @override
-  void dispose() {
-    _giveController.dispose();
-    _getController.dispose();
-    super.dispose();
-  }
+  final Set<String> _give = {};
+  final Set<String> _get = {};
 
   @override
   Widget build(BuildContext context) {
-    final leagueDataAsync = ref.watch(leagueDataProvider);
-
-    return leagueDataAsync.when(
-      loading: () => const Scaffold(body: Center(child: CircularProgressIndicator())),
-      error: (err, _) => Scaffold(body: Center(child: Text('Error: $err'))),
-      data: (leagueData) {
-        final draftState = ref.watch(draftStateProvider);
-        final savedRosterPlayers = ref.watch(savedRosterPlayersProvider);
-
-        // Use saved roster when it has players; fall back to the active draft roster.
-        final myRoster = savedRosterPlayers.isNotEmpty
-            ? savedRosterPlayers
-            : myRosterFrom(
-                leagueData.players,
-                draftState,
-                leagueData.config.myDraftSlot,
-              );
-        final usingSavedRoster = savedRosterPlayers.isNotEmpty;
-
-        final myRosterIds = myRoster.map((p) => p.id).toSet();
-        final allOtherPlayers = leagueData.players.where((p) => !myRosterIds.contains(p.id)).toList();
-
-        final givePlayers = myRoster.where((p) => _giveIds.contains(p.id)).toList();
-        final getPlayers = allOtherPlayers.where((p) => _getIds.contains(p.id)).toList();
-
-        TradeResult? result;
-        if (givePlayers.isNotEmpty || getPlayers.isNotEmpty) {
-          result = evaluateTrade(
-            myCurrentRoster: myRoster,
-            playersIGive: givePlayers,
-            playersIGet: getPlayers,
-            fullPoolForBaseline: leagueData.players,
-          );
-        }
-
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text('Trade Evaluator'),
-            actions: [
-              TextButton(
-                onPressed: () => setState(() {
-                  _giveIds.clear();
-                  _getIds.clear();
-                }),
-                child: const Text('Clear'),
-              ),
-              IconButton(
-                icon: const Icon(Icons.settings_outlined),
-                tooltip: 'Settings',
-                onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => const SettingsScreen()),
-                ),
-              ),
-            ],
-          ),
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              if (usingSavedRoster)
-                Container(
-                  color: Colors.teal.shade50,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  child: Row(
-                    children: [
-                      Icon(Icons.group, size: 16, color: Colors.teal.shade700),
-                      const SizedBox(width: 6),
-                      Expanded(
-                        child: Text(
-                          'Using your saved team · ${myRoster.length} players',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.teal.shade800,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              Expanded(
-                child: SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: _PlayerPickerColumn(
-                        title: 'You Give',
-                        titleColor: Colors.red.shade700,
-                        candidates: myRoster,
-                        selectedIds: _giveIds,
-                        searchController: _giveController,
-                        onToggle: (id) => setState(() {
-                          if (_giveIds.contains(id)) {
-                            _giveIds.remove(id);
-                          } else {
-                            _giveIds.add(id);
-                          }
-                        }),
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: _PlayerPickerColumn(
-                        title: 'You Get',
-                        titleColor: Colors.green.shade700,
-                        candidates: allOtherPlayers,
-                        selectedIds: _getIds,
-                        searchController: _getController,
-                        onToggle: (id) => setState(() {
-                          if (_getIds.contains(id)) {
-                            _getIds.remove(id);
-                          } else {
-                            _getIds.add(id);
-                          }
-                        }),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 24),
-                if (result != null) ...[
-                  _SummaryLine(result: result),
-                  const SizedBox(height: 12),
-                  _CategoryTable(result: result),
-                ] else
-                  const Center(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: 32),
-                      child: Text(
-                        'Select players to give and/or receive above\nto see the trade impact.',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                    ),
-                  ),
-              ],
-            ),
-          ),
-              ), // Expanded
-            ], // outer Column children
-          ), // outer Column (Scaffold.body)
-        );
-      },
-    );
-  }
-}
-
-// ---------------------------------------------------------------------------
-// Player picker column
-// ---------------------------------------------------------------------------
-
-class _PlayerPickerColumn extends StatelessWidget {
-  final String title;
-  final Color titleColor;
-  final List<Player> candidates;
-  final Set<String> selectedIds;
-  final TextEditingController searchController;
-  final ValueChanged<String> onToggle;
-
-  const _PlayerPickerColumn({
-    required this.title,
-    required this.titleColor,
-    required this.candidates,
-    required this.selectedIds,
-    required this.searchController,
-    required this.onToggle,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: titleColor),
-        ),
-        const SizedBox(height: 6),
-        // Selected chips
-        Wrap(
-          spacing: 4,
-          runSpacing: 4,
-          children: [
-            for (final id in selectedIds)
-              Builder(builder: (ctx) {
-                final player = candidates.firstWhere(
-                  (p) => p.id == id,
-                  orElse: () => candidates.first,
-                );
-                return Chip(
-                  label: Text(player.name, style: const TextStyle(fontSize: 11)),
-                  onDeleted: () => onToggle(id),
-                  padding: EdgeInsets.zero,
-                  labelPadding: const EdgeInsets.symmetric(horizontal: 4),
-                );
+    final theme = Theme.of(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Trade'),
+        actions: [
+          if (_give.isNotEmpty || _get.isNotEmpty)
+            TextButton(
+              onPressed: () => setState(() {
+                _give.clear();
+                _get.clear();
               }),
-          ],
-        ),
-        const SizedBox(height: 6),
-        // Search field
-        _SearchablePlayerList(
-          candidates: candidates,
-          selectedIds: selectedIds,
-          controller: searchController,
-          onToggle: onToggle,
-        ),
-      ],
+              child: const Text('Clear'),
+            ),
+        ],
+      ),
+      body: AsyncBody(
+        value: ref.watch(leagueDataProvider),
+        builder: (leagueData) {
+          final mine = ref.watch(savedRosterPlayersProvider);
+          if (mine.isEmpty) {
+            return const EmptyState(
+              icon: Icons.swap_horiz,
+              title: 'Add your team first',
+              body: 'Trades are evaluated against your current roster.',
+            );
+          }
+          final mineIds = mine.map((p) => p.id).toSet();
+          final league = ref.watch(leagueTeamsProvider).value;
+          final others = byPreseasonRank(leagueData.players.where((p) => !mineIds.contains(p.id)).toList());
+          final byId = ref.watch(playersByIdProvider);
+          final give = _give.map((id) => byId[id]).whereType<Player>().toList();
+          final get = _get.map((id) => byId[id]).whereType<Player>().toList();
+          final result = give.isEmpty && get.isEmpty
+              ? null
+              : evaluateTrade(
+                  myCurrentRoster: mine,
+                  playersIGive: give,
+                  playersIGet: get,
+                  fullPoolForBaseline: leagueData.players,
+                );
+
+          return ListView(
+            padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
+            children: [
+              _Side(
+                title: 'You give',
+                players: give,
+                onEdit: () => _pick('You give', mine, _give),
+                onRemove: (id) => setState(() => _give.remove(id)),
+              ),
+              const SizedBox(height: 12),
+              _Side(
+                title: 'You get',
+                players: get,
+                onEdit: () => _pick('You get', others, _get, note: (p) => league?.teamOf(p.id)?.name),
+                onRemove: (id) => setState(() => _get.remove(id)),
+              ),
+              const SizedBox(height: 16),
+              if (result == null)
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 24),
+                  child: Text(
+                    'Pick players on both sides to see how the trade changes each category.',
+                    textAlign: TextAlign.center,
+                    style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant),
+                  ),
+                )
+              else ...[
+                SectionHeader('Impact on your team · ${result.winsCount} up, ${result.lossCount} down'),
+                Card(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                    child: _ImpactTable(result: result),
+                  ),
+                ),
+              ],
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Future<void> _pick(String title, List<Player> candidates, Set<String> target, {String? Function(Player)? note}) {
+    return showPlayerPicker(
+      context,
+      title: title,
+      candidates: candidates,
+      selectedIds: (_) => target,
+      onToggle: (_, id) => setState(() => target.contains(id) ? target.remove(id) : target.add(id)),
+      note: note,
     );
   }
 }
 
-class _SearchablePlayerList extends StatefulWidget {
-  final List<Player> candidates;
-  final Set<String> selectedIds;
-  final TextEditingController controller;
-  final ValueChanged<String> onToggle;
+class _Side extends StatelessWidget {
+  final String title;
+  final List<Player> players;
+  final VoidCallback onEdit;
+  final ValueChanged<String> onRemove;
 
-  const _SearchablePlayerList({
-    required this.candidates,
-    required this.selectedIds,
-    required this.controller,
-    required this.onToggle,
-  });
-
-  @override
-  State<_SearchablePlayerList> createState() => _SearchablePlayerListState();
-}
-
-class _SearchablePlayerListState extends State<_SearchablePlayerList> {
-  @override
-  void initState() {
-    super.initState();
-    widget.controller.addListener(_rebuild);
-  }
-
-  void _rebuild() => setState(() {});
-
-  @override
-  void dispose() {
-    widget.controller.removeListener(_rebuild);
-    super.dispose();
-  }
+  const _Side({required this.title, required this.players, required this.onEdit, required this.onRemove});
 
   @override
   Widget build(BuildContext context) {
-    final query = widget.controller.text.trim().toLowerCase();
-    final filtered = query.isEmpty
-        ? widget.candidates.take(12).toList()
-        : widget.candidates.where((p) => p.name.toLowerCase().contains(query)).take(12).toList();
-
-    return Column(
-      children: [
-        TextField(
-          controller: widget.controller,
-          decoration: const InputDecoration(
-            hintText: 'Search player...',
-            isDense: true,
-            prefixIcon: Icon(Icons.search, size: 18),
-            border: OutlineInputBorder(),
-            contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      child: Column(
+        children: [
+          ListTile(
+            title: Text(title, style: Theme.of(context).textTheme.titleMedium),
+            trailing: TextButton.icon(
+              onPressed: onEdit,
+              icon: const Icon(Icons.add),
+              label: Text(players.isEmpty ? 'Choose' : 'Edit'),
+            ),
           ),
-          style: const TextStyle(fontSize: 13),
-        ),
-        const SizedBox(height: 4),
-        ...filtered.map((p) {
-          final selected = widget.selectedIds.contains(p.id);
-          return InkWell(
-            onTap: () => widget.onToggle(p.id),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 3),
-              child: Row(
-                children: [
-                  Icon(
-                    selected ? Icons.check_box : Icons.check_box_outline_blank,
-                    size: 16,
-                    color: selected ? Theme.of(context).colorScheme.primary : Colors.grey,
-                  ),
-                  const SizedBox(width: 4),
-                  Expanded(
-                    child: Text(
-                      p.name,
-                      style: const TextStyle(fontSize: 12),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
+          for (final p in players) ...[
+            const Divider(indent: 72),
+            PlayerRow(
+              player: p,
+              trailing: IconButton(
+                icon: const Icon(Icons.close),
+                tooltip: 'Remove ${p.name}',
+                onPressed: () => onRemove(p.id),
               ),
             ),
-          );
-        }),
-      ],
-    );
-  }
-}
-
-// ---------------------------------------------------------------------------
-// Results table
-// ---------------------------------------------------------------------------
-
-class _SummaryLine extends StatelessWidget {
-  final TradeResult result;
-
-  const _SummaryLine({required this.result});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceContainerHighest,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Text(
-        'You win ${result.winsCount} categories, '
-        'lose ${result.lossCount}, '
-        'tie ${result.tieCount}',
-        style: const TextStyle(fontWeight: FontWeight.bold),
-      ),
-    );
-  }
-}
-
-class _CategoryTable extends StatelessWidget {
-  final TradeResult result;
-
-  const _CategoryTable({required this.result});
-
-  @override
-  Widget build(BuildContext context) {
-    return Table(
-      columnWidths: const {
-        0: FixedColumnWidth(44),
-        1: FlexColumnWidth(),
-        2: FlexColumnWidth(),
-        3: FlexColumnWidth(),
-      },
-      children: [
-        TableRow(
-          decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceContainerHighest),
-          children: const [
-            _HeaderCell('Cat'),
-            _HeaderCell('After'),
-            _HeaderCell('Delta'),
-            _HeaderCell('Opp'),
           ],
-        ),
-        for (final row in result.rows) _buildRow(row),
-      ],
+        ],
+      ),
     );
-  }
-
-  TableRow _buildRow(TradeCategoryRow row) {
-    final deltaStr = row.myDelta > 0.01
-        ? '+${row.myDelta.toStringAsFixed(1)}'
-        : row.myDelta < -0.01
-            ? row.myDelta.toStringAsFixed(1)
-            : '—';
-    final deltaColor = row.myDelta > 0.01
-        ? Colors.green.shade700
-        : row.myDelta < -0.01
-            ? Colors.red.shade700
-            : Colors.grey;
-
-    return TableRow(children: [
-      Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
-        child: Text(row.category.label, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600)),
-      ),
-      Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4),
-        child: Text(row.myTeamAfter.toStringAsFixed(1), style: const TextStyle(fontSize: 12), textAlign: TextAlign.center),
-      ),
-      Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4),
-        child: Text(deltaStr, style: TextStyle(fontSize: 12, color: deltaColor, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
-      ),
-      Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4),
-        child: Text(row.oppTeamAfter.toStringAsFixed(1), style: const TextStyle(fontSize: 12), textAlign: TextAlign.center),
-      ),
-    ]);
   }
 }
 
-class _HeaderCell extends StatelessWidget {
-  final String text;
+class _ImpactTable extends StatelessWidget {
+  final TradeResult result;
 
-  const _HeaderCell(this.text);
+  const _ImpactTable({required this.result});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
-      child: Text(
-        text,
-        style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
-        textAlign: TextAlign.center,
-      ),
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+    final headStyle = theme.textTheme.labelSmall?.copyWith(color: colors.onSurfaceVariant);
+    Widget cell(Widget child) => Padding(padding: const EdgeInsets.symmetric(vertical: 10), child: child);
+
+    return Table(
+      columnWidths: const {0: FlexColumnWidth(1.1), 1: FlexColumnWidth(), 2: FlexColumnWidth(), 3: FlexColumnWidth(1.2)},
+      defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+      children: [
+        TableRow(children: [
+          cell(Text('CAT', style: headStyle)),
+          for (final h in ['BEFORE', 'AFTER', 'CHANGE']) cell(Text(h, textAlign: TextAlign.end, style: headStyle)),
+        ]),
+        for (final row in result.rows)
+          () {
+            final d = row.myDelta;
+            final (icon, color) = d > 0.01
+                ? (Icons.arrow_upward, context.stat.win)
+                : d < -0.01
+                    ? (Icons.arrow_downward, context.stat.loss)
+                    : (Icons.remove, colors.onSurfaceVariant);
+            return TableRow(
+              decoration: BoxDecoration(border: Border(top: BorderSide(color: colors.outlineVariant))),
+              children: [
+                cell(Text(row.category.label, style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700))),
+                cell(Text((row.myTeamAfter - d).toStringAsFixed(1), textAlign: TextAlign.end)),
+                cell(Text(row.myTeamAfter.toStringAsFixed(1), textAlign: TextAlign.end)),
+                cell(Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Icon(icon, size: 16, color: color),
+                    const SizedBox(width: 4),
+                    Text(d.abs().toStringAsFixed(1), style: theme.textTheme.labelLarge?.copyWith(color: color)),
+                  ],
+                )),
+              ],
+            );
+          }(),
+      ],
     );
   }
 }

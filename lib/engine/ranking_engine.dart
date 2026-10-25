@@ -1,6 +1,5 @@
 import 'dart:math' show min, max;
 
-import '../models/draft_state.dart';
 import '../models/league_config.dart';
 import '../models/player.dart';
 import '../models/ranking_result.dart';
@@ -154,8 +153,9 @@ Map<StatCategory, double> computeTeamStanding({
   final avgFg = poolAverageFgPct(fullPoolForBaseline);
   final avgFt = poolAverageFtPct(fullPoolForBaseline);
 
+  // A player with no games yet (injured, not signed) contributes nothing, not "a game of zeros".
   final perPlayerZ =
-      myRoster.map((p) => computeZScores(p, poolStats, poolAvgFgPct: avgFg, poolAvgFtPct: avgFt));
+      myRoster.where((p) => p.gp > 0).map((p) => computeZScores(p, poolStats, poolAvgFgPct: avgFg, poolAvgFtPct: avgFt));
 
   final totals = <StatCategory, double>{for (final c in allStatCategories) c: 0};
   for (final z in perPlayerZ) {
@@ -164,20 +164,4 @@ Map<StatCategory, double> computeTeamStanding({
     }
   }
   return totals;
-}
-
-/// Helper for screens: resolves the set of players still on the board given
-/// the full player list and the current [DraftState].
-List<Player> availablePoolFrom(List<Player> allPlayers, DraftState draftState) {
-  final drafted = draftState.draftedPlayerIds;
-  return allPlayers.where((p) => !drafted.contains(p.id)).toList();
-}
-
-List<Player> myRosterFrom(
-  List<Player> allPlayers,
-  DraftState draftState,
-  int myDraftSlot,
-) {
-  final myIds = draftState.myRosterPlayerIds(myDraftSlot).toSet();
-  return allPlayers.where((p) => myIds.contains(p.id)).toList();
 }

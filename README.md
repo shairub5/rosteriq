@@ -1,14 +1,10 @@
 # RosterIQ
 
-An NBA fantasy basketball draft-night assistant, built for a 9-category
-(FG%, FT%, 3PM, PTS, REB, AST, STL, BLK, TO) snake-draft league. Ranks the
-live available player pool with z-scores, adapts as picks happen (by you or
-anyone else), supports mid-draft punt strategies, and tracks the full draft
-board - all on your phone.
-
-Draft assistance is the first feature, not the only one: RosterIQ is meant
-to grow into an ongoing roster-management tool (Yahoo sync, injury/
-transaction alerts, trade evaluation).
+A season-long NBA fantasy assistant for a 12-team, 9-category (FG%, FT%,
+3PM, PTS, REB, AST, STL, BLK, TO) league: live ESPN stats and injuries,
+weekly matchup projection, free-agent pickups ranked for your weak spots,
+trade evaluation, and Telegram injury alerts. (It began as a draft-night
+tool; those screens were removed once the season started.)
 
 ## How the ranking works
 
@@ -91,14 +87,23 @@ assistant. Plan: in-season worker + Matchup radar + Add/Drop + Config views.
 - **Setup still needed:** repo secrets `TELEGRAM_TOKEN` and `TELEGRAM_CHAT_ID`,
   then one manual run (Actions -> scrape -> Run workflow). The first run
   sends only a "alerts are live" message and records the baseline.
-- **Next:** app views (Matchup radar of my saved team vs a picked opponent,
-  Add/Drop on live ESPN stats, Config), then Yahoo-roster-aware alerts once
-  approved.
+- **Built (app):** a 4-tab in-season app with a light/dark theme that
+  follows the phone. **Matchup**: you vs this week's opponent (any league
+  team), W/L/T scoreboard, radar and per-category table. **Add/Drop**: free
+  agents ranked for your weak categories or overall, games this week, injury
+  badges, add/drop with undo, and "already rostered" to hide a player.
+  **My Team**: roster with value, category strengths, trade evaluator.
+  **League**: the other 11 teams' rosters, entered by hand until Yahoo sync.
+  Settings holds punts, playoff window and data status. Player data comes
+  from the worker's `snapshot.json`; offline it falls back to preseason
+  projections. All draft-night screens were removed (2026-10-25).
+- **Next:** hot-pickup digest, then Yahoo-roster-aware alerts and the real
+  opponent once the API is approved.
 - **Data sources:** ESPN only. stats.nba.com / cdn.nba.com return 403 from
   cloud IPs. Scraping Yahoo with a session cookie was rejected (ToS / ban
   risk).
 
-### Draft-era status (as of 2026-08-28)
+### Draft-era status (as of 2026-08-28, historical: these screens were removed 2026-10-25)
 
 **Done:**
 - Home screen -> Draft Setup (name the other 11 teams) -> Draft Night

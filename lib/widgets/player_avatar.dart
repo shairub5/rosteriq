@@ -40,7 +40,7 @@ class PlayerAvatar extends StatelessWidget {
       imageBuilder: (context, imageProvider) => CircleAvatar(
         radius: radius,
         backgroundImage: imageProvider,
-        backgroundColor: Colors.grey.shade200,
+        backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
       ),
       placeholder: (context, url) => _InitialsAvatar(
         initials: _initials,
@@ -72,14 +72,14 @@ class _InitialsAvatar extends StatelessWidget {
     final onColor = Theme.of(context).colorScheme.onPrimaryContainer;
     return CircleAvatar(
       radius: radius,
-      backgroundColor: loading ? Colors.grey.shade300 : color,
+      backgroundColor: loading ? Theme.of(context).colorScheme.surfaceContainerHighest : color,
       child: loading
           ? SizedBox(
               width: radius * 0.8,
               height: radius * 0.8,
               child: CircularProgressIndicator(
                 strokeWidth: 1.5,
-                color: Colors.grey.shade500,
+                color: Theme.of(context).colorScheme.outline,
               ),
             )
           : Text(

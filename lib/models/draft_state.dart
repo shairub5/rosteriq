@@ -33,26 +33,6 @@ class DraftState {
 
   const DraftState({this.picks = const [], this.puntedCategories = const {}});
 
-  int get nextPickNumber =>
-      picks.isEmpty ? 1 : (picks.map((p) => p.pickNumber).reduce((a, b) => a > b ? a : b) + 1);
-
-  Set<String> get draftedPlayerIds => picks.map((p) => p.playerId).toSet();
-
-  List<String> myRosterPlayerIds(int myDraftSlot) =>
-      picks.where((p) => p.teamSlot == myDraftSlot).map((p) => p.playerId).toList();
-
-  DraftState addPick({required int teamSlot, required String playerId}) {
-    return DraftState(
-      picks: [...picks, DraftPick(pickNumber: nextPickNumber, teamSlot: teamSlot, playerId: playerId)],
-      puntedCategories: puntedCategories,
-    );
-  }
-
-  DraftState undoLastPick() {
-    if (picks.isEmpty) return this;
-    return DraftState(picks: picks.sublist(0, picks.length - 1), puntedCategories: puntedCategories);
-  }
-
   DraftState withPuntedCategories(Set<StatCategory> newPunts) {
     return DraftState(picks: picks, puntedCategories: newPunts);
   }
