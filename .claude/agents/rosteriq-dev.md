@@ -118,6 +118,11 @@ test/         Engine + worker unit tests
   read off the matchup page; 0 or missing = not shown). `projectWeek` needs
   `remaining` and the team's roster (mine = My Team, others = League team with
   the same name) and returns null otherwise.
+- Leagues: snapshot `league` = primary (app id 'main'), `leagues` = others
+  (same shape + id/name). The worker must write both back every run; deploy a
+  worker change to main BEFORE pushing data that depends on it, or the next
+  cron run drops what it doesn't know. App: `currentLeagueProvider`; per-league
+  prefs via `leagueKey(base, id)` (main keeps the old keys).
 - `normalizeName` folds accents (Dončić, Şengün, Porziņģis). Extend
   `_accentFold` in `lib/worker/espn.dart` when a new letter shows up unmatched.
 - Don't force-push the `data` branch by hand (blocked by the permission
