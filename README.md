@@ -94,6 +94,11 @@ assistant. Plan: in-season worker + Matchup radar + Add/Drop + Config views.
   badges, add/drop with undo, and "already rostered" to hide a player.
   Add/Drop: "My categories" chips (add or remove any category; rankings count
   only those, bolt = close in this week's matchup), "Hide injured" filter.
+  **Trade** (own tab): pick a partner team, players each way (any number),
+  drops for the side that receives more (suggested lowest value, mine
+  editable; players with no games never suggested), best free agent for an
+  open spot, value change for both sides with a verdict, and my category
+  totals and league rank before/after vs every roster in the league.
   **My Team**: roster with value, category strengths, trade evaluator.
   **League**: the other 11 teams' rosters, entered by hand until Yahoo sync.
   Settings holds punts, playoff window and data status. Player data comes

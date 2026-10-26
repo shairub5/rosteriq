@@ -7,6 +7,7 @@ import 'package:http/testing.dart';
 import 'package:rosteriq/models/player.dart';
 import 'package:rosteriq/models/stat_category.dart';
 import 'package:rosteriq/screens/matchup_screen.dart';
+import 'package:rosteriq/screens/trade_evaluator_screen.dart';
 import 'package:rosteriq/services/player_repository.dart';
 import 'package:rosteriq/state/ranking_provider.dart';
 import 'package:rosteriq/theme.dart';
@@ -289,6 +290,22 @@ void main() {
     expect(isFinal(m(done, done)), isTrue);
     expect(isFinal(m(done, playing)), isFalse);
     expect(isFinal(m(done, unknown)), isFalse);
+  });
+
+  test('trade: drops are the lowest-value players, never a received one; ranks are 1 = best', () {
+    final a = Player.fromJson(_json('a', 'A')), b = Player.fromJson(_json('b', 'B')), c = Player.fromJson(_json('c', 'C'));
+    final z = {'a': 5.0, 'b': -1.0, 'c': -3.0};
+    expect(suggestDrops([a, b, c], 1, z).single.id, 'c');
+    expect(suggestDrops([a, b, c], 1, z, keep: {'c'}).single.id, 'b');
+    expect(suggestDrops([a, b, c], 0, z), isEmpty);
+    final hurt = Player.fromJson(_json('h', 'Hurt Star'));
+    expect(suggestDrops([a, b, hurt], 1, z).single.id, 'b'); // no games = no value, never suggested
+    final ranks = categoryRanks({
+      'me': {for (final c in allStatCategories) c: 1.0},
+      'x': {for (final c in allStatCategories) c: c == StatCategory.blk ? 2.0 : 0.0},
+    }, 'me');
+    expect(ranks[StatCategory.pts], 1);
+    expect(ranks[StatCategory.blk], 2);
   });
 
   testWidgets('radar renders', (tester) async {

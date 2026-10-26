@@ -16,7 +16,6 @@ import '../widgets/player_picker_sheet.dart';
 import '../widgets/player_row.dart';
 import 'league_screen.dart';
 import 'settings_screen.dart';
-import 'trade_evaluator_screen.dart';
 
 class MyTeamScreen extends ConsumerWidget {
   const MyTeamScreen({super.key});
@@ -131,19 +130,6 @@ class MyTeamScreen extends ConsumerWidget {
                       ),
                     ],
                   ],
-                ),
-              ),
-              const SizedBox(height: 16),
-              const SectionHeader('Tools'),
-              Card(
-                child: ListTile(
-                  leading: Icon(Icons.swap_horiz, color: theme.colorScheme.primary),
-                  title: const Text('Trade evaluator'),
-                  subtitle: const Text('See how a trade changes each category'),
-                  trailing: const Icon(Icons.chevron_right),
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => const TradeEvaluatorScreen()),
-                  ),
                 ),
               ),
             ],
