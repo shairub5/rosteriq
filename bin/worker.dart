@@ -18,8 +18,6 @@ import 'package:rosteriq/worker/alerts.dart';
 import 'package:rosteriq/worker/espn.dart';
 import 'package:rosteriq/worker/league_bot.dart';
 
-// shortcut: league-wide relevance (no Yahoo rosters yet), switch to "my + opponent roster" once the Yahoo API is approved.
-const _relevantTopN = 150;
 
 Future<void> main(List<String> args) async {
   final dryRun = args.contains('--dry-run');
@@ -38,28 +36,6 @@ Future<void> main(List<String> args) async {
 
   final ranked = _rank(stats.players);
   final totalZById = {for (final r in ranked) r.playerId: r.totalZ};
-  final gpById = {for (final p in stats.players) p.id: p.gp};
-  final relevantIds = {
-    // Early season, a handful of games says little: preseason projections decide relevance too.
-    ..._projectedTopIds([
-      for (final p in stats.players) (name: p.name, id: p.id),
-      // Players out since day one have no stats rows, only injury rows.
-      for (final i in injuries.values) (name: i.name, id: i.playerId),
-    ]),
-    ...ranked.where((r) => (gpById[r.playerId] ?? 0) >= 5).take(_relevantTopN).map((r) => r.playerId),
-  };
-
-  final alerts = prevJson == null
-      ? ['RosterIQ alerts are live - tracking ${injuries.length} injuries across the league.']
-      : injuryAlerts(
-          prev: prevInjuries,
-          now: injuries,
-          relevantIds: relevantIds,
-          pool: stats.players,
-          totalZById: totalZById,
-          minutes: stats.minutes,
-        );
-
   final now = DateTime.now().toUtc();
   final prevLeagues = [
     (prevJson?['league'] as Map<String, dynamic>?) ?? <String, dynamic>{},
@@ -80,6 +56,42 @@ Future<void> main(List<String> args) async {
           apiKey: Platform.environment['ANTHROPIC_API_KEY'],
           now: now,
         );
+
+  // Who owns whom in each league, by name (roster ids are ESPN or bundled ids).
+  final nameById = {
+    for (final p in _bundledPlayers()) p.id: p.name,
+    for (final i in injuries.values) i.playerId: i.name,
+    for (final p in stats.players) p.id: p.name,
+  };
+  final views = [
+    for (final l in leagues)
+      () {
+        final owners = <String, String>{
+          for (final t in (l['teams'] as List? ?? const []))
+            for (final id in (t['playerIds'] as List).cast<String>())
+              if (nameById[id] case final name?)
+                normalizeName(name): isMyTeamName(t['name'] as String) ? 'you' : t['name'] as String,
+        };
+        return (
+          name: l['name'] as String? ?? 'League',
+          ownerOf: (String playerName) => owners[normalizeName(playerName)],
+          hasRosters: owners.isNotEmpty,
+        );
+      }(),
+  ];
+
+  final alerts = prevJson == null
+      ? ['RosterIQ alerts are live - tracking ${injuries.length} injuries across the league.']
+      : injuryAlerts(
+          prev: prevInjuries,
+          now: injuries,
+          pool: stats.players,
+          totalZById: totalZById,
+          minutes: stats.minutes,
+          leagues: views,
+          gamesNote: _gamesNote(now),
+        );
+
   final reminder = keepAliveReminder(
     now: now,
     lastCommit: DateTime.tryParse(Platform.environment['LAST_COMMIT_AT'] ?? ''),
@@ -118,12 +130,28 @@ List<Player> _bundledPlayers() => (jsonDecode(File('assets/data/players.json').r
     .map((j) => Player.fromJson(j as Map<String, dynamic>))
     .toList();
 
-/// ESPN ids of the top [_relevantTopN] players by the bundled preseason projections, matched by name.
-Set<String> _projectedTopIds(List<({String name, String id})> espnPlayers) {
-  final projected = _bundledPlayers();
-  final topNames = _rank(projected).take(_relevantTopN).map((r) => projected.firstWhere((p) => p.id == r.playerId).name);
-  final espnByName = {for (final p in espnPlayers) normalizeName(p.name): p.id};
-  return {for (final n in topNames) ?espnByName[normalizeName(n)]};
+/// "3 games left this week (next: Wed Oct 28)" for an ESPN team code, from the bundled
+/// schedule (dates only). Weeks run Monday-Sunday; "today" is the US date.
+String? Function(String team) _gamesNote(DateTime nowUtc) {
+  final teams = (jsonDecode(File('assets/data/nba_schedule.json').readAsStringSync())['teams'] as Map<String, dynamic>);
+  final us = nowUtc.subtract(const Duration(hours: 5));
+  final today = DateTime.utc(us.year, us.month, us.day);
+  final sunday = today.add(Duration(days: 7 - today.weekday));
+  const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  return (team) {
+    final games = ((teams[espnTeams[team] ?? team] as Map?)?['games'] as List?)
+        ?.map((d) => DateTime.parse(d as String))
+        .map((d) => DateTime.utc(d.year, d.month, d.day))
+        .where((d) => !d.isBefore(today))
+        .toList()
+      ?..sort();
+    if (games == null || games.isEmpty) return null;
+    final left = games.where((d) => !d.isAfter(sunday)).length;
+    final next = games.first;
+    return '${left == 0 ? 'no' : left} game${left == 1 ? '' : 's'} left this week '
+        '(next: ${days[next.weekday - 1]} ${months[next.month - 1]} ${next.day})';
+  };
 }
 
 Future<void> _sendTelegram(List<String> alerts) async {

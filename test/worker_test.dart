@@ -89,11 +89,16 @@ void main() {
 
   group('injuryAlerts', () {
     final pool = [_p('1', 'DAL', ['PG', 'SG']), _p('2', 'DAL', ['PG', 'SG']), _p('3', 'DAL', ['C']), _p('4', 'BOS', ['PG'])];
-    List<String> run(Map<String, InjuryEntry> prev, Map<String, InjuryEntry> now, {Set<String>? relevant}) =>
-        injuryAlerts(
+    // Jerusalem: P1 is mine, P2 is on ForKobe. Fantrax: no rosters yet.
+    final leagues = <LeagueView>[
+      (name: 'Jerusalem League', ownerOf: (n) => const {'P1': 'you', 'P2': 'ForKobe'}[n], hasRosters: true),
+      (name: 'Fantrax League', ownerOf: (n) => null, hasRosters: false),
+    ];
+    List<String> run(Map<String, InjuryEntry> prev, Map<String, InjuryEntry> now) => injuryAlerts(
           prev: prev,
           now: now,
-          relevantIds: relevant ?? {'1', '2', '3', '4'},
+          leagues: leagues,
+          gamesNote: (team) => '3 games left this week (next: Wed Oct 28)',
           pool: pool,
           totalZById: {'2': 1.0, '3': 5.0, '4': 9.0},
           minutes: {'1': 30, '2': 25, '3': 30, '4': 30},
@@ -116,8 +121,23 @@ void main() {
       expect(run({'1': _inj('1', 'Out')}, {}).single, contains('✅ BACK: P1'));
     });
 
-    test('irrelevant players are ignored', () {
-      expect(run({}, {'1': _inj('1', 'Out')}, relevant: {'2'}), isEmpty);
+    test('one row per league: who owns the injured player and whether each fill-in is free', () {
+      final alert = run({}, {'1': _inj('1', 'Out')}).single;
+      expect(alert, contains('📅 DAL: 3 games left this week (next: Wed Oct 28)'));
+      expect(alert, contains('🏀 Jerusalem League - P1: you'));
+      expect(alert, contains('❌ P2 (ForKobe)'));
+      expect(alert, contains('🏀 Fantrax League - P1: free agent'));
+      expect(alert, contains('(rosters not entered yet)'));
+    });
+
+    test('day-to-day gets fill-in recommendations too', () {
+      final alert = run({}, {'1': _inj('1', 'Day-To-Day')}).single;
+      expect(alert, contains('⚠️ DAY-TO-DAY: P1'));
+      expect(alert, contains('Who absorbs the minutes'));
+    });
+
+    test('any player alerts, not only top-ranked ones', () {
+      expect(run({}, {'4': _inj('4', 'Out')}), hasLength(1));
     });
   });
 

@@ -64,6 +64,9 @@ String normalizeName(String name) => name
     .where((w) => w.isNotEmpty && !const {'jr', 'sr', 'ii', 'iii', 'iv'}.contains(w))
     .join(' ');
 
+/// ESPN team abbreviations that differ from the bundled data's (and nba_schedule.json's).
+const espnTeams = {'GS': 'GSW', 'NO': 'NOP', 'NY': 'NYK', 'SA': 'SAS', 'UTAH': 'UTA', 'WSH': 'WAS'};
+
 // Letters that appear in NBA names; anything else non a-z is dropped as punctuation.
 const _accentFold = {
   'á': 'a', 'à': 'a', 'â': 'a', 'ä': 'a', 'ã': 'a', 'å': 'a', 'ā': 'a',

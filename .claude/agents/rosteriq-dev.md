@@ -75,6 +75,10 @@ test/         Engine + worker unit tests
   row, so relevance must match preseason-projection names against injury
   names too, not only against stats rows (a past bug hid Curry and Kyrie).
 - ESPN positions are only G/F/C, mapped by `espnPositions` onto PG/SG/SF/PF/C.
+- Alerts go out for every player (no top-150 filter since 2026-10-26) and
+  include per-league ownership built by name from `league`/`leagues` rosters,
+  plus a games-left note from assets/data/nba_schedule.json (dates only, no
+  opponents). Fill-ins are suggested for any status, not just OUT.
 - Alerts are dedup'd by status diff against the previous snapshot. With no
   snapshot (first run), the worker sends one "live" message and nothing else,
   so you never get 80 injury alerts at once.

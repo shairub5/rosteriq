@@ -87,7 +87,7 @@ Future<LeagueData> loadLeagueData({http.Client? client}) async {
 LeagueData mergeSnapshot(List<Player> bundled, LeagueRosterConfig config, Map<String, dynamic> snapshot) {
   final snapPlayers = [
     for (final j in (snapshot['players'] as List).cast<Map<String, dynamic>>())
-      {...j, 'team': _espnTeams[j['team']] ?? j['team']},
+      {...j, 'team': espnTeams[j['team']] ?? j['team']},
   ];
   final bundledByName = {for (final p in bundled) normalizeName(p.name): p};
   final snapNames = {for (final j in snapPlayers) normalizeName(j['name'] as String)};
@@ -140,7 +140,7 @@ LeagueData mergeSnapshot(List<Player> bundled, LeagueRosterConfig config, Map<St
   ];
   for (final i in injuryEntries) {
     if (snapIds.contains(i.playerId) || idByEspnId.containsKey(i.playerId)) continue;
-    final team = _espnTeams[i.team] ?? i.team;
+    final team = espnTeams[i.team] ?? i.team;
     final loose = looseBundled[_looseKey(i.name, team)];
     final match = bundledByName[normalizeName(i.name)] ?? (loose?.length == 1 ? loose!.single : null);
     if (match != null) {
@@ -219,8 +219,6 @@ LeagueData mergeSnapshot(List<Player> bundled, LeagueRosterConfig config, Map<St
   );
 }
 
-/// ESPN team abbreviations that differ from the bundled data's (and nba_schedule.json's).
-const _espnTeams = {'GS': 'GSW', 'NO': 'NOP', 'NY': 'NYK', 'SA': 'SAS', 'UTAH': 'UTA', 'WSH': 'WAS'};
 
 /// "Kobe Wagler" (LAC) and "Keaton Wagler" (LAC) -> "k wagler LAC".
 String _looseKey(String name, String team) {

@@ -107,8 +107,11 @@ assistant. Plan: in-season worker + Matchup radar + Add/Drop + Config views.
   replaces that team, a new name takes an unnamed "Team N" slot.
   `dart run bin/set_team.dart <snapshot.json> "<team>" "<player>"...` does the
   same from the command line. All 12 rosters were loaded on 2026-10-25.
-- **Multiple leagues:** the primary league (Jerusalem fantasy league, Yahoo)
-  and a Fantrax league, switched from the league name under each tab's
+- **Injury alerts (Telegram):** every injury status change for any player
+  (OUT and day-to-day), with the teammates who absorb the minutes, the NBA
+  team's games left this week and next game, and one row per league: who owns
+  the injured player and whether each fill-in is a free agent or on which team.
+- **Multiple leagues:** Jerusalem League (Yahoo) and Fantrax League, switched from the league name under each tab's
   title. Rosters, My Team and matchups are per league; punts and the league
   size (12 x 13) are shared. Bot captions for a team the bot hasn't seen yet:
   "League: Team". CLI: `--league "Fantrax"` on set_team / set_matchup.
