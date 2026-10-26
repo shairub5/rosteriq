@@ -4,13 +4,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/player.dart';
+import 'current_league_provider.dart';
 import 'league_data_provider.dart';
 
-const _savedRosterKey = 'saved_roster_player_ids';
-
+/// My roster in the selected league (each league keeps its own).
 class SavedRosterNotifier extends AsyncNotifier<List<String>> {
+  late String _savedRosterKey;
+
   @override
   Future<List<String>> build() async {
+    _savedRosterKey = leagueKey('saved_roster_player_ids', await ref.watch(selectedLeagueIdProvider.future));
     final prefs = await SharedPreferences.getInstance();
     final raw = prefs.getString(_savedRosterKey);
     if (raw == null) return [];

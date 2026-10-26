@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/player.dart';
 import '../models/stat_category.dart';
 import '../services/player_repository.dart';
+import '../state/current_league_provider.dart';
 import '../state/league_data_provider.dart';
 import '../state/league_teams_provider.dart';
 import '../state/saved_roster_provider.dart';
@@ -13,6 +14,7 @@ import '../worker/espn.dart' show InjuryEntry, normalizeName;
 import '../theme.dart';
 import '../widgets/category_radar_chart.dart';
 import '../widgets/common.dart';
+import '../widgets/league_switcher.dart';
 import 'settings_screen.dart';
 
 enum CategoryOutcome { win, loss, tie }
@@ -220,11 +222,12 @@ class MatchupScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Matchup'), actions: const [SettingsButton()]),
+      appBar: AppBar(title: const LeagueTitle('Matchup'), actions: const [SettingsButton()]),
       body: AsyncBody(
         value: ref.watch(leagueDataProvider),
         builder: (leagueData) {
-          final all = leagueData.matchups;
+          final current = ref.watch(currentLeagueProvider);
+          final all = current.matchups;
           if (all.isEmpty) {
             return const EmptyState(
               icon: Icons.sports_basketball_outlined,
@@ -234,7 +237,9 @@ class MatchupScreen extends ConsumerWidget {
             );
           }
           final weeks = {for (final m in all) m.week}.toList()..sort();
-          final selected = ref.watch(_selectedProvider) ?? weeks.last;
+          // A week from another league (after switching) falls back to this league's latest.
+          final picked = ref.watch(_selectedProvider);
+          final selected = picked == _season || weeks.contains(picked) ? picked! : weeks.last;
           final period = selected == _season ? all : all.where((m) => m.week == selected).toList();
           final league = ref.watch(_leagueViewProvider);
 
@@ -273,11 +278,11 @@ class MatchupScreen extends ConsumerWidget {
                 ),
                 const SizedBox(height: 12),
                 if (league)
-                  ..._leagueView(context, period, all, leagueData.myName, season: selected == _season)
+                  ..._leagueView(context, period, all, current.myName, season: selected == _season)
                 else if (selected == _season)
-                  ..._seasonView(context, ref, all, leagueData.myName)
+                  ..._seasonView(context, ref, all, current.myName)
                 else
-                  ..._weekView(context, ref, period, leagueData.myName, isLatest: selected == weeks.last),
+                  ..._weekView(context, ref, period, current.myName, isLatest: selected == weeks.last),
               ],
             ),
           );
@@ -512,7 +517,8 @@ class MatchupScreen extends ConsumerWidget {
     ];
     if (mine.isEmpty) return const [];
     final opponents = {for (final m in mine) m.opp.name}.toList()..sort();
-    final filter = ref.watch(_opponentFilterProvider);
+    // A filter left over from another league (after switching) means "all".
+    final filter = opponents.contains(ref.watch(_opponentFilterProvider)) ? ref.watch(_opponentFilterProvider) : null;
     final shown = filter == null ? mine : mine.where((m) => m.opp.name == filter).toList();
     final scores = [for (final m in shown) score(m.me, m.opp)];
     int sum(int Function(Score s) f) => scores.fold(0, (a, s) => a + f(s));

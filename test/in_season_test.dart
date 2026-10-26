@@ -87,11 +87,28 @@ void main() {
         },
       );
       final ids = data.players.map((p) => p.id).toList();
-      expect(data.remoteTeams.single.playerIds, ['jimmy-butler-iii', '777']);
+      expect(data.leagues.first.remoteTeams.single.playerIds, ['jimmy-butler-iii', '777']);
       expect(ids.where((id) => id == 'jimmy-butler-iii'), hasLength(1)); // one zero-stat copy, no ESPN twin
       expect(data.injuries['jimmy-butler-iii']!.status, 'Out');
       final rookie = data.players.firstWhere((p) => p.id == '777');
       expect((rookie.name, rookie.team, rookie.gp), ('Rookie Hurt', 'GSW', 0));
+    });
+
+    test('parses every league: primary first as main, extra leagues by id', () async {
+      final config = (await loadLeagueData(client: MockClient((_) async => http.Response('', 500)))).config;
+      final data = mergeSnapshot([], config, {
+        'updatedAt': '2026-10-25T10:00:00Z',
+        'players': [],
+        'injuries': [],
+        'league': {'name': 'Jerusalem fantasy league', 'myName': 'Ironi shaide'},
+        'leagues': [
+          {'id': 'fantrax', 'name': 'Fantrax', 'myName': 'Shaide', 'teams': [], 'matchups': []},
+        ],
+      });
+      expect(data.leagues.map((l) => (l.id, l.name, l.myName)), [
+        ('main', 'Jerusalem fantasy league', 'Ironi shaide'),
+        ('fantrax', 'Fantrax', 'Shaide'),
+      ]);
     });
 
     test('falls back to initial + surname for OCR-garbled names, only when unambiguous', () async {

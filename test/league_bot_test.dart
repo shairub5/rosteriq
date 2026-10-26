@@ -98,11 +98,55 @@ void main() {
       LeagueTeam(id: 't2', name: 'Team 2'),
       LeagueTeam(id: 't3', name: 'Team 3'),
     ], takenIds: {'c'});
-    final next = league.withRemoteTeam((name: 'ForKobe', playerIds: ['b', 'c'], updatedAt: DateTime.utc(2026)))!;
+    final next = league.withRemoteTeam((name: 'ForKobe', playerIds: ['b', 'c'], updatedAt: DateTime.utc(2026)));
     expect(next.teams[0].playerIds, ['a']);
     expect(next.teams[1].name, 'ForKobe');
     expect(next.teams[1].playerIds, ['b', 'c']);
     expect(next.takenIds, isEmpty);
     expect(next.remoteApplied['forkobe'], isNotNull);
+  });
+
+  test('pickLeague routes by caption prefix, then by known team names, else primary', () {
+    final leagues = [
+      {'name': 'Jerusalem fantasy league', 'teams': [{'name': 'ForKobe'}], 'matchups': []},
+      {
+        'name': 'Fantrax',
+        'myName': 'Shaide',
+        'teams': [],
+        'matchups': [
+          {
+            'teams': [
+              {'name': 'OG Ohana'},
+              {'name': 'Shaide'},
+            ],
+          },
+        ],
+      },
+    ];
+    expect(pickLeague(leagues, ['Shaide', 'Lior']), 1);
+    expect(pickLeague(leagues, ['ForKobe']), 0);
+    expect(pickLeague(leagues, ['Somebody New']), 0);
+    expect(pickLeague(leagues, ['Somebody New'], leaguePrefix: 'fantrax'), 1);
+    expect(splitCaption('Fantrax: The Hayun'), (league: 'Fantrax', team: 'The Hayun'));
+    expect(splitCaption('ForKobe'), (league: null, team: 'ForKobe'));
+  });
+
+  test('leagueFor edits the primary league by default and creates a named extra league once', () {
+    final snap = <String, dynamic>{
+      'league': {'name': 'Jerusalem fantasy league'},
+    };
+    expect(identical(leagueFor(snap, null), snap['league']), isTrue);
+    expect(identical(leagueFor(snap, 'jerusalem fantasy league'), snap['league']), isTrue);
+    final fantrax = leagueFor(snap, 'Fantrax');
+    fantrax['myName'] = 'Shaide';
+    expect(leagueFor(snap, 'Fantrax')['myName'], 'Shaide');
+    expect((snap['leagues'] as List).single['id'], 'fantrax');
+  });
+
+  test('withRemoteTeam adds the team when a league has no free slot', () {
+    const empty = LeagueState(teams: []);
+    final next = empty.withRemoteTeam((name: 'OG Ohana', playerIds: ['x'], updatedAt: DateTime.utc(2026)));
+    expect(next.teams.single.name, 'OG Ohana');
+    expect(next.teams.single.playerIds, ['x']);
   });
 }

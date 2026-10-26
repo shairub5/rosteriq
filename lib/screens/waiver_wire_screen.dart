@@ -5,6 +5,7 @@ import '../models/player.dart';
 import '../models/ranking_result.dart';
 import '../models/stat_category.dart';
 import '../state/draft_state_provider.dart';
+import '../state/current_league_provider.dart';
 import '../state/league_data_provider.dart';
 import '../state/league_teams_provider.dart';
 import '../state/ranking_provider.dart';
@@ -12,6 +13,7 @@ import '../state/saved_roster_provider.dart';
 import '../state/schedule_provider.dart';
 import '../theme.dart';
 import '../widgets/common.dart';
+import '../widgets/league_switcher.dart';
 import '../widgets/player_avatar.dart';
 import '../widgets/player_row.dart';
 import 'in_season_shell.dart';
@@ -31,7 +33,7 @@ class WaiverWireScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     return Scaffold(
-      appBar: AppBar(title: const Text('Add/Drop'), actions: const [SettingsButton()]),
+      appBar: AppBar(title: const LeagueTitle('Add/Drop'), actions: const [SettingsButton()]),
       body: AsyncBody(
         value: ref.watch(leagueDataProvider),
         builder: (leagueData) {
@@ -57,10 +59,11 @@ class WaiverWireScreen extends ConsumerWidget {
           final complete = ref.watch(leagueCompleteProvider);
           final today = DateTime.now();
           // Categories that are close in my current real matchup: the ones a pickup can flip this week.
-          final current = leagueData.matchups.isEmpty ? null : leagueData.matchups.last.week;
-          final live = leagueData.matchups
+          final league = ref.watch(currentLeagueProvider);
+          final current = league.matchups.isEmpty ? null : league.matchups.last.week;
+          final live = league.matchups
               .where((m) => m.week == current)
-              .map((m) => sideOf(m, leagueData.myName))
+              .map((m) => sideOf(m, league.myName))
               .nonNulls
               .firstOrNull;
           final close = {

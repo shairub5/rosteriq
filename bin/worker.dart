@@ -61,11 +61,14 @@ Future<void> main(List<String> args) async {
         );
 
   final now = DateTime.now().toUtc();
-  final prevLeague = prevJson?['league'] as Map<String, dynamic>?;
-  final league = dryRun
-      ? prevLeague
-      : await syncLeagueFromTelegram(
-          previous: prevLeague,
+  final prevLeagues = [
+    (prevJson?['league'] as Map<String, dynamic>?) ?? <String, dynamic>{},
+    ...((prevJson?['leagues'] as List?) ?? const []).cast<Map<String, dynamic>>(),
+  ];
+  final leagues = dryRun
+      ? prevLeagues
+      : await syncLeaguesFromTelegram(
+          leagues: prevLeagues,
           players: [
             for (final p in stats.players) (name: p.name, id: p.id),
             for (final i in injuries.values) (name: i.name, id: i.playerId),
@@ -98,7 +101,8 @@ Future<void> main(List<String> args) async {
       for (final p in stats.players) {...p.toJson(), 'minutes': stats.minutes[p.id], 'totalZ': totalZById[p.id]},
     ],
     'alerts': alerts,
-    'league': league,
+    'league': leagues.first,
+    'leagues': leagues.skip(1).toList(),
   }));
   stdout.writeln('${alerts.length} alerts, ${stats.players.length} players, ${injuries.length} injuries -> ${snapshotFile.path}');
 }

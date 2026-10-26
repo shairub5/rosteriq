@@ -24,25 +24,30 @@ class LeagueData {
   /// When the worker last wrote the snapshot; null = offline, bundled preseason projections.
   final DateTime? updatedAt;
 
-  /// League rosters published through the snapshot (Telegram bot today, Yahoo later), player ids re-keyed.
-  final List<RemoteTeam> remoteTeams;
-
-  /// Every league matchup entered so far with both teams' real weekly totals, sorted by week.
-  final List<LeagueMatchup> matchups;
-
-  /// My Yahoo team name as it appears in matchups (learned by the bot); null until known.
-  final String? myName;
+  /// My fantasy leagues; the primary one (id 'main') first. Never empty.
+  final List<LeagueInfo> leagues;
 
   const LeagueData({
     required this.players,
     required this.config,
     this.injuries = const {},
     this.updatedAt,
-    this.remoteTeams = const [],
-    this.matchups = const [],
-    this.myName,
+    this.leagues = const [emptyMainLeague],
   });
 }
+
+/// One fantasy league from the snapshot: rosters published through it (Telegram bot today,
+/// Yahoo later) and every matchup entered with both teams' real weekly totals, sorted by week.
+typedef LeagueInfo = ({
+  String id,
+  String name,
+  /// My team's name as it appears in matchups (learned by the bot); null until known.
+  String? myName,
+  List<RemoteTeam> remoteTeams,
+  List<LeagueMatchup> matchups,
+});
+
+const LeagueInfo emptyMainLeague = (id: 'main', name: 'My league', myName: null, remoteTeams: [], matchups: []);
 
 /// One team's week: the 9 category totals, plus `extra` = fgm/fga/ftm/fta/gp/remaining when the
 /// screenshot showed them (used for the projected final).
@@ -171,30 +176,45 @@ LeagueData mergeSnapshot(List<Player> bundled, LeagueRosterConfig config, Map<St
     config: config,
     injuries: injuries,
     updatedAt: DateTime.parse(snapshot['updatedAt'] as String),
-    remoteTeams: [
-      for (final t in ((snapshot['league'] as Map?)?['teams'] as List? ?? const []).cast<Map<String, dynamic>>())
+    leagues: [
+      for (final (i, l) in [
+        (snapshot['league'] as Map?) ?? const {},
+        ...((snapshot['leagues'] as List?) ?? const []).cast<Map>(),
+      ].indexed)
         (
-          name: t['name'] as String,
-          playerIds: [for (final id in (t['playerIds'] as List).cast<String>()) idByEspnId[id] ?? id],
-          updatedAt: DateTime.parse(t['updatedAt'] as String),
+          id: i == 0 ? 'main' : (l['id'] as String? ?? 'league$i'),
+          name: l['name'] as String? ?? (i == 0 ? 'My league' : 'League ${i + 1}'),
+          myName: l['myName'] as String?,
+          remoteTeams: [
+            for (final t in ((l['teams'] as List?) ?? const []).cast<Map<String, dynamic>>())
+              (
+                name: t['name'] as String,
+                playerIds: [for (final id in (t['playerIds'] as List).cast<String>()) idByEspnId[id] ?? id],
+                updatedAt: DateTime.parse(t['updatedAt'] as String),
+              ),
+          ],
+          matchups: [
+            for (final m in ((l['matchups'] as List?) ?? const []).cast<Map<String, dynamic>>())
+              if ((m['teams'] as List?)?.length == 2)
+                () {
+                  TeamWeek side(Map t) => (
+                        name: t['name'] as String,
+                        stats: {for (final c in allStatCategories) c: ((t['stats'] as Map)[c.name] as num).toDouble()},
+                        extra: {
+                          for (final k in extraKeys)
+                            if ((t['stats'] as Map)[k] case final num v) k: v.toDouble(),
+                        },
+                      );
+                  final t = (m['teams'] as List).cast<Map>();
+                  return (
+                    week: m['week'] as int,
+                    a: side(t[0]),
+                    b: side(t[1]),
+                    updatedAt: DateTime.parse(m['updatedAt'] as String),
+                  );
+                }(),
+          ],
         ),
-    ],
-    myName: (snapshot['league'] as Map?)?['myName'] as String?,
-    matchups: [
-      for (final m in ((snapshot['league'] as Map?)?['matchups'] as List? ?? const []).cast<Map<String, dynamic>>())
-        if ((m['teams'] as List?)?.length == 2)
-          () {
-            TeamWeek side(Map t) => (
-                  name: t['name'] as String,
-                  stats: {for (final c in allStatCategories) c: ((t['stats'] as Map)[c.name] as num).toDouble()},
-                  extra: {
-                    for (final k in extraKeys)
-                      if ((t['stats'] as Map)[k] case final num v) k: v.toDouble(),
-                  },
-                );
-            final t = (m['teams'] as List).cast<Map>();
-            return (week: m['week'] as int, a: side(t[0]), b: side(t[1]), updatedAt: DateTime.parse(m['updatedAt'] as String));
-          }(),
     ],
   );
 }

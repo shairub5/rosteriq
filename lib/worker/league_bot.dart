@@ -4,9 +4,9 @@ import 'package:http/http.dart' as http;
 
 import 'espn.dart';
 
-/// League data sent to the Telegram bot as Yahoo screenshots, stored in
-/// `snapshot.json` for the app:
-///   league: {telegramOffset, myName, teams: [{name, playerIds, updatedAt}],
+/// League data sent to the Telegram bot as screenshots, stored in `snapshot.json` for the app.
+/// `league` is the primary league; `leagues` holds any others, same shape plus `id`:
+///   league: {name, telegramOffset, myName, teams: [{name, playerIds, updatedAt}],
 ///            matchups: [{week, teams: [{name, stats: {cat: n}}, {...}], updatedAt}]}
 /// - Roster screenshots + the team name as caption replace that team's roster.
 ///   playerIds are ESPN ids (or bundled ids for players ESPN doesn't list); the
@@ -204,7 +204,7 @@ Future<ScreenshotRead> readScreenshots(String apiKey, List<({List<int> bytes, St
               },
             {
               'type': 'text',
-              'text': 'These are screenshots from a 9-category fantasy basketball league (Yahoo or similar).\n'
+              'text': 'These are screenshots from a 9-category fantasy basketball league (Yahoo, Fantrax or similar).\n'
                   'If they show one team\'s roster (players by position): kind "roster", list the full name of '
                   'every NBA player including bench and IL slots, each once, exactly as written; teams empty, week 0.\n'
                   'If they show a head-to-head matchup with both teams\' category totals: kind "matchup", give both '
@@ -235,30 +235,77 @@ Future<ScreenshotRead> readScreenshots(String apiKey, List<({List<int> bytes, St
   );
 }
 
-/// Polls the bot for screenshots, updates `league`, and replies to each one.
-/// Returns the new `league` object for the snapshot (the previous one if nothing came in).
-Future<Map<String, dynamic>> syncLeagueFromTelegram({
-  required Map<String, dynamic>? previous,
+/// Which league a screenshot belongs to: an explicit "League: Team" caption prefix, else the league
+/// whose known team names (or my name) include one of [names], else the first (primary) league.
+int pickLeague(List<Map<String, dynamic>> leagues, Iterable<String> names, {String? leaguePrefix}) {
+  if (leaguePrefix != null) {
+    final i = leagues.indexWhere((l) => normalizeName(l['name'] as String? ?? '') == normalizeName(leaguePrefix));
+    if (i >= 0) return i;
+  }
+  final wanted = names.map(normalizeName).toSet();
+  for (final (i, l) in leagues.indexed) {
+    final known = {
+      for (final t in (l['teams'] as List? ?? const [])) normalizeName(t['name'] as String),
+      for (final m in (l['matchups'] as List? ?? const []))
+        for (final t in (m['teams'] as List)) normalizeName(t['name'] as String),
+      if (l['myName'] case final String me) normalizeName(me),
+    };
+    if (wanted.any(known.contains)) return i;
+  }
+  return 0;
+}
+
+/// "Fantrax: Team" -> (league: "Fantrax", team: "Team"); a plain caption has no league.
+({String? league, String team}) splitCaption(String caption) {
+  final i = caption.indexOf(':');
+  return i <= 0 ? (league: null, team: caption.trim()) : (league: caption.substring(0, i).trim(), team: caption.substring(i + 1).trim());
+}
+
+/// The league object in a snapshot to edit: the primary `league` when [name] is null or matches its
+/// name, else the extra league with that name (created if new). Returned map is live in [snap].
+Map<String, dynamic> leagueFor(Map<String, dynamic> snap, String? name) {
+  final primary = (snap['league'] as Map<String, dynamic>?) ?? (snap['league'] = <String, dynamic>{});
+  if (name == null || normalizeName(primary['name'] as String? ?? '') == normalizeName(name)) return primary;
+  final extras = ((snap['leagues'] as List?) ?? const []).cast<Map<String, dynamic>>().toList();
+  snap['leagues'] = extras;
+  return extras.where((l) => normalizeName(l['name'] as String) == normalizeName(name)).firstOrNull ??
+      (() {
+        final l = <String, dynamic>{'id': normalizeName(name).replaceAll(' ', '-'), 'name': name};
+        extras.add(l);
+        return l;
+      })();
+}
+
+/// Polls the bot for screenshots, routes each to its league, updates it, and replies.
+/// [leagues] = the primary `league` first, then the extra `leagues`; returns them updated, same order.
+/// The Telegram offset lives on the primary league.
+Future<List<Map<String, dynamic>>> syncLeaguesFromTelegram({
+  required List<Map<String, dynamic>> leagues,
   required List<({String id, String name})> players,
   required String? token,
   required String? chatId,
   required String? apiKey,
   required DateTime now,
 }) async {
-  var teams = [...((previous?['teams'] as List?) ?? const []).cast<Map<String, dynamic>>()];
-  var matchups = [...((previous?['matchups'] as List?) ?? const []).cast<Map<String, dynamic>>()];
-  var offset = previous?['telegramOffset'] as int?;
-  var myName = previous?['myName'] as String?;
-  Map<String, dynamic> result() => {'teams': teams, 'matchups': matchups, 'myName': myName, 'telegramOffset': offset};
-  if (token == null || chatId == null) return result();
+  final out = [
+    for (final l in leagues)
+      {
+        ...l,
+        'teams': [...((l['teams'] as List?) ?? const []).cast<Map<String, dynamic>>()],
+        'matchups': [...((l['matchups'] as List?) ?? const []).cast<Map<String, dynamic>>()],
+      },
+  ];
+  if (token == null || chatId == null || out.isEmpty) return out;
+  final offset = out[0]['telegramOffset'] as int?;
 
   final api = 'https://api.telegram.org/bot$token';
   final res = await http.get(Uri.parse('$api/getUpdates?timeout=0${offset == null ? '' : '&offset=${offset + 1}'}'));
   if (res.statusCode != 200) throw Exception('Telegram getUpdates ${res.statusCode}: ${res.body}');
   final grouped = groupPhotoMessages((jsonDecode(res.body) as Map<String, dynamic>)['result'] as List, chatId);
-  offset = grouped.lastUpdateId ?? offset;
+  out[0]['telegramOffset'] = grouped.lastUpdateId ?? offset;
 
   Future<void> reply(String text) => http.post(Uri.parse('$api/sendMessage'), body: {'chat_id': chatId, 'text': text});
+  String label(Map<String, dynamic> l) => out.length > 1 ? '${l['name'] ?? 'League'} · ' : '';
 
   for (final g in grouped.groups) {
     if (apiKey == null) {
@@ -275,15 +322,17 @@ Future<Map<String, dynamic>> syncLeagueFromTelegram({
       }
       final read = await readScreenshots(apiKey, images);
       if (read.kind == 'roster') {
-        final name = g.caption;
-        if (name == null) {
-          await reply('That looks like a roster. Send it again with the team name as the caption ("My Team" for yours).');
+        if (g.caption == null) {
+          await reply('That looks like a roster. Send it again with the team name as the caption ("My Team" for yours, '
+              '"League: Team" for another league).');
           continue;
         }
+        final c = splitCaption(g.caption!);
+        final l = out[pickLeague(out, [c.team], leaguePrefix: c.league)];
         final m = matchRosterNames(read.players, players);
-        teams = upsertTeam(teams, name, m.ids, now);
+        l['teams'] = upsertTeam(l['teams'] as List<Map<String, dynamic>>, c.team, m.ids, now);
         await reply([
-          '✅ $name: ${m.ids.length} players saved. The app picks it up on next refresh.',
+          '✅ ${label(l)}${c.team}: ${m.ids.length} players saved. The app picks it up on next refresh.',
           if (m.unmatched.isNotEmpty) 'Couldn\'t match: ${m.unmatched.join(', ')}',
         ].join('\n'));
       } else {
@@ -291,20 +340,25 @@ Future<Map<String, dynamic>> syncLeagueFromTelegram({
           await reply('❌ Expected 2 teams in the matchup, found ${read.teams.length}.');
           continue;
         }
-        // Yahoo's matchup page often has no week number: caption, else the latest stored week.
-        final week = read.week > 0
-            ? read.week
-            : weekFromCaption(g.caption) ?? (matchups.isEmpty ? 1 : matchups.last['week'] as int);
-        myName ??= inferMyName(read.teams, teams.map((t) => t['name'] as String).where((n) => !isMyTeamName(n)));
-        matchups = upsertMatchup(matchups, matchupEntry(read.teams, week, now));
+        final c = g.caption == null ? null : splitCaption(g.caption!);
+        final l = out[pickLeague(out, read.teams.map((t) => t.name), leaguePrefix: c?.league)];
+        final matchups = l['matchups'] as List<Map<String, dynamic>>;
+        // Matchup pages often have no week number: caption, else the latest stored week.
+        final captionWeek = weekFromCaption(c?.team);
+        final week = read.week > 0 ? read.week : captionWeek ?? (matchups.isEmpty ? 1 : matchups.last['week'] as int);
+        l['myName'] ??= inferMyName(
+          read.teams,
+          (l['teams'] as List<Map<String, dynamic>>).map((t) => t['name'] as String).where((n) => !isMyTeamName(n)),
+        );
+        l['matchups'] = upsertMatchup(matchups, matchupEntry(read.teams, week, now));
         final s = matchupScore(read.teams[0].stats, read.teams[1].stats);
-        await reply('✅ Week $week: ${read.teams[0].name} ${s.w}-${s.l}-${s.t} ${read.teams[1].name}. '
-            '${read.week > 0 || weekFromCaption(g.caption) != null ? '' : '(Wrong week? Resend with a caption like "Week 2".) '}'
+        await reply('✅ ${label(l)}Week $week: ${read.teams[0].name} ${s.w}-${s.l}-${s.t} ${read.teams[1].name}. '
+            '${read.week > 0 || captionWeek != null ? '' : '(Wrong week? Resend with a caption like "Week 2".) '}'
             'The app picks it up on next refresh.');
       }
     } catch (e) {
       await reply('❌ ${g.caption ?? 'Screenshot'}: couldn\'t read it ($e). Try sending it again.');
     }
   }
-  return result();
+  return out;
 }

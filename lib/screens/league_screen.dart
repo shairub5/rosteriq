@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/player.dart';
+import '../state/current_league_provider.dart';
 import '../state/league_data_provider.dart';
 import '../state/league_teams_provider.dart';
 import '../state/saved_roster_provider.dart';
 import '../widgets/common.dart';
+import '../widgets/league_switcher.dart';
 import '../widgets/player_picker_sheet.dart';
 import '../widgets/player_row.dart';
 import '../worker/espn.dart' show normalizeName;
@@ -28,14 +30,15 @@ class LeagueScreen extends ConsumerWidget {
     final size = leagueData?.config.totalRosterSize ?? 13;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('League'), actions: const [SettingsButton()]),
+      appBar: AppBar(title: const LeagueTitle('League'), actions: const [SettingsButton()]),
       body: AsyncBody(
         value: ref.watch(leagueTeamsProvider),
         builder: (league) {
           final filled = league.teams.where((t) => t.playerIds.length >= size).length + (mine.length >= size ? 1 : 0);
           final teamCount = league.teams.length + 1;
-          final myName = leagueData?.myName;
-          final myLast = leagueData?.matchups.where((m) => m.a.name == myName || m.b.name == myName).lastOrNull;
+          final current = ref.watch(currentLeagueProvider);
+          final myName = current.myName;
+          final myLast = current.matchups.where((m) => m.a.name == myName || m.b.name == myName).lastOrNull;
           final lastOpponent = myLast == null ? null : (myLast.a.name == myName ? myLast.b.name : myLast.a.name);
           return ListView(
             padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),

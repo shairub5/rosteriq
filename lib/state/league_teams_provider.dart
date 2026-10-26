@@ -5,10 +5,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../services/player_repository.dart';
 import '../worker/espn.dart' show normalizeName;
+import 'current_league_provider.dart';
 import 'league_data_provider.dart';
 import 'saved_roster_provider.dart';
 
-const _key = 'league_teams_v1';
+const _baseKey = 'league_teams_v1';
 const _otherTeamsCount = 11;
 
 class LeagueTeam {
@@ -67,16 +68,21 @@ class LeagueState {
       };
 
   /// Applies one remote roster: replaces the team with the same name, or takes over a
-  /// "Team N" slot. The players leave any other team and the taken list. Null when every
-  /// team already has a real name.
-  LeagueState? withRemoteTeam(RemoteTeam r) {
+  /// "Team N" slot, or adds the team. The players leave any other team and the taken list.
+  LeagueState withRemoteTeam(RemoteTeam r) {
     final key = normalizeName(r.name);
     // Same name, else an unnamed "Team N" slot (an empty one first, so hand-entered rosters survive).
     final unnamed = teams.where((t) => RegExp(r'^Team \d+$').hasMatch(t.name));
-    final target = teams.where((t) => normalizeName(t.name) == key).firstOrNull ??
+    var target = teams.where((t) => normalizeName(t.name) == key).firstOrNull ??
         unnamed.where((t) => t.playerIds.isEmpty).firstOrNull ??
         unnamed.firstOrNull;
-    if (target == null) return null;
+    // No slot left (e.g. a league that started empty): add the team.
+    final next = target == null ? copyWith(teams: [...teams, LeagueTeam(id: 'r${teams.length + 1}', name: r.name)]) : this;
+    target ??= next.teams.last;
+    return next._applyRemote(target, r, key);
+  }
+
+  LeagueState _applyRemote(LeagueTeam target, RemoteTeam r, String key) {
     final ids = r.playerIds.toSet();
     return copyWith(
       teams: [
@@ -92,14 +98,20 @@ class LeagueState {
 }
 
 class LeagueTeamsNotifier extends AsyncNotifier<LeagueState> {
+  late String _key;
+
   @override
   Future<LeagueState> build() async {
+    final leagueId = await ref.watch(selectedLeagueIdProvider.future);
+    _key = leagueKey(_baseKey, leagueId);
     final prefs = await SharedPreferences.getInstance();
     final raw = prefs.getString(_key);
-    var league = raw == null ? _fresh(prefs) : _parse(raw);
+    // Other leagues start empty and take their teams from the shared file.
+    var league = raw != null ? _parse(raw) : (leagueId == 'main' ? _fresh(prefs) : const LeagueState(teams: []));
 
     // Pull in rosters sent through the bot (or Yahoo later) that are newer than what was applied.
-    final remote = (await ref.watch(leagueDataProvider.future)).remoteTeams;
+    await ref.watch(leagueDataProvider.future);
+    final remote = ref.watch(currentLeagueProvider).remoteTeams;
     var changed = false;
     for (final r in remote) {
       final key = normalizeName(r.name);
@@ -114,7 +126,7 @@ class LeagueTeamsNotifier extends AsyncNotifier<LeagueState> {
           remoteApplied: {...league.remoteApplied, key: r.updatedAt.toIso8601String()},
         );
       } else {
-        league = league.withRemoteTeam(r) ?? league;
+        league = league.withRemoteTeam(r);
       }
       changed = true;
     }
@@ -184,5 +196,7 @@ final leagueCompleteProvider = Provider<bool>((ref) {
   final mine = ref.watch(savedRosterProvider).value ?? const [];
   if (config == null || league == null) return false;
   final size = config.totalRosterSize;
-  return mine.length >= size && league.teams.every((t) => t.playerIds.length >= size);
+  return mine.length >= size &&
+      league.teams.length >= config.teamsCount - 1 &&
+      league.teams.every((t) => t.playerIds.length >= size);
 });

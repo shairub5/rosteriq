@@ -1,14 +1,18 @@
 // Sets one league team's roster in a snapshot.json, using the same matching as
 // the Telegram bot. For rosters entered outside Telegram (e.g. by hand).
 //
-//   dart run bin/set_team.dart <snapshot.json> "<team name>" "Player One" "Player Two" ...
+//   dart run bin/set_team.dart <snapshot.json> [--league "<league>"] "<team name>" "Player One" "Player Two" ...
+// Without --league the primary league is edited; a new league name creates that league.
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:rosteriq/models/player.dart';
 import 'package:rosteriq/worker/league_bot.dart';
 
-void main(List<String> args) {
+void main(List<String> argv) {
+  final li = argv.indexOf('--league');
+  final leagueName = li >= 0 ? argv[li + 1] : null;
+  final args = [...argv]..removeRange(li >= 0 ? li : 0, li >= 0 ? li + 2 : 0);
   if (args.length < 3) {
     stderr.writeln('usage: dart run bin/set_team.dart <snapshot.json> "<team name>" "<player>" ...');
     exit(64);
@@ -24,16 +28,13 @@ void main(List<String> args) {
   ];
 
   final m = matchRosterNames(args.sublist(2), players);
-  final league = (snap['league'] as Map<String, dynamic>?) ?? {};
-  snap['league'] = {
-    ...league,
-    'teams': upsertTeam(
-      [...((league['teams'] as List?) ?? const []).cast<Map<String, dynamic>>()],
-      args[1],
-      m.ids,
-      DateTime.now().toUtc(),
-    ),
-  };
+  final league = leagueFor(snap, leagueName);
+  league['teams'] = upsertTeam(
+    [...((league['teams'] as List?) ?? const []).cast<Map<String, dynamic>>()],
+    args[1],
+    m.ids,
+    DateTime.now().toUtc(),
+  );
   file.writeAsStringSync(jsonEncode(snap));
   stdout.writeln('${args[1]}: ${m.ids.length} matched${m.unmatched.isEmpty ? '' : ', unmatched: ${m.unmatched.join(', ')}'}');
   if (m.unmatched.isNotEmpty) exitCode = 1;

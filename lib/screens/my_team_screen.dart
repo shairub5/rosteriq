@@ -11,6 +11,7 @@ import '../state/saved_roster_provider.dart';
 import '../theme.dart';
 import '../widgets/category_radar_chart.dart';
 import '../widgets/common.dart';
+import '../widgets/league_switcher.dart';
 import '../widgets/player_picker_sheet.dart';
 import '../widgets/player_row.dart';
 import 'league_screen.dart';
@@ -28,7 +29,7 @@ class MyTeamScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Team'),
+        title: const LeagueTitle('My Team'),
         actions: [
           if (hasTeam)
             PopupMenuButton<void>(
