@@ -198,6 +198,9 @@ TeamWeek? projectWeek(TeamWeek t, List<Player> roster, Map<String, InjuryEntry> 
   );
 }
 
+/// A week is over once both teams in a matchup show 0 games remaining (unknown counts as not over).
+bool isFinal(LeagueMatchup m) => m.a.extra['remaining'] == 0 && m.b.extra['remaining'] == 0;
+
 /// Week chip selection: a week number, [_season], or null for the latest week.
 const _season = 0;
 final _selectedProvider = StateProvider<int?>((ref) => null);
@@ -252,7 +255,10 @@ class MatchupScreen extends ConsumerWidget {
                   },
                   dropdownMenuEntries: [
                     for (final w in weeks.reversed)
-                      DropdownMenuEntry(value: w, label: w == weeks.last ? 'Week $w (current)' : 'Week $w'),
+                      DropdownMenuEntry(
+                        value: w,
+                        label: w == weeks.last && !all.where((m) => m.week == w).every(isFinal) ? 'Week $w (current)' : 'Week $w',
+                      ),
                     const DropdownMenuEntry(value: _season, label: 'Season'),
                   ],
                 ),
@@ -316,7 +322,8 @@ class MatchupScreen extends ConsumerWidget {
                 const <String>[])
               ?byId[id],
           ];
-    final wantProjected = ref.watch(_projectedProvider) && isLatest;
+    final live = isLatest && !week.every(isFinal);
+    final wantProjected = ref.watch(_projectedProvider) && live;
     final projected = now == null || !wantProjected
         ? null
         : (
@@ -344,7 +351,7 @@ class MatchupScreen extends ConsumerWidget {
               DropdownMenuEntry(value: name, label: name),
           ],
         ),
-        if (isLatest) ...[
+        if (live) ...[
           const SizedBox(height: 12),
           SegmentedButton<bool>(
             segments: const [
@@ -375,7 +382,7 @@ class MatchupScreen extends ConsumerWidget {
                     'you ${games(now.me)}, them ${games(now.opp)}'
                 : hypothetical
                     ? 'If you had played them · ${s.w > s.l ? 'you\'d win' : s.w < s.l ? 'you\'d lose' : 'a tie'}'
-                    : '${_verdict(s, inProgress: isLatest)} · updated ${_ago(w.updatedAt)}',
+                    : '${_verdict(s, inProgress: live)}${live ? ' · updated ${_ago(w.updatedAt)}' : ' · final'}',
             score: s,
           );
         }(),
@@ -406,7 +413,7 @@ class MatchupScreen extends ConsumerWidget {
             ),
           ),
         ),
-        if (isLatest && !hypothetical)
+        if (live && !hypothetical)
           () {
             final close = [
               for (final c in allStatCategories)
@@ -528,7 +535,7 @@ class MatchupScreen extends ConsumerWidget {
         title: filter == null ? 'My season' : 'Head to head vs $filter',
         subtitle: 'Categories ${sum((s) => s.w)}-${sum((s) => s.l)}-${sum((s) => s.t)} '
             'over ${shown.length} week${shown.length == 1 ? '' : 's'}'
-            '${shown.any((m) => m.week == all.last.week) ? ' (week ${all.last.week} still in progress)' : ''}',
+            '${shown.any((m) => m.week == all.last.week) && !all.where((m) => m.week == all.last.week).every(isFinal) ? ' (week ${all.last.week} still in progress)' : ''}',
         score: (
           w: scores.where((s) => s.w > s.l).length,
           l: scores.where((s) => s.w < s.l).length,

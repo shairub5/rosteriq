@@ -264,6 +264,16 @@ void main() {
     expect(projectWeek(team('X', [.5, .5, 1, 1, 1, 1, 1, 1, 1]), [a], const {}), isNull); // no games left given
   });
 
+  test('isFinal only when both teams have 0 games remaining', () {
+    final done = team('A', [.5, .5, 1, 1, 1, 1, 1, 1, 1], extra: {'remaining': 0});
+    final playing = team('B', [.5, .5, 1, 1, 1, 1, 1, 1, 1], extra: {'remaining': 2});
+    final unknown = team('C', [.5, .5, 1, 1, 1, 1, 1, 1, 1]);
+    LeagueMatchup m(TeamWeek a, TeamWeek b) => (week: 1, a: a, b: b, updatedAt: DateTime.utc(2026));
+    expect(isFinal(m(done, done)), isTrue);
+    expect(isFinal(m(done, playing)), isFalse);
+    expect(isFinal(m(done, unknown)), isFalse);
+  });
+
   testWidgets('radar renders', (tester) async {
     await tester.pumpWidget(MaterialApp(
       theme: buildTheme(Brightness.light),
