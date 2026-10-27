@@ -1,17 +1,18 @@
-# Every 30 min: ESPN stats + injuries -> Telegram alerts -> snapshot.json on the `data` branch.
+# Every 30 min (started by cron-job.org; the schedule below is an hourly backup): ESPN stats + injuries -> Telegram alerts -> snapshot.json on the `data` branch.
 name: scrape
 
 on:
   schedule:
-    # Off the :00/:30 rush: GitHub delays or drops scheduled runs most at the top of the hour.
-    - cron: '7,37 * * * *'
+    # Backup only: GitHub delays or drops scheduled runs, so cron-job.org dispatches the real 30-min cadence.
+    - cron: '7 * * * *'
   workflow_dispatch:
 
 permissions:
   contents: write
 
+# Shared with fantrax.yml: both force-push the data branch, so they take turns.
 concurrency:
-  group: scrape
+  group: data-branch
   cancel-in-progress: false
 
 jobs:
@@ -40,6 +41,7 @@ jobs:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          COOKIE_KEY: ${{ secrets.COOKIE_KEY }}
         # Last commit on main (the bot only pushes to `data`), for the 60-day keep-alive reminder.
         run: LAST_COMMIT_AT=$(git log -1 --format=%cI) dart run bin/worker.dart state/snapshot.json
 

@@ -9,15 +9,14 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:http/http.dart' as http;
 import 'package:rosteriq/engine/ranking_engine.dart';
 import 'package:rosteriq/models/league_config.dart';
 import 'package:rosteriq/models/player.dart';
 import 'package:rosteriq/models/ranking_result.dart';
 import 'package:rosteriq/worker/alerts.dart';
 import 'package:rosteriq/worker/espn.dart';
-import 'package:rosteriq/worker/fantrax.dart';
 import 'package:rosteriq/worker/league_bot.dart';
+import 'package:rosteriq/worker/telegram.dart';
 
 
 Future<void> main(List<String> args) async {
@@ -51,11 +50,12 @@ Future<void> main(List<String> args) async {
   final leagues = dryRun
       ? prevLeagues
       : await syncLeaguesFromTelegram(
-          leagues: await _syncFantrax(prevLeagues, players, now),
+          leagues: prevLeagues,
           players: players,
           token: Platform.environment['TELEGRAM_TOKEN'],
           chatId: Platform.environment['TELEGRAM_CHAT_ID'],
           apiKey: Platform.environment['ANTHROPIC_API_KEY'],
+          cookieKey: Platform.environment['COOKIE_KEY'],
           now: now,
         );
 
@@ -104,7 +104,9 @@ Future<void> main(List<String> args) async {
   for (final a in alerts) {
     stdout.writeln('$a\n');
   }
-  if (!dryRun) await _sendTelegram(alerts);
+  if (!dryRun) {
+    await sendTelegram(alerts, token: Platform.environment['TELEGRAM_TOKEN'], chatId: Platform.environment['TELEGRAM_CHAT_ID']);
+  }
 
   snapshotFile.parent.createSync(recursive: true);
   snapshotFile.writeAsStringSync(jsonEncode({
@@ -120,24 +122,6 @@ Future<void> main(List<String> args) async {
   }));
   stdout.writeln('${alerts.length} alerts, ${stats.players.length} players, ${injuries.length} injuries -> ${snapshotFile.path}');
 }
-
-/// Fantrax leagues due for a roster refresh; a failed fetch keeps the old rosters.
-Future<List<Map<String, dynamic>>> _syncFantrax(
-  List<Map<String, dynamic>> leagues,
-  List<({String id, String name})> players,
-  DateTime now,
-) async => [
-      for (final l in leagues)
-        if (fantraxSyncDue(l, now))
-          await fetchFantraxRosters(l['fantraxLeagueId'] as String)
-              .then((r) => applyFantraxRosters(l, r, players, now))
-              .catchError((Object e) {
-            stderr.writeln('Fantrax sync failed: $e');
-            return l;
-          })
-        else
-          l,
-    ];
 
 List<RankingResult> _rank(List<Player> pool) => computeRankings(
       availablePool: pool,
@@ -172,20 +156,4 @@ String? Function(String team) _gamesNote(DateTime nowUtc) {
     return '${left == 0 ? 'no' : left} game${left == 1 ? '' : 's'} left this week '
         '(next: ${days[next.weekday - 1]} ${months[next.month - 1]} ${next.day})';
   };
-}
-
-Future<void> _sendTelegram(List<String> alerts) async {
-  final token = Platform.environment['TELEGRAM_TOKEN'];
-  final chatId = Platform.environment['TELEGRAM_CHAT_ID'];
-  if (token == null || chatId == null) {
-    stderr.writeln('TELEGRAM_TOKEN / TELEGRAM_CHAT_ID not set - alerts printed only');
-    return;
-  }
-  for (final text in alerts) {
-    final res = await http.post(
-      Uri.parse('https://api.telegram.org/bot$token/sendMessage'),
-      body: {'chat_id': chatId, 'text': text},
-    );
-    if (res.statusCode != 200) stderr.writeln('Telegram ${res.statusCode}: ${res.body}');
-  }
 }

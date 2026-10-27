@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
+import 'package:rosteriq/worker/cookies.dart';
 import 'package:rosteriq/worker/fantrax.dart';
 
 void main() {
@@ -36,12 +39,30 @@ void main() {
     expect(l['fantraxSyncedAt'], now.toIso8601String());
   });
 
-  test('fantraxSyncDue: only opted-in leagues, about twice a day', () {
-    expect(fantraxSyncDue({}, now), isFalse);
-    expect(fantraxSyncDue({'fantraxLeagueId': 'x'}, now), isTrue);
-    Map<String, dynamic> at(Duration ago) =>
-        {'fantraxLeagueId': 'x', 'fantraxSyncedAt': now.subtract(ago).toIso8601String()};
-    expect(fantraxSyncDue(at(const Duration(hours: 3)), now), isFalse);
-    expect(fantraxSyncDue(at(const Duration(hours: 11)), now), isTrue);
+  test('currentScoringPeriod reads Fantrax offsets without a colon', () {
+    final info = {
+      'scoringPeriods': [
+        {'number': 1, 'startDate': '2026-10-20T15:00:00.0-0400', 'endDate': '2026-10-26T18:59:59.0-0400'},
+        {'number': 2, 'startDate': '2026-10-26T19:00:00.0-0400', 'endDate': '2026-11-02T18:59:59.0-0500'},
+      ],
+    };
+    expect(currentScoringPeriod(info, DateTime.utc(2026, 10, 26, 22)), 1); // 18:00 ET Mon
+    expect(currentScoringPeriod(info, DateTime.utc(2026, 10, 27)), 2);
+    expect(currentScoringPeriod(info, DateTime.utc(2026, 12)), isNull);
+  });
+
+  test('isFantraxLoggedOut spots the not-logged-in answer', () {
+    expect(isFantraxLoggedOut({'pageError': {'code': 'WARNING_NOT_LOGGED_IN'}}), isTrue);
+    expect(isFantraxLoggedOut({'responses': []}), isFalse);
+  });
+
+  test('cookies round-trip through AES-GCM and never store the plain text', () async {
+    final key = base64.encode(List.generate(32, (i) => i));
+    final sealed = await encryptCookie('JSESSIONID=abc; FX_RM=xyz', key);
+    expect(sealed, isNot(contains('JSESSIONID')));
+    expect(await decryptCookie(sealed, key), 'JSESSIONID=abc; FX_RM=xyz');
+    expect(cookieState(null), 'missing');
+    expect(cookieState(cookieEntry(sealed, now)), 'ok');
+    expect(cookieState({...cookieEntry(sealed, now), 'expiredAt': now.toIso8601String()}), 'expired');
   });
 }

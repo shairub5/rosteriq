@@ -25,6 +25,35 @@ void main() {
     expect(normalizeName('Jimmy Butler III'), 'jimmy butler');
   });
 
+  test('groupPhotoMessages picks up /commands from my chat, with args and @bot suffix stripped', () {
+    Map<String, dynamic> text(int id, String chat, String t) => {
+          'update_id': id,
+          'message': {'message_id': id * 10, 'chat': {'id': int.parse(chat)}, 'text': t},
+        };
+    final g = groupPhotoMessages([
+      text(1, '42', '/help@RosterIQBot'),
+      text(2, '42', '/fantrax_cookie  JSESSIONID=a; FX_RM=b '),
+      text(3, '42', 'hello'),
+      text(4, '99', '/status'),
+    ], '42');
+    expect(g.commands.map((c) => '${c.name}|${c.args}|${c.messageId}'), ['help||10', 'fantrax_cookie|JSESSIONID=a; FX_RM=b|20']);
+    expect(g.groups, isEmpty);
+    expect(g.lastUpdateId, 4);
+  });
+
+  test('/help lists every bot command; /status shows the Fantrax cookie state', () {
+    for (final (c, _) in botCommands) {
+      expect(helpText(), contains('/$c - '));
+    }
+    final s = statusText([
+      {'name': 'Jerusalem League', 'teams': [{}], 'matchups': [{'week': 1}, {'week': 2}]},
+      {'name': 'Fantrax League', 'fantraxLeagueId': 'x', 'fantraxSyncedAt': '2026-10-27T10:00:00Z'},
+    ], DateTime.utc(2026, 10, 27, 13));
+    expect(s, contains('Jerusalem League: 1 rosters, latest matchup week 2.'));
+    expect(s, contains('Fantrax sync: 3h ago'));
+    expect(s, contains('Fantrax cookie: missing.'));
+  });
+
   test('groupPhotoMessages joins an album, takes the caption from any photo, ignores other chats', () {
     final g = groupPhotoMessages([
       _photo(1, '42', group: 'a', caption: 'ForKobe', file: 'p1'),

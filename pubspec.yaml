@@ -41,6 +41,7 @@ dependencies:
   flutter_secure_storage: ^9.2.4
   http: ^1.2.0
   cached_network_image: ^3.4.1
+  cryptography: ^2.9.0
 
 dev_dependencies:
   flutter_test:

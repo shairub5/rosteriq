@@ -1,0 +1,52 @@
+# Twice a day: Fantrax rosters (public API) + live scoring with the cookie sent to the bot -> snapshot.json on `data`.
+name: fantrax
+
+on:
+  schedule:
+    # ~08:23 / 20:23 Israel time; off the :00/:30 marks the scrape job is dispatched at.
+    - cron: '23 5,17 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Shared with scrape.yml: both force-push the data branch, so they take turns.
+concurrency:
+  group: data-branch
+  cancel-in-progress: false
+
+jobs:
+  fantrax:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.44.0
+          channel: stable
+          cache: true
+
+      - run: flutter pub get
+
+      - name: Load snapshot
+        run: |
+          mkdir -p state
+          git fetch --depth=1 origin data && git show origin/data:snapshot.json > state/snapshot.json
+
+      - name: Sync Fantrax
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          COOKIE_KEY: ${{ secrets.COOKIE_KEY }}
+        run: dart run bin/fantrax_sync.dart state/snapshot.json
+
+      # Same orphan force-push as scrape.yml.
+      - name: Save snapshot
+        run: |
+          cd state
+          git init -q -b data
+          git -c user.name=rosteriq-bot -c user.email=bot@users.noreply.github.com add snapshot.json
+          git -c user.name=rosteriq-bot -c user.email=bot@users.noreply.github.com commit -qm "fantrax $(date -u +%FT%TZ)"
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" data

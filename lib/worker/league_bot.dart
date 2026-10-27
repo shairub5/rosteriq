@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
+import 'cookies.dart';
 import 'espn.dart';
+import 'fantrax.dart';
 
 /// League data sent to the Telegram bot as screenshots, stored in `snapshot.json` for the app.
 /// `league` is the primary league; `leagues` holds any others, same shape plus `id`:
@@ -32,13 +34,69 @@ const extraKeys = ['fgm', 'fga', 'ftm', 'fta', 'gp', 'remaining'];
 /// Groups this chat's updates into photo groups. Photos sent together share a
 /// media_group_id; the caption sits on just one of them. Other chats are
 /// ignored (the bot token is the only thing standing between strangers and the league).
-({List<PhotoGroup> groups, int? lastUpdateId}) groupPhotoMessages(List<dynamic> updates, String chatId) {
+/// A "/command args" text message.
+typedef BotCommand = ({String name, String args, int messageId});
+
+/// Bot commands with their one-line descriptions: the /help text and Telegram's "/" menu.
+const botCommands = [
+  ('help', 'What the bot can do'),
+  ('status', 'Last updates and Fantrax cookie state'),
+  ('fantrax_cookie', 'Save the Fantrax login cookie (send it bare for how-to)'),
+];
+
+String helpText() => [
+      'RosterIQ bot commands:',
+      for (final (c, d) in botCommands) '/$c - $d',
+      '',
+      'Screenshots:',
+      '• Roster: caption = team name ("My Team" for yours, "League: Team" for a team the bot hasn\'t seen).',
+      '• Matchup: no caption needed, or "Week N" if the page doesn\'t show the week.',
+      '',
+      'The bot checks messages every 30 minutes, so replies can take up to half an hour.',
+    ].join('\n');
+
+/// /status: what each league has and when it last changed.
+String statusText(List<Map<String, dynamic>> leagues, DateTime now) {
+  String ago(String? iso) {
+    final t = DateTime.tryParse(iso ?? '');
+    if (t == null) return 'never';
+    final m = now.difference(t).inMinutes;
+    return m < 60 ? '${m}m ago' : m < 48 * 60 ? '${m ~/ 60}h ago' : '${m ~/ (24 * 60)}d ago';
+  }
+
+  return [
+    'Players & injuries: updated now (every 30 min).',
+    for (final l in leagues) ...[
+      '',
+      '${l['name'] ?? 'League'}: ${(l['teams'] as List? ?? const []).length} rosters, '
+          'latest matchup week ${(l['matchups'] as List? ?? const []).map((m) => m['week'] as int).fold(0, (a, b) => a > b ? a : b)}.',
+      if (l['fantraxLeagueId'] != null) ...[
+        'Fantrax sync: ${ago(l['fantraxSyncedAt'] as String?)} (twice a day).',
+        'Fantrax cookie: ${cookieState(l['fantraxCookie'] as Map<String, dynamic>?)}.',
+      ],
+    ],
+  ].join('\n');
+}
+
+/// Photo groups plus "/command" texts from [chatId]; "/help@MyBot" -> "help".
+({List<PhotoGroup> groups, List<BotCommand> commands, int? lastUpdateId}) groupPhotoMessages(
+  List<dynamic> updates,
+  String chatId,
+) {
   int? last;
   final groups = <String, PhotoGroup>{};
+  final commands = <BotCommand>[];
   for (final u in updates.cast<Map<String, dynamic>>()) {
     last = u['update_id'] as int;
     final m = u['message'] as Map<String, dynamic>?;
     if (m == null || '${(m['chat'] as Map)['id']}' != chatId) continue;
+    final text = (m['text'] as String?)?.trim();
+    if (text != null && text.startsWith('/')) {
+      final sp = text.indexOf(RegExp(r'\s'));
+      final name = (sp < 0 ? text : text.substring(0, sp)).substring(1).split('@').first.toLowerCase();
+      commands.add((name: name, args: sp < 0 ? '' : text.substring(sp).trim(), messageId: m['message_id'] as int));
+      continue;
+    }
     final photos = m['photo'] as List?;
     final doc = m['document'] as Map<String, dynamic>?;
     // Largest photo size; screenshots sent "as file" arrive as an image document.
@@ -54,7 +112,7 @@ const extraKeys = ['fgm', 'fga', 'ftm', 'fta', 'gp', 'remaining'];
       fileIds: [...?g?.fileIds, fileId],
     );
   }
-  return (groups: groups.values.toList(), lastUpdateId: last);
+  return (groups: groups.values.toList(), commands: commands, lastUpdateId: last);
 }
 
 /// Names read off a screenshot -> player ids. Exact name first (punctuation and
@@ -286,6 +344,7 @@ Future<List<Map<String, dynamic>>> syncLeaguesFromTelegram({
   required String? chatId,
   required String? apiKey,
   required DateTime now,
+  String? cookieKey,
 }) async {
   final out = [
     for (final l in leagues)
@@ -306,6 +365,42 @@ Future<List<Map<String, dynamic>>> syncLeaguesFromTelegram({
 
   Future<void> reply(String text) => http.post(Uri.parse('$api/sendMessage'), body: {'chat_id': chatId, 'text': text});
   String label(Map<String, dynamic> l) => out.length > 1 ? '${l['name'] ?? 'League'} · ' : '';
+
+  // Telegram's "/" menu, re-sent only when the list changes.
+  final menu = botCommands.map((c) => '${c.$1}:${c.$2}').join('|');
+  if (out[0]['botCommands'] != menu) {
+    final r = await http.post(Uri.parse('$api/setMyCommands'), headers: {'Content-Type': 'application/json'}, body: jsonEncode({
+      'commands': [for (final (c, d) in botCommands) {'command': c, 'description': d}],
+    }));
+    if (r.statusCode == 200) out[0]['botCommands'] = menu;
+  }
+
+  for (final c in grouped.commands) {
+    switch (c.name) {
+      case 'help' || 'start':
+        await reply(helpText());
+      case 'status':
+        await reply(statusText(out, now));
+      case 'fantrax_cookie':
+        final l = out.where((l) => l['fantraxLeagueId'] != null).firstOrNull;
+        if (c.args.isEmpty) {
+          await reply(fantraxCookieHowTo);
+        } else if (l == null || cookieKey == null) {
+          await reply('❌ Can\'t save it: ${l == null ? 'no Fantrax league is set up' : 'COOKIE_KEY isn\'t set in the repo secrets'}.');
+        } else {
+          l['fantraxCookie'] = cookieEntry(await encryptCookie(c.args, cookieKey), now);
+          // The cookie is a login: don't leave it sitting in the chat.
+          await http.post(Uri.parse('$api/deleteMessage'), body: {'chat_id': chatId, 'message_id': '${c.messageId}'});
+          final ok = await fantraxCookieWorks(l['fantraxLeagueId'] as String, c.args);
+          await reply(ok
+              ? '✅ Fantrax cookie saved and it works (your message was deleted). Matchups sync twice a day.'
+              : '❌ Saved, but Fantrax says it\'s not logged in. Copy it again while logged in.\n\n$fantraxCookieHowTo');
+          if (!ok) (l['fantraxCookie'] as Map<String, dynamic>)['expiredAt'] = now.toIso8601String();
+        }
+      default:
+        await reply('Unknown command /${c.name}. Send /help for the list.');
+    }
+  }
 
   for (final g in grouped.groups) {
     if (apiKey == null) {
