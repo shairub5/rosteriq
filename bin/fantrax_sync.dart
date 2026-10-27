@@ -47,7 +47,7 @@ Future<void> main(List<String> args) async {
 
     final entry = league['fantraxCookie'] as Map<String, dynamic>?;
     final key = env['COOKIE_KEY'];
-    if (entry != null && entry['expiredAt'] == null && key != null) {
+    if (entry != null && entry['expiredAt'] == null && key != null && key.isNotEmpty) {
       await Future<void>.delayed(Duration(seconds: 5 + Random().nextInt(10)));
       try {
         final cookie = await decryptCookie(entry['sealed'] as String, key);

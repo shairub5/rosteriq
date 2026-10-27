@@ -55,7 +55,8 @@ Future<void> main(List<String> args) async {
           token: Platform.environment['TELEGRAM_TOKEN'],
           chatId: Platform.environment['TELEGRAM_CHAT_ID'],
           apiKey: Platform.environment['ANTHROPIC_API_KEY'],
-          cookieKey: Platform.environment['COOKIE_KEY'],
+          // An unset repo secret arrives as an empty string.
+          cookieKey: switch (Platform.environment['COOKIE_KEY']) { '' => null, final k => k },
           now: now,
         );
 
