@@ -3,7 +3,8 @@ name: scrape
 
 on:
   schedule:
-    - cron: '*/30 * * * *'
+    # Off the :00/:30 rush: GitHub delays or drops scheduled runs most at the top of the hour.
+    - cron: '7,37 * * * *'
   workflow_dispatch:
 
 permissions:

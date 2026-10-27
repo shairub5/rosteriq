@@ -119,7 +119,9 @@ assistant. Plan: in-season worker + Matchup radar + Add/Drop + Config views.
 - **Multiple leagues:** Jerusalem League (Yahoo) and Fantrax League, switched from the league name under each tab's
   title. Rosters, My Team and matchups are per league; punts and the league
   size (12 x 13) are shared. Bot captions for a team the bot hasn't seen yet:
-  "League: Team". CLI: `--league "Fantrax"` on set_team / set_matchup.
+  "League: Team". CLI: `--league "Fantrax League"` on set_team / set_matchup.
+  Fantrax rosters sync on their own about twice a day from the public API (league
+  `fantraxLeagueId` in the snapshot); Fantrax matchup stats need a login, so they stay on screenshots.
 - **Real matchups:** send Yahoo matchup-page screenshots to the bot (no
   caption; any of the league's matchups). Both teams' weekly category totals
   are stored per week in `league.matchups`; the week comes from the image, the

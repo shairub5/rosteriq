@@ -16,6 +16,7 @@ import 'package:rosteriq/models/player.dart';
 import 'package:rosteriq/models/ranking_result.dart';
 import 'package:rosteriq/worker/alerts.dart';
 import 'package:rosteriq/worker/espn.dart';
+import 'package:rosteriq/worker/fantrax.dart';
 import 'package:rosteriq/worker/league_bot.dart';
 
 
@@ -41,16 +42,17 @@ Future<void> main(List<String> args) async {
     (prevJson?['league'] as Map<String, dynamic>?) ?? <String, dynamic>{},
     ...((prevJson?['leagues'] as List?) ?? const []).cast<Map<String, dynamic>>(),
   ];
+  final players = [
+    for (final p in stats.players) (name: p.name, id: p.id),
+    for (final i in injuries.values) (name: i.name, id: i.playerId),
+    // Bundled ids for anyone ESPN lists nowhere (no games, not injured); the app keeps them as-is.
+    for (final p in _bundledPlayers()) (name: p.name, id: p.id),
+  ];
   final leagues = dryRun
       ? prevLeagues
       : await syncLeaguesFromTelegram(
-          leagues: prevLeagues,
-          players: [
-            for (final p in stats.players) (name: p.name, id: p.id),
-            for (final i in injuries.values) (name: i.name, id: i.playerId),
-            // Bundled ids for anyone ESPN lists nowhere (no games, not injured); the app keeps them as-is.
-            for (final p in _bundledPlayers()) (name: p.name, id: p.id),
-          ],
+          leagues: await _syncFantrax(prevLeagues, players, now),
+          players: players,
           token: Platform.environment['TELEGRAM_TOKEN'],
           chatId: Platform.environment['TELEGRAM_CHAT_ID'],
           apiKey: Platform.environment['ANTHROPIC_API_KEY'],
@@ -118,6 +120,24 @@ Future<void> main(List<String> args) async {
   }));
   stdout.writeln('${alerts.length} alerts, ${stats.players.length} players, ${injuries.length} injuries -> ${snapshotFile.path}');
 }
+
+/// Fantrax leagues due for a roster refresh; a failed fetch keeps the old rosters.
+Future<List<Map<String, dynamic>>> _syncFantrax(
+  List<Map<String, dynamic>> leagues,
+  List<({String id, String name})> players,
+  DateTime now,
+) async => [
+      for (final l in leagues)
+        if (fantraxSyncDue(l, now))
+          await fetchFantraxRosters(l['fantraxLeagueId'] as String)
+              .then((r) => applyFantraxRosters(l, r, players, now))
+              .catchError((Object e) {
+            stderr.writeln('Fantrax sync failed: $e');
+            return l;
+          })
+        else
+          l,
+    ];
 
 List<RankingResult> _rank(List<Player> pool) => computeRankings(
       availablePool: pool,
