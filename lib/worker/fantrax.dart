@@ -74,6 +74,15 @@ int? currentScoringPeriod(Map<String, dynamic> leagueInfo, DateTime now) {
   return null;
 }
 
+/// The week that ended within the last day, so a twice-daily run stores its final totals once.
+int? justEndedScoringPeriod(Map<String, dynamic> leagueInfo, DateTime now) {
+  for (final p in (leagueInfo['scoringPeriods'] as List).cast<Map<String, dynamic>>()) {
+    final end = _fantraxDate(p['endDate'] as String);
+    if (!now.isBefore(end) && now.difference(end) < const Duration(days: 1)) return p['number'] as int;
+  }
+  return null;
+}
+
 /// "2026-10-26T18:59:59.0-0400" (no colon in the offset) -> UTC.
 DateTime _fantraxDate(String s) => DateTime.parse(s.replaceFirstMapped(RegExp(r'([+-]\d\d)(\d\d)$'), (m) => '${m[1]}:${m[2]}'));
 
@@ -113,6 +122,44 @@ Future<Map<String, dynamic>> fetchFantraxLiveScoring(String leagueId, String coo
       'sppId': '-1',
       'viewType': '2', // Period (the whole matchup week); '1' is a single day
     });
+
+/// Fantrax scoring-category ids -> the app's stat keys (`statKeys`).
+const _fantraxCats = {
+  '1520': 'fgPct',
+  '1550': 'ftPct',
+  '1435': 'threePM',
+  '1390': 'pts',
+  '1400': 'reb',
+  '1250': 'ast',
+  '1410': 'stl',
+  '1260': 'blk',
+  '1460': 'to',
+};
+
+/// Period-view live scoring -> each matchup's two sides with the 9 category totals.
+/// A team's totals are the `_3010` (player group) row of its ACTIVE stats. [isFinal] adds
+/// remaining = 0 so the app shows the week as Won/Lost; while it's live, remaining is left out
+/// (Fantrax doesn't give games left), which the app treats as "in progress".
+List<List<MatchupSide>> parseFantraxLiveScoring(Map<String, dynamic> data, {bool isFinal = false}) {
+  final names = {for (final t in (data['fantasyTeams'] as List)) t['id'] as String: t['name'] as String};
+  final teams = (data['statsPerTeam'] as Map)['allTeamsStats'] as Map<String, dynamic>;
+  MatchupSide side(String id) {
+    final row = (((teams[id] as Map)['ACTIVE'] as Map)['statsMap'] as Map)['_3010'] as Map;
+    return (
+      name: names[id] ?? id,
+      stats: {
+        for (final c in (row['object2'] as List).cast<Map<String, dynamic>>())
+          ?_fantraxCats[(c['scipId'] as String).split('#')[1]]: c['av'] as num,
+        if (isFinal) 'remaining': 0,
+      },
+    );
+  }
+
+  return [
+    for (final m in (data['matchups'] as List).cast<String>())
+      if (m.split('_') case [final away, final home]) [side(away), side(home)],
+  ];
+}
 
 /// True when [cookie] gets live scoring for the current (or first) week.
 Future<bool> fantraxCookieWorks(String leagueId, String cookie) async {

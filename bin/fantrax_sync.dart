@@ -12,6 +12,7 @@ import 'dart:math';
 import 'package:rosteriq/models/player.dart';
 import 'package:rosteriq/worker/cookies.dart';
 import 'package:rosteriq/worker/fantrax.dart';
+import 'package:rosteriq/worker/league_bot.dart';
 import 'package:rosteriq/worker/telegram.dart';
 
 Future<void> main(List<String> args) async {
@@ -51,11 +52,21 @@ Future<void> main(List<String> args) async {
       await Future<void>.delayed(Duration(seconds: 5 + Random().nextInt(10)));
       try {
         final cookie = await decryptCookie(entry['sealed'] as String, key);
-        final period = currentScoringPeriod(await fetchFantraxLeagueInfo(id), now);
-        if (period != null) {
+        final info = await fetchFantraxLeagueInfo(id);
+        // A week that just ended gets its final totals; the current week its totals so far.
+        for (final (period, isFinal) in [
+          if (justEndedScoringPeriod(info, now) case final p?) (p, true),
+          if (currentScoringPeriod(info, now) case final p?) (p, false),
+        ]) {
           final live = await fetchFantraxLiveScoring(id, cookie, period);
-          stdout.writeln('${league['name']}: live scoring week $period ok (${live.keys.join(', ')})');
           if (dumpDir != null) File('$dumpDir/fantrax_live_$period.json').writeAsStringSync(jsonEncode(live));
+          var matchups = [...((league['matchups'] as List?) ?? const []).cast<Map<String, dynamic>>()];
+          final pairs = parseFantraxLiveScoring(live, isFinal: isFinal);
+          for (final sides in pairs) {
+            matchups = upsertMatchup(matchups, matchupEntry(sides, period, now));
+          }
+          league = {...league, 'matchups': matchups};
+          stdout.writeln('${league['name']}: week $period${isFinal ? ' (final)' : ''}, ${pairs.length} matchups');
         }
       } on FantraxLoggedOut {
         league = {...league, 'fantraxCookie': {...entry, 'expiredAt': now.toIso8601String()}};

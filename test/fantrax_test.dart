@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:rosteriq/worker/cookies.dart';
@@ -49,6 +50,29 @@ void main() {
     expect(currentScoringPeriod(info, DateTime.utc(2026, 10, 26, 22)), 1); // 18:00 ET Mon
     expect(currentScoringPeriod(info, DateTime.utc(2026, 10, 27)), 2);
     expect(currentScoringPeriod(info, DateTime.utc(2026, 12)), isNull);
+  });
+
+  test('parseFantraxLiveScoring reads week totals (real week-2 response, Monday = screenshots)', () {
+    final data = jsonDecode(File('test/fixtures/fantrax_live_week2.json').readAsStringSync()) as Map<String, dynamic>;
+    final pairs = parseFantraxLiveScoring(data);
+    expect(pairs, hasLength(6));
+    final shaide = pairs.expand((p) => p).firstWhere((s) => s.name == 'Shaide');
+    expect(shaide.stats, {
+      'fgPct': 0.45, 'threePM': 12, 'ftPct': 0.7931, 'pts': 125, 'reb': 54, 'ast': 27, 'stl': 9, 'blk': 8, 'to': 17, //
+    });
+    expect(pairs.firstWhere((p) => p.any((s) => s.name == 'Shaide')).map((s) => s.name), ['nivoscohen', 'Shaide']);
+    expect(parseFantraxLiveScoring(data, isFinal: true).first.first.stats['remaining'], 0);
+  });
+
+  test('justEndedScoringPeriod: only within a day of the week ending', () {
+    final info = {
+      'scoringPeriods': [
+        {'number': 1, 'startDate': '2026-10-20T15:00:00.0-0400', 'endDate': '2026-10-26T18:59:59.0-0400'},
+      ],
+    };
+    expect(justEndedScoringPeriod(info, DateTime.utc(2026, 10, 26, 22)), isNull);
+    expect(justEndedScoringPeriod(info, DateTime.utc(2026, 10, 27, 5)), 1);
+    expect(justEndedScoringPeriod(info, DateTime.utc(2026, 10, 28, 5)), isNull);
   });
 
   test('isFantraxLoggedOut spots the not-logged-in answer', () {
