@@ -111,7 +111,7 @@ Future<Map<String, dynamic>> fetchFantraxLiveScoring(String leagueId, String coo
       'period': '$period',
       'playerViewType': '1',
       'sppId': '-1',
-      'viewType': '1',
+      'viewType': '2', // Period (the whole matchup week); '1' is a single day
     });
 
 /// True when [cookie] gets live scoring for the current (or first) week.
