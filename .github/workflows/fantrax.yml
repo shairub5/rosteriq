@@ -6,6 +6,11 @@ on:
     # ~08:23 / 20:23 Israel time; off the :00/:30 marks the scrape job is dispatched at.
     - cron: '23 5,17 * * *'
   workflow_dispatch:
+    inputs:
+      dump:
+        description: Save the raw live-scoring response as an artifact (for building the parser)
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -40,7 +45,17 @@ jobs:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           COOKIE_KEY: ${{ secrets.COOKIE_KEY }}
-        run: dart run bin/fantrax_sync.dart state/snapshot.json
+        run: |
+          mkdir -p dump
+          dart run bin/fantrax_sync.dart state/snapshot.json ${{ inputs.dump && '--dump dump' || '' }}
+
+      # League stats only (the cookie never leaves memory); kept one day.
+      - if: ${{ inputs.dump }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: fantrax-live
+          path: dump/
+          retention-days: 1
 
       # Same orphan force-push as scrape.yml.
       - name: Save snapshot
