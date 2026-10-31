@@ -81,4 +81,61 @@ void main() {
       expect(identical(applyYahooData(done, data('t1'), players, now), done), isTrue);
     });
   });
+
+  // Trimmed from real pages (state/yahoo_dump), personal details removed.
+  group('parsers', () {
+    test('league: team ids, week and matchup paths', () {
+      const html = '''<table id="standingstable"><a href="https://basketball.fantasysports.yahoo.com/nba/1623/2">A</a>
+<a href="/nba/1623/10">B</a></table>
+<li class='Linkable' data-target='/nba/1623/matchup?week=2&mid1=1&mid2=6'></li>
+<li class='Linkable' data-target='/nba/1623/matchup?week=2&mid1=2&mid2=5'></li>''';
+      final l = parseYahooLeague(html);
+      expect(l.teamIds, [2, 10]);
+      expect(l.week, 2);
+      expect(l.matchupPaths, ['/nba/1623/matchup?week=2&mid1=1&mid2=6', '/nba/1623/matchup?week=2&mid1=2&mid2=5']);
+    });
+
+    test('team: name from the title, players from the roster table only', () {
+      const html = '''<title>Jerusalem fantasy league - Ja&#39;Yoshay | Fantasy Basketball | Yahoo! Sports</title>
+<a class="Nowrap name F-link" href="#">Outside Table</a>
+<table class="x" id="statTable0"><tr><td><a class="Nowrap name F-link playernote" href="#" title="VJ Edgecombe">VJ Edgecombe</a></td></tr>
+<tr><td><a class="Nowrap name F-link" href="#">Jaime Jaquez Jr.</a></td></tr></table>''';
+      final t = parseYahooTeam(html);
+      expect(t.name, "Ja'Yoshay");
+      expect(t.players, ['VJ Edgecombe', 'Jaime Jaquez Jr.']);
+    });
+
+    const matchup = '''<div id="remaining-games" class="Py-lg"><div class="W-100">
+<div class="Ta-start"><span>11</span> <span class="F-shade">Remaining</span></div>
+<div class="Ta-c"><span>32/43</span> <span class="F-shade">Games Played</span> <span>33/41</span></div>
+<div class="Ta-end"><span class="F-shade">Remaining</span> <span>8</span></div>
+</div></div>
+<table class="Datatable"><thead><tr class="First Last"><th title="Field Goals Made/Field Goals Attempted">FGM/A*</th></tr></thead><tbody>
+<tr class="First"><td><a href="/nba/1623/1"><img></a><span><a href="/nba/1623/1">Ironi shaide</a></span></td><td><div>203/417</div></td><td><div>.487</div></td><td><div>90/115</div></td><td><div>.783</div></td><td><div>62</div></td><td><div>558</div></td><td><div>242</div></td><td><div>93</div></td><td><div>25</div></td><td><div>19</div></td><td><div>63</div></td><td><div>6</div></td></tr>
+<tr><td><a href="/nba/1623/6">Kong-fu basket</a></td><td>201/460</td><td>.437</td><td>-/-</td><td>-</td><td>58</td><td>556</td><td>187</td><td>146</td><td>35</td><td>19</td><td>73</td><td>2</td></tr>
+</tbody></table>''';
+
+    test('matchup: totals for both teams, games played and remaining', () {
+      final m = parseYahooMatchup(matchup);
+      expect(m[0].name, 'Ironi shaide');
+      expect(m[0].stats, {
+        'fgPct': .487, 'ftPct': .783, 'threePM': 62, 'pts': 558, 'reb': 242, 'ast': 93, 'stl': 25, 'blk': 19, 'to': 63,
+        'fgm': 203, 'fga': 417, 'ftm': 90, 'fta': 115, 'gp': 32, 'remaining': 11,
+      });
+      expect(m[1].name, 'Kong-fu basket');
+      expect(m[1].stats['ftm'], 0); // "-/-" before any attempts
+      expect(m[1].stats['gp'], 33);
+      expect(m[1].stats['remaining'], 8);
+    });
+
+    test('a finished week has remaining = 0', () {
+      expect(parseYahooMatchup(matchup, isFinal: true)[0].stats['remaining'], 0);
+    });
+
+    test('an unrecognized page is an error, never empty data', () {
+      expect(() => parseYahooLeague('<html>'), throwsA(isA<YahooParseError>()));
+      expect(() => parseYahooTeam('<title>x</title>'), throwsA(isA<YahooParseError>()));
+      expect(() => parseYahooMatchup('<html>'), throwsA(isA<YahooParseError>()));
+    });
+  });
 }

@@ -25,7 +25,7 @@ while (( $(date +%s) < target )); do sleep 60; done
 
 print -r -- "$today" > $marker
 rm -f state/yahoo.json
-/Users/shir_shai/code/.flutter-sdk/bin/dart run bin/yahoo_sync.dart --dump state/yahoo_dump || exit 1
+/Users/shir_shai/code/.flutter-sdk/bin/dart run bin/yahoo_sync.dart || exit 1
 [[ -f state/yahoo.json ]] || exit 0
 
 remote=$(git remote get-url origin)

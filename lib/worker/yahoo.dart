@@ -48,6 +48,92 @@ Future<String> fetchYahooPage(http.Client client, String path, String cookie) as
   throw Exception('Yahoo $path: too many redirects');
 }
 
+/// A page came back without what the parser expects (Yahoo changed its HTML). Nothing gets published.
+class YahooParseError implements Exception {
+  YahooParseError(this.message);
+  final String message;
+  @override
+  String toString() => 'Yahoo page not understood: $message';
+}
+
+String _text(String html) => html
+    .replaceAll(RegExp(r'<[^>]+>'), ' ')
+    .replaceAllMapped(RegExp(r'&#x([0-9a-fA-F]+);'), (m) => String.fromCharCode(int.parse(m[1]!, radix: 16)))
+    .replaceAllMapped(RegExp(r'&#(\d+);'), (m) => String.fromCharCode(int.parse(m[1]!)))
+    .replaceAll('&quot;', '"')
+    .replaceAll('&lt;', '<')
+    .replaceAll('&gt;', '>')
+    .replaceAll('&nbsp;', ' ')
+    .replaceAll('&amp;', '&')
+    .replaceAll(RegExp(r'\s+'), ' ')
+    .trim();
+
+/// The <table> that contains [needle].
+String _tableAround(String html, String needle) {
+  final at = html.indexOf(needle);
+  final start = at < 0 ? -1 : html.lastIndexOf('<table', at);
+  final end = at < 0 ? -1 : html.indexOf('</table>', at);
+  if (start < 0 || end < 0) throw YahooParseError('no table with $needle');
+  return html.substring(start, end);
+}
+
+/// League home: the team ids from the standings, the week shown and its matchup page paths.
+({List<int> teamIds, int week, List<String> matchupPaths}) parseYahooLeague(String html) {
+  final teamIds = {
+    for (final m in RegExp(r'/nba/1623/(\d+)"').allMatches(_tableAround(html, 'id="standingstable"'))) int.parse(m[1]!),
+  }.toList()
+    ..sort();
+  final paths = {
+    for (final m in RegExp(r"data-target='(/nba/1623/matchup\?week=\d+&(?:amp;)?mid1=\d+&(?:amp;)?mid2=\d+)'").allMatches(html))
+      m[1]!.replaceAll('&amp;', '&'),
+  }.toList();
+  if (teamIds.isEmpty || paths.isEmpty) throw YahooParseError('league page: ${teamIds.length} teams, ${paths.length} matchups');
+  return (teamIds: teamIds, week: int.parse(RegExp(r'week=(\d+)').firstMatch(paths.first)![1]!), matchupPaths: paths);
+}
+
+/// A team's page: its name (from the title, "League - Team | Fantasy Basketball...") and every rostered player.
+({String name, List<String> players}) parseYahooTeam(String html) {
+  final title = RegExp(r'<title>(.*?)</title>', dotAll: true).firstMatch(html)?[1] ?? '';
+  final dash = title.indexOf(' - ');
+  final bar = title.lastIndexOf(' | Fantasy');
+  if (dash < 0 || bar < dash) throw YahooParseError('team page title');
+  final players = [
+    for (final m in RegExp(r'<a class="Nowrap name F-link[^"]*"[^>]*>([^<]+)</a>').allMatches(_tableAround(html, 'id="statTable0"')))
+      _text(m[1]!),
+  ];
+  if (players.isEmpty) throw YahooParseError('team page has no players');
+  return (name: _text(title.substring(dash + 3, bar)), players: players);
+}
+
+/// A matchup page: both teams' category totals plus games played / remaining ("32/43 Games Played").
+/// [isFinal] marks a finished week with remaining = 0 so the app shows it as Won/Lost.
+List<MatchupSide> parseYahooMatchup(String html, {bool isFinal = false}) {
+  final rows = RegExp(r'<tr.*?</tr>', dotAll: true).allMatches(_tableAround(html, 'Field Goals Made/Field Goals Attempted')).skip(1).toList();
+  if (rows.length != 2) throw YahooParseError('matchup table has ${rows.length} teams');
+  final games = RegExp(r'id="remaining-games".*?</div>\s*</div>', dotAll: true).firstMatch(html)?[0] ?? '';
+  final spans = [for (final m in RegExp(r'<span>([^<]*)</span>').allMatches(games)) m[1]!];
+  num n(String s) => num.tryParse(s) ?? 0;
+  return [
+    for (final (i, row) in rows.indexed)
+      () {
+        final c = [for (final m in RegExp(r'<td.*?</td>', dotAll: true).allMatches(row[0]!)) _text(m[0]!)];
+        if (c.length < 12) throw YahooParseError('matchup row has ${c.length} cells');
+        final fg = c[1].split('/'), ft = c[3].split('/');
+        final played = spans.length == 4 ? spans[i == 0 ? 1 : 2].split('/').first : '0';
+        return (
+          name: c[0],
+          stats: <String, num>{
+            'fgPct': n(c[2]), 'ftPct': n(c[4]), 'threePM': n(c[5]), 'pts': n(c[6]), 'reb': n(c[7]),
+            'ast': n(c[8]), 'stl': n(c[9]), 'blk': n(c[10]), 'to': n(c[11]),
+            'fgm': n(fg[0]), 'fga': n(fg.last), 'ftm': n(ft[0]), 'fta': n(ft.last),
+            'gp': n(played),
+            if (isFinal) 'remaining': 0 else if (spans.length == 4) 'remaining': n(spans[i == 0 ? 0 : 3]),
+          },
+        );
+      }(),
+  ];
+}
+
 /// Merges yahoo.json (published by the Mac to the `yahoo` branch) into the league:
 ///   {fetchedAt, teams: [{name, players: [full names]}], matchups: [{week, teams: [{name, stats}]}]}
 /// Each file is applied once, so a later screenshot isn't overwritten by an older fetch. A roster with

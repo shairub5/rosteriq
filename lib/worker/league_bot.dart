@@ -70,6 +70,7 @@ String statusText(List<Map<String, dynamic>> leagues, DateTime now) {
       '',
       '${l['name'] ?? 'League'}: ${(l['teams'] as List? ?? const []).length} rosters, '
           'latest matchup week ${(l['matchups'] as List? ?? const []).map((m) => m['week'] as int).fold(0, (a, b) => a > b ? a : b)}.',
+      if (l['yahooSyncedAt'] != null) 'Yahoo sync: ${ago(l['yahooSyncedAt'] as String?)} (daily, from the Mac).',
       if (l['fantraxLeagueId'] != null) ...[
         'Fantrax sync: ${ago(l['fantraxSyncedAt'] as String?)} (twice a day).',
         'Fantrax cookie: ${cookieState(l['fantraxCookie'] as Map<String, dynamic>?)}.',
