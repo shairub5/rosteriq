@@ -37,6 +37,10 @@ Future<void> main(List<String> args) async {
     exit(1);
   }
   final cookie = cookieFile.readAsStringSync().trim();
+  if (cookie.contains('\n') || !cookie.contains('=')) {
+    stderr.writeln("state/yahoo_cookie doesn't look like a cookie (should be one line of name=value pairs). Copy it again.");
+    exit(1);
+  }
   final dir = Directory(args[di + 1])..createSync(recursive: true);
 
   final client = http.Client();
