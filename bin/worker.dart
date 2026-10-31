@@ -17,6 +17,7 @@ import 'package:rosteriq/worker/alerts.dart';
 import 'package:rosteriq/worker/espn.dart';
 import 'package:rosteriq/worker/league_bot.dart';
 import 'package:rosteriq/worker/telegram.dart';
+import 'package:rosteriq/worker/yahoo.dart';
 
 
 Future<void> main(List<String> args) async {
@@ -47,7 +48,7 @@ Future<void> main(List<String> args) async {
     // Bundled ids for anyone ESPN lists nowhere (no games, not injured); the app keeps them as-is.
     for (final p in _bundledPlayers()) (name: p.name, id: p.id),
   ];
-  final leagues = dryRun
+  final synced = dryRun
       ? prevLeagues
       : await syncLeaguesFromTelegram(
           leagues: prevLeagues,
@@ -59,6 +60,14 @@ Future<void> main(List<String> args) async {
           cookieKey: switch (Platform.environment['COOKIE_KEY']) { '' => null, final k => k },
           now: now,
         );
+  // What the Mac last fetched from Yahoo (primary league), when the workflow found one.
+  final yahooFile = File('${snapshotFile.parent.path}/yahoo.json');
+  final leagues = [
+    yahooFile.existsSync()
+        ? applyYahooData(synced.first, jsonDecode(yahooFile.readAsStringSync()) as Map<String, dynamic>, players, now)
+        : synced.first,
+    ...synced.skip(1),
+  ];
 
   // Who owns whom in each league, by name (roster ids are ESPN or bundled ids).
   final nameById = {

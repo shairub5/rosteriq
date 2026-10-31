@@ -36,6 +36,10 @@ jobs:
           mkdir -p state
           git fetch --depth=1 origin data && git show origin/data:snapshot.json > state/snapshot.json || rm -f state/snapshot.json
 
+      # Published by the user's Mac (bin/yahoo_daily.sh). Missing until its first successful run.
+      - name: Load Yahoo data
+        run: git fetch --depth=1 origin yahoo && git show origin/yahoo:yahoo.json > state/yahoo.json || rm -f state/yahoo.json
+
       - name: Run worker
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
