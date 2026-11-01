@@ -17,7 +17,7 @@ void main() {
 
   test('a redirect to login or consent means logged out', () async {
     for (final to in ['https://login.yahoo.com/?done=x', 'https://guce.yahoo.com/consent']) {
-      await expectLater(fetchYahooPage(answering((_) => redirect(to)), '/nba/1623', 'a=1'), throwsA(isA<YahooLoggedOut>()));
+      await expectLater(fetchYahooPage(answering((_) => redirect(to)), '/nba/1623', 'a=1'), throwsA(isA<YahooLoggedOut>().having((e) => '$e', 'message', contains(Uri.parse(to).host))));
     }
   });
 

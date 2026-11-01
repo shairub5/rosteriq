@@ -12,8 +12,10 @@ const _userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/
 
 /// Yahoo wants a login or a consent page: the cookie expired or was signed out.
 class YahooLoggedOut implements Exception {
+  YahooLoggedOut(this.host);
+  final String host;
   @override
-  String toString() => 'Yahoo cookie is not logged in';
+  String toString() => 'Yahoo cookie is not logged in (sent to $host)';
 }
 
 /// Yahoo refused the request (401/403/429, or its 999 rate-limit status).
@@ -36,7 +38,7 @@ Future<String> fetchYahooPage(http.Client client, String path, String cookie) as
     if (res.statusCode >= 300 && res.statusCode < 400) {
       final next = url.resolve(res.headers['location'] ?? '');
       if (next.host.startsWith('login.') || next.host.startsWith('guce.') || next.host.startsWith('consent.')) {
-        throw YahooLoggedOut();
+        throw YahooLoggedOut(next.host);
       }
       if (next.scheme != 'https' || !next.host.endsWith('.yahoo.com')) throw Exception('Yahoo redirected to ${next.host}');
       url = next;
