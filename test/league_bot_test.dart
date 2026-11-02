@@ -69,6 +69,27 @@ void main() {
     expect(g.lastUpdateId, 4);
   });
 
+  test('canonicalMatchupNames restores the league\'s spelling of screenshot names', () {
+    Map<String, dynamic> m(int week, String a, String b) => {
+          'week': week,
+          'teams': [
+            {'name': a, 'stats': <String, num>{'pts': 1}},
+            {'name': b, 'stats': <String, num>{'pts': 2}},
+          ],
+        };
+    final out = canonicalMatchupNames({
+      'myName': 'Ironi shaide',
+      'teams': [
+        {'name': 'My Team'},
+        {'name': "ron's Swag Team"},
+      ],
+      'matchups': [m(1, 'Ironi shaide', 'Kong-fu basket'), m(2, 'IRONI SHAIDE', 'KONG-FU BASKET'), m(2, "RON'S SWAG TEAM", 'NEW TEAM')],
+    });
+    expect((out[1]['teams'] as List).map((t) => t['name']), ['Ironi shaide', 'Kong-fu basket']);
+    expect((out[2]['teams'] as List).map((t) => t['name']), ["ron's Swag Team", 'NEW TEAM']);
+    expect((out[1]['teams'] as List).first['stats'], {'pts': 1});
+  });
+
   test('upsertMatchup replaces the same week\'s matchup of either team, keeps other weeks', () {
     final now = DateTime.utc(2026);
     Map<String, dynamic> m(int week, String a, String b) => matchupEntry([

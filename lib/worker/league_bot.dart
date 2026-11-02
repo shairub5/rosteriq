@@ -180,6 +180,31 @@ List<Map<String, dynamic>> upsertMatchup(List<Map<String, dynamic>> matchups, Ma
   ]..sort((a, b) => (a['week'] as int).compareTo(b['week'] as int));
 }
 
+/// Matchups with each team's name spelled the way the league first knew it: a screenshot can show
+/// "IRONI SHAIDE" for "Ironi shaide", and the app compares team names exactly.
+List<Map<String, dynamic>> canonicalMatchupNames(Map<String, dynamic> league) {
+  final matchups = ((league['matchups'] as List?) ?? const []).cast<Map<String, dynamic>>();
+  final canonical = <String, String>{};
+  for (final name in [
+    if (league['myName'] case final String me) me,
+    for (final t in (league['teams'] as List? ?? const [])) t['name'] as String,
+    for (final m in matchups)
+      for (final t in (m['teams'] as List)) t['name'] as String,
+  ]) {
+    canonical.putIfAbsent(normalizeName(name), () => name);
+  }
+  return [
+    for (final m in matchups)
+      {
+        ...m,
+        'teams': [
+          for (final t in (m['teams'] as List).cast<Map<String, dynamic>>())
+            {...t, 'name': canonical[normalizeName(t['name'] as String)]},
+        ],
+      },
+  ];
+}
+
 /// My Yahoo team name: the one side of a matchup that isn't a known other team.
 String? inferMyName(List<MatchupSide> sides, Iterable<String> otherTeamNames) {
   final others = otherTeamNames.map(normalizeName).toSet();
@@ -455,6 +480,9 @@ Future<List<Map<String, dynamic>>> syncLeaguesFromTelegram({
     } catch (e) {
       await reply('❌ ${g.caption ?? 'Screenshot'}: couldn\'t read it ($e). Try sending it again.');
     }
+  }
+  for (final l in out) {
+    l['matchups'] = canonicalMatchupNames(l);
   }
   return out;
 }
