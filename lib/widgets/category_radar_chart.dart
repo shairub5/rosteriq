@@ -18,6 +18,7 @@ class CategoryRadarChart extends StatelessWidget {
   final Set<StatCategory> puntedCategories;
   final Map<StatCategory, double>? opponent;
   final String opponentLabel;
+  final String label;
 
   const CategoryRadarChart({
     super.key,
@@ -25,6 +26,7 @@ class CategoryRadarChart extends StatelessWidget {
     required this.puntedCategories,
     this.opponent,
     this.opponentLabel = 'Opponent',
+    this.label = 'You',
   });
 
   @override
@@ -50,7 +52,7 @@ class CategoryRadarChart extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _LegendItem(color: colors.primary, label: 'You', filled: true),
+            _LegendItem(color: colors.primary, label: label, filled: true),
             const SizedBox(width: 16),
             Flexible(child: _LegendItem(color: colors.tertiary, label: opponentLabel, filled: false)),
           ],

@@ -53,10 +53,12 @@ Future<void> main(List<String> args) async {
       try {
         final cookie = await decryptCookie(entry['sealed'] as String, key);
         final info = await fetchFantraxLeagueInfo(id);
-        // A week that just ended gets its final totals; the current week its totals so far.
+        // A week that just ended gets its final totals; the current week its totals so far;
+        // a week starting within a day its pairings.
         for (final (period, isFinal) in [
           if (justEndedScoringPeriod(info, now) case final p?) (p, true),
           if (currentScoringPeriod(info, now) case final p?) (p, false),
+          if (upcomingScoringPeriod(info, now) case final p?) (p, false),
         ]) {
           final live = await fetchFantraxLiveScoring(id, cookie, period);
           if (dumpDir != null) File('$dumpDir/fantrax_live_$period.json').writeAsStringSync(jsonEncode(live));

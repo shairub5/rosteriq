@@ -74,6 +74,16 @@ int? currentScoringPeriod(Map<String, dynamic> leagueInfo, DateTime now) {
   return null;
 }
 
+/// The next week when it starts within a day (Fantrax weeks start Monday 7pm ET), so its
+/// pairings show up on Monday morning instead of after the first night of games.
+int? upcomingScoringPeriod(Map<String, dynamic> leagueInfo, DateTime now) {
+  for (final p in (leagueInfo['scoringPeriods'] as List).cast<Map<String, dynamic>>()) {
+    final start = _fantraxDate(p['startDate'] as String);
+    if (now.isBefore(start) && start.difference(now) < const Duration(days: 1)) return p['number'] as int;
+  }
+  return null;
+}
+
 /// The week that ended within the last day, so a twice-daily run stores its final totals once.
 int? justEndedScoringPeriod(Map<String, dynamic> leagueInfo, DateTime now) {
   for (final p in (leagueInfo['scoringPeriods'] as List).cast<Map<String, dynamic>>()) {

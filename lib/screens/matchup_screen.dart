@@ -211,8 +211,14 @@ final _leagueViewProvider = StateProvider<bool>((ref) => false);
 
 final _projectedProvider = StateProvider<bool>((ref) => false);
 
-/// Team to compare my week against; null = my real opponent.
+/// Team to compare the week against; null = the real opponent of [_sideProvider]'s team.
 final _compareProvider = StateProvider<String?>((ref) => null);
+
+/// Team whose week is shown; null = mine.
+final _sideProvider = StateProvider<String?>((ref) => null);
+
+/// Keep both team picks when switching weeks; off = back to my own matchup.
+final _keepProvider = StateProvider<bool>((ref) => false);
 
 /// Real weekly matchups (from Yahoo screenshots): mine, the rest of the league,
 /// and a league table, for one week or the whole season.
@@ -256,7 +262,10 @@ class MatchupScreen extends ConsumerWidget {
                   leadingIcon: const Icon(Icons.calendar_month_outlined),
                   onSelected: (v) {
                     ref.read(_selectedProvider.notifier).state = v;
-                    ref.read(_compareProvider.notifier).state = null;
+                    if (!ref.read(_keepProvider)) {
+                      ref.read(_compareProvider.notifier).state = null;
+                      ref.read(_sideProvider.notifier).state = null;
+                    }
                   },
                   dropdownMenuEntries: [
                     for (final w in weeks.reversed)
@@ -299,17 +308,23 @@ class MatchupScreen extends ConsumerWidget {
     required bool isLatest,
   }) {
     final theme = Theme.of(context);
-    final real = week.map((m) => sideOf(m, myName)).nonNulls.firstOrNull;
     final w = week.first;
-    // Every other team's totals this week, to compare against any of them.
+    // Every team's totals this week, so any two can be compared.
     final teams = {
       for (final m in week)
-        for (final t in [m.a, m.b])
-          if (t.name != myName) t.name: t,
+        for (final t in [m.a, m.b]) t.name: t,
     };
+    // A picked team missing from this week (kept from another week) falls back to mine.
+    final picked = ref.watch(_sideProvider);
+    final sideName = teams.containsKey(picked) ? picked : myName;
+    final isMe = sideName == myName;
+    final real = week.map((m) => sideOf(m, sideName)).nonNulls.firstOrNull;
     final compareName = ref.watch(_compareProvider);
-    final now = real == null ? null : (me: real.me, opp: teams[compareName] ?? real.opp);
+    final now = real == null
+        ? null
+        : (me: real.me, opp: compareName != sideName ? teams[compareName] ?? real.opp : real.opp);
     final hypothetical = now != null && now.opp.name != real!.opp.name;
+    final sideLabel = isMe ? 'You' : sideName!;
 
     // Projected final: needs each side's roster (mine from My Team, others from League by name).
     final leagueData = ref.watch(leagueDataProvider).value;
@@ -344,17 +359,43 @@ class MatchupScreen extends ConsumerWidget {
     return [
       if (mine != null) ...[
         DropdownMenu<String>(
-          key: ValueKey('cmp${mine.opp.name}'),
+          key: ValueKey('side${mine.me.name}'),
+          initialSelection: mine.me.name,
+          expandedInsets: EdgeInsets.zero,
+          label: const Text('Team'),
+          leadingIcon: const Icon(Icons.person_outline),
+          onSelected: (v) {
+            ref.read(_sideProvider.notifier).state = v == myName ? null : v;
+            // Comparing a team with itself means nothing: back to its real opponent.
+            if (ref.read(_compareProvider) == v) ref.read(_compareProvider.notifier).state = null;
+          },
+          dropdownMenuEntries: [
+            if (myName != null && teams.containsKey(myName)) DropdownMenuEntry(value: myName, label: '$myName (me)'),
+            for (final name in teams.keys.where((n) => n != myName).toList()..sort())
+              DropdownMenuEntry(value: name, label: name),
+          ],
+        ),
+        const SizedBox(height: 12),
+        DropdownMenu<String>(
+          key: ValueKey('cmp${mine.me.name}${mine.opp.name}'),
           initialSelection: mine.opp.name,
           expandedInsets: EdgeInsets.zero,
           label: const Text('Compare with'),
           leadingIcon: const Icon(Icons.compare_arrows),
           onSelected: (v) => ref.read(_compareProvider.notifier).state = v == real.opp.name ? null : v,
           dropdownMenuEntries: [
-            DropdownMenuEntry(value: real!.opp.name, label: '${real.opp.name} (my opponent)'),
-            for (final name in teams.keys.where((n) => n != real.opp.name).toList()..sort())
+            DropdownMenuEntry(value: real!.opp.name, label: '${real.opp.name} (${isMe ? 'my' : 'their'} opponent)'),
+            for (final name in teams.keys.where((n) => n != real.opp.name && n != sideName).toList()..sort())
               DropdownMenuEntry(value: name, label: name),
           ],
+        ),
+        SwitchListTile(
+          contentPadding: EdgeInsets.zero,
+          dense: true,
+          title: const Text('Keep selection'),
+          subtitle: const Text('Same teams when you change week'),
+          value: ref.watch(_keepProvider),
+          onChanged: (v) => ref.read(_keepProvider.notifier).state = v,
         ),
         if (live) ...[
           const SizedBox(height: 12),
@@ -381,26 +422,28 @@ class MatchupScreen extends ConsumerWidget {
           final nowScore = score(now!.me, now.opp);
           String games(TeamWeek t) => '${(t.extra['remaining'] ?? 0).round()}';
           return _Scoreboard(
-            title: 'Week ${w.week} · You vs ${mine.opp.name}',
+            title: 'Week ${w.week} · $sideLabel vs ${mine.opp.name}',
             subtitle: showProjected
                 ? 'Projected final · now ${nowScore.w}-${nowScore.l}-${nowScore.t} · games left: '
                     'you ${games(now.me)}, them ${games(now.opp)}'
                 : hypothetical
-                    ? 'If you had played them · ${s.w > s.l ? 'you\'d win' : s.w < s.l ? 'you\'d lose' : 'a tie'}'
+                    ? 'If ${isMe ? 'you' : 'they'} had played them · '
+                        '${s.w > s.l ? '${isMe ? 'you' : 'they'}\'d win' : s.w < s.l ? '${isMe ? 'you' : 'they'}\'d lose' : 'a tie'}'
                     : '${_verdict(s, inProgress: live)}${live ? ' · updated ${_ago(w.updatedAt)}' : ' · final'}',
             score: s,
           );
         }(),
-        if (myName != null) ...[
+        if (sideName != null) ...[
           const SizedBox(height: 16),
-          const SectionHeader('My rank in the league'),
-          Card(child: MyRanks(rows: allPlay(week), myName: myName)),
+          SectionHeader(isMe ? 'My rank in the league' : '$sideName: rank in the league'),
+          Card(child: MyRanks(rows: allPlay(week), myName: sideName)),
         ],
         const SizedBox(height: 12),
         _RadarCard(
           me: leagueZ(week)[mine.me.name]!,
           opp: leagueZ(week)[mine.opp.name],
           oppName: mine.opp.name,
+          meName: sideLabel,
           caption: 'Each category vs all 12 teams this week',
         ),
         const SizedBox(height: 16),
@@ -411,8 +454,8 @@ class MatchupScreen extends ConsumerWidget {
             child: MatchupTable(
               a: mine.me,
               b: mine.opp,
-              aLabel: 'YOU',
-              bLabel: 'OPP',
+              aLabel: isMe ? 'YOU' : _short(sideName!),
+              bLabel: hypothetical || !isMe ? _short(mine.opp.name) : 'OPP',
               aNow: showProjected ? now!.me : null,
               bNow: showProjected ? now!.opp : null,
             ),
@@ -636,9 +679,10 @@ class _RadarCard extends StatelessWidget {
   final Map<StatCategory, double> me;
   final Map<StatCategory, double>? opp;
   final String? oppName;
+  final String meName;
   final String caption;
 
-  const _RadarCard({required this.me, required this.opp, this.oppName, required this.caption});
+  const _RadarCard({required this.me, required this.opp, this.oppName, this.meName = 'You', required this.caption});
 
   @override
   Widget build(BuildContext context) {
@@ -650,7 +694,7 @@ class _RadarCard extends StatelessWidget {
           children: [
             Text(caption, style: theme.textTheme.bodySmall),
             Text('Bold ring = league average · farther out = better', style: theme.textTheme.bodySmall),
-            CategoryRadarChart(standing: me, puntedCategories: const {}, opponent: opp, opponentLabel: oppName ?? 'Opponent'),
+            CategoryRadarChart(standing: me, puntedCategories: const {}, opponent: opp, opponentLabel: oppName ?? 'Opponent', label: meName),
           ],
         ),
       ),
@@ -1185,4 +1229,10 @@ String _ago(DateTime t) {
   if (d.inHours < 1) return '${d.inMinutes} min ago';
   if (d.inDays < 1) return '${d.inHours} h ago';
   return '${d.inDays} d ago';
+}
+
+/// A team name short enough for a table column header.
+String _short(String name) {
+  final t = name.trim().toUpperCase();
+  return t.length <= 8 ? t : '${t.substring(0, 7)}…';
 }

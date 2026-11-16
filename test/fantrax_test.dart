@@ -75,6 +75,18 @@ void main() {
     expect(justEndedScoringPeriod(info, DateTime.utc(2026, 10, 28, 5)), isNull);
   });
 
+  test('upcomingScoringPeriod: the next week, within a day of its start', () {
+    final info = {
+      'scoringPeriods': [
+        {'number': 4, 'startDate': '2026-11-09T19:00:00.0-0500', 'endDate': '2026-11-16T18:59:59.0-0500'},
+        {'number': 5, 'startDate': '2026-11-16T19:00:00.0-0500', 'endDate': '2026-11-23T18:59:59.0-0500'},
+      ],
+    };
+    expect(upcomingScoringPeriod(info, DateTime.utc(2026, 11, 15, 9)), isNull); // Sunday
+    expect(upcomingScoringPeriod(info, DateTime.utc(2026, 11, 16, 9)), 5); // Monday 09:00 UTC
+    expect(upcomingScoringPeriod(info, DateTime.utc(2026, 11, 17, 7)), isNull); // week 5 is current
+  });
+
   test('isFantraxLoggedOut spots the not-logged-in answer', () {
     expect(isFantraxLoggedOut({'pageError': {'code': 'WARNING_NOT_LOGGED_IN'}}), isTrue);
     expect(isFantraxLoggedOut({'responses': []}), isFalse);
