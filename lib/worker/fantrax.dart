@@ -158,6 +158,8 @@ List<List<MatchupSide>> parseFantraxLiveScoring(Map<String, dynamic> data, {bool
     return (
       name: names[id] ?? id,
       stats: {
+        // Every category, 0 before the week's first game (Fantrax then sends no rows).
+        for (final k in _fantraxCats.values) k: 0,
         for (final c in (row['object2'] as List).cast<Map<String, dynamic>>())
           ?_fantraxCats[(c['scipId'] as String).split('#')[1]]: c['av'] as num,
         if (isFinal) 'remaining': 0,

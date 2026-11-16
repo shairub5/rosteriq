@@ -199,7 +199,8 @@ LeagueData mergeSnapshot(List<Player> bundled, LeagueRosterConfig config, Map<St
                 () {
                   TeamWeek side(Map t) => (
                         name: t['name'] as String,
-                        stats: {for (final c in allStatCategories) c: ((t['stats'] as Map)[c.name] as num).toDouble()},
+                        // A missing category (week not started) counts as 0 instead of failing the whole load.
+                        stats: {for (final c in allStatCategories) c: ((t['stats'] as Map)[c.name] as num? ?? 0).toDouble()},
                         extra: {
                           for (final k in extraKeys)
                             if ((t['stats'] as Map)[k] case final num v) k: v.toDouble(),
