@@ -6,10 +6,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/player.dart';
 import '../models/stat_category.dart';
 import '../services/player_repository.dart';
+import '../services/schedule_service.dart';
 import '../state/current_league_provider.dart';
 import '../state/league_data_provider.dart';
 import '../state/league_teams_provider.dart';
 import '../state/saved_roster_provider.dart';
+import '../state/schedule_provider.dart';
 import '../worker/espn.dart' show InjuryEntry, normalizeName;
 import '../theme.dart';
 import '../widgets/category_radar_chart.dart';
@@ -498,6 +500,44 @@ class MatchupScreen extends ConsumerWidget {
                     ],
                   ),
                 ),
+              ),
+            );
+          }(),
+        if (ref.watch(scheduleProvider).value case final schedule?)
+          () {
+            final range = fantasyWeekDates(w.week, schedule);
+            final today = _usToday();
+            final current = !today.isBefore(range.start) && !today.isAfter(range.end);
+            final injuries = leagueData?.injuries ?? const <String, InjuryEntry>{};
+            List<PlayerGames> rows(TeamWeek t, bool mineSide) => [
+                  for (final p in rosterOf(t.name))
+                    (
+                      player: p,
+                      mine: mineSide,
+                      games: schedule.teams[p.team]?.gamesInWindow(range.start, range.end) ?? 0,
+                      left: schedule.teams[p.team]?.gamesInWindow(today, range.end) ?? 0,
+                      status: injuries[p.id]?.status,
+                    ),
+                ];
+            final all = [...rows(mine.me, true), ...rows(mine.opp, false)];
+            if (all.isEmpty) return const SizedBox.shrink();
+            return Padding(
+              padding: const EdgeInsets.only(top: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  SectionHeader('Games per player · week ${w.week}'),
+                  Card(
+                    child: PlayerGamesTable(
+                      rows: all,
+                      meLabel: sideLabel,
+                      oppLabel: mine.opp.name,
+                      showLeft: current,
+                      caption: '${_md(range.start)} – ${_md(range.end)} · NBA schedule'
+                          '${current ? ' · left = from today' : ''}',
+                    ),
+                  ),
+                ],
               ),
             );
           }(),
@@ -1244,4 +1284,214 @@ String _ago(DateTime t) {
 String _short(String name) {
   final t = name.trim().toUpperCase();
   return t.length <= 8 ? t : '${t.substring(0, 7)}…';
+}
+
+/// Monday–Sunday dates of fantasy week [week]: week 1 is the week of the season opener
+/// (the earliest game in the schedule). Assumes one-week matchups throughout.
+({DateTime start, DateTime end}) fantasyWeekDates(int week, NbaSchedule schedule) {
+  final opener = schedule.teams.values.map((t) => t.games.first).reduce((a, b) => a.isBefore(b) ? a : b);
+  final monday = DateTime(opener.year, opener.month, opener.day - (opener.weekday - 1) + 7 * (week - 1));
+  return (start: monday, end: DateTime(monday.year, monday.month, monday.day + 6));
+}
+
+/// Today's date in the US (games are dated by US day; Israel is ahead).
+DateTime _usToday() {
+  final us = DateTime.now().toUtc().subtract(const Duration(hours: 5));
+  return DateTime(us.year, us.month, us.day);
+}
+
+String _md(DateTime d) =>
+    '${const ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][d.month - 1]} ${d.day}';
+
+typedef PlayerGames = ({Player player, bool mine, int games, int left, String? status});
+
+/// Both rosters' players with their NBA games this week; sortable by games, games left or name,
+/// and filterable to one side. Team totals on top.
+class PlayerGamesTable extends StatefulWidget {
+  final List<PlayerGames> rows;
+  final String meLabel;
+  final String oppLabel;
+  final bool showLeft;
+  final String caption;
+
+  const PlayerGamesTable({
+    super.key,
+    required this.rows,
+    required this.meLabel,
+    required this.oppLabel,
+    required this.showLeft,
+    required this.caption,
+  });
+
+  @override
+  State<PlayerGamesTable> createState() => _PlayerGamesTableState();
+}
+
+enum _GamesSort { games, left, name }
+
+class _PlayerGamesTableState extends State<PlayerGamesTable> {
+  _GamesSort _sort = _GamesSort.games;
+  bool _desc = true;
+  bool? _side; // null = both, true = mine, false = opponent
+
+  void _tap(_GamesSort s) => setState(() {
+        if (_sort == s) {
+          _desc = !_desc;
+        } else {
+          _sort = s;
+          _desc = s != _GamesSort.name;
+        }
+      });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+    final sort = _sort == _GamesSort.left && !widget.showLeft ? _GamesSort.games : _sort;
+    int key(PlayerGames r) => sort == _GamesSort.left ? r.left : r.games;
+    final rows = widget.rows.where((r) => _side == null || r.mine == _side).toList()
+      ..sort((a, b) {
+        final byName = a.player.name.compareTo(b.player.name);
+        if (sort == _GamesSort.name) return _desc ? -byName : byName;
+        final c = _desc ? key(b).compareTo(key(a)) : key(a).compareTo(key(b));
+        return c != 0 ? c : byName;
+      });
+
+    // Team totals count healthy players only: an "Out" player's games won't score.
+    ({int games, int left}) total(bool mine) {
+      final r = widget.rows.where((r) => r.mine == mine && r.status != 'Out');
+      return (games: r.fold(0, (s, r) => s + r.games), left: r.fold(0, (s, r) => s + r.left));
+    }
+
+    Widget totalTile(bool mine) {
+      final t = total(mine);
+      final color = mine ? colors.primary : colors.tertiary;
+      return Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(children: [
+              Container(width: 8, height: 8, decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
+              const SizedBox(width: 6),
+              Flexible(
+                child: Text(mine ? widget.meLabel : widget.oppLabel,
+                    overflow: TextOverflow.ellipsis, style: theme.textTheme.labelMedium?.copyWith(color: colors.onSurfaceVariant)),
+              ),
+            ]),
+            const SizedBox(height: 2),
+            Text('${t.games} games', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700)),
+            if (widget.showLeft)
+              Text('${t.left} left', style: theme.textTheme.labelSmall?.copyWith(color: colors.onSurfaceVariant)),
+          ],
+        ),
+      );
+    }
+
+    Widget head(String label, _GamesSort s, {TextAlign align = TextAlign.end}) {
+      final active = sort == s;
+      return InkWell(
+        onTap: () => _tap(s),
+        borderRadius: BorderRadius.circular(6),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          child: Row(
+            mainAxisAlignment: align == TextAlign.end ? MainAxisAlignment.end : MainAxisAlignment.start,
+            children: [
+              Text(label,
+                  style: theme.textTheme.labelSmall?.copyWith(
+                    color: active ? colors.primary : colors.onSurfaceVariant,
+                    fontWeight: active ? FontWeight.w800 : null,
+                  )),
+              Icon(active ? (_desc ? Icons.arrow_downward : Icons.arrow_upward) : Icons.unfold_more,
+                  size: 14, color: active ? colors.primary : colors.onSurfaceVariant),
+            ],
+          ),
+        ),
+      );
+    }
+
+    const numW = 56.0;
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 14, 16, 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(children: [totalTile(true), const SizedBox(width: 12), totalTile(false)]),
+          const SizedBox(height: 12),
+          SegmentedButton<bool?>(
+            showSelectedIcon: false,
+            segments: [
+              const ButtonSegment(value: null, label: Text('Both')),
+              ButtonSegment(value: true, label: Text(widget.meLabel, overflow: TextOverflow.ellipsis)),
+              ButtonSegment(value: false, label: Text(widget.oppLabel, overflow: TextOverflow.ellipsis)),
+            ],
+            selected: {_side},
+            onSelectionChanged: (v) => setState(() => _side = v.first),
+          ),
+          const SizedBox(height: 4),
+          Row(children: [
+            Expanded(child: head('PLAYER', _GamesSort.name, align: TextAlign.start)),
+            SizedBox(width: numW, child: head('GAMES', _GamesSort.games)),
+            if (widget.showLeft) SizedBox(width: numW, child: head('LEFT', _GamesSort.left)),
+          ]),
+          for (final r in rows)
+            DecoratedBox(
+              decoration: BoxDecoration(border: Border(top: BorderSide(color: colors.outlineVariant))),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Row(children: [
+                  Container(
+                    width: 4,
+                    height: 32,
+                    decoration: BoxDecoration(
+                      color: r.mine ? colors.primary : colors.tertiary,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(r.player.name,
+                            overflow: TextOverflow.ellipsis,
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: r.status == 'Out' ? colors.onSurfaceVariant : null,
+                            )),
+                        Text(
+                          [r.player.team, ?switch (r.status) { 'Out' => 'OUT', null => null, final s => s }].join(' · '),
+                          style: theme.textTheme.labelSmall?.copyWith(
+                            color: r.status == 'Out'
+                                ? context.stat.loss
+                                : r.status != null
+                                    ? context.stat.warn
+                                    : colors.onSurfaceVariant,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: numW,
+                    child: Text('${r.games}',
+                        textAlign: TextAlign.end, style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700)),
+                  ),
+                  if (widget.showLeft)
+                    SizedBox(
+                      width: numW,
+                      child: Text('${r.left}', textAlign: TextAlign.end, style: theme.textTheme.bodyMedium),
+                    ),
+                ]),
+              ),
+            ),
+          const SizedBox(height: 6),
+          Text(
+            '${widget.caption} · totals leave out players ruled Out',
+            style: theme.textTheme.labelSmall?.copyWith(color: colors.onSurfaceVariant),
+          ),
+        ],
+      ),
+    );
+  }
 }
