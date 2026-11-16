@@ -365,9 +365,10 @@ class MatchupScreen extends ConsumerWidget {
           label: const Text('Team'),
           leadingIcon: const Icon(Icons.person_outline),
           onSelected: (v) {
-            ref.read(_sideProvider.notifier).state = v == myName ? null : v;
-            // Comparing a team with itself means nothing: back to its real opponent.
-            if (ref.read(_compareProvider) == v) ref.read(_compareProvider.notifier).state = null;
+            ref.read(_sideProvider.notifier).state = v;
+            // A new team starts against its real opponent this week (pinned by name when keeping).
+            ref.read(_compareProvider.notifier).state =
+                ref.read(_keepProvider) ? week.map((m) => sideOf(m, v)).nonNulls.firstOrNull?.opp.name : null;
           },
           dropdownMenuEntries: [
             if (myName != null && teams.containsKey(myName)) DropdownMenuEntry(value: myName, label: '$myName (me)'),
@@ -382,7 +383,8 @@ class MatchupScreen extends ConsumerWidget {
           expandedInsets: EdgeInsets.zero,
           label: const Text('Compare with'),
           leadingIcon: const Icon(Icons.compare_arrows),
-          onSelected: (v) => ref.read(_compareProvider.notifier).state = v == real.opp.name ? null : v,
+          // The name itself, even for the real opponent, so Keep selection holds it across weeks.
+          onSelected: (v) => ref.read(_compareProvider.notifier).state = v,
           dropdownMenuEntries: [
             DropdownMenuEntry(value: real!.opp.name, label: '${real.opp.name} (${isMe ? 'my' : 'their'} opponent)'),
             for (final name in teams.keys.where((n) => n != real.opp.name && n != sideName).toList()..sort())
@@ -395,7 +397,14 @@ class MatchupScreen extends ConsumerWidget {
           title: const Text('Keep selection'),
           subtitle: const Text('Same teams when you change week'),
           value: ref.watch(_keepProvider),
-          onChanged: (v) => ref.read(_keepProvider.notifier).state = v,
+          onChanged: (v) {
+            ref.read(_keepProvider.notifier).state = v;
+            // Pin the two teams on screen, including an untouched default (my real matchup).
+            if (v) {
+              ref.read(_sideProvider.notifier).state = mine.me.name;
+              ref.read(_compareProvider.notifier).state = mine.opp.name;
+            }
+          },
         ),
         if (live) ...[
           const SizedBox(height: 12),
