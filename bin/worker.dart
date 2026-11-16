@@ -68,6 +68,10 @@ Future<void> main(List<String> args) async {
         : synced.first,
     ...synced.skip(1),
   ];
+  // /sync_fantrax from this run: scrape.yml starts fantrax.yml once the snapshot is saved.
+  if (leagues.any((l) => l[fantraxSyncRequestedKey] == now.toIso8601String())) {
+    File('${snapshotFile.parent.path}/fantrax_requested').createSync(recursive: true);
+  }
 
   // Who owns whom in each league, by name (roster ids are ESPN or bundled ids).
   final nameById = {

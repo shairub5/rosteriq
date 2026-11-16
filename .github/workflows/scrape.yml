@@ -9,6 +9,8 @@ on:
 
 permissions:
   contents: write
+  # Starting fantrax.yml for /sync_fantrax.
+  actions: write
 
 # Shared with fantrax.yml: both force-push the data branch, so they take turns.
 concurrency:
@@ -57,3 +59,10 @@ jobs:
           git -c user.name=rosteriq-bot -c user.email=bot@users.noreply.github.com add snapshot.json
           git -c user.name=rosteriq-bot -c user.email=bot@users.noreply.github.com commit -qm "snapshot $(date -u +%FT%TZ)"
           git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" data
+
+      # Someone sent /sync_fantrax. Queues behind this run in the data-branch group.
+      - name: Start Fantrax sync
+        if: hashFiles('state/fantrax_requested') != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run fantrax.yml --repo ${{ github.repository }}

@@ -42,7 +42,12 @@ const botCommands = [
   ('help', 'What the bot can do'),
   ('status', 'Last updates and Fantrax cookie state'),
   ('fantrax_cookie', 'Save the Fantrax login cookie (send it bare for how-to)'),
+  ('sync_fantrax', 'Run the Fantrax sync now instead of waiting for 09:00/21:00'),
 ];
+
+/// Set on the Fantrax league by /sync_fantrax; bin/worker.dart turns a fresh one into
+/// state/fantrax_requested, and scrape.yml then starts fantrax.yml.
+const fantraxSyncRequestedKey = 'fantraxSyncRequestedAt';
 
 String helpText() => [
       'RosterIQ bot commands:',
@@ -422,6 +427,14 @@ Future<List<Map<String, dynamic>>> syncLeaguesFromTelegram({
               ? '✅ Fantrax cookie saved and it works (your message was deleted). Matchups sync twice a day.'
               : '❌ Saved, but Fantrax says it\'s not logged in. Copy it again while logged in.\n\n$fantraxCookieHowTo');
           if (!ok) (l['fantraxCookie'] as Map<String, dynamic>)['expiredAt'] = now.toIso8601String();
+        }
+      case 'sync_fantrax':
+        final l = out.where((l) => l['fantraxLeagueId'] != null).firstOrNull;
+        if (l == null) {
+          await reply('❌ No Fantrax league is set up.');
+        } else {
+          l[fantraxSyncRequestedKey] = now.toIso8601String();
+          await reply('⏳ Fantrax sync started. Rosters and matchups land in the app in about 3 minutes.');
         }
       default:
         await reply('Unknown command /${c.name}. Send /help for the list.');
