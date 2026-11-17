@@ -64,7 +64,7 @@ void main() {
     expect(parseFantraxLiveScoring(data, isFinal: true).first.first.stats['remaining'], 0);
   });
 
-  test('justEndedScoringPeriod: only within a day of the week ending', () {
+  test('justEndedScoringPeriod: only within a week of the week ending', () {
     final info = {
       'scoringPeriods': [
         {'number': 1, 'startDate': '2026-10-20T15:00:00.0-0400', 'endDate': '2026-10-26T18:59:59.0-0400'},
@@ -72,7 +72,8 @@ void main() {
     };
     expect(justEndedScoringPeriod(info, DateTime.utc(2026, 10, 26, 22)), isNull);
     expect(justEndedScoringPeriod(info, DateTime.utc(2026, 10, 27, 5)), 1);
-    expect(justEndedScoringPeriod(info, DateTime.utc(2026, 10, 28, 5)), isNull);
+    expect(justEndedScoringPeriod(info, DateTime.utc(2026, 11, 1, 5)), 1);
+    expect(justEndedScoringPeriod(info, DateTime.utc(2026, 11, 3, 5)), isNull);
   });
 
   test('upcomingScoringPeriod: the next week, within a day of its start', () {

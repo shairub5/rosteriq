@@ -1,11 +1,7 @@
-# Twice a day: Fantrax rosters (public API) + live scoring with the cookie sent to the bot -> snapshot.json on `data`.
+# On request only (the bot's /sync_fantrax, or a manual run): Fantrax rosters (public API) + live scoring with the cookie sent to the bot -> snapshot.json on `data`.
 name: fantrax
 
 on:
-  schedule:
-    # 09:00 / 21:00 Israel winter time (UTC+2); 10:00 / 22:00 in summer, since cron is UTC.
-    # Shares the :00 mark with the scrape dispatch; the data-branch group queues one behind the other.
-    - cron: '0 7,19 * * *'
   workflow_dispatch:
     inputs:
       dump:

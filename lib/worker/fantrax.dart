@@ -84,11 +84,12 @@ int? upcomingScoringPeriod(Map<String, dynamic> leagueInfo, DateTime now) {
   return null;
 }
 
-/// The week that ended within the last day, so a twice-daily run stores its final totals once.
+/// The week that ended within the last week, so a sync run any time during the next week (they
+/// run on request only) still stores its final totals.
 int? justEndedScoringPeriod(Map<String, dynamic> leagueInfo, DateTime now) {
   for (final p in (leagueInfo['scoringPeriods'] as List).cast<Map<String, dynamic>>()) {
     final end = _fantraxDate(p['endDate'] as String);
-    if (!now.isBefore(end) && now.difference(end) < const Duration(days: 1)) return p['number'] as int;
+    if (!now.isBefore(end) && now.difference(end) < const Duration(days: 7)) return p['number'] as int;
   }
   return null;
 }

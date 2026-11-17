@@ -42,7 +42,7 @@ const botCommands = [
   ('help', 'What the bot can do'),
   ('status', 'Last updates and Fantrax cookie state'),
   ('fantrax_cookie', 'Save the Fantrax login cookie (send it bare for how-to)'),
-  ('sync_fantrax', 'Run the Fantrax sync now instead of waiting for 09:00/21:00'),
+  ('sync_fantrax', 'Sync Fantrax rosters and matchups now'),
 ];
 
 /// Set on the Fantrax league by /sync_fantrax; bin/worker.dart turns a fresh one into
