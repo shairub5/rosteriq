@@ -178,3 +178,105 @@ Future<({List<Player> players, Map<String, double> minutes})> fetchStats(int sea
 }
 
 Future<List<InjuryEntry>> fetchInjuries() async => parseInjuries(await _getJson(_injuriesUrl));
+
+/// One player's line from a finished game (ESPN ids and team codes, like [fetchStats]).
+typedef NightLine = ({
+  String id,
+  String name,
+  String team,
+  double min,
+  int pts,
+  int reb,
+  int ast,
+  int threePM,
+  int stl,
+  int blk,
+  int to,
+  int fgm,
+  int fga,
+  int ftm,
+  int fta,
+});
+
+/// Box score of one game: who played and how, and who sat out hurt (ESPN's game injury report
+/// plus anyone listed as not playing for a reason other than a coach's decision).
+({List<NightLine> lines, Map<String, Set<String>> outByTeam}) parseGameSummary(Map<String, dynamic> json) {
+  final lines = <NightLine>[];
+  final out = <String, Set<String>>{};
+  for (final b in ((json['boxscore'] as Map?)?['players'] as List? ?? const []).cast<Map<String, dynamic>>()) {
+    final team = (b['team'] as Map)['abbreviation'] as String;
+    final s = ((b['statistics'] as List).first as Map).cast<String, dynamic>();
+    final labels = ((s['labels'] ?? s['names']) as List).cast<String>();
+    for (final a in (s['athletes'] as List).cast<Map<String, dynamic>>()) {
+      final athlete = a['athlete'] as Map;
+      final id = athlete['id'] as String;
+      if (a['didNotPlay'] == true) {
+        if ((a['reason'] as String? ?? '').toUpperCase() != "COACH'S DECISION") (out[team] ??= {}).add(id);
+        continue;
+      }
+      final stats = (a['stats'] as List?)?.cast<String>() ?? const [];
+      if (stats.length != labels.length) continue;
+      String v(String label) => stats[labels.indexOf(label)];
+      int i(String label) => int.tryParse(v(label)) ?? 0;
+      (int, int) madeAtt(String label) {
+        final p = v(label).split('-');
+        return p.length == 2 ? (int.tryParse(p[0]) ?? 0, int.tryParse(p[1]) ?? 0) : (0, 0);
+      }
+
+      final (fgm, fga) = madeAtt('FG');
+      final (tpm, _) = madeAtt('3PT');
+      final (ftm, fta) = madeAtt('FT');
+      lines.add((
+        id: id,
+        name: athlete['displayName'] as String,
+        team: team,
+        min: double.tryParse(v('MIN')) ?? 0,
+        pts: i('PTS'),
+        reb: i('REB'),
+        ast: i('AST'),
+        threePM: tpm,
+        stl: i('STL'),
+        blk: i('BLK'),
+        to: i('TO'),
+        fgm: fgm,
+        fga: fga,
+        ftm: ftm,
+        fta: fta,
+      ));
+    }
+  }
+  for (final t in (json['injuries'] as List? ?? const []).cast<Map<String, dynamic>>()) {
+    final team = (t['team'] as Map)['abbreviation'] as String;
+    for (final i in (t['injuries'] as List).cast<Map<String, dynamic>>()) {
+      if (i['status'] == 'Out') (out[team] ??= {}).add((i['athlete'] as Map)['id'] as String);
+    }
+  }
+  return (lines: lines, outByTeam: out);
+}
+
+Map<String, dynamic> nightLineToJson(NightLine l) => {
+      'id': l.id, 'name': l.name, 'team': l.team, 'min': l.min, 'pts': l.pts, 'reb': l.reb, 'ast': l.ast, //
+      'threePM': l.threePM, 'stl': l.stl, 'blk': l.blk, 'to': l.to,
+      'fgm': l.fgm, 'fga': l.fga, 'ftm': l.ftm, 'fta': l.fta,
+    };
+
+/// Every finished game on [usDate] ("YYYYMMDD" in ESPN's scoreboard): the lines and who sat out
+/// hurt. `complete` is false while any game that day hasn't finished, so the caller fetches again.
+Future<({List<NightLine> lines, Map<String, Set<String>> outByTeam, bool complete})> fetchNight(String usDate) async {
+  final board = await _getJson('https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=$usDate');
+  final events = (board['events'] as List? ?? const []).cast<Map<String, dynamic>>();
+  final lines = <NightLine>[];
+  final out = <String, Set<String>>{};
+  var complete = true;
+  for (final e in events) {
+    if (((e['status'] as Map?)?['type'] as Map?)?['completed'] != true) {
+      complete = false;
+      continue;
+    }
+    final g = parseGameSummary(
+        await _getJson('https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=${e['id']}'));
+    lines.addAll(g.lines);
+    g.outByTeam.forEach((t, ids) => (out[t] ??= {}).addAll(ids));
+  }
+  return (lines: lines, outByTeam: out, complete: complete);
+}

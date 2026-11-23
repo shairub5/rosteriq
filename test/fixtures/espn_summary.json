@@ -1,0 +1,350 @@
+{
+ "boxscore": {
+  "players": [
+   {
+    "team": {
+     "abbreviation": "OKC"
+    },
+    "statistics": [
+     {
+      "names": [
+       "MIN",
+       "PTS",
+       "FG",
+       "3PT",
+       "FT",
+       "REB",
+       "AST",
+       "TO",
+       "STL",
+       "BLK",
+       "OREB",
+       "DREB",
+       "PF",
+       "+/-"
+      ],
+      "labels": [
+       "MIN",
+       "PTS",
+       "FG",
+       "3PT",
+       "FT",
+       "REB",
+       "AST",
+       "TO",
+       "STL",
+       "BLK",
+       "OREB",
+       "DREB",
+       "PF",
+       "+/-"
+      ],
+      "athletes": [
+       {
+        "athlete": {
+         "id": "4222252",
+         "displayName": "Isaiah Hartenstein"
+        },
+        "stats": [
+         "23",
+         "2",
+         "1-5",
+         "0-0",
+         "0-1",
+         "8",
+         "4",
+         "3",
+         "1",
+         "0",
+         "0",
+         "8",
+         "3",
+         "-21"
+        ],
+        "didNotPlay": false,
+        "reason": "COACH'S DECISION",
+        "active": false,
+        "starter": true
+       },
+       {
+        "athlete": {
+         "id": "3133626",
+         "displayName": "Kenrich Williams"
+        },
+        "stats": [
+         "26",
+         "12",
+         "5-10",
+         "2-4",
+         "0-1",
+         "4",
+         "2",
+         "3",
+         "1",
+         "0",
+         "2",
+         "2",
+         "2",
+         "-16"
+        ],
+        "didNotPlay": false,
+        "reason": "COACH'S DECISION",
+        "active": false,
+        "starter": true
+       },
+       {
+        "athlete": {
+         "id": "4432185",
+         "displayName": "Micah Peavy"
+        },
+        "stats": [
+         "31",
+         "9",
+         "4-7",
+         "1-1",
+         "0-0",
+         "6",
+         "1",
+         "1",
+         "2",
+         "0",
+         "2",
+         "4",
+         "2",
+         "-7"
+        ],
+        "didNotPlay": false,
+        "reason": "COACH'S DECISION",
+        "active": true,
+        "starter": true
+       },
+       {
+        "athlete": {
+         "id": "4432823",
+         "displayName": "Jaylin Williams"
+        },
+        "stats": [],
+        "didNotPlay": true,
+        "reason": "LOW BACK MUSCLE SPASMS",
+        "active": false,
+        "starter": false
+       },
+       {
+        "athlete": {
+         "id": "5174983",
+         "displayName": "Aday Mara"
+        },
+        "stats": [],
+        "didNotPlay": true,
+        "reason": "RIGHT SHIN CONTUSION",
+        "active": false,
+        "starter": false
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "team": {
+     "abbreviation": "MIA"
+    },
+    "statistics": [
+     {
+      "names": [
+       "MIN",
+       "PTS",
+       "FG",
+       "3PT",
+       "FT",
+       "REB",
+       "AST",
+       "TO",
+       "STL",
+       "BLK",
+       "OREB",
+       "DREB",
+       "PF",
+       "+/-"
+      ],
+      "labels": [
+       "MIN",
+       "PTS",
+       "FG",
+       "3PT",
+       "FT",
+       "REB",
+       "AST",
+       "TO",
+       "STL",
+       "BLK",
+       "OREB",
+       "DREB",
+       "PF",
+       "+/-"
+      ],
+      "athletes": [
+       {
+        "athlete": {
+         "id": "3064482",
+         "displayName": "Bobby Portis"
+        },
+        "stats": [
+         "21",
+         "10",
+         "4-9",
+         "1-3",
+         "1-2",
+         "8",
+         "1",
+         "2",
+         "0",
+         "0",
+         "2",
+         "6",
+         "0",
+         "+8"
+        ],
+        "didNotPlay": false,
+        "reason": "COACH'S DECISION",
+        "active": false,
+        "starter": true
+       },
+       {
+        "athlete": {
+         "id": "4066261",
+         "displayName": "Bam Adebayo"
+        },
+        "stats": [
+         "37",
+         "24",
+         "8-11",
+         "0-0",
+         "8-9",
+         "15",
+         "12",
+         "0",
+         "2",
+         "2",
+         "5",
+         "10",
+         "2",
+         "+15"
+        ],
+        "didNotPlay": false,
+        "reason": "COACH'S DECISION",
+        "active": true,
+        "starter": true
+       },
+       {
+        "athlete": {
+         "id": "6475",
+         "displayName": "Klay Thompson"
+        },
+        "stats": [
+         "23",
+         "9",
+         "3-9",
+         "3-7",
+         "0-0",
+         "6",
+         "4",
+         "1",
+         "1",
+         "1",
+         "1",
+         "5",
+         "2",
+         "+12"
+        ],
+        "didNotPlay": false,
+        "reason": "COACH'S DECISION",
+        "active": false,
+        "starter": true
+       },
+       {
+        "athlete": {
+         "id": "4431786",
+         "displayName": "Keshad Johnson"
+        },
+        "stats": [],
+        "didNotPlay": true,
+        "reason": "COACH'S DECISION",
+        "active": false,
+        "starter": false
+       },
+       {
+        "athlete": {
+         "id": "4278076",
+         "displayName": "Nick Richards"
+        },
+        "stats": [],
+        "didNotPlay": true,
+        "reason": "COACH'S DECISION",
+        "active": false,
+        "starter": false
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "injuries": [
+  {
+   "team": {
+    "abbreviation": "MIA"
+   },
+   "injuries": [
+    {
+     "athlete": {
+      "id": "3032977",
+      "displayName": "Giannis Antetokounmpo"
+     },
+     "status": "Out"
+    }
+   ]
+  },
+  {
+   "team": {
+    "abbreviation": "OKC"
+   },
+   "injuries": [
+    {
+     "athlete": {
+      "id": "5174983",
+      "displayName": "Aday Mara"
+     },
+     "status": "Out"
+    },
+    {
+     "athlete": {
+      "id": "4278073",
+      "displayName": "Shai Gilgeous-Alexander"
+     },
+     "status": "Out"
+    },
+    {
+     "athlete": {
+      "id": "5159925",
+      "displayName": "Nikola Topic"
+     },
+     "status": "Out"
+    },
+    {
+     "athlete": {
+      "id": "4432823",
+      "displayName": "Jaylin Williams"
+     },
+     "status": "Out"
+    },
+    {
+     "athlete": {
+      "id": "2991350",
+      "displayName": "Alex Caruso"
+     },
+     "status": "Out"
+    }
+   ]
+  }
+ ]
+}

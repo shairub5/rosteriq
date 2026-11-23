@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:rosteriq/models/player.dart';
 import 'package:rosteriq/worker/alerts.dart';
@@ -155,5 +158,15 @@ void main() {
         isNull,
       );
     });
+  });
+
+  test('parseGameSummary: lines, and who sat out hurt (not coach\'s decisions)', () {
+    final g = parseGameSummary(jsonDecode(File('test/fixtures/espn_summary.json').readAsStringSync()) as Map<String, dynamic>);
+    final h = g.lines.firstWhere((l) => l.name == 'Isaiah Hartenstein');
+    expect((h.team, h.min, h.pts, h.fgm, h.fga, h.reb, h.ast, h.to, h.stl), ('OKC', 23.0, 2, 1, 5, 8, 4, 3, 1));
+    expect(g.lines.where((l) => l.name == 'Alex Caruso'), isEmpty);
+    // Game injury report + "did not play" with an injury reason; coach's decisions don't count.
+    expect(g.outByTeam['OKC'], {'5174983', '4278073', '5159925', '4432823', '2991350'});
+    expect(g.outByTeam['MIA'], {'3032977'});
   });
 }

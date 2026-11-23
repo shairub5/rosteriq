@@ -108,6 +108,12 @@ Future<void> main(List<String> args) async {
           gamesNote: _gamesNote(now),
         );
 
+  final nights = await _nights(
+    now,
+    prevLast: prevJson?['lastNight'] as Map<String, dynamic>?,
+    prevPlayed: (prevJson?['played'] as Map?)?.cast<String, dynamic>() ?? const {},
+  );
+
   final reminder = keepAliveReminder(
     now: now,
     lastCommit: DateTime.tryParse(Platform.environment['LAST_COMMIT_AT'] ?? ''),
@@ -131,10 +137,58 @@ Future<void> main(List<String> args) async {
       for (final p in stats.players) {...p.toJson(), 'minutes': stats.minutes[p.id], 'totalZ': totalZById[p.id]},
     ],
     'alerts': alerts,
+    if (nights.last != null) 'lastNight': nights.last,
+    'played': nights.played,
     'league': leagues.first,
     'leagues': leagues.skip(1).toList(),
   }));
   stdout.writeln('${alerts.length} alerts, ${stats.players.length} players, ${injuries.length} injuries -> ${snapshotFile.path}');
+}
+
+/// "YYYYMMDD" of a US date.
+String _ymd(DateTime d) => '${d.year}${'${d.month}'.padLeft(2, '0')}${'${d.day}'.padLeft(2, '0')}';
+
+/// Box scores of finished US game nights since last week's Monday:
+/// - `played`: date -> {complete, ids} of everyone who got minutes (ESPN ids), so the app counts the
+///   games each player really played this week and last, not just the scheduled ones;
+/// - `last`: the latest night's full lines and who sat out hurt, for the "hot last night" list.
+/// A complete night is kept from the previous snapshot, so each night is fetched about once.
+/// A failed fetch keeps what the previous snapshot had rather than failing the run.
+Future<({Map<String, dynamic>? last, Map<String, dynamic> played})> _nights(
+  DateTime nowUtc, {
+  required Map<String, dynamic>? prevLast,
+  required Map<String, dynamic> prevPlayed,
+}) async {
+  final usToday = nowUtc.subtract(const Duration(hours: 5));
+  final today = DateTime.utc(usToday.year, usToday.month, usToday.day);
+  final from = today.subtract(Duration(days: today.weekday - 1 + 7)); // last week's Monday
+  final played = <String, dynamic>{};
+  Map<String, dynamic>? last = prevLast;
+  for (var d = from; d.isBefore(today); d = d.add(const Duration(days: 1))) {
+    final date = _ymd(d);
+    final isLast = d == today.subtract(const Duration(days: 1));
+    final kept = prevPlayed[date] as Map?;
+    if (kept?['complete'] == true && (!isLast || prevLast?['date'] == date)) {
+      played[date] = kept;
+      continue;
+    }
+    try {
+      final n = await fetchNight(date);
+      played[date] = {'complete': n.complete, 'ids': [for (final l in n.lines) if (l.min > 0) l.id]};
+      if (isLast) {
+        last = {
+          'date': date,
+          'complete': n.complete,
+          'players': n.lines.map(nightLineToJson).toList(),
+          'outByTeam': {for (final e in n.outByTeam.entries) e.key: e.value.toList()},
+        };
+      }
+    } catch (e) {
+      stderr.writeln('box scores $date: $e');
+      if (kept != null) played[date] = kept;
+    }
+  }
+  return (last: last, played: played);
 }
 
 List<RankingResult> _rank(List<Player> pool) => computeRankings(
