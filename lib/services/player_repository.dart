@@ -27,14 +27,34 @@ class LeagueData {
   /// My fantasy leagues; the primary one (id 'main') first. Never empty.
   final List<LeagueInfo> leagues;
 
+  /// Season minutes per game by [Player.id]; empty when offline.
+  final Map<String, double> minutes;
+
+  /// The last finished game night's box scores; null when offline or before the worker had them.
+  final NightBox? lastNight;
+
+  /// US game date -> ids of everyone who got minutes that night (this week and last). A date that's
+  /// missing hasn't been fetched yet, so callers fall back to the schedule for it.
+  final Map<DateTime, Set<String>> played;
+
   const LeagueData({
     required this.players,
     required this.config,
     this.injuries = const {},
     this.updatedAt,
     this.leagues = const [emptyMainLeague],
+    this.minutes = const {},
+    this.lastNight,
+    this.played = const {},
   });
 }
+
+/// One game night: each player's line by [Player.id] (team codes as in the schedule), and the
+/// players each team was missing to injury that night.
+typedef NightBox = ({DateTime date, Map<String, NightLine> lines, Map<String, Set<String>> outByTeam});
+
+/// "20261122" -> that date (local midnight, like the schedule's dates).
+DateTime _ymdDate(String s) => DateTime(int.parse(s.substring(0, 4)), int.parse(s.substring(4, 6)), int.parse(s.substring(6, 8)));
 
 /// One fantasy league from the snapshot: rosters published through it (Telegram bot today,
 /// Yahoo later) and every matchup entered with both teams' real weekly totals, sorted by week.
@@ -170,12 +190,51 @@ LeagueData mergeSnapshot(List<Player> bundled, LeagueRosterConfig config, Map<St
   ]);
 
   final injuries = {for (final i in injuryEntries) idByEspnId[i.playerId] ?? i.playerId: i};
+  String appId(String espnId) => idByEspnId[espnId] ?? espnId;
+  final night = snapshot['lastNight'] as Map<String, dynamic>?;
 
   return LeagueData(
     players: players,
     config: config,
     injuries: injuries,
     updatedAt: DateTime.parse(snapshot['updatedAt'] as String),
+    minutes: {
+      for (final j in snapPlayers)
+        if (j['minutes'] case final num m) appId(j['id'] as String): m.toDouble(),
+    },
+    lastNight: night == null
+        ? null
+        : (
+            date: _ymdDate(night['date'] as String),
+            lines: {
+              for (final j in (night['players'] as List).cast<Map<String, dynamic>>())
+                appId(j['id'] as String): (
+                  id: appId(j['id'] as String),
+                  name: j['name'] as String,
+                  team: espnTeams[j['team']] ?? j['team'] as String,
+                  min: (j['min'] as num).toDouble(),
+                  pts: j['pts'] as int,
+                  reb: j['reb'] as int,
+                  ast: j['ast'] as int,
+                  threePM: j['threePM'] as int,
+                  stl: j['stl'] as int,
+                  blk: j['blk'] as int,
+                  to: j['to'] as int,
+                  fgm: j['fgm'] as int,
+                  fga: j['fga'] as int,
+                  ftm: j['ftm'] as int,
+                  fta: j['fta'] as int,
+                ),
+            },
+            outByTeam: {
+              for (final e in ((night['outByTeam'] as Map?) ?? const {}).entries)
+                espnTeams[e.key] ?? e.key as String: {for (final id in (e.value as List).cast<String>()) appId(id)},
+            },
+          ),
+    played: {
+      for (final e in ((snapshot['played'] as Map?) ?? const {}).entries)
+        _ymdDate(e.key as String): {for (final id in ((e.value as Map)['ids'] as List).cast<String>()) appId(id)},
+    },
     leagues: [
       for (final (i, l) in [
         (snapshot['league'] as Map?) ?? const {},

@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/player.dart';
 import '../models/stat_category.dart';
 import '../services/player_repository.dart';
-import '../services/schedule_service.dart';
+import '../engine/matchup_needs.dart';
 import '../state/current_league_provider.dart';
 import '../state/league_data_provider.dart';
 import '../state/league_teams_provider.dart';
@@ -172,6 +172,29 @@ String ordinal(int n) => '$n${n % 100 >= 11 && n % 100 <= 13 ? 'th' : const {1: 
 /// Projected final for the week: totals so far + games remaining x the roster's average
 /// per-game line this season (healthy players with games only). FG%/FT% are recomputed from
 /// projected makes/attempts when the screenshot gave them. Null when there's nothing to project.
+/// [t]'s projected final for [week]: day by day from today, each day's 10 best healthy players at
+/// their season averages (see [projectSide]). Falls back to [projectWeek] until the schedule loads.
+TeamWeek? _projectTeam(WidgetRef ref, TeamWeek t, List<Player> roster, int week) {
+  final data = ref.watch(leagueDataProvider).value;
+  final schedule = ref.watch(scheduleProvider).value;
+  final injuries = data?.injuries ?? const <String, InjuryEntry>{};
+  if (data == null || schedule == null) return projectWeek(t, roster, injuries);
+  if (roster.where((p) => p.gp > 0).isEmpty) return null;
+  final baseline = PerGameBaseline.of(data.players, data.minutes);
+  return (
+    name: t.name,
+    extra: t.extra,
+    stats: projectSide(
+      now: t,
+      roster: roster,
+      schedule: schedule,
+      injuries: injuries,
+      range: fantasyWeekDates(week, schedule),
+      valueOf: (p) => baseline.z(seasonLine(p)).values.fold(0, (a, b) => a + b),
+    ),
+  );
+}
+
 TeamWeek? projectWeek(TeamWeek t, List<Player> roster, Map<String, InjuryEntry> injuries) {
   final remaining = t.extra['remaining'] ?? 0;
   final active = roster.where((p) => p.gp > 0 && injuries[p.id]?.status != 'Out').toList();
@@ -349,8 +372,8 @@ class MatchupScreen extends ConsumerWidget {
     final projected = now == null || !wantProjected
         ? null
         : (
-            me: projectWeek(now.me, rosterOf(now.me.name), leagueData?.injuries ?? const {}),
-            opp: projectWeek(now.opp, rosterOf(now.opp.name), leagueData?.injuries ?? const {}),
+            me: _projectTeam(ref, now.me, rosterOf(now.me.name), w.week),
+            opp: _projectTeam(ref, now.opp, rosterOf(now.opp.name), w.week),
           );
     final showProjected = projected != null && (projected.me != null || projected.opp != null);
     final mine = now == null
@@ -422,7 +445,7 @@ class MatchupScreen extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.only(top: 8),
               child: Text(
-                'Can\'t project yet: the matchup screenshot needs games remaining, and both rosters need to be in League.',
+                'Can\'t project yet: both rosters need to be in League.',
                 style: theme.textTheme.bodySmall,
               ),
             ),
@@ -472,7 +495,8 @@ class MatchupScreen extends ConsumerWidget {
             ),
           ),
         ),
-        if (live && !hypothetical)
+        // Before the week's first game everything is 0-0, which isn't "close".
+        if (live && !hypothetical && (now!.me.stats[StatCategory.pts]! > 0 || now.opp.stats[StatCategory.pts]! > 0))
           () {
             final close = [
               for (final c in allStatCategories)
@@ -506,7 +530,7 @@ class MatchupScreen extends ConsumerWidget {
         if (ref.watch(scheduleProvider).value case final schedule?)
           () {
             final range = fantasyWeekDates(w.week, schedule);
-            final today = _usToday();
+            final today = usToday();
             final current = !today.isBefore(range.start) && !today.isAfter(range.end);
             final injuries = leagueData?.injuries ?? const <String, InjuryEntry>{};
             List<PlayerGames> rows(TeamWeek t, bool mineSide) => [
@@ -514,8 +538,7 @@ class MatchupScreen extends ConsumerWidget {
                     (
                       player: p,
                       mine: mineSide,
-                      games: schedule.teams[p.team]?.gamesInWindow(range.start, range.end) ?? 0,
-                      left: schedule.teams[p.team]?.gamesInWindow(today, range.end) ?? 0,
+                      games: weekGames(p, range, schedule, leagueData?.played ?? const {}, today: today),
                       status: injuries[p.id]?.status,
                     ),
                 ];
@@ -533,8 +556,8 @@ class MatchupScreen extends ConsumerWidget {
                       meLabel: sideLabel,
                       oppLabel: mine.opp.name,
                       showLeft: current,
-                      caption: '${_md(range.start)} – ${_md(range.end)} · NBA schedule'
-                          '${current ? ' · left = from today' : ''}',
+                      caption: '${_md(range.start)} – ${_md(range.end)} · played = box scores'
+                          '${current ? ', left = NBA schedule from today' : ''}',
                     ),
                   ),
                 ],
@@ -1286,24 +1309,10 @@ String _short(String name) {
   return t.length <= 8 ? t : '${t.substring(0, 7)}…';
 }
 
-/// Monday–Sunday dates of fantasy week [week]: week 1 is the week of the season opener
-/// (the earliest game in the schedule). Assumes one-week matchups throughout.
-({DateTime start, DateTime end}) fantasyWeekDates(int week, NbaSchedule schedule) {
-  final opener = schedule.teams.values.map((t) => t.games.first).reduce((a, b) => a.isBefore(b) ? a : b);
-  final monday = DateTime(opener.year, opener.month, opener.day - (opener.weekday - 1) + 7 * (week - 1));
-  return (start: monday, end: DateTime(monday.year, monday.month, monday.day + 6));
-}
-
-/// Today's date in the US (games are dated by US day; Israel is ahead).
-DateTime _usToday() {
-  final us = DateTime.now().toUtc().subtract(const Duration(hours: 5));
-  return DateTime(us.year, us.month, us.day);
-}
-
 String _md(DateTime d) =>
     '${const ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][d.month - 1]} ${d.day}';
 
-typedef PlayerGames = ({Player player, bool mine, int games, int left, String? status});
+typedef PlayerGames = ({Player player, bool mine, WeekGames games, String? status});
 
 /// Both rosters' players with their NBA games this week; sortable by games, games left or name,
 /// and filterable to one side. Team totals on top.
@@ -1327,10 +1336,10 @@ class PlayerGamesTable extends StatefulWidget {
   State<PlayerGamesTable> createState() => _PlayerGamesTableState();
 }
 
-enum _GamesSort { games, left, name }
+enum _GamesSort { total, played, left, name }
 
 class _PlayerGamesTableState extends State<PlayerGamesTable> {
-  _GamesSort _sort = _GamesSort.games;
+  _GamesSort _sort = _GamesSort.total;
   bool _desc = true;
   bool? _side; // null = both, true = mine, false = opponent
 
@@ -1347,8 +1356,12 @@ class _PlayerGamesTableState extends State<PlayerGamesTable> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
-    final sort = _sort == _GamesSort.left && !widget.showLeft ? _GamesSort.games : _sort;
-    int key(PlayerGames r) => sort == _GamesSort.left ? r.left : r.games;
+    final sort = (_sort == _GamesSort.left || _sort == _GamesSort.total) && !widget.showLeft ? _GamesSort.played : _sort;
+    int key(PlayerGames r) => switch (sort) {
+          _GamesSort.left => r.games.left,
+          _GamesSort.played => r.games.played,
+          _ => r.games.played + r.games.left,
+        };
     final rows = widget.rows.where((r) => _side == null || r.mine == _side).toList()
       ..sort((a, b) {
         final byName = a.player.name.compareTo(b.player.name);
@@ -1357,10 +1370,13 @@ class _PlayerGamesTableState extends State<PlayerGamesTable> {
         return c != 0 ? c : byName;
       });
 
-    // Team totals count healthy players only: an "Out" player's games won't score.
-    ({int games, int left}) total(bool mine) {
-      final r = widget.rows.where((r) => r.mine == mine && r.status != 'Out');
-      return (games: r.fold(0, (s, r) => s + r.games), left: r.fold(0, (s, r) => s + r.left));
+    // Played games are real; games left count healthy players only (an "Out" player won't play them).
+    ({int played, int left}) total(bool mine) {
+      final r = widget.rows.where((r) => r.mine == mine);
+      return (
+        played: r.fold(0, (s, r) => s + r.games.played),
+        left: r.where((r) => r.status != 'Out').fold(0, (s, r) => s + r.games.left),
+      );
     }
 
     Widget totalTile(bool mine) {
@@ -1379,9 +1395,9 @@ class _PlayerGamesTableState extends State<PlayerGamesTable> {
               ),
             ]),
             const SizedBox(height: 2),
-            Text('${t.games} games', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700)),
-            if (widget.showLeft)
-              Text('${t.left} left', style: theme.textTheme.labelSmall?.copyWith(color: colors.onSurfaceVariant)),
+            Text('${t.played + t.left} games', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700)),
+            Text(widget.showLeft ? '${t.played} played · ${t.left} left' : 'played',
+                style: theme.textTheme.labelSmall?.copyWith(color: colors.onSurfaceVariant)),
           ],
         ),
       );
@@ -1410,7 +1426,7 @@ class _PlayerGamesTableState extends State<PlayerGamesTable> {
       );
     }
 
-    const numW = 56.0;
+    const numW = 50.0;
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 14, 16, 8),
       child: Column(
@@ -1431,8 +1447,11 @@ class _PlayerGamesTableState extends State<PlayerGamesTable> {
           const SizedBox(height: 4),
           Row(children: [
             Expanded(child: head('PLAYER', _GamesSort.name, align: TextAlign.start)),
-            SizedBox(width: numW, child: head('GAMES', _GamesSort.games)),
-            if (widget.showLeft) SizedBox(width: numW, child: head('LEFT', _GamesSort.left)),
+            SizedBox(width: numW + 8, child: head('PLAYED', _GamesSort.played)),
+            if (widget.showLeft) ...[
+              SizedBox(width: numW, child: head('LEFT', _GamesSort.left)),
+              SizedBox(width: numW, child: head('TOTAL', _GamesSort.total)),
+            ],
           ]),
           for (final r in rows)
             DecoratedBox(
@@ -1459,35 +1478,50 @@ class _PlayerGamesTableState extends State<PlayerGamesTable> {
                               fontWeight: FontWeight.w600,
                               color: r.status == 'Out' ? colors.onSurfaceVariant : null,
                             )),
-                        Text(
-                          [r.player.team, ?switch (r.status) { 'Out' => 'OUT', null => null, final s => s }].join(' · '),
-                          style: theme.textTheme.labelSmall?.copyWith(
-                            color: r.status == 'Out'
-                                ? context.stat.loss
-                                : r.status != null
-                                    ? context.stat.warn
-                                    : colors.onSurfaceVariant,
-                          ),
+                        Text.rich(
+                          TextSpan(children: [
+                            TextSpan(text: r.player.team),
+                            if (r.status != null)
+                              TextSpan(
+                                text: ' · ${r.status == 'Out' ? 'OUT' : r.status}',
+                                style: TextStyle(color: r.status == 'Out' ? context.stat.loss : context.stat.warn),
+                              ),
+                            if (r.games.missed > 0)
+                              TextSpan(
+                                text: ' · missed ${r.games.missed}',
+                                style: TextStyle(color: context.stat.warn, fontWeight: FontWeight.w700),
+                              ),
+                          ]),
+                          style: theme.textTheme.labelSmall?.copyWith(color: colors.onSurfaceVariant),
                         ),
                       ],
                     ),
                   ),
                   SizedBox(
-                    width: numW,
-                    child: Text('${r.games}',
-                        textAlign: TextAlign.end, style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700)),
+                    width: numW + 8,
+                    child: Text('${r.games.played}',
+                        textAlign: TextAlign.end,
+                        style: widget.showLeft
+                            ? theme.textTheme.bodyMedium
+                            : theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700)),
                   ),
-                  if (widget.showLeft)
+                  if (widget.showLeft) ...[
                     SizedBox(
                       width: numW,
-                      child: Text('${r.left}', textAlign: TextAlign.end, style: theme.textTheme.bodyMedium),
+                      child: Text('${r.games.left}', textAlign: TextAlign.end, style: theme.textTheme.bodyMedium),
                     ),
+                    SizedBox(
+                      width: numW,
+                      child: Text('${r.games.played + r.games.left}',
+                          textAlign: TextAlign.end, style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700)),
+                    ),
+                  ],
                 ]),
               ),
             ),
           const SizedBox(height: 6),
           Text(
-            '${widget.caption} · totals leave out players ruled Out',
+            '${widget.caption}${widget.showLeft ? ' · games left leave out players ruled Out' : ''}',
             style: theme.textTheme.labelSmall?.copyWith(color: colors.onSurfaceVariant),
           ),
         ],
