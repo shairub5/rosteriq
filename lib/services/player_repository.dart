@@ -65,9 +65,19 @@ typedef LeagueInfo = ({
   String? myName,
   List<RemoteTeam> remoteTeams,
   List<LeagueMatchup> matchups,
+  /// Daily lineups (Yahoo): team name as in [matchups] -> US date -> who was rostered that day.
+  /// Only days a sync saw; empty for leagues without them.
+  Map<String, Map<DateTime, List<LineupSlot>>> lineups,
 });
 
-const LeagueInfo emptyMainLeague = (id: 'main', name: 'My league', myName: null, remoteTeams: [], matchups: []);
+/// One player on one day's roster: [slot] is the lineup slot ("PG", "Util", "BN", "IL"...),
+/// [min] his minutes that day (null = no game).
+typedef LineupSlot = ({String id, String slot, double? min});
+
+/// Bench and injured-list slots: games there don't count for the fantasy team.
+bool isBenchSlot(String slot) => const {'BN', 'IL', 'IL+', 'NA'}.contains(slot);
+
+const LeagueInfo emptyMainLeague = (id: 'main', name: 'My league', myName: null, remoteTeams: [], matchups: [], lineups: {});
 
 /// One team's week: the 9 category totals, plus `extra` = fgm/fga/ftm/fta/gp/remaining when the
 /// screenshot showed them (used for the projected final).
@@ -244,6 +254,16 @@ LeagueData mergeSnapshot(List<Player> bundled, LeagueRosterConfig config, Map<St
           id: i == 0 ? 'main' : (l['id'] as String? ?? 'league$i'),
           name: l['name'] as String? ?? (i == 0 ? 'My league' : 'League ${i + 1}'),
           myName: l['myName'] as String?,
+          lineups: {
+            for (final t in ((l['lineups'] as Map?) ?? const {}).entries)
+              t.key as String: {
+                for (final d in (t.value as Map).entries)
+                  _ymdDate(d.key as String): [
+                    for (final r in (d.value as List).cast<Map<String, dynamic>>())
+                      (id: appId(r['id'] as String), slot: r['slot'] as String, min: (r['min'] as num?)?.toDouble()),
+                  ],
+              },
+          },
           remoteTeams: [
             for (final t in ((l['teams'] as List?) ?? const []).cast<Map<String, dynamic>>())
               (

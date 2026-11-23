@@ -533,13 +533,24 @@ class MatchupScreen extends ConsumerWidget {
             final today = usToday();
             final current = !today.isBefore(range.start) && !today.isAfter(range.end);
             final injuries = leagueData?.injuries ?? const <String, InjuryEntry>{};
+            final lineups = ref.watch(currentLeagueProvider).lineups;
             List<PlayerGames> rows(TeamWeek t, bool mineSide) => [
-                  for (final p in rosterOf(t.name))
+                  for (final g in teamWeekGames(
+                    roster: rosterOf(t.name),
+                    playersById: byId,
+                    lineups: lineups[t.name],
+                    range: range,
+                    schedule: schedule,
+                    played: leagueData?.played ?? const {},
+                    today: today,
+                  ))
                     (
-                      player: p,
+                      player: g.player,
                       mine: mineSide,
-                      games: weekGames(p, range, schedule, leagueData?.played ?? const {}, today: today),
-                      status: injuries[p.id]?.status,
+                      games: g.games,
+                      benched: g.benched,
+                      dropped: !g.onRoster,
+                      status: injuries[g.player.id]?.status,
                     ),
                 ];
             final all = [...rows(mine.me, true), ...rows(mine.opp, false)];
@@ -556,7 +567,8 @@ class MatchupScreen extends ConsumerWidget {
                       meLabel: sideLabel,
                       oppLabel: mine.opp.name,
                       showLeft: current,
-                      caption: '${_md(range.start)} – ${_md(range.end)} · played = box scores'
+                      caption: '${_md(range.start)} – ${_md(range.end)} · played = games in the lineup'
+                          '${lineups[mine.me.name] == null ? ' (box scores until a Yahoo sync saves lineups)' : ''}'
                           '${current ? ', left = NBA schedule from today' : ''}',
                     ),
                   ),
@@ -1312,7 +1324,7 @@ String _short(String name) {
 String _md(DateTime d) =>
     '${const ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][d.month - 1]} ${d.day}';
 
-typedef PlayerGames = ({Player player, bool mine, WeekGames games, String? status});
+typedef PlayerGames = ({Player player, bool mine, WeekGames games, int benched, bool dropped, String? status});
 
 /// Both rosters' players with their NBA games this week; sortable by games, games left or name,
 /// and filterable to one side. Team totals on top.
@@ -1375,7 +1387,7 @@ class _PlayerGamesTableState extends State<PlayerGamesTable> {
       final r = widget.rows.where((r) => r.mine == mine);
       return (
         played: r.fold(0, (s, r) => s + r.games.played),
-        left: r.where((r) => r.status != 'Out').fold(0, (s, r) => s + r.games.left),
+        left: r.where((r) => r.status != 'Out' && !r.dropped).fold(0, (s, r) => s + r.games.left),
       );
     }
 
@@ -1481,7 +1493,9 @@ class _PlayerGamesTableState extends State<PlayerGamesTable> {
                         Text.rich(
                           TextSpan(children: [
                             TextSpan(text: r.player.team),
-                            if (r.status != null)
+                            if (r.dropped)
+                              TextSpan(text: ' · dropped', style: TextStyle(color: colors.onSurfaceVariant, fontStyle: FontStyle.italic)),
+                            if (r.status != null && !r.dropped)
                               TextSpan(
                                 text: ' · ${r.status == 'Out' ? 'OUT' : r.status}',
                                 style: TextStyle(color: r.status == 'Out' ? context.stat.loss : context.stat.warn),
@@ -1491,6 +1505,7 @@ class _PlayerGamesTableState extends State<PlayerGamesTable> {
                                 text: ' · missed ${r.games.missed}',
                                 style: TextStyle(color: context.stat.warn, fontWeight: FontWeight.w700),
                               ),
+                            if (r.benched > 0) TextSpan(text: ' · ${r.benched} on bench'),
                           ]),
                           style: theme.textTheme.labelSmall?.copyWith(color: colors.onSurfaceVariant),
                         ),

@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:rosteriq/engine/matchup_needs.dart';
 import 'package:rosteriq/models/player.dart';
 import 'package:rosteriq/models/stat_category.dart';
+import 'package:rosteriq/services/player_repository.dart';
 import 'package:rosteriq/services/schedule_service.dart';
 import 'package:rosteriq/worker/espn.dart';
 
@@ -90,5 +91,30 @@ void main() {
     );
     expect(drops.map((d) => d.player.id), ['weak', 'mid']);
     expect(drops.first.reasons, containsAll(['38.0% FG', '1 game left this week']));
+  });
+
+  test('teamWeekGames: daily lineups count starters only, and keep players dropped mid-week', () {
+    final range = fantasyWeekDates(5, _schedule);
+    DateTime gameDay(String team, int i) => _schedule.teams[team]!.games.where((d) => !d.isBefore(range.start)).elementAt(i);
+    final kept = _p('kept', team: 'POR'), dropped = _p('gone', team: 'MIL');
+    final d0 = gameDay('POR', 0), d1 = gameDay('MIL', 0);
+    final lineups = {
+      DateTime(d0.year, d0.month, d0.day): <LineupSlot>[(id: 'kept', slot: 'BN', min: 30), (id: 'gone', slot: 'SF', min: _schedule.teams['MIL']!.hasGameOn(d0) ? 25 : null)],
+      DateTime(d1.year, d1.month, d1.day): <LineupSlot>[(id: 'gone', slot: 'Util', min: 28)],
+    };
+    final rows = teamWeekGames(
+      roster: [kept],
+      playersById: {'kept': kept, 'gone': dropped},
+      lineups: lineups,
+      range: range,
+      schedule: _schedule,
+      played: const {},
+      today: DateTime(2026, 11, 23),
+    );
+    final k = rows.firstWhere((r) => r.player.id == 'kept');
+    final g = rows.firstWhere((r) => r.player.id == 'gone');
+    expect(k.benched, 1); // a bench game doesn't count
+    expect(g.onRoster, isFalse);
+    expect(g.games.played, greaterThanOrEqualTo(1));
   });
 }

@@ -159,5 +159,42 @@ Map<String, dynamic> applyYahooData(
   for (final m in (data['matchups'] as List).cast<Map<String, dynamic>>()) {
     matchups = upsertMatchup(matchups, {...m, 'updatedAt': now.toIso8601String()});
   }
-  return {...league, 'teams': teams, 'matchups': matchups, 'yahooSyncedAt': data['fetchedAt']};
+  return {
+    ...league,
+    'teams': teams,
+    'matchups': matchups,
+    'lineups': mergeLineups(league['lineups'] as Map<String, dynamic>?, data['lineups'] as Map<String, dynamic>?, players, now),
+    'yahooSyncedAt': data['fetchedAt'],
+  };
+}
+
+/// Daily lineups from Yahoo's team pages: team name (as in matchups) -> "YYYYMMDD" -> who was on the
+/// roster that day, in which slot (BN and IL slots don't count), and their minutes (null = no game).
+/// New days replace old ones; days older than three weeks are dropped. Names become player ids.
+Map<String, dynamic> mergeLineups(
+  Map<String, dynamic>? prev,
+  Map<String, dynamic>? fresh,
+  List<({String id, String name})> players,
+  DateTime now,
+) {
+  final cutoff = now.subtract(const Duration(days: 21));
+  final keep = '${cutoff.year}${'${cutoff.month}'.padLeft(2, '0')}${'${cutoff.day}'.padLeft(2, '0')}';
+  final out = <String, Map<String, dynamic>>{
+    for (final e in (prev ?? const {}).entries)
+      e.key: {
+        for (final d in (e.value as Map).entries)
+          if ((d.key as String).compareTo(keep) >= 0) d.key as String: d.value,
+      },
+  };
+  for (final e in (fresh ?? const {}).entries) {
+    final days = out[e.key] ??= {};
+    for (final d in (e.value as Map).entries) {
+      days[d.key as String] = [
+        for (final r in (d.value as List).cast<Map<String, dynamic>>())
+          if (matchRosterNames([r['name'] as String], players).ids.firstOrNull case final id?)
+            {'id': id, 'slot': r['slot'], 'min': r['min']},
+      ];
+    }
+  }
+  return out;
 }

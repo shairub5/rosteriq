@@ -50,6 +50,65 @@ WeekGames weekGames(
   return (played: pl, missed: mi, left: le);
 }
 
+/// A team's week per player, including players it dropped during the week: [games] counts only
+/// games in active slots, [benched] games he played on the bench (they don't score), [onRoster]
+/// whether he's still on the team. Days with a saved daily lineup use it; other past days fall back
+/// to the current roster and box scores; games from today on come from the schedule.
+typedef TeamPlayerWeek = ({Player player, WeekGames games, int benched, bool onRoster});
+
+List<TeamPlayerWeek> teamWeekGames({
+  required List<Player> roster,
+  required Map<String, Player> playersById,
+  required Map<DateTime, List<LineupSlot>>? lineups,
+  required ({DateTime start, DateTime end}) range,
+  required NbaSchedule schedule,
+  required Map<DateTime, Set<String>> played,
+  DateTime? today,
+}) {
+  final t = today ?? usToday();
+  final acc = <String, List<int>>{for (final p in roster) p.id: [0, 0, 0, 0]}; // played, missed, benched, left
+  bool hasGame(Player p, DateTime d) => schedule.teams[p.team]?.hasGameOn(d) ?? false;
+  for (var d = range.start; !d.isAfter(range.end); d = DateTime(d.year, d.month, d.day + 1)) {
+    if (!d.isBefore(t)) {
+      for (final p in roster) {
+        if (hasGame(p, d)) acc[p.id]![3]++;
+      }
+      continue;
+    }
+    final day = lineups?[d];
+    if (day != null) {
+      for (final r in day) {
+        final p = playersById[r.id];
+        if (p == null || !hasGame(p, d)) continue;
+        final a = acc.putIfAbsent(r.id, () => [0, 0, 0, 0]);
+        final bench = isBenchSlot(r.slot);
+        if ((r.min ?? 0) > 0) {
+          a[bench ? 2 : 0]++;
+        } else if (!bench) {
+          a[1]++;
+        }
+      }
+      continue;
+    }
+    for (final p in roster) {
+      if (!hasGame(p, d)) continue;
+      final ids = played[d];
+      acc[p.id]![ids == null || ids.contains(p.id) ? 0 : 1]++;
+    }
+  }
+  final onRoster = {for (final p in roster) p.id};
+  return [
+    for (final e in acc.entries)
+      if (playersById[e.key] case final p?)
+        (
+          player: p,
+          games: (played: e.value[0], missed: e.value[1], left: e.value[3]),
+          benched: e.value[2],
+          onRoster: onRoster.contains(e.key),
+        ),
+  ];
+}
+
 /// Chance a player is available on [d]: Out until the listed return date, Day-To-Day at 75%.
 double availability(InjuryEntry? i, DateTime d) {
   if (i == null) return 1;
