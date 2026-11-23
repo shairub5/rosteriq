@@ -84,9 +84,12 @@ List<TeamPlayerWeek> teamWeekGames({
         final bench = isBenchSlot(r.slot);
         // Yahoo counts a game with 0 minutes as played. Its page for the latest day can show no
         // minutes at all, so the box score fills in.
-        if (r.min != null || (played[d]?.contains(r.id) ?? false)) {
-          a[bench ? 2 : 0]++;
-        } else if (!bench) {
+        final box = played[d]?.contains(r.id) ?? false;
+        if (bench) {
+          if ((r.min ?? 0) > 0 || box) a[2]++;
+        } else if (r.min != null || box) {
+          a[0]++;
+        } else {
           a[1]++;
         }
       }
