@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'assistant_screen.dart';
 import 'league_screen.dart';
 import 'matchup_screen.dart';
 import 'my_team_screen.dart';
@@ -36,6 +37,12 @@ class InSeasonShell extends ConsumerWidget {
     final index = ref.watch(shellTabProvider);
     return Scaffold(
       body: IndexedStack(index: index, children: _screens),
+      floatingActionButton: FloatingActionButton.small(
+        heroTag: 'ask',
+        tooltip: 'Ask RosterIQ',
+        onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const AssistantScreen())),
+        child: const Icon(Icons.auto_awesome),
+      ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: index,
         onDestinationSelected: (i) => ref.read(shellTabProvider.notifier).state = i,
